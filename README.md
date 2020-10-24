@@ -1,4 +1,4 @@
-FemtoAPI
+# FemtoAPI
 
 
 The FemtoAPI (Application Programming Interface for Femtonics microscope software) lets you remote-control 
@@ -8,7 +8,7 @@ connecting your Femtonics scope to your existing lab software environment are al
 
 https://www.youtube.com/watch?v=rSD8e9R1d2A
 
-Benefits of FemtoAPI and its open-source wrapper functions: 
+## Benefits of FemtoAPI and its open-source wrapper functions: 
 
 - FemtoAPI Interface defines MATLAB and Python commands which let you create your own measurement 
 protocols supporting automated measurements  
@@ -38,3 +38,11 @@ run on different workstations than the measurement workstation at your Femtonics
   - open communication protocol, easy to create new bindings 
   - easy script creation: API functions closely refer to GUI buttons, parameter boxes, etc. 
   - MATLAB and Python bindings 
+ 
+  
+## Purchase
+
+To purchase FemtoAPI please contact sales@femtonics.eu
+
+## Documentation
+The full documentation of FemtoAPI is provided with FemtoAPI package
