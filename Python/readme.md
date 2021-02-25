@@ -1,7 +1,7 @@
 - APIFunctions.py:
 
 This file contains python implementations for all the usable API calls.
-Detailed description about these functions can be found at the 'https://kb.femtonics.eu/display/MAN/The+MESc+API+command+reference' knowledgebase site.
+Detailed description about these functions can be found at the 'https://kb.femtonics.eu/display/SUP/The+FemtoAPI+command+reference' knowledgebase site.
 
 - miscFunctions.py:
 
