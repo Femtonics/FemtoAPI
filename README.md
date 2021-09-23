@@ -1,7 +1,7 @@
 # FemtoAPI - Analysis, programming tool, automation
 
 
-## Programming Femtonics microscopes: Femto-API
+## Programming Femtonics microscopes: FemtoAPI
 
 The Femto-API (Application Programming Interface) enables you to remote-control your FEMTOSmart
 microscope. It serves as a programmable client-server user interface to the FEMTOSmart software,
