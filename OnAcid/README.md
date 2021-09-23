@@ -32,11 +32,10 @@ Femtonics Real-time Analysis Package is supported
 - CaImAn presently targets Python 3.7, parts of CaImAn are written in C++, but apart possibly during install, this is not visible to the user
 - Conda
 - [FemtoAPI](https://kb.femtonics.eu/display/SUP/FemtoAPI+1.0) from Femtonics Ltd is required for online analysis. At least 16G RAM is strongly recommended, and depending on datasets, 32G or more may be helpful
-- For the source code of the required script files please visit [here](LINK-TO-FEMTOCAIMAN-PAGE).
 
 ## Download
 
-To download corresponding package and data, please visit [OnAcid download]https://github.com/Kata5/FemtoOnAcid.
+To download corresponding package and data, please visit [OnAcid download](https://github.com/Kata5/FemtoOnAcid).
 
 ## Installation
 
