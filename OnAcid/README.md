@@ -20,10 +20,10 @@ implementation details and benchmarking can be found [here](https://elifescience
 any time while codes for accessing data measured with Femtonics microscopes will not be changed.
 
 The algorithm can be either finetuned with a GUI containing parameters for the data, for algorithm, etc or without GUI with default parameters.
-<img src="https://github.com/Femtonics/FemtoAPI/blob/OnAcid/doc/img/Picture1.png" width="500" align="left">
+<img src="https://github.com/Femtonics/FemtoAPI/blob/main/OnAcid/doc/img/Picture1.png" width="500" align="left">
 
 Ca traces are visualized real time and using the check boxes next to the cells a subpopulation of cells can be selected so as to forward them to further measurements (i.e. chessboard scanning)
-<img src="https://github.com/Femtonics/FemtoAPI/blob/OnAcid/doc/img/Picture2.png" width="500" align="left">
+<img src="https://github.com/Femtonics/FemtoAPI/blob/main/OnAcid/doc/img/Picture2.png" width="500" align="left">
 
 ## Requirements
 
