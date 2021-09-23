@@ -29,7 +29,7 @@ On [FemtoAPI](https://kb.femtonics.eu/display/SUP/FemtoAPI+1.0) page you can fin
   - online motion correction
   - online cell detection and Ca<sup>2+</sup> source extraction
   
-  <img src="https://github.com/Femtonics/FemtoAPI/blob/main/docs/img/Picture2.png" width="500" align="right">
+  <img src="https://github.com/Femtonics/FemtoAPI/blob/main/docs/img/Picture2.png" width="500" align="center">
   
 - Remote control the Femtonics software from the comfort of the MATLAB IDE or your favorite Python IDE: keep accessing all the power of MATLAB and the Python ecosystem.  
 
