@@ -19,7 +19,7 @@ The package is based on the popular [CaImAn](https://github.com/flatironinstitut
 implementation details and benchmarking can be found [here](https://elifesciences.org/articles/38173). The code can be updated with an algorithm from GitHub
 any time while codes for accessing data measured with Femtonics microscopes will not be changed.
 
-The algorithm can be either finetuned with a GUI containing parameters for the data, for the algorithm, etc or without GUI with default parameters.
+The algorithm can be either finetuned with a GUI containing parameters for the data, for the algorithm, etc, or without GUI with default parameters.
 <img src="https://github.com/Femtonics/FemtoAPI/blob/main/OnAcid/doc/img/Picture1.png" width="500" align="right">
 
 Ca traces are visualized real-time and using the checkboxes next to the cells a subpopulation of cells can be selected to forward them to further measurements (i.e. chessboard scanning)
