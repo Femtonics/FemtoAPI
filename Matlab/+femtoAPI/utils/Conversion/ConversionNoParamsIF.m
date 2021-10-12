@@ -1,23 +1,24 @@
-% Copyright ©2021. Femtonics Kft. (Femtonics). All Rights Reserved. 
-% Permission to use, copy, modify this software and its documentation for educational,
-% research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
-% hereby granted, provided that the above copyright notice, this paragraph and the following two 
-% paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
-% for commercial licensing opportunities.
+% Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved.
+% Permission to use, copy, modify this software and its documentation for
+% educational, research, and not-for-profit purposes, without fee and
+% without a signed licensing agreement, is hereby granted, provided that
+% the above copyright notice, this paragraph and the following two
+% paragraphs appear in all copies, modifications, and distributions.
+% Contact info@femtonics.eu for commercial licensing opportunities.
 % 
-% IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
-% INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
-% THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
-% ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+% IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT,
+% SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS,
+% ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF
+% FEMTONICS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 % 
-% FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-% THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
-% PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
-% HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
-% MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+% FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY,
+% PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
+% PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 classdef ConversionNoParamsIF < ConversionIF
-    %ConversionNoParamsIF Summary of this class goes here
+    %CONVERSIONNOPARAMSIF Summary of this class goes here
     %   Detailed explanation goes here
     
     
@@ -57,10 +58,6 @@ classdef ConversionNoParamsIF < ConversionIF
             obj.m_sTitle = title;
             obj.m_sUnitName = unitName;
             
-%             obj.m_lowerLimitDouble = ConversionIF.m_defaultLowerLimitDouble;
-%             obj.m_upperLimitDouble = ConversionIF.m_defaultUpperLimitDouble;
-%             obj.m_lowerLimitUint16 = ConversionIF.m_defaultLowerLimitUint16;
-%             obj.m_upperLimitUint16 = ConversionIF.m_defaultUpperLimitUint16;
         end
         
         
@@ -110,13 +107,6 @@ classdef ConversionNoParamsIF < ConversionIF
             unitName = obj.m_sUnitName;
         end
         
-        %         function val = get.m_sDefaultTitle(obj)
-        %             val = obj.m_sDefaultTitle;
-        %         end
-        %
-        %         function val = get.m_sDefaultUnitName(obj)
-        %             val = obj.m_sDefaultUnitName;
-        %         end
         
         function set.m_sTitle(obj,newTitle)
             validateattributes(newTitle,{'char'},{'vector'},'set.m_sTitle');
@@ -124,14 +114,14 @@ classdef ConversionNoParamsIF < ConversionIF
                 obj.m_sTitle = newTitle;
             end
         end
-        
+
         function set.m_sUnitName(obj, newUnitName)
             validateattributes(newUnitName,{'char'},{'vector'},'set.m_sUnitName');
             if(~isequal(obj.m_sUnitName,newUnitName))
                 obj.m_sUnitName = newUnitName;
             end
         end
-        
+
         
         function resetLimitsFromUint16Values(obj,varargin)
             numVarargs = length(varargin);
@@ -176,6 +166,7 @@ classdef ConversionNoParamsIF < ConversionIF
                 obj.limitsChanged();
             end
         end
+        
         
         function resetLimitsFromDoubleValues(obj, varargin)
             numVarargs = length(varargin);

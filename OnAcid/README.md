@@ -15,7 +15,7 @@ With the package the following measurements can be processed:
 - 3D VolumeScan and
 - 3D Multilayer.
 
-The package is based on the popular [CaImAn](https://github.com/flatironinstitute/CaImAn) package of [Flatiron Institute](https://www.simonsfoundation.org/flatiron/), a paper explaining most of the 
+The package is based on the popular [CaImAn](https://github.com/flatironinstitute/CaImAn) package of [Flatiron Institute](https://www.simonsfoundation.org/flatiron/), a paper explaining most of the
 implementation details and benchmarking can be found [here](https://elifesciences.org/articles/38173). The code can be updated with an algorithm from GitHub
 any time while codes for accessing data measured with Femtonics microscopes will not be changed.
 

@@ -1,20 +1,21 @@
-% Copyright ©2021. Femtonics Kft. (Femtonics). All Rights Reserved. 
-% Permission to use, copy, modify this software and its documentation for educational,
-% research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
-% hereby granted, provided that the above copyright notice, this paragraph and the following two 
-% paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
-% for commercial licensing opportunities.
+% Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved.
+% Permission to use, copy, modify this software and its documentation for
+% educational, research, and not-for-profit purposes, without fee and
+% without a signed licensing agreement, is hereby granted, provided that
+% the above copyright notice, this paragraph and the following two
+% paragraphs appear in all copies, modifications, and distributions.
+% Contact info@femtonics.eu for commercial licensing opportunities.
 % 
-% IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
-% INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
-% THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
-% ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+% IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT,
+% SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS,
+% ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF
+% FEMTONICS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 % 
-% FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-% THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
-% PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
-% HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
-% MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+% FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY,
+% PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
+% PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 classdef DeviceValues
     %DEVICEVALUES Class for managing PMT/Laserintensity device values
@@ -26,7 +27,7 @@ classdef DeviceValues
     end
     
     properties (SetAccess = private)
-        m_deviceValueMap containers.Map % Map of device name - value pairs
+		m_deviceValueMap containers.Map % Map of device name - value pairs
     end
     
     methods
@@ -47,22 +48,19 @@ classdef DeviceValues
                 warning('Device values struct is empty');
                 obj.m_deviceValueMap = containers.Map;
             else
-                obj.validateDeviceValuesStruct(deviceValues);
+                deviceValues = obj.validateDeviceValuesStruct(deviceValues);
             end
             
-            deviceNames = cell(size(deviceValues));
-            for i=1:length(deviceValues)
-                deviceNames{i} = deviceValues(i).name;
-            end
-            
+            deviceNames = horzcat(deviceValues(:).name);
             obj.m_deviceValueMap = containers.Map(deviceNames, num2cell(deviceValues));
         end
+        
         
         function deviceNames = getDeviceNames(obj)
             %GETDEVICENAMES Gets device names as cell array
             deviceNames = obj.m_deviceValueMap.keys;
-            deviceNames = deviceNames(:);
         end
+        
         
         function index = getDeviceIndexByName(obj, deviceName)
             %GETDEVICEINDEXBYNAME Gets device indexes by name
@@ -71,56 +69,73 @@ classdef DeviceValues
             index = find(index);
         end
         
+        
         function deviceValuesStructArray = getDeviceValuesStructArray(obj)
             %GETDEVICEVALUESSTRUCTARRAY Gets device values as struct array
             deviceValuesStructArray = cell2mat(obj.m_deviceValueMap.values);
             deviceValuesStructArray = deviceValuesStructArray(:);
         end
         
+        
         function deviceValuesCellArray = getDeviceValuesCellArray(obj)
             deviceValuesCellArray = obj.m_deviceValueMap.values;
         end
         
+        
         function obj = setDeviceValueByName(obj,deviceName,deviceValue)
             %SETDEVICEVALUEBYNAME Sets a device value based on its name
-            validateattributes(deviceName,{'char'},{'row'},'setDeviceValueByName',...
+            
+            deviceName = convertCharsToStrings(deviceName);
+            validateattributes(deviceName,{'string'},{'scalar'}, ...
+                'setDeviceValueByName', ...
                 'deviceName');
-            validateattributes(deviceValue,{'double'},{'scalar'},'setDeviceValueByName',...
+            
+            validateattributes(deviceValue,{'double'},{'scalar'}, ...
+                'setDeviceValueByName',...
                 'deviceValue');
+            
             if(~obj.m_deviceValueMap.isKey(deviceName))
                 error('Device name is not valid');
             end
+            
             if(~obj.m_deviceValueMap.isKey(deviceName))
                 error('Invalid device name');
             end
+            
             deviceValuesStruct = obj.m_deviceValueMap(deviceName);
             deviceValuesStruct.value = deviceValue;
             obj.m_deviceValueMap(deviceName) = deviceValuesStruct;
         end
         
+        
         function deviceValue = getDevicePropertyByName(obj,deviceName,propertyName)
             %GETDEVICEPROPERTYBYNAME Gets the requested property of named
             % device
+            
+            deviceName = convertCharsToStrings(deviceName);
+            
             if(~obj.m_deviceValueMap.isKey(deviceName))
                 error('Invalid device name');
             end
+            
             deviceValueStruct = obj.m_deviceValueMap(deviceName);
+            
             if(~isfield(deviceValueStruct,propertyName))
                 error('Invalid property name');
             end
+            
             deviceValue = deviceValueStruct.(propertyName);
         end
+        
         
         function deviceValue = getDevicePropertyByIndex(obj,propertyName,index)
             %GETDEVICEPROPERTYBYINDEX Gets requested property by index
             deviceNames = obj.getDeviceNames;
-            deviceName = deviceNames{index};
+            deviceName  = deviceNames{index};
             deviceValue = obj.getDevicePropertyByName(deviceName,propertyName);
         end
-        %        % TODO implement if needed
-        %        function setDevicePropertyByName(obj,deviceName,propertyName, newValue)
-        %
-        %        end
+
+        
         %% Property setters and validators
         function obj = set.m_deviceValueMap( obj, deviceValuesMap )
             obj.validateDeviceValueMap(deviceValuesMap);
@@ -139,15 +154,21 @@ classdef DeviceValues
             for i=1:length(keys)
                 validateattributes(keys{i},{'char'},{'row'});
             end
+            
         end
+        
         
         function validateDeviceName(obj,deviceName)
             %VALIDATEDEVICENAME Validates device name
-            validatestring(deviceName,obj.m_deviceValueMap.keys);
+            
+            if ~obj.m_deviceValueMap.isKey( deviceName )
+                error('Invalid device name.');
+            end
+            
         end
         
         
-        function validateDeviceValuesStruct(~,deviceValues)
+        function deviceValues = validateDeviceValuesStruct(~,deviceValues)
             % VALIDATEDEVICEVALUESSTRUCT Validates device values struct
             % It must contain min, max, value, space fields
             validateattributes(deviceValues,{'struct'},{'vector'},...
@@ -156,16 +177,29 @@ classdef DeviceValues
             for i=1:length(deviceValues)
                 % deviceValues struct must contain 'name', 'min', 'max',
                 % 'value' fields
-                if(~isequal(sort(fieldnames(deviceValues(i)))',sort(DeviceValues.deviceValuesStructFieldNames)))
+                if ~isequal(sort(fieldnames(deviceValues(i)))', ... 
+                        sort(DeviceValues.deviceValuesStructFieldNames)) 
+                    
                     error(strcat('Input parameter ''deviceValuesStruct'' must contain ''min'',',...
                         ' ''max'', ''name'', ''value'' and ''space'' fields'));
+                    
                 end
-                validateattributes(deviceValues(i).name,{'char'},{'row'},...
+                [ deviceValues(i).name, deviceValues(i).space ]  = ...
+                    convertCharsToStrings(deviceValues(i).name, ...
+                                          deviceValues(i).space);
+                
+                validateattributes(deviceValues(i).name,{'string'},{'scalar'},...
                     'validateDeviceValuesStruct','name');
+                
+                validateattributes(deviceValues(i).space,{'string'},{'scalar'},...
+                    'validateDeviceValuesStruct','space');
+                
                 validateattributes(deviceValues(i).value,{'double'},{'scalar'},...
                     'validateDeviceValuesStruct','value');
+                
                 validateattributes(deviceValues(i).min,{'double'},{'scalar'},...
                     'validateDeviceValuesStruct','min');
+                
                 validateattributes(deviceValues(i).max,{'double'},{'scalar'},...
                     'validateDeviceValuesStruct','max');
             end
@@ -204,6 +238,42 @@ classdef DeviceValues
                     error('Not a valid indexing expression')
             end
         end
+        
+        % obj.m_deviceValueMap.values(indices) = val -> obj(indices) = val
+        % obj.m_deviceValueMap.values(indices).propertyName = val ->
+        % obj(indices).propertyName = val
+        function obj = subsasgn(obj,s, val)
+            switch s(1).type
+                case '.'
+                    obj = builtin('subsasgn',obj,s,val);
+                case '()'
+                    if length(s) == 1
+                        % Implement obj(indices) = val
+                        if(numel(s(1).subs) ~= 1)
+                            error('Not a valid indexing expression');
+                        end
+                        
+                        validateattributes(s(1).subs, 'numeric', {'scalar', ...
+                            'positive','integer'});                        
+                        val = obj.validateDeviceValuesStruct(val);
+                        obj.m_deviceValueMap(s(1).subs) = val;
+         
+                    elseif length(s) == 2 && strcmp(s(2).type,'.')
+                    % Implement obj(ind).PropertyName
+                       deviceName = obj.getDevicePropertyByIndex('name', ...
+                           cell2mat(s(1).subs));
+                       deviceNameAsCell{1} = deviceName; 
+                       deviceStruct = cell2mat(obj.m_deviceValueMap.values(deviceNameAsCell));
+                       deviceStruct.(s(2).subs) = convertCharsToStrings(val);
+                       obj.m_deviceValueMap(deviceName) = deviceStruct;
+                    else
+                    % Use built-in for any other expression
+                        obj = builtin('subsasgn', obj, s, val);
+                    end
+                otherwise
+                    error('Not a valid indexing expression')
+            end
+        end        
     end
 end
     

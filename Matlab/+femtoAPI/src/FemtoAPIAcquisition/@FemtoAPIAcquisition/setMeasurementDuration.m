@@ -1,20 +1,21 @@
-% Copyright ©2021. Femtonics Kft. (Femtonics). All Rights Reserved. 
-% Permission to use, copy, modify this software and its documentation for educational,
-% research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
-% hereby granted, provided that the above copyright notice, this paragraph and the following two 
-% paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
-% for commercial licensing opportunities.
-% 
-% IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
-% INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
-% THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
-% ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-% 
-% FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-% THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
-% PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
-% HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
-% MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+% Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved.
+% Permission to use, copy, modify this software and its documentation for
+% educational, research, and not-for-profit purposes, without fee and
+% without a signed licensing agreement, is hereby granted, provided that
+% the above copyright notice, this paragraph and the following two
+% paragraphs appear in all copies, modifications, and distributions.
+% Contact info@femtonics.eu for commercial licensing opportunities.
+%
+% IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT,
+% SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS,
+% ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF
+% FEMTONICS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+%
+% FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY,
+% PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
+% PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function [ succeeded ] = setMeasurementDuration(obj, duration,varargin)
 %SETMEASUREMENTDURATION Sets measurement duration.
@@ -67,27 +68,39 @@ function [ succeeded ] = setMeasurementDuration(obj, duration,varargin)
     
     q = char(39); % quote character
     
-    if(numVarargs == 0)
+    if numVarargs == 0
+        
         succeeded = femtoAPI('command', ...
-        strcat('FemtoAPIMicroscope.setMeasurementDuration(',num2str(duration),')'));        
-    elseif(numVarargs == 1)
+            strcat('FemtoAPIMicroscope.setMeasurementDuration(', ...
+            num2str(duration), ')')); 
+        
+    elseif numVarargs == 1
+        
         taskType = validatestring(varargin{1},{'resonant','galvo'}, ...
             mfilename, 'taskType');
         
         succeeded = femtoAPI('command', ...
-        strcat('FemtoAPIMicroscope.setMeasurementDuration(',num2str(duration), ...
-        ',',q,taskType,q,')'));        
-    else 
+        strcat('FemtoAPIMicroscope.setMeasurementDuration(', ...
+            num2str(duration), ...
+            ',', q, taskType, q, ')'));
+        
+    else
+        
         taskType = validatestring(varargin{1},{'resonant','galvo'}, ...
             mfilename, 'taskType');        
-        spaceName = validateattributes(varargin{2},{'char'}, ...
-            {'vector','row'},mfilename, 'spaceName');
+        validateattributes(varargin{2}, {'char'}, ...
+            {'vector','row'}, mfilename, 'spaceName');
+        spaceName = varargin{2};
         
         succeeded = femtoAPI('command', ...
-        strcat('FemtoAPIMicroscope.setActiveTaskAndSubTask(',num2str(duration), ...
-       ',', q,taskType,q,',',q,spaceName,q,')'));        
+             strcat('FemtoAPIMicroscope.setMeasurementDuration(', ...
+             num2str(duration), ...
+              ',', q, taskType, q, ...
+              ',', q, spaceName, q, ')'));  
+          
     end
     
     succeeded = jsondecode(succeeded{1});
+    
 end
 
