@@ -1,21 +1,3 @@
-# Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved. 
-# Permission to use, copy, modify this software and its documentation for educational,
-# research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
-# hereby granted, provided that the above copyright notice, this paragraph and the following two 
-# paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
-# for commercial licensing opportunities.
-# 
-# IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
-# INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
-# THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
-# FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
-# PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
-# HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
-# MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-
 import sys, re, time, argparse
 import APIFunctions
 from PySide2.QtCore import *
@@ -26,10 +8,6 @@ from femtoapi import PyFemtoAPI
 
 
 class copyFrames:
-
-    '''
-    Script copying a predefined number of frames from a starting frame into a new measurement file and saves it. The specified frames will be copied for all channels.
-    '''
 
     def __init__(self):
         self.sourceMeas = ''
@@ -93,12 +71,16 @@ class copyFrames:
 
         app = QCoreApplication(sys.argv)
         ws = APIFunctions.initConnection()
+        if ws == None:
+            sys.exit()
         print("Connected to API websocket host.")
         #the login functions does not actually checks the given data as of version 1.0 but it is still a necessary step to start up an API conncetion
-        APIFunctions.login(ws, 'asd', '123')
+        res = APIFunctions.login(ws, 'asd', '123')
+        if not res:
+            sys.exit()
         time.sleep(5)
         print("API login successfull.")
-        pstate = APIFunctions.getProcessingState(ws)
+        pstate = APIFunctions.getChildTree(ws)
 
         for e in pstate['openedMEScFiles']:
             if e['handle'] == [int(file_handler)]:
@@ -109,19 +91,20 @@ class copyFrames:
                                 channelNames = []
                                 for channel in munit['channels']:
                                     channelNames.append(channel['name'])
-                                xmlstring = str(munit['measurementInfo']['measurementParamsXML'])
-                                for dim in munit['dimensions']:
-                                    if dim['role'] == 'x':
-                                        dimx = dim['size']
-                                        xscale = dim['conversion']['scale']
-                                    if dim['role'] == 'y':
-                                        dimy = dim['size']
-                                        yscale = dim['conversion']['scale']
-                                    if dim['role'] == 't':
-                                        dimt = dim['size']
-                                        tscale = dim['conversion']['scale']
-                                transl = str(munit['translation'])
-                                rotQ = str(munit['rotationQuaternion'])
+                                taskType = munit['technologyType']
+                                munit['xDim']
+                                
+                                dimx = munit['xDim']
+                                xscale = munit['pixelSizeX']
+                                dimy = munit['yDim']
+                                yscale = munit['pixelSizeY']
+                                dimt = munit['zDim']
+                                tscale = munit['tStepInMs']
+                                referenceViewportJSON = munit['referenceViewportJSON']
+                                transl = str(munit['referenceViewportJSON']['viewports'][0]['geomTransTransl'])
+                                rotQ = str(munit['referenceViewportJSON']['viewports'][0]['geomTransRot'])
+                                width = str(munit['referenceViewportJSON']['viewports'][0]['width'])
+                                height = str(munit['referenceViewportJSON']['viewports'][0]['height'])
 
         if  self.startingFrame >= dimt:
             print("PARAMETER ERROR! Starting frame number is larger than the actual length of the mUnit. Exiting script...")
@@ -133,33 +116,27 @@ class copyFrames:
             print("Number of copied framse are dropped to " + str(self.frameNum))
 
         APIFunctions.createNewFile(ws)
-        pstate = APIFunctions.getProcessingState(ws)
-        newfilehandle = pstate['currentFileHandle'][0]
+        currHandle = APIFunctions.getCurrentSession(ws)
+        pos = currHandle.find(",")
+        newfilehandle = currHandle[:pos]
+
         
-        root = ET.fromstring(xmlstring)
-        taskType = "<Task"
-        #the root usualy has 2 attributes Type and Version
-        for attr in root.attrib:
-            taskType += ' ' + attr + '="' + str(root.attrib[attr]) + '"'
-        taskType += ">"
-        
-        width = dimx * xscale
-        height = dimy * yscale
-        viewport='{"transformation": {"translation": ' + transl + ',"rotationQuaternion": ' + rotQ + '},"size": [' + str(width) + ',' + str(height) + ']}'
+
+        viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransTransl": ' + transl + ',"geomTransRot": ' + rotQ + ',"width": ' + str(width) + ',"height": ' + str(height) + '}]}'
+
         res = APIFunctions.createTimeSeriesMUnit(ws, dimx, dimy, taskType, viewport, z0InMs = 0, zStepInMs = tscale)
         time.sleep(2)
         handle = res['addedMUnitIdx']
         for name in channelNames:
             res = APIFunctions.addChannel(ws, handle, name)
 
-        
         for frame in range(self.frameNum):
             baseFrame = self.startingFrame + frame
             for channelNum in range(len(channelNames)):
                 res = APIFunctions.readChannelData(ws, 'tmpvar', self.sourceMeas + ',' +str(channelNum), '0,0,' + str(baseFrame), str(dimx) + ',' + str(dimy) + ',1')
                 res = APIFunctions.writeChannelData(ws, 'tmpvar',  handle + ',' + str(channelNum), '0,0,' + str(frame), str(dimx) + ',' + str(dimy) + ',1')
-                if frame < self.frameNum - 1:
-                    res = APIFunctions.extendMUnit(ws, handle, 1)
+            if frame < self.frameNum - 1:
+                res = APIFunctions.extendMUnit(ws, handle, 1)
 
         file = self.targetPath
         tmp = 2

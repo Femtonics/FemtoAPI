@@ -14,6 +14,7 @@ def initConnection():
     returns the ws object which is used in all other functions
     """
     ws=PyFemtoAPI.APIWebSocketClient('ws://localhost:8888')
+    #ws=PyFemtoAPI.APIWebSocketClient('ws://192.168.43.138:8888')
     if ws == False:
         print("WebSocketHost could not be found?")
         sys.exit(1)
@@ -186,6 +187,7 @@ def getUnitMetadata(ws, handle, JsonItemName, string=""):
     if resultCode > 0:
         print("Return code: %d" % resultCode)
         print(simpleCmdParser.getErrorText())
+        return None
     else:
         #print(simpleCmdParser.getJSEngineResult())
         cmdResult = simpleCmdParser.getJSEngineResult()
@@ -224,9 +226,40 @@ def getChildTree(ws, handle=''):
         return cmdResult
 
 
+def getCurrentSession(ws, string=""):
+    if not string:
+        command = "FemtoAPIFile.getCurrentSession()"
+    else:
+        command = "FemtoAPIFile.getCurrentSession('" + string + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    #logging.info(resultCode)
+    if resultCode > 0:
+        print("Return code: " + str(resultCode))
+        print(simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
+
+def setCurrentSession(ws, handle):
+    command="FemtoAPIFile.setCurrentSession('" + handle + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    #logging.info(resultCode)
+    if resultCode > 0:
+        print("Return code: " + str(resultCode))
+        print(simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
     
 def getProcessingState(ws):
     """
+    
     returns a dictionary containing all data about the processing state
     """
     command='FemtoAPIFile.getProcessingState()'
@@ -240,23 +273,7 @@ def getProcessingState(ws):
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-#removed
-def setProcessingState(ws, jsonString):
-    """
-    the input json format restrictions can be found in the function description on the FemtoAPInics knowledgebase
-    returns a boolean value
-    """
-    command="FemtoAPIFile.setProcessingState('"+jsonString+"')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-    
+
     
 def getMicroscopeState(ws):
     """
@@ -683,6 +700,7 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
     zDimInitial: Number of frames to create in z dimension. Positive integer, default value is 1.
     """
     command="FemtoAPIFile.createTimeSeriesMUnit(" + str(xDim) + ", " + str(yDim) + ", '" + taskXMLParameters + "', '" + viewportJson + "', z0InMs = " + str(z0InMs) + ", zStepInMs = " + str(zStepInMs) + ", zDimInitial = " + str(zDimInitial) + ")"
+    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -693,19 +711,6 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-
-# deprecated function
-def createAOFullFrameScanSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
-    command="FemtoAPIFile.createAOFullFrameScanSeriesMUnit(" + str(xDim) + ", " + str(yDim) + ", '" + taskXMLParameters + "', '" + viewportJson + "', z0InMs = " + str(z0InMs) + ", zStepInMs = " + str(zStepInMs) + ", zDimInitial = " + str(zDimInitial) + ")"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
 
 
 def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zStepInMicrons = 1.0):
@@ -834,6 +839,7 @@ def copyMUnit(ws, sourceMUnitHandle, destMSessionHandle, bCopyChannelContents = 
     destMSessionHandle is the session handle of the destination
     """
     command="FemtoAPIFile.copyMUnit('" + str(sourceMUnitHandle) + "', '" + str(destMSessionHandle) + "', " + bCopyChannelContents + ")"
+    print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -1014,7 +1020,7 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
     the elements of these 2 list make up data pairs (xData[0] - yData[0], xData[1] - yData[1], etc.)
     """
     command="FemtoAPIFile.readCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', '" + str(vectorFormat) + "', '" + str(forceDouble) + "')"
-    print(command)
+    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     #print(simpleCmdParser.hasBinaryParts())
     resultCode=simpleCmdParser.getResultCode()
@@ -1283,7 +1289,7 @@ def readChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = Non
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readRawChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        print ("readChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
         if filePath:
             cmdResult = QByteArray()
             for parts in simpleCmdParser.getPartList():
@@ -1349,7 +1355,7 @@ def readChannelData(ws, varName, handle, fromDims, countDims):
     command="var " + varName + " = FemtoAPIFile.readChannelData('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
-    print(command)
+    #print(command)
     if resultCode > 0:
         print ("Return code: " + str(resultCode))
         print (simpleCmdParser.getErrorText())

@@ -1,22 +1,4 @@
-# Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved. 
-# Permission to use, copy, modify this software and its documentation for educational,
-# research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
-# hereby granted, provided that the above copyright notice, this paragraph and the following two 
-# paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
-# for commercial licensing opportunities.
-# 
-# IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
-# INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
-# THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
-# FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
-# PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
-# HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
-# MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-
-import sys, time, argparse, pathlib, re
+import sys, time, re, os, argparse, numpy, h5py, pathlib, json
 import APIFunctions
 import miscFunctions
 from PySide2.QtCore import *
@@ -27,10 +9,6 @@ from femtoapi import PyFemtoAPI
 
 
 class layerSeparator:
-
-    '''
-    Script creating separate measurement units from the different layers in a multilayer or volumescan measurement including all channels.
-    '''
 
     def __init__(self):
         self.sourceMeas = ''
@@ -87,96 +65,82 @@ class layerSeparator:
         app = QCoreApplication(sys.argv)
         ws = APIFunctions.initConnection()
         print("Connected to API websocket host.")
-        #login credentials are not checked on server side yet but this step is still necessary to estabilist an API connection
         APIFunctions.login(ws, 'asd', '123')
         time.sleep(5)
         print("API login successfull.")
         res = APIFunctions.createNewFile(ws)
         
-        pstate = APIFunctions.getProcessingState(ws)
-        newfilehandle = pstate['currentFileHandle'][0]
-        #collecting measurement specific data like dimensions and viewports
+        pstate = APIFunctions.getChildTree(ws)
+        currHandle = APIFunctions.getCurrentSession(ws)
+        pos = currHandle.find(",")
+        newfilehandle = currHandle[:pos]
+        
+        channelName = ''
         for e in pstate['openedMEScFiles']:
             if e['handle'] == [int(file_handler)]:
                 for session in e['measurementSessions']:
                     if session['handle'] == [int(file_handler),int(session_handler)]:
                         for munit in session['measurements']:
                             if munit['handle'] == [int(file_handler),int(session_handler), int(unit_handler)]:
+                                if not munit['methodType'] in ('volumeScan', 'multiLayer'):
+                                    print("Bad type of measurement detected: " + munit['methodType'] + " . layerSeparator only work on volumeScan or multiLayer measurements.")
                                 channelNames = []
                                 for channel in munit['channels']:
                                     channelNames.append(channel['name'])
-                                
-                                for dim in munit['dimensions']:
-                                    if dim['role'] == 'z':
-                                        dimz = dim['size']
-                                    elif dim['role'] == 't':
-                                        dimt = dim['size']
-                                        tscale = dim['conversion']['scale']
-                                    else:
-                                        pass
+                                dimx = munit['logicalDimSizes'][0]
+                                dimy = munit['logicalDimSizes'][1]
+                                dimz = munit['logicalDimSizes'][2]
+                                dimt = munit['logicalDimSizes'][3]
+                                tscale = munit['tStepInMs']
 
                                 layerData = []
                                 
-                                if 'viewportList' in munit['measurementParams']:
-                                    vpList = munit['measurementParams']['viewportList']
-                                    counter = 0
-                                    for vp in vpList:
-                                        layerData.append({})
-                                        layerData[counter].update({})
-                                        layerData[counter].update({"dimx": vp['viewport']['pixelNumberX']})
-                                        layerData[counter].update({"dimy": vp['viewport']['pixelNumberY']})
-                                        rotQ = vp['viewport']['geomTrans']['m_rot']
-                                        tmp = rotQ.pop(0)
-                                        rotQ.append(tmp)
-                                        layerData[counter].update({"rotQ": rotQ})
-                                        transl = vp['viewport']['geomTrans']['m_transl']
-                                        layerData[counter].update({"transl": transl})
-                                        height = vp['viewport']['height']
-                                        layerData[counter].update({"height": height})
-                                        width = vp['viewport']['width']
-                                        layerData[counter].update({"width": width})
-                                        counter += 1
-                                else:
-                                    transl = str(munit['translation'])
-                                    rotQ = str(munit['rotationQuaternion'])
-                                    width = str(munit['measurementParams']['axinfo'][channelNames[0]]['viewport']['width'])
-                                    height = str(munit['measurementParams']['axinfo'][channelNames[0]]['viewport']['height'])
-                                    dimx = str(munit['measurementParams']['axinfo'][channelNames[0]]['viewport']['pixelNumberX'])
-                                    dimy = str(munit['measurementParams']['axinfo'][channelNames[0]]['viewport']['pixelNumberY'])
+                                vpList = munit['referenceViewportJSON']['viewports']
+                                counter = 0
+                                for vp in vpList:
+                                    layerData.append({})
+                                    layerData[counter].update({})
+                                    rotQ = vp['geomTransRot']
+                                    layerData[counter].update({"rotQ": rotQ})
+                                    transl = vp['geomTransTransl']
+                                    layerData[counter].update({"transl": transl})
+                                    height = vp['height']
+                                    layerData[counter].update({"height": height})
+                                    width = vp['width']
+                                    layerData[counter].update({"width": width})
+                                    counter += 1
 
-        #creating the new measurement units for each layer and storing the handle
+             
         handleArray = []                   
-        tp='<Task Type="TaskAOFullFrame" Version="1.0">'
+        tp='aO'
         for i in range(dimz):
-            if len(layerData) > 0:
+            if len(layerData) > 1:
                 transl = str(layerData[i]["transl"])
                 rotQ = str(layerData[i]["rotQ"])
                 width = str(layerData[i]["width"])
                 height = str(layerData[i]["height"])
-                dimx = str(layerData[i]["dimx"])
-                dimy =str(layerData[i]["dimy"])
-            viewport='{"transformation": {"translation": ' + transl + ',"rotationQuaternion": ' + rotQ + '},"size": [' + width + ',' + height + ']}'
-            res = APIFunctions.createTimeSeriesMUnit(ws, dimx, dimy, tp, viewport, z0InMs = i * (tscale / dimz), zStepInMs = tscale)
+            else:
+                transl = str(layerData[0]["transl"])
+                rotQ = str(layerData[0]["rotQ"])
+                width = str(layerData[0]["width"])
+                height = str(layerData[0]["height"])
+            viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransTransl": ' + transl + ',"geomTransRot": ' + rotQ + ',"width": ' + width + ',"height": ' + height + '}]}'
+            res = APIFunctions.createTimeSeriesMUnit(ws, dimx, dimy, tp, viewport, z0InMs = i * tscale , zStepInMs = tscale * dimz)
             time.sleep(2)
             handle = res['addedMUnitIdx']
             for name in channelNames:
                 res = APIFunctions.addChannel(ws, handle, name)
             handleArray.append(handle)
 
-        #copy the proper frames into the new measurement units
-        for frame in range(dimt):
-            baseNum = frame * dimz
-            for layerNum in range(dimz):
-                if len(layerData) > 0:
-                    dimx = str(layerData[layerNum]["dimx"])
-                    dimy =str(layerData[layerNum]["dimy"])
-                frameNum = baseNum + layerNum
-                for channelNum in range(len(channelNames)):
-                    res = APIFunctions.readChannelData(ws, 'tmpvar', self.sourceMeas + ',' +str(channelNum), '0,0,' + str(frameNum), dimx + ',' + dimy + ',1')
-                    res = APIFunctions.writeChannelData(ws, 'tmpvar',  handleArray[layerNum] + ',' + str(channelNum), '0,0,' + str(frame), dimx + ',' + dimy + ',1')
-                    if frame < dimt - 1:
-                        res = APIFunctions.extendMUnit(ws, handleArray[layerNum], 1)
-        #save the new measurement file and rename if necessary
+        
+        for layerNum in range(dimz):
+            res = APIFunctions.extendMUnit(ws, handleArray[layerNum], dimt-1)
+            for frame in range(dimt):
+                for channelNum in range(len(channelNames)): #',' + str(layerNum) + ','
+                    res = APIFunctions.readChannelData(ws, 'tmpvar', self.sourceMeas + ',' +str(channelNum), '0,0,' + str(layerNum) + ',' + str(frame), str(dimx) + ',' + str(dimy) + ',1,1')
+                    res = APIFunctions.writeChannelData(ws, 'tmpvar',  handleArray[layerNum] + ',' + str(channelNum), '0,0,' + str(frame), str(dimx) + ',' + str(dimy) + ',1')
+
+                
         file2 = self.targetPath
         tmp = 2
         while pathlib.Path(file2).exists():

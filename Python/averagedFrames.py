@@ -1,21 +1,3 @@
-# Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved. 
-# Permission to use, copy, modify this software and its documentation for educational,
-# research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
-# hereby granted, provided that the above copyright notice, this paragraph and the following two 
-# paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
-# for commercial licensing opportunities.
-# 
-# IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
-# INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
-# THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
-# FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
-# PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
-# HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
-# MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-
 import sys, time, logging, os, numpy, argparse, re
 import APIFunctions
 import miscFunctions
@@ -26,24 +8,17 @@ from femtoapi import PyFemtoAPI
 
 
 class AverageFrames:
-    
-    '''
-    Script which creates an averaged measurement from the source measurement unit. It can only handle one channel simultaneously.
-    Contains some examples how to transform measurement data exported from mesc into a numpy ndarray
-    '''
-    
     def __init__(self):
         self.bufferSize = 0
         self.avgFrameNum = 0
 
     def getArguments(self):
-        parser = argparse.ArgumentParser(description="Creates a new averaged measuement from the given source. The number of frames used for averaqging is defined in the second argument."
-                                                     "Does not save the created measurement.")
+        parser = argparse.ArgumentParser(description="PLACEHOLDER"
+                                                     "maybe I will write some actual content here in the future")
         parser.add_argument('source', metavar='SOURCE',
                             help='Handler of the source measurement unit with channel number. e.g.: "10,0,0,0"')
         parser.add_argument('avgFrames', metavar='FRAMES',
-                            help='A number that defines how many frames are used to create an averaged frame.'
-                                 'The a frame will be crated by averaging the current frame with the preceding and following X number of frames(1+2*X frames altogether into one frame).')
+                            help='A number that defines how many frames are used to create an averaged frame. The a frame will be crated by averaging the X number of frames before and after the frame together.')
         parser.add_argument('--bufferSize', default = 100,
                     help='Defines the number of frames to read at once from the server. Default value is 100')
         args = parser.parse_args()
@@ -56,6 +31,8 @@ class AverageFrames:
 
         
     def createAveragedTimeSeries(self, ws, file_handler, session_handler, unit_handler, channel_handler, avgFrameNum = None, bufferSize = None):
+        """
+        """
         if bufferSize:
             self.bufferSize = bufferSize
         if avgFrameNum:
@@ -64,27 +41,31 @@ class AverageFrames:
         firstBuffer = 0
         res = APIFunctions.createNewFile(ws)
         print("newid " + str(res['id']))
-        pstate = APIFunctions.getProcessingState(ws)
-        currHandle = pstate['currentFileHandle']
-
+        pstate = APIFunctions.getChildTree(ws)
+        currHandle = APIFunctions.getCurrentSession(ws)
+        pos = currHandle.find(",")
+        currHandle = currHandle[:pos]
+        print(currHandle)
+    
         for e in pstate['openedMEScFiles']:
             if e['handle'] == [int(file_handler)]:
                 for session in e['measurementSessions']:
                     if session['handle'] == [int(file_handler),int(session_handler)]:
                         for munit in session['measurements']:
                             if munit['handle'] == [int(file_handler),int(session_handler), int(unit_handler)]:
-                                dimx = munit['dimensions'][0]['size']
-                                dimy = munit['dimensions'][1]['size']
-                                dimz = munit['dimensions'][2]['size']
+                                dimx = munit['logicalDimSizes'][0]
+                                dimy = munit['logicalDimSizes'][1]
+                                dimz = munit['logicalDimSizes'][2]
 
-        res = APIFunctions.copyMUnit(ws, file_handler + ',' + session_handler + ',' + unit_handler, '' + str(currHandle[0]) + ',0', 'true')
+        res = APIFunctions.copyMUnit(ws, file_handler + ',' + session_handler + ',' + unit_handler, '' + str(currHandle) + ',0', 'true')
+        newHandle = res['copiedMUnitIdx']
 
         firstBuffer = 0
         if dimz < self.bufferSize:
             firstBuffer = dimz
         else:
             firstBuffer = self.bufferSize
-        rawdata = APIFunctions.readChannelDataToClientsBlob(ws, str(currHandle[0]) + ',0,0,' + str(channel_handler) , '0,0,0', str(dimx) + ',' + str(dimy) + ',' + str(firstBuffer))
+        rawdata = APIFunctions.readChannelDataToClientsBlob(ws, str(currHandle) + ',0,0,' + str(channel_handler) , '0,0,0', str(dimx) + ',' + str(dimy) + ',' + str(firstBuffer))
         stream = QDataStream(rawdata)
         stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
         tmplist = []
@@ -112,13 +93,13 @@ class AverageFrames:
         workingarr = newdata[0:dimx, 0:dimy, (firstBuffer - (self.avgFrameNum * 2)):firstBuffer]
         numpy.swapaxes(avgarray, 0, 1)
         stream = QByteArray(avgarray.tobytes(order='F'))
-        res = APIFunctions.writeChannelDataFromAttachment(ws, stream,  str(currHandle[0]) + ',0,0,' + str(channel_handler), '0,0,0', str(dimx) + ',' + str(dimy) + ',' + str(firstBuffer - self.avgFrameNum))  
+        res = APIFunctions.writeChannelDataFromAttachment(ws, stream,  str(currHandle) + ',0,0,' + str(channel_handler), '0,0,0', str(dimx) + ',' + str(dimy) + ',' + str(firstBuffer - self.avgFrameNum))  
 
         frameCount = firstBuffer
 
         while frameCount + self.bufferSize <= dimz:
             print("frameCount : " + str(frameCount))
-            rawdata = APIFunctions.readChannelDataToClientsBlob(ws, str(currHandle[0]) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount), str(dimx) + ',' + str(dimy) + ',' + str(self.bufferSize))
+            rawdata = APIFunctions.readChannelDataToClientsBlob(ws, str(currHandle) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount), str(dimx) + ',' + str(dimy) + ',' + str(self.bufferSize))
             stream = QDataStream(rawdata)
             stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
             tmplist = []
@@ -140,12 +121,12 @@ class AverageFrames:
             workingarr = workingarr[0:dimx, 0:dimy, self.bufferSize:(self.bufferSize + (self.avgFrameNum * 2))]     
             numpy.swapaxes(avgarray, 0, 1)
             stream = QByteArray(avgarray.tobytes(order='F'))
-            res = APIFunctions.writeChannelDataFromAttachment(ws, stream,  str(currHandle[0]) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount - self.avgFrameNum), str(dimx) + ',' + str(dimy) + ',' + str(self.bufferSize))
+            res = APIFunctions.writeChannelDataFromAttachment(ws, stream,  str(currHandle) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount - self.avgFrameNum), str(dimx) + ',' + str(dimy) + ',' + str(self.bufferSize))
             frameCount = frameCount + self.bufferSize
 
         if firstBuffer == self.bufferSize and (dimz % self.bufferSize) > 0:
             print("frameCount : " + str(frameCount) + ", lastFrames : " + str(dimz % self.bufferSize))
-            rawdata = APIFunctions.readChannelDataToClientsBlob(ws, str(currHandle[0]) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount), str(dimx) + ',' + str(dimy) + ',' + str(dimz % self.bufferSize))
+            rawdata = APIFunctions.readChannelDataToClientsBlob(ws, str(currHandle) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount), str(dimx) + ',' + str(dimy) + ',' + str(dimz % self.bufferSize))
             stream = QDataStream(rawdata)
             stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
             tmplist = []
@@ -158,6 +139,7 @@ class AverageFrames:
 
 
         lastBuffer = workingarr.shape[2]
+        print(lastBuffer)
         avgarray = numpy.array([])
         for x in range(0 + self.avgFrameNum, lastBuffer):
             if ((lastBuffer - 1) - x) < 5:
@@ -170,17 +152,17 @@ class AverageFrames:
                 avgarray = avrg
             else:
                 avgarray = numpy.append(avgarray, avrg, axis=2)
+        print(avgarray.shape[2])
         numpy.swapaxes(avgarray, 0, 1)
         stream = QByteArray(avgarray.tobytes(order='F'))
-        res = APIFunctions.writeChannelDataFromAttachment(ws, stream,  str(currHandle[0]) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount - self.avgFrameNum), str(dimx) + ',' + str(dimy) + ',' + str(lastBuffer))
-        return str(currHandle[0]) + ',0,0,' + str(channel_handler)
+        res = APIFunctions.writeChannelDataFromAttachment(ws, stream,  str(currHandle) + ',0,0,' + str(channel_handler), '0,0,' + str(frameCount - self.avgFrameNum), str(dimx) + ',' + str(dimy) + ',' + str(lastBuffer))
+        return str(currHandle) + ',0,0,' + str(channel_handler)
     
     def connect(self):
         app = QCoreApplication(sys.argv)
         ws = APIFunctions.initConnection()
         print("Connected to API websocket host.")
-        #the login functions does not actually checks the given data as of version 1.0 but it is still a necessary step to start up an API conncetion
-        APIFunctions.login(ws, 'user', 'pass')
+        APIFunctions.login(ws, 'csp', 'asdf')
         time.sleep(5)
         print("API login successfull.")
         return ws
@@ -203,8 +185,7 @@ if __name__ == '__main__':
         unit = source[:pos]
         channel = source[pos+1:]
     else:
-        print("Bad source format given!\nThe source should look like: '10,0,0,0'")
-        sys.exit()
+        print("Bad source format given!/nThe source should look like: '10,0,0,0'")
     ws = app.connect()
     string = app.createAveragedTimeSeries(ws, file, session, unit, channel)
     print(string)
