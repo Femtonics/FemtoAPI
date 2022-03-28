@@ -9,7 +9,7 @@ and allows you to integrate a set of clearly defined instructions from various s
 such as MATLAB or Python. 
 Create your custom measurement protocols, online and offline data visualization and analysis
 tools, and connect your Femtonics scope to your existing lab software environment easily with the FemtoAPI!
-On the [FemtoAPI](https://kb.femtonics.eu/display/SUP/FemtoAPI+1.0) page, you can find the detailed documentation of our tool.
+On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page, you can find the detailed documentation of our tool.
 [Ask our experts for more details](mailto:info@femtonics.eu).
 
 
@@ -56,7 +56,7 @@ For the annotation, downstream analysis, and curation of calcium imaging data re
 To purchase FemtoAPI please contact sales@femtonics.eu.
 
 ## Documentation
-To see full documentation please visit the [FemtoAPI](https://kb.femtonics.eu/display/SUP/FemtoAPI+1.0) page.
+To see full documentation please visit the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page.
 
 ## Disclaimer
 IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
