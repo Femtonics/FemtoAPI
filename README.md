@@ -3,10 +3,9 @@
 
 ## Programming Femtonics microscopes: FemtoAPI
 
-The FemtoAPI (Application Programming Interface) enables you to remote-control your FEMTOSmart
-microscope. It serves as a programmable client-server user interface to the FEMTOSmart software
+The FemtoAPI (Application Programming Interface) enables you to access measurement data created with MES8 on FEMTO3D Atlas microscopes. It serves as a programmable client-server user interface to the Atlas software
 and allows you to integrate a set of clearly defined instructions from various software systems,
-such as MATLAB or Python. 
+such as MATLAB or Python.
 Create your custom measurement protocols, online and offline data visualization and analysis
 tools, and connect your Femtonics scope to your existing lab software environment easily with the FemtoAPI!
 On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page, you can find the detailed documentation of our tool.
@@ -43,7 +42,7 @@ On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161
   - MATLAB and Python bindings.
 
 ## Prerequisites for using the FemtoAPI library
-The FemtoAPI library depends on Qt, so it needs to be installed and added to the Windows PATH. The minimum Qt version required is Qt 5.10. Other tools are not needed.
+The FemtoAPI library depends on Qt, so it needs to be installed and added to the Windows PATH. The minimum Qt version required is Qt 5.15. Other tools are not needed.
 ### OnAcid:
 - Real-time Ca source detection on AO and resonant data.
 - Video: [Program your Femtonics microscope with the FemtoAPI](https://www.youtube.com/watch?v=IQOnXeu4G7w&ab_channel=Femtonics).
