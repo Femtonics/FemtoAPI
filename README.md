@@ -1,11 +1,11 @@
 # FemtoAPI - Analysis, programming tool, automation
-
-
+[![Downloads](https://pepy.tech/badge/femtoapi)](https://pepy.tech/project/femtoapi) [![PyPI version](https://badge.fury.io/py/femtoapi.svg)](https://badge.fury.io/py/femtoapi) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ## Programming Femtonics microscopes: FemtoAPI
 
-The FemtoAPI (Application Programming Interface) enables you to access measurement data created with MES8 on FEMTO3D Atlas microscopes. It serves as a programmable client-server user interface to the Atlas software
+The FemtoAPI (Application Programming Interface) enables you to remote-control your FEMTOSmart
+microscope. It serves as a programmable client-server user interface to the FEMTOSmart software
 and allows you to integrate a set of clearly defined instructions from various software systems,
-such as MATLAB or Python.
+such as MATLAB or Python. 
 Create your custom measurement protocols, online and offline data visualization and analysis
 tools, and connect your Femtonics scope to your existing lab software environment easily with the FemtoAPI!
 On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page, you can find the detailed documentation of our tool.
@@ -23,7 +23,7 @@ On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161
   - measurements triggered by external devices, or measurements triggered by behavioral feedback.
 
 - Use self-developed or other software tools for data analysis pipelines and offline data visualization with provided open-source wrapper functions.
-- Open-source platform: write your code, share analysis tools, develop existing codes further, adapt your code to data acquired with their Femtonics microscopes.
+- Open-source platform: write your code, share analysis tools, develop existing codes further, and adapt your code to data acquired with their Femtonics microscopes.
 - Analyze data online with real-time data access while your measurement is running. You can perform:
   - online motion correction,
   - online cell detection, and Ca<sup>2+</sup> source extraction.
@@ -41,11 +41,23 @@ On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161
   - Easy script creation: API functions closely refer to GUI buttons, parameter boxes, etc.
   - MATLAB and Python bindings.
 
-## Prerequisites for using the FemtoAPI library
+## Installation
+
+### Prerequisites for using the FemtoAPI library
 The FemtoAPI library depends on Qt, so it needs to be installed and added to the Windows PATH. The minimum Qt version required is Qt 5.15. Other tools are not needed.
-### OnAcid:
+
+You can install FemtoAPI using pip:
+```
+pip install femtoapi
+```
+
+#### OnAcid:
 - Real-time Ca source detection on AO and resonant data.
 - Video: [Program your Femtonics microscope with the FemtoAPI](https://www.youtube.com/watch?v=IQOnXeu4G7w&ab_channel=Femtonics).
+
+## FemtoAPI libraries
+In the open-source libraries, you can find a collection of the FemtoAPI functions.
+There are some example/demo applications in both Python and Matlab folders.
 
 ## Femtonics supported by community analysis packages
 For the annotation, downstream analysis, and curation of calcium imaging data recorded by [Femtonics microscopes](https://femtonics.eu/products/), we highly recommend the [Mesmerize package](https://github.com/kushalkolar/MESmerize) written by Kushal Kolar from the [Chatzigeorgiou Lab](https://www.chatzigeorgioulab.com/).
