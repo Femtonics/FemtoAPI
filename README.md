@@ -46,11 +46,6 @@ On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161
 ### Prerequisites for using the FemtoAPI library
 The FemtoAPI library depends on Qt, so it needs to be installed and added to the Windows PATH. The minimum Qt version required is Qt 5.15. Other tools are not needed.
 
-You can install FemtoAPI using pip:
-```
-pip install femtoapi
-```
-
 #### OnAcid:
 - Real-time Ca source detection on AO and resonant data.
 - Video: [Program your Femtonics microscope with the FemtoAPI](https://www.youtube.com/watch?v=IQOnXeu4G7w&ab_channel=Femtonics).
