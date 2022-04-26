@@ -1,7 +1,28 @@
-"""
-Python API wrapper functions for femtoAPI 2.0 version
-!!! Not final version, nor is it fully tested yet!!!
-"""
+# Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved. 
+# Permission to use, copy, modify this software and its documentation for educational,
+# research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
+# hereby granted, provided that the above copyright notice, this paragraph and the following two 
+# paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
+# for commercial licensing opportunities.
+# 
+# IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
+# INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
+# THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# 
+# FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+# PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
+# HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
+# MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+
+
+# ---------------------------------------------------------------------
+
+## This source contains a collection of the FemtoAPI 2.0 calls available for the Atlas systems
+
+
+
 import sys, time, array
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
@@ -11,10 +32,10 @@ import json
 def initConnection():
     """
     creates the websocket object used in all communications with the API server
+    the URL can be changed in the PyFemtoAPI.APIWebSocketClient call if the API server is running on a different machine, default port is set to 8888 in MESc
     returns the ws object which is used in all other functions
     """
     ws=PyFemtoAPI.APIWebSocketClient('ws://localhost:8888')
-    #ws=PyFemtoAPI.APIWebSocketClient('ws://192.168.43.138:8888')
     if ws == False:
         print("WebSocketHost could not be found?")
         sys.exit(1)
@@ -161,7 +182,7 @@ def getUnitMetadata(ws, handle, JsonItemName, string=""):
     JsonItemName:
         BaseUnitMetadata
         Roi
-        referenceViewport
+        ReferenceViewport
         Points
         Device 
         AxisControl
@@ -176,6 +197,7 @@ def getUnitMetadata(ws, handle, JsonItemName, string=""):
         ChannelInfo
         Modality
         CameraSettings
+        BreakView
     """
     if not string:
         command = "FemtoAPIFile.getUnitMetadata('" + str(handle) + "', '" + JsonItemName + "')"
@@ -197,8 +219,6 @@ def getUnitMetadata(ws, handle, JsonItemName, string=""):
 
 
 def setUnitMetadata(ws, handle, JsonItemName, jsonString):
-    """
-    """
     command = "FemtoAPIFile.setUnitMetadata('" + str(handle) + "', '" + JsonItemName + "', '" + jsonString + "')"
     simpleCmdParser=ws.sendJSCommand(command)
     #print(simpleCmdParser)
@@ -212,6 +232,10 @@ def setUnitMetadata(ws, handle, JsonItemName, jsonString):
 
 
 def getChildTree(ws, handle=''):
+    """
+    returns information about the opened files
+    handle defines the range of data returned, can be empty, file level('10'), session level('10,0') and munit level('10,0,0')
+    """
     command="FemtoAPIFile.getChildTree('"+handle+"')"
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -259,7 +283,7 @@ def setCurrentSession(ws, handle):
     
 def getProcessingState(ws):
     """
-    
+    DEPRECATED
     returns a dictionary containing all data about the processing state
     """
     command='FemtoAPIFile.getProcessingState()'
@@ -271,116 +295,6 @@ def getProcessingState(ws):
         return None
     else:
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-
-    
-def getMicroscopeState(ws):
-    """
-    returns a dictionary containing data about the microscope state
-    """
-    command='FemtoAPIMicroscope.getMicroscopeState()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-
-def getAcquisitionState(ws):
-    """
-    returns a dictionary containing all data about the processing state
-    """
-    command='FemtoAPIMicroscope.getAcquisitionState()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-
-def startGalvoScanSnapAsync(ws):
-    command='FemtoAPIMicroscope.startGalvoScanSnapAsync()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:	
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def startGalvoScanAsync(ws):
-    command='FemtoAPIMicroscope.startGalvoScanAsync()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def stopGalvoScanAsync(ws):
-    command='FemtoAPIMicroscope.stopGalvoScanAsync()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:	
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def startResonantScanSnapAsync(ws):
-    command='FemtoAPIMicroscope.startResonantScanSnapAsync()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-def startResonantScanAsync(ws):
-    command='FemtoAPIMicroscope.startResonantScanAsync()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-    
-
-def stopResonantScanAsync(ws):
-    command='FemtoAPIMicroscope.stopResonantScanAsync()'
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:	
-        cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
 
 
@@ -399,6 +313,7 @@ def createNewFile(ws):
 
 def setCurrentFile(ws, handle):
     """
+    DEPRECATED , removed
     set the current file to 'handle' in the processing view
     """
     command="FemtoAPIFile.setCurrentFile('" + str(handle) + "')"
@@ -507,193 +422,15 @@ def openFilesAsync(ws, filePath):
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-    
-def getImagingWindowParameters(ws, mType = '', spaceName = ''):
-    """
-    returns a dictionary containing data about the imaging window parameters
-    the function will only return data about the measurement type defined in mType or all if undefined
-    """
-    command="FemtoAPIMicroscope.getImagingWindowParameters(measurementType = '" + str(mType) + "', spaceName  = '" + str(spaceName) + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:	
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
 
-
-def setImagingWindowParameters(ws, jsonString):
-    """
-    the input json format restrictions can be found in the function description on the FemtoAPInics knowledgebase
-    """
-    command="FemtoAPIMicroscope.setImagingWindowParameters('"+jsonString+"')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def getZStackLaserIntensityProfile(ws, mType = '', spaceName = ''):
-    """
-    gets the Z-stack depth correction profile
-    mType: defines the measurement type (resonant, galvo), all types if undefined
-    """
-    command="FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '" + str(mType) + "', spaceName = '" + str(spaceName) + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:	
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-
-def setZStackLaserIntensityProfile(ws, jsonString):
-    """
-    the input json format restrictions can be found in the function description on the FemtoAPInics knowledgebase
-    """
-    command="FemtoAPIMicroscope.setZStackLaserIntensityProfile('"+jsonString+"')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def getAxisPositions(ws):
-    """
-    get positions for all the axes
-    """
-    command="FemtoAPIMicroscope.getAxisPositions()"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-def getAxisPosition(ws, axisName, posType = '', space = ''):
-    """
-    get position of one specific axis
-    """
-    command="FemtoAPIMicroscope.getAxisPosition('" + axisName + "', positionType = '" +posType+ "', spaceName = '" + space + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-def isAxisMoving(ws, axisName):
-    command="FemtoAPIMicroscope.isAxisMoving('" + axisName + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def doZero(ws, axisName, spaceName = ''):
-    command="FemtoAPIMicroscope.doZero('" + str(axisName) + "', spaceName  = '" + str(spaceName) + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:	
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def setAxisPosition(ws, axisName, newPosition, isRelativePosition = 'true', isRelativeToCurrentPosition = 'true', spaceName = ''):
-    """
-    required parameters:
-        axisName - string, must be configured axis name
-        newPosition - double
-    optional parameters:
-        isRelativePosition - boolean
-        isRelativeToCurrentPosition - boolean
-        spaceName - string, empty string means default namespace
-    """
-    command="FemtoAPIMicroscope.setAxisPosition('" + str(axisName) + "', " + str(newPosition) + ", isRelativePosition = " + isRelativePosition + ", isRelativeToCurrentPosition = " + isRelativeToCurrentPosition + ", spaceName = '" + spaceName + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def getPMTAndLaserIntensityDeviceValues(ws):
-    """
-    returns a dictionary containing PMT/Laser intensity device values
-    """
-    command="FemtoAPIMicroscope.getPMTAndLaserIntensityDeviceValues()"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-    
-
-def setPMTAndLaserIntensityDeviceValues(ws, jsonString):
-    """
-    the input json format restrictions can be found in the function description on the FemtoAPInics knowledgebase
-    """
-    command="FemtoAPIMicroscope.setPMTAndLaserIntensityDeviceValues('"+jsonString+"')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-#utolsó 3 paraméter változni fog!!!
 def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
     """
-    available types in taskXMLParameters : TaskResonantCommon, TaskFastXYGalvo, TaskAOFullFrame
-    *from mesc veresion 4.5 taskXMLParameters is replaced by a single string containing the scaning mode: galvo, resonant, AOFullFrame
-    
-    
     xDim: measurement image x resolution 
-    yDim: measurement image y resolution 
-    taskXMLParameters: measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.
-        *from mesc veresion 4.5 taskXMLParameters is replaced by a single string containing the scanin mode: galvo, resonant, AOFullFrame
+    yDim: measurement image y resolution
+    
+    taskXMLParameters: previously measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.
+    In MESc version 4.5 taskXMLParameters is replaced by a single string containing the scanin mode: galvo, resonant, aO
+       
     viewportJson: viewport for measurement 
     z0InMs: Measurement start time offset in ms. Double, default value is 0.0 
     zStepInMs: Frame duration time in ms (1/frame rate). Positive double, default value is 1.0. 
@@ -712,8 +449,12 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
         return cmdResult
 
 
-
 def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zStepInMicrons = 1.0):
+    """
+    zDim: number of Z planes
+
+    rest of the parameters are the same as in createTimeSeriesMUnit
+    """
     command="FemtoAPIFile.createZStackMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(zDim) + ", '" + taskXMLParameters + "', '" + viewportJson + "', zStepInMicrons = " + str(zStepInMicrons) +  ")"
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -725,7 +466,7 @@ def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zSt
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-#utolsó 3 paraméter változni fog!!!
+
 def createBackgroundFrame(ws, xDim, yDim, technologyType, viewportJson, fileNodeDescriptor = '', z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
     command="FemtoAPIFile.createBackgroundFrame(" + str(xDim) + ", " + str(yDim) + ", '" + technologyType + "', '" + viewportJson + "', '" + fileNodeDescriptor + "', z0InMs = " + str(z0InMs) + ", zStepInMs = " + str(zStepInMs) + ", zDimInitial = " + str(zDimInitial) + ")"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -973,7 +714,6 @@ def saveVarToFile(ws, jsValue, PathAndFileName):
     else:
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
-
     
 
 def getStatus(ws, sCommandID = None):
@@ -1102,87 +842,6 @@ def appendToCurve(ws, buffer, mUnitHandle, curveIdx, size, xType, xDataType, yTy
         return cmdResult
 
 
-def getFocusingModes(ws, spaceName = ''):
-    command="FemtoAPIMicroscope.getFocusingModes('" + spaceName + "')"
-    print(command)
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-    
-def setFocusingMode(ws, sfocusingMode, spaceName = ''):
-    command="FemtoAPIMicroscope.setFocusingMode('" + str(sfocusingMode) + "', '" + spaceName + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def getActiveProtocol(ws):
-    """
-    returns a directory containing the following data:
-    -currently active user waveforms, channels, and patterns
-    -which waveform is currently set to be displayed on which channels
-    -display order and timing of the waveforms
-    -pattern metadata: path description, path order, cycle time, etc. 
-    """
-    command="FemtoAPIMicroscope.getActiveProtocol()"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-
-def setActiveTaskAndSubTask(ws, taskName, subTaskName = 'timeSeries'):
-    """
-    taskName: string, name of the task to set, can be 'resonant' or 'galvo'
-    subTaskName: string, optional parameter, name of the sub task to set, value can be 'timeSeries', 'zStack' or 'volumeScan'
-    If not given, timeseries measurement will be selected on the MESc GUI by default. 
-    """
-    command="FemtoAPIMicroscope.setActiveTaskAndSubTask( '" + taskName + "', '" + subTaskName + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
-def getCommandSetVersion(ws):
-    """
-    Gets the version of the FemtoAPI API command set in string
-    """
-    command="FemtoAPIMicroscope.getCommandSetVersion()"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-
-
 def getCommandSetVersionProcessing(ws):
     """
     Gets the version of the FemtoAPI API command set in string
@@ -1199,19 +858,6 @@ def getCommandSetVersionProcessing(ws):
         return cmdResult
 
 
-def getLastCommandError(ws):
-    command="FemtoAPIMicroscope.getLastCommandError()"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
-        return cmdResult
-
-
 def getLastCommandErrorProcessing(ws):
     command="FemtoAPIFile.getLastCommandError()"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -1224,18 +870,6 @@ def getLastCommandErrorProcessing(ws):
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-
-def setMeasurementDuration(ws, duration, taskName = '', spaceName = ''):
-    command="FemtoAPIMicroscope.setMeasurementDuration(" + str(duration) + ", taskName = '" + taskName + "', spaceName = '" + spaceName + "')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
 
 def readRawChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = None):
     """
@@ -1419,3 +1053,56 @@ def writeChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
     else:
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
+
+
+def getTmpTiff(ws, uId, filePath):
+    print('gettif')
+    command = "FemtoAPIFile.getTmpTiff('" + uId + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        result =  simpleCmdParser.getJSEngineResult()
+        print ("getTiff result: " + str(result))
+        cmdResult = QByteArray()
+        for parts in simpleCmdParser.getPartList():
+            cmdResult.append(parts)
+        with open(Path(filePath), "wb") as f:
+            f.write(cmdResult.data())
+        return True
+
+            
+def tiffExport(ws, filePath, handle, applyLut, channelList = '', compressed = 1, breakView = 0, exportRawData = 0, startTimeSlice = 0, endTimeSlice = ''):
+    filePath = Path(filePath)
+    print(filePath)
+    if not filePath.parent.exists():
+        print("tiffExport error: Filepath directory does not exists.")
+        return None
+    rndm = random.randrange(0, 1000000)
+    uId = 'tmptif_' + str(rndm)
+    command="FemtoAPIFile.createTmpTiff('" + uId + "', '" + str(handle) + "', " + str(applyLut) + ",'" + str(channelList) + "'," + str(compressed) + "," + str(breakView) + "," + str(exportRawData) + "," + str(startTimeSlice) + "," + str(endTimeSlice) + ")"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        createTiffRes =  simpleCmdParser.getJSEngineResult()
+        print ("createTmpTiff result: " + str(createTiffRes))
+        cmdResult = QByteArray()
+        for parts in simpleCmdParser.getPartList():
+            cmdResult.append(parts)
+        tmp = cmdResult.data()
+        mDataFile = Path(filePath.parent, str(filePath.name) + '.metadata.txt')
+        with open(mDataFile, "wb") as f:
+            f.write(tmp)
+        if ws.getUrl().toString == 'ws://localhost:8888':
+            tmpPath = Path(createTiffRes['tmp'])
+            shutil.move(tmpPath, filePath)
+        else:
+            result = getTmpTiff(ws, uId, filePath)
+        return result

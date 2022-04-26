@@ -1,3 +1,21 @@
+# Copyright ©2021. Femtonics Ltd. (Femtonics). All Rights Reserved. 
+# Permission to use, copy, modify this software and its documentation for educational,
+# research, and not-for-profit purposes, without fee and without a signed licensing agreement, is 
+# hereby granted, provided that the above copyright notice, this paragraph and the following two 
+# paragraphs appear in all copies, modifications, and distributions. Contact info@femtonics.eu
+# for commercial licensing opportunities.
+# 
+# IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
+# INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF 
+# THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF FEMTONICS HAS BEEN 
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# 
+# FEMTONICS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+# PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED 
+# HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
+# MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+
 import sys, time, logging, os, numpy, argparse, re
 import APIFunctions
 import miscFunctions
@@ -13,12 +31,12 @@ class AverageFrames:
         self.avgFrameNum = 0
 
     def getArguments(self):
-        parser = argparse.ArgumentParser(description="PLACEHOLDER"
-                                                     "maybe I will write some actual content here in the future")
+        parser = argparse.ArgumentParser(description="Creates a new measurement unit from the given source with averaged pixel values."
+                                                     "Usable with MESc 4.5 and femtoAPI 2.0 versions.")
         parser.add_argument('source', metavar='SOURCE',
                             help='Handler of the source measurement unit with channel number. e.g.: "10,0,0,0"')
         parser.add_argument('avgFrames', metavar='FRAMES',
-                            help='A number that defines how many frames are used to create an averaged frame. The a frame will be crated by averaging the X number of frames before and after the frame together.')
+                            help='A number that defines how many frames are used to create an averaged frame. The frame will be crated by averaging the X number of frames before and after the frame together.')
         parser.add_argument('--bufferSize', default = 100,
                     help='Defines the number of frames to read at once from the server. Default value is 100')
         args = parser.parse_args()
