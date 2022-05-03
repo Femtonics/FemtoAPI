@@ -18,14 +18,17 @@
 
 
 # ---------------------------------------------------------------------
-
-## This source contains a collection of the FemtoAPI calls
-
-import sys, time, array
+"""
+This source contains a collection of the FemtoAPI calls
+Python API wrapper functions for femtoAPI 2.0 version
+!!! Not final version, nor is it fully tested yet!!!
+"""
+import sys, time, array, random, shutil
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
 import json
+from pathlib import Path
 
 def initConnection(host = 'ws://localhost:8888'):
     """
@@ -35,7 +38,7 @@ def initConnection(host = 'ws://localhost:8888'):
     ws=PyFemtoAPI.APIWebSocketClient(host)
     if ws == False:
         print("WebSocketHost could not be found?")
-        return None
+        sys.exit(1)
     timer = 0
     while timer < 10:
         print("Trying to connect to server...")
@@ -47,9 +50,8 @@ def initConnection(host = 'ws://localhost:8888'):
         timer = timer + 1
     print("Connection initialized: " + str(done))
     if done == False:
-        return None
-    else:
-        return ws
+        sys.exit(1)
+    return ws
 
 
 def login(ws, name, passw):
@@ -70,7 +72,7 @@ def login(ws, name, passw):
         timer = timer + 1
     if resultCode > 0:
         print (loginParser.getErrorText())
-        return False
+        sys.exit(1)
     else:
         print("Successful login to FemtoAPI server")
         return True
@@ -80,8 +82,225 @@ def closeConnection(ws):
     """
     closes the connection in the ws object
     """
-    ws.close()
+    res = ws.close()
     print("Connection closed")
+
+
+
+
+def enableSignals(ws):
+    """
+    Enables signaling on websocket
+    """
+    command="FemtoAPITools.enableSignals('true')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
+def isSignalEnabled(ws):
+    """
+    Check is signaling enabled on websocket
+    """
+    command='FemtoAPITools.isSignalEnabled()'
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+    
+
+def getFileList(ws, string=""):
+    """
+    Returns the list of the opened files. With the "string" argument ('subscribe'|'unsubscribe') you can subscribe for opening/closing files.
+    """
+    if not string:
+        command = "FemtoAPIFile.getFileList()"
+    else:
+        command = "FemtoAPIFile.getFileList('" + string + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print("Return code: %d" % resultCode)
+        print(simpleCmdParser.getErrorText())
+    else:	
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def getFileMetadata(ws, handle, string=""):
+    """
+    Returns the metadata JSON of the opened file defined by "handle". With the "string" argument ('subscribe'|'unsubscribe') you can subscribe for opening/closing the file.
+    """
+    if not string:
+        command = "FemtoAPIFile.getFileMetadata('" + str(handle) + "')"
+    else:
+        command = "FemtoAPIFile.getFileMetadata('" + str(handle) + "', '" + string + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print("Return code: %d" % resultCode)
+        print(simpleCmdParser.getErrorText())
+    else:	
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def getSessionMetadata(ws, handle, string=""):
+    """
+    Returns the metadata JSON of MSESSION section of the specific session described by "handle". With the "string" argument ('subscribe'|'unsubscribe') you can subscribe for opening/closing the session.
+    """
+    if not string:
+        command = "FemtoAPIFile.getSessionMetadata('" + str(handle) + "')"
+    else:
+        command = "FemtoAPIFile.getSessionMetadata('" + str(handle) + "', '" + string + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print("Return code: %d" % resultCode)
+        print(simpleCmdParser.getErrorText())
+    else:	
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def setSessionMetadata(ws, handle, jsonString):
+    """
+    jsonString must be the same format as the result of getSessionMetadata with the proper modified values
+    """
+    command = "FemtoAPIFile.setSessionMetadata('" + str(handle) + "', '" + jsonString + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print("Return code: %d" % resultCode)
+        print(simpleCmdParser.getErrorText())
+    else:	
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
+
+def getUnitMetadata(ws, handle, JsonItemName, string=""):
+    """
+    JsonItemName:
+        BaseUnitMetadata
+        Roi
+        referenceViewport
+        Points
+        Device 
+        AxisControl
+        UserData
+        Protocol
+        AoSettings
+        IntensityCompensationo
+        CoordinateTuning
+        MultiProtocolJson
+        CurveInfo
+        FullFrameparams
+        ChannelInfo
+        Modality
+        CameraSettings
+    """
+    if not string:
+        command = "FemtoAPIFile.getUnitMetadata('" + str(handle) + "', '" + JsonItemName + "')"
+    else:
+        command = "FemtoAPIFile.getUnitMetadata('" + str(handle) + "', '" + JsonItemName + "', '" + string + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print("Return code: %d" % resultCode)
+        print(simpleCmdParser.getErrorText())
+        return None
+    else:
+        #print(simpleCmdParser.getJSEngineResult())
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        if cmdResult:
+            cmdResult = json.loads(cmdResult)
+        return cmdResult
+
+
+def setUnitMetadata(ws, handle, JsonItemName, jsonString):
+    """
+    Sets the metadata of "JsonItemName" in unit defined by "handle". "jsonString" argument must be the the modified result of "getSessionMetadataJson()" function.
+    """
+    command = "FemtoAPIFile.setUnitMetadata('" + str(handle) + "', '" + JsonItemName + "', '" + jsonString + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print("Return code: %d" % resultCode)
+        print(simpleCmdParser.getErrorText())
+    else:	
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
+
+def getChildTree(ws, handle=''):
+    """
+    Returns with the file tree. With no handle argument, returns the whole file tree. Otherwise returns the file, session or unit property tree, according to the given "handle" argument.
+    """
+    command="FemtoAPIFile.getChildTree('"+handle+"')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    #logging.info(resultCode)
+    if resultCode > 0:
+        print("Return code: " + str(resultCode))
+        print(simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        print("ChildTree acquired")
+        return cmdResult
+
+
+def getCurrentSession(ws, string=""):
+    """
+    Returns with the handler of the actual session in JSON format. With "string" argument the client subscribes on changes.
+    """
+    if not string:
+        command = "FemtoAPIFile.getCurrentSession()"
+    else:
+        command = "FemtoAPIFile.getCurrentSession('" + string + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    #logging.info(resultCode)
+    if resultCode > 0:
+        print("Return code: " + str(resultCode))
+        print(simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
+
+def setCurrentSession(ws, handle):
+    """
+    Sets the current session according to the "handle" given.
+    """
+    command="FemtoAPIFile.setCurrentSession('" + handle + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    #logging.info(resultCode)
+    if resultCode > 0:
+        print("Return code: " + str(resultCode))
+        print(simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
 
     
 def getProcessingState(ws):
@@ -100,22 +319,6 @@ def getProcessingState(ws):
         return cmdResult
 
 
-def setProcessingState(ws, jsonString):
-    """
-    the input json format restrictions can be found in the function description on the FemtoAPInics knowledgebase
-    returns a boolean value
-    """
-    command="FemtoAPIFile.setProcessingState('"+jsonString+"')"
-    simpleCmdParser=ws.sendJSCommand(command)
-    resultCode=simpleCmdParser.getResultCode()
-    if resultCode > 0:
-        print ("Return code: " + str(resultCode))
-        print (simpleCmdParser.getErrorText())
-        return None
-    else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        return cmdResult
-    
     
 def getMicroscopeState(ws):
     """
@@ -362,7 +565,6 @@ def closeFileAndSaveAsAsync(ws, filePath, handle = '', overwrite = 'false', comp
 def openFilesAsync(ws, filePath):
     """
     Opens one or more file(s) asynchronously
-    only '/' characters can be used in the path
     """
     command="FemtoAPIFile.openFilesAsync('" + str(filePath) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -398,7 +600,6 @@ def setImagingWindowParameters(ws, jsonString):
     the input json format restrictions can be found in the function description on the FemtoAPInics knowledgebase
     """
     command="FemtoAPIMicroscope.setImagingWindowParameters('"+jsonString+"')"
-    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -558,7 +759,7 @@ def setPMTAndLaserIntensityDeviceValues(ws, jsonString):
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
 
-
+#utolsó 3 paraméter változni fog!!!
 def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
     """
     available types in taskXMLParameters : TaskResonantCommon, TaskFastXYGalvo, TaskAOFullFrame
@@ -586,6 +787,7 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
         return cmdResult
 
 
+
 def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zStepInMicrons = 1.0):
     """
     Creates new measurement unit for galvo/resonant/AO fullframe scan time series measurement
@@ -600,11 +802,104 @@ def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zSt
     else:
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
+
+#utolsó 3 paraméter változni fog!!!
+#MESc version 4.5 and above only
+def createBackgroundFrame(ws, xDim, yDim, technologyType, viewportJson, fileNodeDescriptor = '', z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
+    """
+    Creates new measurement session and a time series measurement unit in it with the specified
+    technology type, and adds one (or optionally more) frame to it.
+    This measurement session is special: it cannot be target of new measurements,
+    and only multiROI images can be created in it.
+    """
+    command="FemtoAPIFile.createBackgroundFrame(" + str(xDim) + ", " + str(yDim) + ", '" + technologyType + "', '" + viewportJson + "', '" + fileNodeDescriptor + "', z0InMs = " + str(z0InMs) + ", zStepInMs = " + str(zStepInMs) + ", zDimInitial = " + str(zDimInitial) + ")"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+#MESc version 4.5 and above only
+def createBackgroundZStack(ws, xDim, yDim, zDim, technologyType, viewportJson, fileNodeDescriptor = '', zStepInMicrons = 1.0):
+    """
+    Creates new measurement session and a z-stack series measurement unit in it with the
+    specified technology type, This measurement session is special:
+    it cannot be target of new measurements, and only multiROI images can be created in it. 
+    """
+    command="FemtoAPIFile.createBackgroundZStack(" + str(xDim) + ", " + str(yDim) + ", " + str(zDim) + ", '" + technologyType + "', '" + viewportJson + "', '" + fileNodeDescriptor + "', zStepInMicrons = " + str(zStepInMicrons) +  ")"
+    print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def createMultiROI2DMUnit(ws, xDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0):
+    """
+    methodType : 2D multiROI type, it can be 'multiROIPointScan', 'multiROILineScan', or 'multiROIMultiLine' 
+    """
+    command="FemtoAPIFile.createMultiROIMUnit(" + str(xDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str() + "', deltaTInMs = " + str(x0InMicrons) + ", t0InMs = " + str(y0InMicrons) + ")"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        print ("Create createMultiROI2DMUnit success:" + str(cmdResult))
+        return cmdResult
+
+
+def createMultiROI3DMUnit(ws, xDim, yDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0):
+    """
+    methodType : 3D multiROI type, it can be 'multiROIChessBoard', 'multiROITransverseRibbonScan', 'multiROILongitudinalRibbonScan'e' 
+    """
+    command="FemtoAPIFile.createMultiROIMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str() + "', deltaTInMs = " + str(x0InMicrons) + ", t0InMs = " + str(y0InMicrons) + ")"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        print ("Create createMultiROI2DMUnit success:" + str(cmdResult))
+        return cmdResult
+
+    
+def createMultiROI4DMUnit(ws, xDim, yDim, zDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0):
+    """
+    methodType : 4D multiROI type, it can be 'multiROIMultiCube', 'multiROISnake'
+    """
+    command="FemtoAPIFile.createMultiROIMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(zDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str() + "', deltaTInMs = " + str(x0InMicrons) + ", t0InMs = " + str(y0InMicrons) + ")"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        print ("Create createMultiROI2DMUnit success:" + str(cmdResult))
+        return cmdResult
     
 
 def extendMUnit(ws, mUnitHandle, countDims):
     """
-    Extends a measurement unit given by 'mUnitHandle' with the number of frames 'countDims'
+    Extends a measurement unit given by 'mUnitHandle' with the number of frames 'countDims'.
     """
     command="FemtoAPIFile.extendMUnit('" + str(mUnitHandle) + "', " + str(countDims) + ")"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -620,7 +915,7 @@ def extendMUnit(ws, mUnitHandle, countDims):
 
 def deleteMUnit(ws, mUnitHandle):
     """
-    Deletes a measurement unit from a .mesc file given by 'mUnitHandle'
+    Deletes a measurement unit from a .mesc file given by 'mUnitHandle' .
     """
     command="FemtoAPIFile.deleteMUnit('" + str(mUnitHandle) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -633,13 +928,14 @@ def deleteMUnit(ws, mUnitHandle):
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-
+# source x,y,z, dest x,y
 def copyMUnit(ws, sourceMUnitHandle, destMSessionHandle, bCopyChannelContents = 'true'):
     """
-    sourceMUnitHandle is the measurementunit handle of the source (e.g. '10,0,0')
-    destMSessionHandle is the session handle of the destination (e.g. '11,0')
+    sourceMUnitHandle is the measurementunit handle of the source 
+    destMSessionHandle is the session handle of the destination
     """
     command="FemtoAPIFile.copyMUnit('" + str(sourceMUnitHandle) + "', '" + str(destMSessionHandle) + "', " + bCopyChannelContents + ")"
+    print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -650,11 +946,11 @@ def copyMUnit(ws, sourceMUnitHandle, destMSessionHandle, bCopyChannelContents = 
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-
+# source x,y,z, dest x,y 
 def moveMUnit(ws, sourceMUnitHandle, destMSessionHandle):
     """
-    sourceMUnitHandle is the measurementunit handle of the source (e.g. '10,0,0')
-    destMSessionHandle is the sessionhandle of the destination (e.g. '11,0')
+    sourceMUnitHandle is the measurementunit handle of the source 
+    destMSessionHandle is the sessionhandle of the destination
     """
     command="FemtoAPIFile.moveMUnit('" + str(sourceMUnitHandle) + "', '" + str(destMSessionHandle) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -668,11 +964,13 @@ def moveMUnit(ws, sourceMUnitHandle, destMSessionHandle):
         return cmdResult
 
     
-def addChannel(ws, mUnitHandle, channelName):
+def addChannel(ws, mUnitHandle, channelName, compressionPreset=0):
     """
-    Adds a new channel to the measurement unit with the given channel name
+    Adds a new channel to the measurement unit with the given channel name,
+    if there is no existing channel with this name, otherwise 'false' is set
+    in the returned json. 
     """
-    command="FemtoAPIFile.addChannel('" + str(mUnitHandle) + "', '" + str(channelName) + "')"
+    command="FemtoAPIFile.addChannel('" + str(mUnitHandle) + "', '" + str(channelName) + "', '" + str(compressionPreset) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -686,7 +984,8 @@ def addChannel(ws, mUnitHandle, channelName):
 
 def deleteChannel(ws, channelHandle):
     """
-    Removes the specified channel
+    Removes the specified channel. If there is no channel exists
+    with the given channel handle, 'false' is set in the returned json.
     """
     command="FemtoAPIFile.deleteChannel('" + str(channelHandle) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -702,7 +1001,11 @@ def deleteChannel(ws, channelHandle):
 
 def addLastFrameToMSession(ws, destMSessionHandle = '', space = ''):
     """
-    Creates a new MUnit in the given MSession, and adds the frame on the immediate window (last frame of a measurement/live or snap) to it
+    Creates a new MUnit in the given MSession, and adds the frame
+    on the immediate window (last frame of a measurement/live or snap) to it.
+    If "destMSessionHandle" parameter  is empty string, the current MSession
+    is considered. Last frame is considered as the frame of immediate window
+    of the space given by "space", or from the default space if "space" is empty.
     """
     command="FemtoAPIFile.addLastFrameToMSession('" + str(destMSessionHandle) + "', '" + space + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -787,8 +1090,8 @@ def saveVarToFile(ws, jsValue, PathAndFileName):
 
 def getStatus(ws, sCommandID = None):
     """
-    If sCommand is defined the function will get the status of the assyncronous file operation represented by the given ID. - not tested
-    If sCommand is not given the function will return information about the currently opened files.
+        If sCommand is defined the function will get the status of the assyncronous file operation represented by the given ID. - not tested
+        If sCommand is not given the function will return information about the currently opened files.
     """
     if sCommandID:
         command="FemtoAPIFile.getStatus('" + str(sCommandID) + "')"
@@ -805,7 +1108,24 @@ def getStatus(ws, sCommandID = None):
         return cmdResult
     
 
-def getCurve(ws, mUnitHandle, curveIdx):
+def curveInfo(ws, mUnitHandle, curveIdx):
+    """
+    Returns information about the selected curve
+    """
+    command="FemtoAPIFile.curveInfo('" + str(mUnitHandle) + "', '" + str(curveIdx) + "')"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
     """
     returns a dictionary with 2 elements
     Result: contains data about the specified curve
@@ -814,9 +1134,10 @@ def getCurve(ws, mUnitHandle, curveIdx):
         - 'yData' is a list with the y data of the curve
     the elements of these 2 list make up data pairs (xData[0] - yData[0], xData[1] - yData[1], etc.)
     """
-    command="FemtoAPIFile.getCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "')"
-    print(command)
+    command="FemtoAPIFile.readCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', '" + str(vectorFormat) + "', '" + str(forceDouble) + "')"
+    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
+    #print(simpleCmdParser.hasBinaryParts())
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
         print ("Return code: " + str(resultCode))
@@ -824,7 +1145,7 @@ def getCurve(ws, mUnitHandle, curveIdx):
         return None
     else:
         cmdResult = {}
-        cmdResult.update({"Result": simpleCmdParser.getJSEngineResult()})
+        cmdResult.update({"Result": json.loads(simpleCmdParser.getJSEngineResult())})
         xData = []
         yData = []
         curveData = {"xData": xData, "yData": yData}
@@ -846,15 +1167,81 @@ def getCurve(ws, mUnitHandle, curveIdx):
             while not stream.atEnd():
                 floatData = stream.readDouble()
                 curveData["yData"].append(floatData)
-
             print( "Binary part with size: " + str(parts.size()))
-        cmdResult.update({"CurveData": curveData})
+        cmdResult.update({"CurveData": curveData})                 
+        return cmdResult
+
+    
+def deleteCurve(ws, mUnitHandle, curveIdx):
+    """
+    Deletes a curve
+    """
+    command="FemtoAPIFile.deleteCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "')"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
+        return cmdResult
+
+#will change
+def writeCurve(ws, buffer, mUnitHandle, size, name, xType, xDataType, yType, yDataType, optimize = ''):
+    """parameter info on Confluence -> API2.0 """
+    ws.uploadAttachment(buffer)
+    command="FemtoAPIFile.writeCurve('" + str(mUnitHandle) + "', '" + str(size) + "', '" + name + "', '" + xType + "', '" + xDataType + "', '" + yType + "', '" + yDataType + "', '" + str(optimize) + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+#not working !! fix needed
+def appendToCurve(ws, buffer, mUnitHandle, curveIdx, size, xType, xDataType, yType, yDataType):
+    """parameter info on Confluence -> API2.0 """
+    ws.uploadAttachment(buffer)
+    command="FemtoAPIFile.appendToCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', '" + str(size) + "', '" + xType + "', '" + xDataType + "', '" + yType + "', '" + yDataType + "')"
+    print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
 
 
+def getFocusingModes(ws, spaceName = ''):
+    """
+    Gets the available (configured) focusing modes for the specified space
+    in json array, as it can be seen in the MESc GUI.
+    If space name is not given, default space ('space1') is considered.
+    """
+    command="FemtoAPIMicroscope.getFocusingModes('" + spaceName + "')"
+    print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+    
 def setFocusingMode(ws, sfocusingMode, spaceName = ''):
     """
-    Switches to the given focusing mode  'focusingMode', if it is valid
+    Switches to the given focusing mode  'sfocusingMode', if it is valid.
     """
     command="FemtoAPIMicroscope.setFocusingMode('" + str(sfocusingMode) + "', '" + spaceName + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -940,7 +1327,7 @@ def getCommandSetVersionProcessing(ws):
 
 def getLastCommandError(ws):
     """
-    Gets the error information of the last issued command
+    Gets the error information of the last issued command.
     """
     command="FemtoAPIMicroscope.getLastCommandError()"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -972,7 +1359,9 @@ def getLastCommandErrorProcessing(ws):
 
 def setMeasurementDuration(ws, duration, taskName = '', spaceName = ''):
     """
-    Sets measurement duration for the given task and space
+    Sets measurement duration for the given task and space. If taskName is empty,
+    the current active task is considered. If spaceName is empty,
+    default space ('space1') is considered
     """
     command="FemtoAPIMicroscope.setMeasurementDuration(" + str(duration) + ", taskName = '" + taskName + "', spaceName = '" + spaceName + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -1037,7 +1426,7 @@ def readChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = Non
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readRawChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        print ("readChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
         if filePath:
             cmdResult = QByteArray()
             for parts in simpleCmdParser.getPartList():
@@ -1058,9 +1447,10 @@ def readChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = Non
 
 def readRawChannelDataJSON(ws, handle, fromDims, countDims):
     """
-    Reads the requested raw image data as a JSON string
+    The server sends the requested raw image data as a JSON string to the FemtoAPI client
     """
     command="FemtoAPIFile.readRawChannelDataJSON('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
+    print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -1074,9 +1464,10 @@ def readRawChannelDataJSON(ws, handle, fromDims, countDims):
 
 def readChannelDataJSON(ws, handle, fromDims, countDims):
     """
-    Reads the requested converted image data as a JSON string
+    The server sends the requested converted image data as a JSON string to the FemtoAPI client.
     """
     command="FemtoAPIFile.readChannelDataJSON('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
+    print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -1085,12 +1476,13 @@ def readChannelDataJSON(ws, handle, fromDims, countDims):
         return None
     else:
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        print(cmdResult)
         return cmdResult
 
     
 def readRawChannelData(ws, varName, handle, fromDims, countDims):
     """
-    Reads raw channel data on the server side to a JavaScript variable
+    Reads raw channel data on the server side to a JavaScript variable.
     """
     command="var " + varName + " = FemtoAPIFile.readRawChannelData('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -1101,12 +1493,13 @@ def readRawChannelData(ws, varName, handle, fromDims, countDims):
         return None
     else:
         cmdResult = simpleCmdParser.getJSEngineResult()
+        print("done", cmdResult)
         return cmdResult
 
 
 def readChannelData(ws, varName, handle, fromDims, countDims):
     """
-    Reads converted channel data on the server side into a JavaScript variable
+    Reads converted channel data on the server side into a JavaScript variable. 
     """
     command="var " + varName + " = FemtoAPIFile.readChannelData('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -1125,7 +1518,11 @@ def readChannelData(ws, varName, handle, fromDims, countDims):
 
 def writeRawChannelData(ws, varName, handle, fromDims, countDims):
     """
-    Writes raw channel data from the variable to the specified sub-hyperrectangle
+    Writes raw channel data from the variable to the specified
+    sub-hyperrectangle. The variable should be of the same type
+    as the channel to write specified by handle, and the
+    sub-hyperrectangle specified by fromDims and countDims
+    must fulfill the conditions described in the introduction.
     """
     command="FemtoAPIFile.writeRawChannelData(" + str(varName) + ", '" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -1141,7 +1538,7 @@ def writeRawChannelData(ws, varName, handle, fromDims, countDims):
 
 def writeChannelData(ws, varName, handle, fromDims, countDims):
     """
-    Writes the converted data from a variable
+    Writes the converted data from a variable.
     """
     command="FemtoAPIFile.writeChannelData(" + str(varName) + ", '" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -1157,7 +1554,11 @@ def writeChannelData(ws, varName, handle, fromDims, countDims):
     
 def writeRawChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
     """
-    Writes the specified raw data from an attached binary data file
+    Writes the specified raw data from an attached binary data file.
+    The attached binary data type must be the same as the
+    channel data type of the specified data, and the fromDims
+    and countDims parameters must fulfill the conditions
+    described in the introduction.
     """
     command="FemtoAPIFile.writeRawChannelDataFromAttachment('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     ws.uploadAttachment(buffer)
@@ -1174,7 +1575,9 @@ def writeRawChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
 
 def writeChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
     """
-    Writes the specified converted data from an attached binary data file
+    Writes the specified converted data from an attached binary data file.
+    The attached binary data type must be the same as the
+    channel data type of the specified data.
     """
     command="FemtoAPIFile.writeChannelDataFromAttachment('" + str(handle) + "', '" + str(fromDims) + "', '" + str(countDims) + "')"
     ws.uploadAttachment(buffer)
@@ -1187,3 +1590,57 @@ def writeChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
     else:
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
+
+
+
+def getTmpTiff(ws, uId, filePath):
+    print('gettif')
+    command = "FemtoAPIFile.getTmpTiff('" + uId + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        result =  simpleCmdParser.getJSEngineResult()
+        print ("getTiff result: " + str(result))
+        cmdResult = QByteArray()
+        for parts in simpleCmdParser.getPartList():
+            cmdResult.append(parts)
+        with open(Path(filePath), "wb") as f:
+            f.write(cmdResult.data())
+        return True
+
+
+            
+def tiffExport(ws, filePath, handle, applyLut, channelList = [], compressed = 1, breakView = 0, exportRawData = 0, startTimeSlice = 0, endTimeSlice = 1):
+    filePath = Path(filePath)
+    print(filePath)
+    rndm = random.randrange(0, 1000000)
+    uId = 'tmptif_' + str(rndm)
+    command="FemtoAPIFile.createTmpTiff('" + uId + "', '" + str(handle) + "', " + str(applyLut) + "," + str(channelList) + "," + str(compressed) + "," + str(breakView) + "," + str(exportRawData) + "," + str(startTimeSlice) + "," + str(endTimeSlice) + ")"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        createTiffRes =  simpleCmdParser.getJSEngineResult()
+        print ("createTmpTiff result: " + str(createTiffRes))
+        cmdResult = QByteArray()
+        for parts in simpleCmdParser.getPartList():
+            cmdResult.append(parts)
+        tmp = cmdResult.data()
+        mDataFile = Path(filePath.parent, str(filePath.name) + '.metadata.txt')
+        with open(mDataFile, "wb") as f:
+            f.write(tmp)
+        if ws.getUrl().toString == 'ws://localhost:8888':
+            tmpPath = Path(createTiffRes['tmp'])
+            shutil.move(tmpPath, filePath)
+        else:
+            result = getTmpTiff(ws, uId, filePath)
+        return result
+   
+    

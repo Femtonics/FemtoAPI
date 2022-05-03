@@ -19,6 +19,7 @@
 
 # ---------------------------------------------------------------------
 """
+This source contains a collection of the FemtoAPI calls
 Python API wrapper functions for femtoAPI 2.0 version
 !!! Not final version, nor is it fully tested yet!!!
 """
@@ -29,12 +30,12 @@ from femtoapi import PyFemtoAPI
 import json
 from pathlib import Path
 
-def initConnection():
+def initConnection(host = 'ws://localhost:8888'):
     """
     creates the websocket object used in all communications with the API server
     returns the ws object which is used in all other functions
     """
-    ws=PyFemtoAPI.APIWebSocketClient('ws://localhost:8888')
+    ws=PyFemtoAPI.APIWebSocketClient(host)
     if ws == False:
         print("WebSocketHost could not be found?")
         sys.exit(1)
@@ -1037,7 +1038,7 @@ def sendFileToClientsBlob(ws, sPathAndFileName):
 def saveAttachmentToFile(ws, sPathAndFileName):
     """
     If there is data attached to the websocket session it is gonna be saved as the given file.
-    ws.uploadAttachment() function can be used for ataching data to the websocket session.
+    ws.uploadAttachment() function can be used for attaching data to the websocket session.
     No data means empty file.
     """
     command="FemtoAPIFile.saveAttachmentToFile('" + str(sPathAndFileName) + "')"
