@@ -35,8 +35,7 @@ class copyFrames:
         
 
     def getArguments(self):
-        parser = argparse.ArgumentParser(description="FemtoAPI application to copy data between two specified frames into a new measurement unit."
-                                                     "Usable with MESc 4.0 and femtoAPI 1.0 versions.")
+        parser = argparse.ArgumentParser(description="FemtoAPI application to copy data between two specified frames into a new measurement unit.")
         parser.add_argument('source', metavar='SOURCE',
                             help='Handle of the source measurement unit. e.g.: "10,0,0"')
         parser.add_argument('frameStart', metavar='FRAMESTART',
