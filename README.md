@@ -1,5 +1,15 @@
 # FemtoAPI - Analysis, programming tool, automation
-
+<p align="center">  
+<a href="https://pypi.org/project/femtoapi" target="_blank">
+    <img src="https://badge.fury.io/py/femtoapi.svg" alt="Package version">
+</a>
+<a href="https://pepy.tech/project/femtoapi" target="_blank">
+    <img src="https://pepy.tech/badge/femtoapi" alt="Downloads">
+</a>
+<a href="https://www.gnu.org/licenses/gpl-2.0" target="_blank">
+    <img src="https://img.shields.io/badge/License-GPLv2-blue.svg" alt="License">
+</a>
+</p>
 
 ## Programming Femtonics microscopes: FemtoAPI
 
@@ -8,7 +18,6 @@ and allows you to integrate a set of clearly defined instructions from various s
 With the functions of FemtoAPI, you can create easily data visualization and analysis tools.
 On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page, you can find the detailed documentation of our tool.
 [Ask our experts for more details](mailto:info@femtonics.eu).
-
 
 ## The key features and benefits of the FemtoAPI and its open-source wrapper functions
 
@@ -28,8 +37,20 @@ On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161
   - Easy script creation: API functions closely refer to GUI buttons, parameter boxes, etc.
   - MATLAB and Python bindings.
 
-## Prerequisites for using the FemtoAPI library
+## Installation
+
+### Prerequisites for using the FemtoAPI library
 The FemtoAPI library depends on Qt, so it needs to be installed and added to the Windows PATH. The minimum Qt version required is Qt 5.15. Other tools are not needed.
+
+## FemtoAPI libraries
+In the open-source libraries, you can find a collection of the FemtoAPI functions.
+There are some example/demo applications in both Python and Matlab folders.
+
+### Technology types
+According to the different Femtonics microscope technology types, there are several collections of API functions and examples, which you can find in the corresponding FemtoAPI Github branches.
+On the current page, you can see information related to the Atlas system.
+- [Atlas](https://github.com/Femtonics/FemtoAPI/tree/Atlas): The ```Atlas``` branch contains all the functions, that you can use when having a Femtonics Atlas system. It contains the FemtoAPI commands to use during processing measurement data.  
+- [main](https://github.com/Femtonics/FemtoAPI/tree/main): Here you can find the full functionality of FemtoAPI. Contains both microscope control, and data processing related functions and examples.  
 
 ## Femtonics supported by community analysis packages
 For the annotation, downstream analysis, and curation of calcium imaging data recorded by [Femtonics microscopes](https://femtonics.eu/products/), we highly recommend the [Mesmerize package](https://github.com/kushalkolar/MESmerize) written by Kushal Kolar from the [Chatzigeorgiou Lab](https://www.chatzigeorgioulab.com/).
