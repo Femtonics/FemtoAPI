@@ -18,7 +18,8 @@ framenum = 0
 isRaw = True # if true the extracted data will be in raw form, if false the data will already include the offset value
 
 
-app = QApplication(sys.argv)
+#app = QApplication(sys.argv)
+app = QCoreApplication(sys.argv)
 ws = APIFunctions.initConnection()
 APIFunctions.login(ws, 'asd', '123')
 time.sleep(2)

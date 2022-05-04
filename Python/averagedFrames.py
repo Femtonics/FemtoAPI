@@ -8,13 +8,16 @@ from femtoapi import PyFemtoAPI
 
 
 class AverageFrames:
+    """
+    Creates a measurement unit with averaged frames, based on opened measurement "SOURCE", and average defined by "FRAMES".
+    """
+    
     def __init__(self):
         self.bufferSize = 0
         self.avgFrameNum = 0
 
     def getArguments(self):
-        parser = argparse.ArgumentParser(description="PLACEHOLDER"
-                                                     "maybe I will write some actual content here in the future")
+        parser = argparse.ArgumentParser(description="Creates a measurement unit with averaged frames, based on opened measurement 'SOURCE', and average defined by 'FRAMES'.")
         parser.add_argument('source', metavar='SOURCE',
                             help='Handler of the source measurement unit with channel number. e.g.: "10,0,0,0"')
         parser.add_argument('avgFrames', metavar='FRAMES',
