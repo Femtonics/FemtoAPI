@@ -26,7 +26,7 @@ from femtoapi import PyFemtoAPI
 from PIL import Image
 
 """
-Example script to show how convert a picture file into a mesc measurement file.
+Example script to show how to convert a picture file into a mesc measurement file.
 In this example the different color channels are imported into separate channels in the measurement unit.
 """
 

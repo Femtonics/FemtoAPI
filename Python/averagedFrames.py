@@ -26,6 +26,10 @@ from femtoapi import PyFemtoAPI
 
 
 class AverageFrames:
+    """
+    Creates a measurement unit with averaged frames, based on opened measurement "SOURCE", and average defined by "FRAMES".
+    """
+    
     def __init__(self):
         self.bufferSize = 0
         self.avgFrameNum = 0

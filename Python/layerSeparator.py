@@ -16,7 +16,7 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-import sys, time, re, os, argparse, numpy, h5py, pathlib, json
+import sys, time, re, os, argparse, numpy, pathlib, json
 import APIFunctions
 import miscFunctions
 from PySide2.QtCore import *
@@ -27,6 +27,9 @@ from femtoapi import PyFemtoAPI
 
 
 class layerSeparator:
+    """
+    FemtoAPI application to create separate measurement units from the different layers in multilayer and volumescan measurements.
+    """
 
     def __init__(self):
         self.sourceMeas = ''

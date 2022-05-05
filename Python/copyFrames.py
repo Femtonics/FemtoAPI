@@ -25,7 +25,11 @@ from femtoapi import PyFemtoAPI
 
 
 class copyFrames:
-
+    """
+    FemtoAPI application to copy data between two specified frames into a new measurement unit.
+    """
+    
+    
     def __init__(self):
         self.sourceMeas = ''
         self.startingFrame = 0
@@ -108,12 +112,10 @@ class copyFrames:
                                 for channel in munit['channels']:
                                     channelNames.append(channel['name'])
                                 taskType = munit['technologyType']
-                                munit['xDim']
-                                
                                 dimx = munit['xDim']
-                                xscale = munit['pixelSizeX']
+                                #xscale = munit['pixelSizeX']
                                 dimy = munit['yDim']
-                                yscale = munit['pixelSizeY']
+                                #yscale = munit['pixelSizeY']
                                 dimt = munit['zDim']
                                 tscale = munit['tStepInMs']
                                 referenceViewportJSON = munit['referenceViewportJSON']

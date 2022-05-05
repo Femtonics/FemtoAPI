@@ -24,7 +24,7 @@ from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
 
 """
-Example for accessing some metadata in the MESc 4.5 measurement file
+Example for accessing some metadata from the 4.5 measurement file
 """
 
 app = QCoreApplication(sys.argv)
@@ -49,19 +49,19 @@ for channel in res['channels']:
 print("")
 
 #device info
-if res['deviceJSON']['deviceJSONFormat'] == 'MES': #MES format
+if res['deviceJSON']['deviceJsonFormat'] == 'MES': #MES format
     for i in res['deviceJSON']['devices']:
         print(i)
-if res['deviceJSON']['deviceJSONFormat'] == 'MESc': #MESc format
+if res['deviceJSON']['deviceJsonFormat'] == 'MESc': #MESc format
     for i in res['deviceJSON']['gear']:
         print(i)
 print("")
 
-#dimensions and pixel size
+#dimensions, technology type and space name
 print("xDim: " + str(res['xDim']))
 print("yDim: " + str(res['yDim']))
-print("xPixelSize: " + str(res['pixelSizeX']))
-print("yPixelSize: " + str(res['pixelSizeY']))
+print("Technology type: " + str(res['technologyType']))
+print("Space name: " + str(res['spaceName']))
 print("\n")
 
 #vieport (some measurement types can have multiple viewports so it is actually a list of viewports)
@@ -105,10 +105,10 @@ for channel in res:
 print()
 
 res = APIFunctions.getUnitMetadata(ws, handle, 'Device')
-if res['deviceJSONFormat'] == 'MES': #MES format
+if res['deviceJsonFormat'] == 'MES': #MES format
     for i in res['devices']:
         print(i)
-if res['deviceJSONFormat'] == 'MESc': #MESc format
+if res['deviceJsonFormat'] == 'MESc': #MESc format
     for i in res['gear']:
         print(i)
 print()
