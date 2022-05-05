@@ -23,6 +23,8 @@ This source contains a collection of the FemtoAPI calls
 Python API wrapper functions for femtoAPI 2.0 version
 !!! Not final version, nor is it fully tested yet!!!
 """
+
+
 import sys, time, array, random, shutil
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
@@ -33,6 +35,7 @@ from pathlib import Path
 def initConnection(host = 'ws://localhost:8888'):
     """
     creates the websocket object used in all communications with the API server
+    the URL can be changed in the PyFemtoAPI.APIWebSocketClient call if the API server is running on a different machine, default port is set to 8888 in MESc
     returns the ws object which is used in all other functions
     """
     ws=PyFemtoAPI.APIWebSocketClient(host)
@@ -305,6 +308,7 @@ def setCurrentSession(ws, handle):
     
 def getProcessingState(ws):
     """
+    DEPRECATED
     returns a dictionary containing all data about the processing state
     """
     command='FemtoAPIFile.getProcessingState()'
@@ -467,6 +471,7 @@ def createNewFile(ws):
 
 def setCurrentFile(ws, handle):
     """
+    DEPRECATED , removed
     set the current file to 'handle' in the processing view
     """
     command="FemtoAPIFile.setCurrentFile('" + str(handle) + "')"
@@ -769,7 +774,7 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
     xDim: measurement image x resolution 
     yDim: measurement image y resolution 
     taskXMLParameters: measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.
-        *from mesc veresion 4.5 taskXMLParameters is replaced by a single string containing the scanin mode: galvo, resonant, AOFullFrame
+        *from mesc veresion 4.5 taskXMLParameters is replaced by a single string containing the scanin mode: galvo, resonant, AO
     viewportJson: viewport for measurement 
     z0InMs: Measurement start time offset in ms. Double, default value is 0.0 
     zStepInMs: Frame duration time in ms (1/frame rate). Positive double, default value is 1.0. 
@@ -1085,7 +1090,6 @@ def saveVarToFile(ws, jsValue, PathAndFileName):
     else:
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
-
     
 
 def getStatus(ws, sCommandID = None):
@@ -1592,7 +1596,6 @@ def writeChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
         return cmdResult
 
 
-
 def getTmpTiff(ws, uId, filePath):
     print('gettif')
     command = "FemtoAPIFile.getTmpTiff('" + uId + "')"
@@ -1611,7 +1614,6 @@ def getTmpTiff(ws, uId, filePath):
         with open(Path(filePath), "wb") as f:
             f.write(cmdResult.data())
         return True
-
 
             
 def tiffExport(ws, filePath, handle, applyLut, channelList = [], compressed = 1, breakView = 0, exportRawData = 0, startTimeSlice = 0, endTimeSlice = 1):
