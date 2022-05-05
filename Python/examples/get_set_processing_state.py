@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+Example to get and set processing state
+"""
+
 import sys, os, time
 import APIFunctions
 from PySide2.QtCore import *

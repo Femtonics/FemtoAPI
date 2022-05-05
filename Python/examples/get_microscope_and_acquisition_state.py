@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+This example shows how to access microscope and processing states.
+"""
+
 import sys, os, time
 import APIFunctions
 from PySide2.QtCore import *

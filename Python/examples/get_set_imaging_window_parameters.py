@@ -16,15 +16,16 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+Example to get and set imaging window parameters
+"""
+
 import sys, os, time
 import APIFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
 
-"""
-Example to get and set imaging window parameters
-"""
 
 app = QCoreApplication(sys.argv)
 
