@@ -2,7 +2,6 @@
 
 In this section, we collected some common usage of FemtoAPI functions.
 Please have a look at the short description of the presented examples.  
-
 	- [basic_connection.py](https://github.com/Femtonics/FemtoAPI/blob/main/Python/examples/basic_connection.py):  
 		Initiates a connection to FemtoAPI.  
 	- [get_microscope_and_acquisition_state.py](https://github.com/Femtonics/FemtoAPI/blob/main/Python/get_microscope_and_acquisition_state.py):  
