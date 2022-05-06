@@ -16,6 +16,11 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+This script implements the tile scan functionality in MESc through the API.
+The result will be a new mesc file session with the pictures taken accordintg to the defined tile pattern and size.
+"""
+
 import sys, time, logging
 import APIFunctions
 import miscFunctions

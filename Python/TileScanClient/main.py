@@ -17,6 +17,11 @@
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 # This Python file uses the following encoding: utf-8
+
+"""
+In this application you can set the tile scan parameters, and initiate the measurement.
+"""
+
 import sys
 import os
 import time

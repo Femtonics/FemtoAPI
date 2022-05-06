@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+functionality to call scripts before scan start and/or after scan finish
+"""
+
 import sys, time, os, subprocess, json
 import APIFunctions
 from PySide2.QtCore import *
@@ -26,9 +30,6 @@ from femtoapi import PyFemtoAPI
 
 
 class Application:
-    """
-    functionality to call scripts before scan start and/or after scan finish
-    """
 
     def __init__( self):
         """

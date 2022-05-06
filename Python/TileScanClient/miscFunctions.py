@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+This example contains a collection of functions related to running measurements.
+"""
+
 import sys
 import time
 import logging
@@ -39,7 +43,7 @@ def waitForMeasurementStop(ws):
         logging.error("Microscope is turned off! Testing cannot proceed. Hardver start needed..")
         sys.exit()
     if state == "Initializing":
-        logging.info("Microscope is Initializing. Why it is in this state is a mystery ...  Testing will stop anyways.")
+        logging.info("Microscope is Initializing. Microscope needs to be fully started before running measurements. Aborting script.")
         sys.exit()
     if state == "Ready":
         return True
@@ -66,3 +70,31 @@ def isMeasurementRunning(ws):
     else:
         logging.error("Microscope is in an invalid state!")
         return False
+
+
+def waitForOperationDone(ws, operationID = None, limit = 180):
+    '''
+    Waits for operation defined by operationID to finish. Timeout is defined by the variable 'limit'.
+    Not too dependable as of MESc 4.0
+    '''
+    pending = True
+    timer = 0
+    print(pending, timer, operationID)
+    while pending == True and timer < limit:
+        timer += 1
+        time.sleep(1)
+        #print(timer)
+        res = APIFunctions.getStatus(ws, operationID)
+        #print(res)
+        if res['error']:
+            print('Error happened during the operation. ErrorMessage: ' + str(res['error']))
+        pending = res['isPending']
+    if timer < limit:    
+        print('Asynchronous operation done.')
+        return True
+    else:
+        print('Asynchronous operation still running. Function timeout.')
+        return False
+    
+    
+    
