@@ -1,4 +1,4 @@
-# FemtoAPI Matlab Wrapper -- FemtoAPIProcessing
+# FemtoAPI Matlab Wrapper — FemtoAPIProcessing
 
 In the [FemtoAPIProcessing](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIProcessing/@FemtoAPIProcessing) folder, you can find the functions of measurement processing.  
 

@@ -1,4 +1,4 @@
-# FemtoAPI - Matlab demos
+# FemtoAPI — Matlab demos
 
 In this folder, we listed some examples of FemtoAPI usage in the Matlab environment.  
 Here you can see the following examples:  

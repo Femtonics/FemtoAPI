@@ -1,4 +1,4 @@
-# FemtoAPI Matlab Wrapper -- FemtoAPIAcquisition
+# FemtoAPI Matlab Wrapper — FemtoAPIAcquisition
 
 In the [FemtoAPIAcquisition](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIAcquisition/@FemtoAPIAcquisition) folder, you can find the functions of microscope control.  
 

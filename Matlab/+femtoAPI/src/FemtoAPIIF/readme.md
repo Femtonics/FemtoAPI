@@ -1,4 +1,4 @@
-# FemtoAPI Matlab Wrapper -- FemtoAPIIF
+# FemtoAPI Matlab Wrapper — FemtoAPIIF
 
 [ConnectionManager.m](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIIF/ConnectionManager.m):  
 Handles connect/disconnect to/from the server. Always call close current connection before opening a new connection.

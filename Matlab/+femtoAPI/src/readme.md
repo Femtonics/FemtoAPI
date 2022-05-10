@@ -1,4 +1,4 @@
-# FemtoAPI Matlab Wrapper -- Main classes
+# FemtoAPI Matlab Wrapper — Main classes
 
 For microscope control related functions see:
 [FemtoAPIAcquisition](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIAcquisition)
