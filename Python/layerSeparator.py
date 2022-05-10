@@ -18,7 +18,6 @@
 
 import sys, time, re, os, argparse, numpy, pathlib, json
 import APIFunctions
-import miscFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 import xml.etree.ElementTree as ET

@@ -18,7 +18,6 @@
 
 import sys, os, time, numpy
 import APIFunctions
-import miscFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from pathlib import Path

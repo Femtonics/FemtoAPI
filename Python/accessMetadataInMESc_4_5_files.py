@@ -18,7 +18,6 @@
 
 import sys
 import APIFunctions
-import miscFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
