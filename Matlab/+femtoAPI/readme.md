@@ -12,6 +12,7 @@ It uses two main classes: FemtoAPIProcessing and FemtoAPIAcquisition.
 
 [FemtoAPIProcessing](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIProcessing) class: used for measurement processing purposes, such as file operations (read, write, create a new file, or measurement unit, set current file, etc.), getting the processing state (metadata found on the processing panel of the MESc GUI) or the setting part of the processing state (e.g. comment of measurement session/group/unit, channel conversion and LUT), etc.  
 [FemtoAPIAcquisition](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIAcquisition) class: used for measurement acquisition purposes, such as starting/stopping galvo/resonant measurements, getting/setting values of PMT and Laser intensity devices, objective positions, the viewport, getting the acquisition state (metadata found on the acquisition panel of the MESc GUI), etc.  
+[FemtoAPIIF](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIIF) class: it's a common interface for processing and acquisition classes. It manages the connection to the server and provides the function to get the connection status.
 
 Important notes:  
 
