@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function getProcessingState(obj)
-   
+%GETPROCESSINGSTATE Gets the list of open files and the trees of all measurement sessions and measurements within them, together with most of the available metadata.
 if(isempty(obj.m_connectionObj) || ~obj.m_connectionObj.m_isConnected)
     error(['Could not update processing state because not connected to',...
         ' the server. Please connect first.']);
