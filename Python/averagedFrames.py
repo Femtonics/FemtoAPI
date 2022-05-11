@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+Creates a measurement unit with averaged frames, based on opened measurement "SOURCE", and average defined by "FRAMES".
+"""
+
 import sys, time, logging, os, numpy, argparse, re
 import APIFunctions
 from PySide2.QtCore import *

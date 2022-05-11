@@ -16,6 +16,11 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+Example script to show how to convert a picture file into a mesc measurement file.
+In this example the different color channels are imported into separate channels in the measurement unit.
+"""
+
 import sys, time, numpy
 import APIFunctions
 from PySide2.QtCore import *
@@ -23,11 +28,6 @@ from PySide2.QtWebSockets import *
 from pathlib import Path
 from femtoapi import PyFemtoAPI
 from PIL import Image
-
-"""
-Example script to show how to convert a picture file into a mesc measurement file.
-In this example the different color channels are imported into separate channels in the measurement unit.
-"""
 
 sizeX = 400
 sizeY = 400

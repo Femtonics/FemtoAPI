@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+FemtoAPI application to copy data between two specified frames into a new measurement unit.
+"""
+
 import sys, re, time, argparse
 import APIFunctions
 from PySide2.QtCore import *
@@ -25,10 +29,6 @@ from femtoapi import PyFemtoAPI
 
 
 class copyFrames:
-    """
-    FemtoAPI application to copy data between two specified frames into a new measurement unit.
-    """
-    
     
     def __init__(self):
         self.sourceMeas = ''

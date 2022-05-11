@@ -16,15 +16,15 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+Example for accessing some metadata from the 4.5 measurement file
+"""
+
 import sys
 import APIFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
-
-"""
-Example for accessing some metadata from the 4.5 measurement file
-"""
 
 app = QCoreApplication(sys.argv)
 ws = APIFunctions.initConnection()

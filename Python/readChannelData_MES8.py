@@ -16,17 +16,17 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+How to read channel data from MES8 AO measurements into numpy array
+API 2.0
+"""
+
 import sys, os, time, numpy
 import APIFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from pathlib import Path
 from femtoapi import PyFemtoAPI
-
-"""
-How to read channel data from MES8 AO measurements into numpy array
-API 2.0
-"""
 
 
 munitHandle = '61,0,4'
