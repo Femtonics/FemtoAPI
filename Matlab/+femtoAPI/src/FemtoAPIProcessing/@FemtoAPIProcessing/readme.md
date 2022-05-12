@@ -1,6 +1,6 @@
 # FemtoAPI Matlab Wrapper — FemtoAPIProcessing functions
 
-In this list, you can see the implemented FemtoAPIProcessing functions, and a short description of them:
+In this list, you can see the implemented FemtoAPIProcessing functions, and a short description of them:  
 	- [FemtoAPIProcessing.m](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIProcessing/@FemtoAPIProcessing/FemtoAPIProcessing.m):  
 		This class is for handling measurement processing data.  
 	- [addChannel.m](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIProcessing/@FemtoAPIProcessing/addChannel.m):  

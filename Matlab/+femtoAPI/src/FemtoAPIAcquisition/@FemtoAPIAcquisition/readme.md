@@ -1,6 +1,6 @@
 # FemtoAPI Matlab Wrapper — FemtoAPIAcquisition functions
 
-In this list, you can see the implemented FemtoAPIAcquisition functions, and a short description of them:
+In this list, you can see the implemented FemtoAPIAcquisition functions, and a short description of them:  
 	- [FemtoAPIAcquisition.m](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIAcquisition/@FemtoAPIAcquisition/FemtoAPIAcquisition.m):  
 		Class for handling measurement data acquisition. The purpose of this class is to provide methods for easy handling of measurement acquisition-related functions, like set/get device values, start/stop measurements, get acquisition state, etc.  
 	- [doZero.m](https://github.com/Femtonics/FemtoAPI/blob/main/Matlab/+femtoAPI/src/FemtoAPIAcquisition/@FemtoAPIAcquisition/doZero.m):  
