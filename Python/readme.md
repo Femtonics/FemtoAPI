@@ -1,6 +1,6 @@
 # FemtoAPI - Python wrapper
 
-The 'femtoapi' package is used to communicate with the API server. It can be installed from PyPI: "pip install femtoapi"
+The FemtoAPI package is used to communicate with the API server of Femtonics microscopes. It can be installed from PyPI: "pip install femtoapi"
 
 For a detailed description of these functions please visit the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) site.
 
