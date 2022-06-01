@@ -95,7 +95,7 @@ string = '[{"space": "space1", "measurementType": "resonant", "size": [' + str(v
             "resolution": [' + str(resX) + ', ' + str(resY) + '], "transformation": {"translation": [-' + str(vpX/2) + ', -' + str(vpY/2) + ', 0]}}]'
 print(string)
 
-command="MEScMicroscope.setImagingWindowParameters('"+string+"')"
+command="FemtoAPIMicroscope.setImagingWindowParameters('"+string+"')"
 simpleCmdParser=ws.sendJSCommand(command)
 resultCode=simpleCmdParser.getResultCode()
 if resultCode > 0:
