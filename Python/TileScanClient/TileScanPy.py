@@ -97,7 +97,7 @@ class TileScanPy:
                       overlap, firstX, firstY, outputDir):
         string = '[{"space": "space1", "measurementType": "' + scannerType + '", "size": [' + str(viewPortX) + ', ' + str(viewPortY) + '], \
                 "resolution": [' + str(resolutionX) + ', ' + str(resolutionY) + '], "transformation": {"translation": [-' + str(viewPortX/2) + ', -' + str(viewPortY/2) + ', 0]}}]'
-        command = "MEScMicroscope.setImagingWindowParameters('" + string + "')"
+        command = "FemtoAPIMicroscope.setImagingWindowParameters('" + string + "')"
         simpleCmdParser = self.wsConnection.sendJSCommand(command)
         resultCode = simpleCmdParser.getResultCode()
         if resultCode > 0:
