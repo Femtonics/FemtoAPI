@@ -5,7 +5,7 @@ The FemtoAPI package is used to communicate with the API server of Femtonics mic
 For a detailed description of these functions please visit the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) site.
 
 List of available functions:
-	- [APIFunction.py](https://github.com/Femtonics/FemtoAPI/blob/Atlas/Python/APIFunction.py):  
+	- [APIFunctions.py](https://github.com/Femtonics/FemtoAPI/blob/Atlas/Python/APIFunctions.py):  
 		APIFunction.py contains a collection of the API calls and it is used by all the example scripts in this repository.
 	- [accessMetadataInMESc_4_5_files.py](https://github.com/Femtonics/FemtoAPI/blob/Atlas/Python/accessMetadataInMESc_4_5_files.py):  
 		Example for accessing some metadata from the 4.5 measurement file.  
