@@ -5,7 +5,7 @@ The 'femtoapi' package is used to communicate with the API server. It can be ins
 For a detailed description of these functions please visit the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) site.
 
 Here is a list of the presented functions.  
-	- [APIFunction.py](https://github.com/Femtonics/FemtoAPI/blob/main/Python/APIFunction.py):  
+	- [APIFunctions.py](https://github.com/Femtonics/FemtoAPI/blob/main/Python/APIFunctions.py):  
 		APIFunction.py contains a collection of the API calls and it is used by all the example scripts in this repository.
 	- [MeasurementAutomation.py](https://github.com/Femtonics/FemtoAPI/blob/main/Python/MeasurementAutomation.py):  
 		Contains the functionalities to call scripts before scan start and/or after scan finish.  
