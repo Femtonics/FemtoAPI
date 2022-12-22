@@ -17,8 +17,11 @@
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 """
-How to read channel data from MES8 AO measurements into numpy array
-API 2.0
+Example for reading channel data from MES8 AO measurements into numpy array
+Can only read data from one channel
+Checks measurement type and chooses dimensions accordingly
+Reads all frames 
+Only works with MES8 measurement files using API 2.0 (MESc 4.5)
 """
 
 import sys, os, time, numpy
@@ -30,10 +33,9 @@ from pathlib import Path
 from femtoapi import PyFemtoAPI
 
 
-munitHandle = '61,0,4'
-channel = 0
-framenum = 0
-isRaw = True # if true the extracted data will be in raw form, if false the data will already include the offset value
+munitHandle = '61,0,4'  # measurement unit handle to export data from
+channel = 0  # channel number to export data from (numbering starts at 0)
+isRaw = True  # if true the extracted data will be in raw form, if false the data will already include the offset value
 
 
 #app = QApplication(sys.argv)
@@ -50,7 +52,7 @@ if not res:
     sys.exit(0)
 mType = res['methodType']
 offset = res['channels'][channel]['conversion']['offset']
-#print(offset)
+
 if mType in ('multiROIPointScan', 'multiROIMultiLine', 'multiROILineScan'):
     dimX = res['logicalDimSizes'][0]
     dimY = res['logicalDimSizes'][1]
@@ -73,7 +75,6 @@ else:
     print('Bad measurement type! Invalid file or newer/unexpected type.')
     sys.exit(0)
 
-print(mType)
 
 if isRaw:
     rawdata = APIFunctions.readRawChannelDataToClientsBlob(ws, munitHandle + ',' + str(channel), fromDims, toDims)
