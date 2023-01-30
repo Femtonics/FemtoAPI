@@ -32,11 +32,6 @@ from PySide2.QtWebSockets import *
 from pathlib import Path
 from femtoapi import PyFemtoAPI
 
-"""
-How to read channel data from measurements stored in mesc files
-Compatible with API 1.0
-"""
-
 
 fileHandle = 58
 sessionHandle = 0 
