@@ -23,6 +23,7 @@ import APIFunctions
 import miscFunctions
 import time
 import logging
+import json
 
 
 class TileScanPy:
@@ -108,9 +109,13 @@ class TileScanPy:
             logging.info("Set Image Window parameters success:" + str(cmdResult))
 
         APIFunctions.createNewFile(self.wsConnection)
-        res = APIFunctions.getProcessingState(self.wsConnection)
-        currFileHandle = res['currentFileHandle']
-        currHandle = res['currentMeasurementSessionHandle']
+        res = APIFunctions.getCurrentSession(self.wsConnection)
+        pos = res.find(",")
+        currFileHandle = res[:pos]
+        currHandle = []
+        currHandle.append(currFileHandle)
+        currHandle.append(res[pos+1:])
+        print(currHandle)
         cols = 0
         xMove = viewPortX - overlap
         yMove = viewPortY - overlap
@@ -145,13 +150,12 @@ class TileScanPy:
                 logging.info(str(rownum) + ", " + str(cols))
                 matrixPos = str(rownum) + "x" + str(cols)
                 measUnit = (cols * dimensionX) + rows
-                string = '{"openedMEScFiles": [{"handle": '+ str(currFileHandle) + \
-                        ', "measurementSessions": [{"handle": '+ str(currHandle) + \
-                        ', "measurements": [{"comment": "' + matrixPos + \
-                        '","handle": ['+ str(currHandle[0]) + ', '+ str(currHandle[1]) + \
-                        ', ' + str(measUnit) + ']}]}]}]}'
+
+                string = {"comment": matrixPos}
                 logging.info(string)
-                res = APIFunctions.setProcessingState(self.wsConnection, string)
+
+                APIFunctions.setUnitMetadata(self.wsConnection, str(currHandle[0]) + ', '+ str(currHandle[1]) + ', ' + str(measUnit) ,\
+                                             'BaseUnitMetadata', json.dumps(string));
 
                 if rows >= dimensionX - 1:
                     break
@@ -173,3 +177,4 @@ class TileScanPy:
         timestamp = time.strftime("%Y%m%d%H%M%S", ts)
         logging.info("saveFileAsync" + outputDir + " " + timestamp)
         APIFunctions.saveFileAsAsync(self.wsConnection, outputDir + "/" + timestamp + ".mesc")
+
