@@ -32,7 +32,7 @@ ws = APIFunctions.initConnection()
 APIFunctions.login(ws, 'user', 'pass') #no login data check is implemented yet, any string works
 
 #measurement file handle
-handle = '68,0,0'
+handle = '231,0,0'
 print("")
 
 
@@ -49,10 +49,11 @@ for channel in res['channels']:
 print("")
 
 #device info
-if res['deviceJSON']['deviceJsonFormat'] == 'MES': #MES format
+
+if res['deviceJSON']['deviceJSONFormat'] == 'MES': #MES format
     for i in res['deviceJSON']['devices']:
         print(i)
-if res['deviceJSON']['deviceJsonFormat'] == 'MESc': #MESc format
+if res['deviceJSON']['deviceJSONFormat'] == 'MESc': #MESc format
     for i in res['deviceJSON']['gear']:
         print(i)
 print("")
@@ -99,16 +100,17 @@ print("Experimenter Profilename: " + str(res['experimenterProfilename']))
 Second example: read metaData with getUnitMetadata functions
 """
 res = APIFunctions.getUnitMetadata(ws, handle, 'ChannelInfo')
-for channel in res:
+for channel in res["channels"]:
+    #print(channel)
     for param in channel:
         print(str(param) + " : " + str(channel[param]))
 print()
 
 res = APIFunctions.getUnitMetadata(ws, handle, 'Device')
-if res['deviceJsonFormat'] == 'MES': #MES format
+if res['deviceJSONFormat'] == 'MES': #MES format
     for i in res['devices']:
         print(i)
-if res['deviceJsonFormat'] == 'MESc': #MESc format
+if res['deviceJSONFormat'] == 'MESc': #MESc format
     for i in res['gear']:
         print(i)
 print()
@@ -145,3 +147,4 @@ else:
 
 
 APIFunctions.closeConnection(ws)
+
