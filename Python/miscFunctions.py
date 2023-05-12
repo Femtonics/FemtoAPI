@@ -72,29 +72,15 @@ def isMeasurementRunning(ws):
         return False
 
 
-def waitForOperationDone(ws, operationID = None, limit = 180):
-    '''
-    Waits for operation defined by operationID to finish. Timeout is defined by the variable 'limit'.
-    Not too dependable as of MESc 4.0
-    '''
-    pending = True
-    timer = 0
-    print(pending, timer, operationID)
-    while pending == True and timer < limit:
-        timer += 1
-        time.sleep(1)
-        #print(timer)
-        res = APIFunctions.getStatus(ws, operationID)
-        #print(res)
-        if res['error']:
-            print('Error happened during the operation. ErrorMessage: ' + str(res['error']))
-        pending = res['isPending']
-    if timer < limit:    
-        print('Asynchronous operation done.')
-        return True
-    else:
-        print('Asynchronous operation still running. Function timeout.')
-        return False
+def waitForAsyncCommand(ws, commandId):
+    """
+    Wait for the async operation defined by commandId to finish
+    """
+    isPending = True
+    time.sleep(1)
+    while isPending:
+        status = APIFunctions.getStatus(ws, commandId)
+        isPending = status['isPending']
     
     
     
