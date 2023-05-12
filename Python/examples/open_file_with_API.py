@@ -32,8 +32,7 @@ print("Connected to API websocket host.")
 APIFunctions.login(ws, 'user', 'pass')
 time.sleep(2)
 
-fullPath = "C:/Users/csiszar.peter/Documents/TEST/csiszpe_test/python/MEScAPIPython/copied_frames.mesc"
-fullPath = str(fullPath).replace("\\", "/")
+fullPath = "C:/path/filaname.mesc"
 result = APIFunctions.openFilesAsync(ws, fullPath)
 miscFunctions.waitForAsyncCommand(ws, result['id']) #wait for the async fileopen operation to finish
 
