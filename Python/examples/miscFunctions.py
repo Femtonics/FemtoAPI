@@ -26,6 +26,9 @@ import logging
 import APIFunctions
 
 def waitForMeasurementStop(ws):
+    """
+    Checks the microscope state and waits until it changes to 'Ready' from 'Working'
+    """
     logging.info("wait")
     state = APIFunctions.getMicroscopeState(ws)['microscopeState']
     if state == "Working":
@@ -34,13 +37,13 @@ def waitForMeasurementStop(ws):
             time.sleep(1)
             state = APIFunctions.getMicroscopeState(ws)['microscopeState']
     if state == "In an invalid state":
-        logging.error("Microscope is in an invalid state! Testing cannot proceed. Restart might be needed.")
+        logging.error("Microscope is in an invalid state! Restart might be needed.")
         sys.exit()
     if state == "Off":
-        logging.error("Microscope is turned off! Testing cannot proceed. Hardver start needed..")
+        logging.error("Microscope is turned off! Hardver start needed..")
         sys.exit()
     if state == "Initializing":
-        logging.info("Microscope is Initializing. Why it is in this state is a mystery ...  Testing will stop anyways.")
+        logging.info("Microscope is Initializing. Microscope needs to be fully started before running measurements. Aborting script.")
         sys.exit()
     if state == "Ready":
         return True
@@ -49,6 +52,9 @@ def waitForMeasurementStop(ws):
 
 
 def isMeasurementRunning(ws):
+    """
+    Return value is True if the microscope state is 'Working' which means scanning is in progress, False otherwise
+    """
     state = APIFunctions.getMicroscopeState(ws)['microscopeState']
     logging.info("Mic state is " + str(state))
     if state == "Working":
@@ -64,3 +70,17 @@ def isMeasurementRunning(ws):
     else:
         logging.error("Microscope is in an invalid state!")
         return False
+
+
+def waitForAsyncCommand(ws, commandId):
+    """
+    Wait for the async operation defined by commandId to finish
+    """
+    isPending = True
+    time.sleep(1)
+    while isPending:
+        status = APIFunctions.getStatus(ws, commandId)
+        isPending = status['isPending']
+    
+    
+    
