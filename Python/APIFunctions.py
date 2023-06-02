@@ -1160,7 +1160,7 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
         xData = []
         yData = []
         curveData = {"xData": xData, "yData": yData}
-
+        cntr = 0
         raw_data = QByteArray()
         for parts in simpleCmdParser.getPartList():
             raw_data.append(parts)
@@ -1173,7 +1173,6 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
             
             stream = QDataStream(parts)
             stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
-            cntr = 0
             while not stream.atEnd():
                 if cntr < xSize:
                     if xDataType == 'double':
