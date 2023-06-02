@@ -1149,29 +1149,59 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
         return None
     else:
         cmdResult = {}
-        cmdResult.update({"Result": json.loads(simpleCmdParser.getJSEngineResult())})
+        result = json.loads(simpleCmdParser.getJSEngineResult())
+        cmdResult.update({"Result": result})
+        dataSize = result['size']
+        xType = result['xType']
+        yType = result['yType']
+        xDataType = result['xDataType']
+        yDataType = result['yDataType']
+
         xData = []
         yData = []
         curveData = {"xData": xData, "yData": yData}
 
+        raw_data = QByteArray()
         for parts in simpleCmdParser.getPartList():
-            size = int(parts.size() / 2)
-            binaryDataX = QByteArray()
-            binaryDataY = QByteArray()
-            binaryDataX.append(parts[:size])
-            binaryDataY.append(parts[size:])
+            raw_data.append(parts)
             
-            stream = QDataStream(binaryDataX)
+            xSize = 0
+            if xType == 'vector':
+                xSize = dataSize
+            else:
+                xSize = 2
+            
+            stream = QDataStream(parts)
             stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
+            cntr = 0
             while not stream.atEnd():
-                floatData = stream.readDouble()
-                curveData["xData"].append(floatData) 
-            stream = QDataStream(binaryDataY)
-            stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
-            while not stream.atEnd():
-                floatData = stream.readDouble()
-                curveData["yData"].append(floatData)
-            print( "Binary part with size: " + str(parts.size()))
+                if cntr < xSize:
+                    if xDataType == 'double':
+                        tmpData = stream.readDouble()
+                        curveData["xData"].append(tmpData)
+                    else:
+                        tmpData = stream.readUInt16()
+                        curveData["xData"].append(tmpData)
+                else:
+                    if yType== 'rle':
+                        if yDataType == 'double':
+                            tmpData = stream.readUInt32()
+                            curveData["yData"].append(tmpData)
+                            tmpData = stream.readDouble()
+                            curveData["yData"].append(tmpData)
+                        else:
+                            tmpData = stream.readUInt32()
+                            curveData["yData"].append(tmpData)
+                            tmpData = stream.readUInt16()
+                            curveData["yData"].append(tmpData)
+                    else:
+                        if yDataType == 'double':
+                            tmpData = stream.readDouble()
+                            curveData["yData"].append(tmpData)
+                        else:
+                            tmpData = stream.readUInt16()
+                            curveData["yData"].append(tmpData)
+                cntr += 1
         cmdResult.update({"CurveData": curveData})                 
         return cmdResult
 
