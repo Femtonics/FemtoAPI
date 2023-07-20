@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="tilescan">tilescan.png</file>
+        <file alias="2">tilescan.png</file>
+        <file alias="1">LeftDown.jpg</file>
+        <file alias="3">LeftUp.jpg</file>
+        <file alias="0">RightDown.jpg</file>
     </qresource>
 </RCC>

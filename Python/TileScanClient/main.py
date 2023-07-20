@@ -53,6 +53,10 @@ class TileScanClient(QWidget):
         #    self.ui.move(self.settings.value('window position'))
         #except:
         #    pass
+    def on_cmbMode_changed(self, value):
+        pixmap = QPixmap(':/images/' + str(value))
+        self.ui.lblgraphic.setPixmap(pixmap)
+        self.ui.lblgraphic.update()
 
     def quit_app(self):
             # some actions to perform before actually quitting:
@@ -84,6 +88,7 @@ class TileScanClient(QWidget):
 
     def writeSettings(self):
         scanner = self.ui.cmbScanner.currentText()
+        mode = self.ui.cmbMode.currentIndex()
         viewpX = self.ui.spnViewportX.value()
         viewpY = self.ui.spnViewportY.value()
         resX = self.ui.spnResolution.value()
@@ -115,7 +120,7 @@ class TileScanClient(QWidget):
         self.settings.setValue("outDir". outDir)
         self.settings.setValue("fstX", fstX)
         self.settings.setValue("fstY", fstY)
-        self.settings.setValue("scanner", scanner)
+        self.settings.setValue("mode", mode)
         self.settings.endGroup()
 
     def load_ui(self):
@@ -138,7 +143,8 @@ class TileScanClient(QWidget):
         self.ui.spnOverlap.setSuffix(micrometer)
         self.ui.dsbFirstX.setSuffix(micrometer)
         self.ui.dsbFirstY.setSuffix(micrometer)
-        pixmap = QPixmap(':/images/tilescan')
+        self.ui.cmbMode.currentIndexChanged.connect(self.on_cmbMode_changed)
+        pixmap = QPixmap(':/images/2')
         self.ui.lblgraphic.setPixmap(pixmap)
 
     #def dim_x_changed(self):
@@ -174,9 +180,23 @@ class TileScanClient(QWidget):
         outDir = self.ui.lineEditOutput.text()
         fstX = self.ui.dsbFirstX.value()
         fstY = self.ui.dsbFirstY.value()
+        xDirection = 1
+        yDirection = 1
+        if 0 == self.ui.cmbMode.currentIndex() :
+            xDirection = 1
+            yDirection = -1
+        elif 1 == self.ui.cmbMode.currentIndex() :
+            xDirection = -1
+            yDirection = -1
+        elif 2 == self.ui.cmbMode.currentIndex() :
+            xDirection = 1
+            yDirection = 1
+        elif 3 == self.ui.cmbMode.currentIndex() :
+            xDirection = -1
+            yDirection = 1
         print("Starting.. with " + scanner + " vX:" + str(viewpX) +" vY:" + str(viewpY))
         self.tileScanPy.setParameters(scanner, viewpX, viewpY,
-        resX, resY, dimX, dimY, ovrlap, fstX, fstY, outDir)
+        resX, resY, dimX, dimY, ovrlap, fstX, fstY, outDir, xDirection, yDirection)
 
     def abort_tile_scan(self):
         scanner = self.ui.cmbScanner.currentText()

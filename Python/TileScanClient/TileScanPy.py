@@ -94,7 +94,7 @@ class TileScanPy:
 
     def setParameters(self, scannerType, viewPortX, viewPortY,
                       resolutionX, resolutionY, dimensionX, dimensionY,
-                      overlap, firstX, firstY, outputDir):
+                      overlap, firstX, firstY, outputDir, directionX, directionY):
         string = '[{"space": "space1", "measurementType": "' + scannerType + '", "size": [' + str(viewPortX) + ', ' + str(viewPortY) + '], \
                 "resolution": [' + str(resolutionX) + ', ' + str(resolutionY) + '], "transformation": {"translation": [-' + str(viewPortX/2) + ', -' + str(viewPortY/2) + ', 0]}}]'
         command = "FemtoAPIMicroscope.setImagingWindowParameters('" + string + "')"
@@ -112,10 +112,15 @@ class TileScanPy:
         currFileHandle = res['currentFileHandle']
         currHandle = res['currentMeasurementSessionHandle']
         cols = 0
-        xMove = viewPortX - overlap
-        yMove = viewPortY - overlap
+        xMove = (viewPortX - overlap) * directionX
+        yMove = (viewPortY - overlap) * directionY
         APIFunctions.setAxisPosition(self.wsConnection, self.axisX, firstX, 'false', 'true')
         APIFunctions.setAxisPosition(self.wsConnection, self.axisY, firstY, 'false', 'true')
+        time.sleep(2)
+        while APIFunctions.isAxisMoving(self.wsConnection, self.axisX):
+            time.sleep(1)
+        while APIFunctions.isAxisMoving(self.wsConnection, self.axisY):
+            time.sleep(1)
 
         while not self.abortRun:
 
@@ -125,8 +130,8 @@ class TileScanPy:
             # logging.info("y " + str(res))
 
             for rows in range(0, dimensionX):
-                res = APIFunctions.getAxisPosition(self.wsConnection, self.axisX)
-                res = APIFunctions.getAxisPosition(self.wsConnection, self.axisY)
+                xPos = APIFunctions.getAxisPosition(self.wsConnection, self.axisX)
+                yPos = APIFunctions.getAxisPosition(self.wsConnection, self.axisY)
                 if scannerType == "resonant":
                     res = APIFunctions.startResonantScanSnapAsync(self.wsConnection)
                 else:
@@ -145,14 +150,17 @@ class TileScanPy:
                 logging.info(str(rownum) + ", " + str(cols))
                 matrixPos = str(rownum) + "x" + str(cols)
                 measUnit = (cols * dimensionX) + rows
+                xPosAbs = xPos['absolute']
+                yPosAbs = yPos['absolute']
+                
                 string = '{"openedMEScFiles": [{"handle": '+ str(currFileHandle) + \
                         ', "measurementSessions": [{"handle": '+ str(currHandle) + \
-                        ', "measurements": [{"comment": "' + matrixPos + \
+                        ', "measurements": [{"comment": "' + matrixPos + ' X:' + str(xPosAbs) + ' Y:' + str(yPosAbs) + \
                         '","handle": ['+ str(currHandle[0]) + ', '+ str(currHandle[1]) + \
                         ', ' + str(measUnit) + ']}]}]}]}'
                 logging.info(string)
                 res = APIFunctions.setProcessingState(self.wsConnection, string)
-
+                
                 if rows >= dimensionX - 1:
                     break
                 res = APIFunctions.setAxisPosition(self.wsConnection, self.axisX, xMove, 'true', 'true')
