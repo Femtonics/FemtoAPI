@@ -4,7 +4,7 @@
     <img src="https://badge.fury.io/py/femtoapi.svg" alt="Package version">
 </a>
 <a href="https://pepy.tech/project/femtoapi" target="_blank">
-    <img src="https://pepy.tech/badge/femtoapi" alt="Downloads">
+    <img src="https://static.pepy.tech/badge/femtoapi" alt="Downloads">
 </a>
 <a href="https://www.gnu.org/licenses/gpl-2.0" target="_blank">
     <img src="https://img.shields.io/badge/License-GPLv2-blue.svg" alt="License">
