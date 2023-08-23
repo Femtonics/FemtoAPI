@@ -91,8 +91,12 @@ res = APIFunctions.getImagingWindowParameters(ws)
 print(res)
 
 
-string = '[{"space": "space1", "measurementType": "resonant", "size": [' + str(vpX) + ', ' + str(vpY) + '], \
-            "resolution": [' + str(resX) + ', ' + str(resY) + '], "transformation": {"translation": [-' + str(vpX/2) + ', -' + str(vpY/2) + ', 0]}}]'
+#string = '[{"space": "space1", "measurementType": "resonant", "size": [' + str(vpX) + ', ' + str(vpY) + '], \
+#        "resolution": [' + str(resX) + ', ' + str(resY) + '], "transformation": {"translation": [-' + str(vpX/2) + ', -' + str(vpY/2) + ', 0]}}]'
+string = '[{"space": "space1", "measurementType": "resonant", "resolution": [' + str(resX) + ', ' + str(resY) + '], \
+"userViewport": {"geomTransRot": [0,0,0,1],"geomTransTransl": [-' + str(vpX/2) + ',-' + str(vpY/2) + ',0],"height": ' + str(vpY) + ',"width": ' + str(vpX) + '}}]'
+
+#"resolutionXLimits": [ 64, 512], "resolutionYLimits": [16,1024],
 print(string)
 
 command="FemtoAPIMicroscope.setImagingWindowParameters('"+string+"')"

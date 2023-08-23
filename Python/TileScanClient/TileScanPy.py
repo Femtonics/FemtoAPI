@@ -95,9 +95,11 @@ class TileScanPy:
 
     def setParameters(self, scannerType, viewPortX, viewPortY,
                       resolutionX, resolutionY, dimensionX, dimensionY,
-                      overlap, firstX, firstY, outputDir):
-        string = '[{"space": "space1", "measurementType": "' + scannerType + '", "size": [' + str(viewPortX) + ', ' + str(viewPortY) + '], \
-                "resolution": [' + str(resolutionX) + ', ' + str(resolutionY) + '], "transformation": {"translation": [-' + str(viewPortX/2) + ', -' + str(viewPortY/2) + ', 0]}}]'
+                      overlap, firstX, firstY, outputDir, directionX, directionY):
+        #string = '[{"space": "space1", "measurementType": "' + scannerType + '", "size": [' + str(viewPortX) + ', ' + str(viewPortY) + '], \
+        #        "resolution": [' + str(resolutionX) + ', ' + str(resolutionY) + '], "transformation": {"translation": [-' + str(viewPortX/2) + ', -' + str(viewPortY/2) + ', 0]}}]'
+        string = '[{"space": "space1", "measurementType": "resonant", "resolution": [' + str(resolutionX) + ', ' + str(resolutionY) + '], \
+"userViewport": {"geomTransRot": [0,0,0,1],"geomTransTransl": [-' + str(viewPortX/2) + ',-' + str(viewPortY/2) + ',0],"height": ' + str(viewPortY) + ',"width": ' + str(viewPortX) + '}}]'
         command = "FemtoAPIMicroscope.setImagingWindowParameters('" + string + "')"
         simpleCmdParser = self.wsConnection.sendJSCommand(command)
         resultCode = simpleCmdParser.getResultCode()
@@ -117,10 +119,15 @@ class TileScanPy:
         currHandle.append(res[pos+1:])
         print(currHandle)
         cols = 0
-        xMove = viewPortX - overlap
-        yMove = viewPortY - overlap
+        xMove = (viewPortX - overlap) * directionX
+        yMove = (viewPortY - overlap) * directionY
         APIFunctions.setAxisPosition(self.wsConnection, self.axisX, firstX, 'false', 'true')
         APIFunctions.setAxisPosition(self.wsConnection, self.axisY, firstY, 'false', 'true')
+        time.sleep(2)
+        while APIFunctions.isAxisMoving(self.wsConnection, self.axisX):
+            time.sleep(1)
+        while APIFunctions.isAxisMoving(self.wsConnection, self.axisY):
+            time.sleep(1)
 
         while not self.abortRun:
 
@@ -130,8 +137,8 @@ class TileScanPy:
             # logging.info("y " + str(res))
 
             for rows in range(0, dimensionX):
-                res = APIFunctions.getAxisPosition(self.wsConnection, self.axisX)
-                res = APIFunctions.getAxisPosition(self.wsConnection, self.axisY)
+                xPos = APIFunctions.getAxisPosition(self.wsConnection, self.axisX)
+                yPos = APIFunctions.getAxisPosition(self.wsConnection, self.axisY)
                 if scannerType == "resonant":
                     res = APIFunctions.startResonantScanSnapAsync(self.wsConnection)
                 else:
@@ -150,13 +157,13 @@ class TileScanPy:
                 logging.info(str(rownum) + ", " + str(cols))
                 matrixPos = str(rownum) + "x" + str(cols)
                 measUnit = (cols * dimensionX) + rows
-
-                string = {"comment": matrixPos}
+                xPosAbs = xPos['absolute']
+                yPosAbs = yPos['absolute']
+                
+                string = '{"comment": "' + matrixPos + ' X:' + str(xPosAbs) + ' Y:' + str(yPosAbs) + '"}'
                 logging.info(string)
-
                 APIFunctions.setUnitMetadata(self.wsConnection, str(currHandle[0]) + ', '+ str(currHandle[1]) + ', ' + str(measUnit) ,\
-                                             'BaseUnitMetadata', json.dumps(string));
-
+                                             'BaseUnitMetadata', string);
                 if rows >= dimensionX - 1:
                     break
                 res = APIFunctions.setAxisPosition(self.wsConnection, self.axisX, xMove, 'true', 'true')
@@ -177,4 +184,3 @@ class TileScanPy:
         timestamp = time.strftime("%Y%m%d%H%M%S", ts)
         logging.info("saveFileAsync" + outputDir + " " + timestamp)
         APIFunctions.saveFileAsAsync(self.wsConnection, outputDir + "/" + timestamp + ".mesc")
-

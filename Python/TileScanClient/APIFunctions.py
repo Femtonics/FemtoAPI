@@ -237,6 +237,7 @@ def setUnitMetadata(ws, handle, JsonItemName, jsonString):
     Sets the metadata of "JsonItemName" in unit defined by "handle". "jsonString" argument must be the the modified result of "getSessionMetadataJson()" function.
     """
     command = "FemtoAPIFile.setUnitMetadata('" + str(handle) + "', '" + JsonItemName + "', '" + jsonString + "')"
+    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     #print(simpleCmdParser)
     resultCode=simpleCmdParser.getResultCode()
