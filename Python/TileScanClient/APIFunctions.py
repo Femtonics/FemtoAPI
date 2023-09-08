@@ -23,16 +23,20 @@ This source contains a collection of the FemtoAPI calls
 Python API wrapper functions for femtoAPI 2.0 version
 !!! Not final version, nor is it fully tested yet!!!
 """
+
+
 import sys, time, array, random, shutil
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
 import json
 from pathlib import Path
+import numpy as np
 
 def initConnection(host = 'ws://localhost:8888'):
     """
     creates the websocket object used in all communications with the API server
+    the URL can be changed in the PyFemtoAPI.APIWebSocketClient call if the API server is running on a different machine, default port is set to 8888 in MESc
     returns the ws object which is used in all other functions
     """
     ws=PyFemtoAPI.APIWebSocketClient(host)
@@ -197,7 +201,7 @@ def getUnitMetadata(ws, handle, JsonItemName, string=""):
     JsonItemName:
         BaseUnitMetadata
         Roi
-        referenceViewport
+        ReferenceViewport
         Points
         Device 
         AxisControl
@@ -212,6 +216,7 @@ def getUnitMetadata(ws, handle, JsonItemName, string=""):
         ChannelInfo
         Modality
         CameraSettings
+        BreakView
     """
     if not string:
         command = "FemtoAPIFile.getUnitMetadata('" + str(handle) + "', '" + JsonItemName + "')"
@@ -237,7 +242,6 @@ def setUnitMetadata(ws, handle, JsonItemName, jsonString):
     Sets the metadata of "JsonItemName" in unit defined by "handle". "jsonString" argument must be the the modified result of "getSessionMetadataJson()" function.
     """
     command = "FemtoAPIFile.setUnitMetadata('" + str(handle) + "', '" + JsonItemName + "', '" + jsonString + "')"
-    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     #print(simpleCmdParser)
     resultCode=simpleCmdParser.getResultCode()
@@ -306,6 +310,7 @@ def setCurrentSession(ws, handle):
     
 def getProcessingState(ws):
     """
+    DEPRECATED
     returns a dictionary containing all data about the processing state
     """
     command='FemtoAPIFile.getProcessingState()'
@@ -468,6 +473,7 @@ def createNewFile(ws):
 
 def setCurrentFile(ws, handle):
     """
+    REMOVED  -> setCurrentSession
     set the current file to 'handle' in the processing view
     """
     command="FemtoAPIFile.setCurrentFile('" + str(handle) + "')"
@@ -770,7 +776,7 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
     xDim: measurement image x resolution 
     yDim: measurement image y resolution 
     taskXMLParameters: measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.
-        *from mesc veresion 4.5 taskXMLParameters is replaced by a single string containing the scanin mode: galvo, resonant, AOFullFrame
+        *from mesc veresion 4.5 taskXMLParameters is replaced by a single string containing the scanin mode: galvo, resonant, AO
     viewportJson: viewport for measurement 
     z0InMs: Measurement start time offset in ms. Double, default value is 0.0 
     zStepInMs: Frame duration time in ms (1/frame rate). Positive double, default value is 1.0. 
@@ -804,6 +810,37 @@ def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zSt
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
+
+def createVolumeScanMUnit(ws, xDim, yDim, zDim, tDim, technologyType, referenceViewportJson):
+    command="FemtoAPIFile.createVolumeScanMUnit(" + str(xDim) + ", " + str(yDim)+ ", " + str(zDim)+ ", " + str(tDim) + ", '" + technologyType + "', '" + referenceViewportJson + "')"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def createMultiLayerMUnit(ws, xDim, yDim, tDim, technologyType, referenceViewportJson):
+    command="FemtoAPIFile.createMultiLayerMUnit(" + str(xDim) + ", " + str(yDim)+ ", " + str(tDim) + ", '" + technologyType + "', '" + referenceViewportJson + "')"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+
+    
 #utolsó 3 paraméter változni fog!!!
 #MESc version 4.5 and above only
 def createBackgroundFrame(ws, xDim, yDim, technologyType, viewportJson, fileNodeDescriptor = '', z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
@@ -848,7 +885,7 @@ def createMultiROI2DMUnit(ws, xDim, tDim, methodType, backgroundImagePath, delta
     """
     methodType : 2D multiROI type, it can be 'multiROIPointScan', 'multiROILineScan', or 'multiROIMultiLine' 
     """
-    command="FemtoAPIFile.createMultiROIMUnit(" + str(xDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str() + "', deltaTInMs = " + str(x0InMicrons) + ", t0InMs = " + str(y0InMicrons) + ")"
+    command="FemtoAPIFile.createMultiROI2DMUnit(" + str(xDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str(backgroundImagePath) + "', deltaTInMs = " + str(deltaTInMs) + ", t0InMs = " + str(t0InMs) + ")"
     #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -866,7 +903,7 @@ def createMultiROI3DMUnit(ws, xDim, yDim, tDim, methodType, backgroundImagePath,
     """
     methodType : 3D multiROI type, it can be 'multiROIChessBoard', 'multiROITransverseRibbonScan', 'multiROILongitudinalRibbonScan'e' 
     """
-    command="FemtoAPIFile.createMultiROIMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str() + "', deltaTInMs = " + str(x0InMicrons) + ", t0InMs = " + str(y0InMicrons) + ")"
+    command="FemtoAPIFile.createMultiROI3DMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str(backgroundImagePath) + "', deltaTInMs = " + str(deltaTInMs) + ", t0InMs = " + str(t0InMs) + ")"
     #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -884,7 +921,7 @@ def createMultiROI4DMUnit(ws, xDim, yDim, zDim, tDim, methodType, backgroundImag
     """
     methodType : 4D multiROI type, it can be 'multiROIMultiCube', 'multiROISnake'
     """
-    command="FemtoAPIFile.createMultiROIMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(zDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str() + "', deltaTInMs = " + str(x0InMicrons) + ", t0InMs = " + str(y0InMicrons) + ")"
+    command="FemtoAPIFile.createMultiROI4DMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(zDim) + ", " + str(tDim) + ", '" +  methodType + "', '" + str(backgroundImagePath) + "', deltaTInMs = " + str(deltaTInMs) + ", t0InMs = " + str(t0InMs) + ")"
     #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -935,7 +972,7 @@ def copyMUnit(ws, sourceMUnitHandle, destMSessionHandle, bCopyChannelContents = 
     sourceMUnitHandle is the measurementunit handle of the source 
     destMSessionHandle is the session handle of the destination
     """
-    command="FemtoAPIFile.copyMUnit('" + str(sourceMUnitHandle) + "', '" + str(destMSessionHandle) + "', " + bCopyChannelContents + ")"
+    command="FemtoAPIFile.copyMUnit('" + str(sourceMUnitHandle) + "', '" + str(destMSessionHandle) + "', " + str(bCopyChannelContents) + ")"
     print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -1032,7 +1069,12 @@ def sendFileToClientsBlob(ws, sPathAndFileName):
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
+        binaryData = QByteArray()
+        for parts in simpleCmdParser.getPartList():
+            binaryData.append(parts)
+            #print( "Binary part sizes: " + str(parts.size()))
+        cmdResult.update({"data": binaryData}) 
+        cmdResult.update({"result": simpleCmdParser.getJSEngineResult()})
         return cmdResult
 
 
@@ -1086,7 +1128,6 @@ def saveVarToFile(ws, jsValue, PathAndFileName):
     else:
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
-
     
 
 def getStatus(ws, sCommandID = None):
@@ -1146,29 +1187,58 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
         return None
     else:
         cmdResult = {}
-        cmdResult.update({"Result": json.loads(simpleCmdParser.getJSEngineResult())})
+        result = json.loads(simpleCmdParser.getJSEngineResult())
+        cmdResult.update({"Result": result})
+        dataSize = result['size']
+        xType = result['xType']
+        yType = result['yType']
+        xDataType = result['xDataType']
+        yDataType = result['yDataType']
+
         xData = []
         yData = []
         curveData = {"xData": xData, "yData": yData}
-
+        cntr = 0
+        raw_data = QByteArray()
         for parts in simpleCmdParser.getPartList():
-            size = int(parts.size() / 2)
-            binaryDataX = QByteArray()
-            binaryDataY = QByteArray()
-            binaryDataX.append(parts[:size])
-            binaryDataY.append(parts[size:])
+            raw_data.append(parts)
             
-            stream = QDataStream(binaryDataX)
+            xSize = 0
+            if xType == 'vector':
+                xSize = dataSize
+            else:
+                xSize = 2
+            
+            stream = QDataStream(parts)
             stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
             while not stream.atEnd():
-                floatData = stream.readDouble()
-                curveData["xData"].append(floatData) 
-            stream = QDataStream(binaryDataY)
-            stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
-            while not stream.atEnd():
-                floatData = stream.readDouble()
-                curveData["yData"].append(floatData)
-            print( "Binary part with size: " + str(parts.size()))
+                if cntr < xSize:
+                    if xDataType == 'double':
+                        tmpData = stream.readDouble()
+                        curveData["xData"].append(tmpData)
+                    else:
+                        tmpData = stream.readUInt16()
+                        curveData["xData"].append(tmpData)
+                else:
+                    if yType== 'rle':
+                        if yDataType == 'double':
+                            tmpData = stream.readUInt32()
+                            curveData["yData"].append(tmpData)
+                            tmpData = stream.readDouble()
+                            curveData["yData"].append(tmpData)
+                        else:
+                            tmpData = stream.readUInt32()
+                            curveData["yData"].append(tmpData)
+                            tmpData = stream.readUInt16()
+                            curveData["yData"].append(tmpData)
+                    else:
+                        if yDataType == 'double':
+                            tmpData = stream.readDouble()
+                            curveData["yData"].append(tmpData)
+                        else:
+                            tmpData = stream.readUInt16()
+                            curveData["yData"].append(tmpData)
+                cntr += 1
         cmdResult.update({"CurveData": curveData})                 
         return cmdResult
 
@@ -1209,7 +1279,7 @@ def appendToCurve(ws, buffer, mUnitHandle, curveIdx, size, xType, xDataType, yTy
     """parameter info on Confluence -> API2.0 """
     ws.uploadAttachment(buffer)
     command="FemtoAPIFile.appendToCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', '" + str(size) + "', '" + xType + "', '" + xDataType + "', '" + yType + "', '" + yDataType + "')"
-    print(command)
+    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -1392,21 +1462,25 @@ def readRawChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = 
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readRawChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        cmdResult = {}
+        result = simpleCmdParser.getJSEngineResult()
+        #print ("readRawChannelDataToClientsBlob result: " + result)
+        cmdResult.update({"result": result})
         if filePath:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-            print("Res type: " + str(type(cmdResult)) + ", Res size: "  + str(cmdResult.size()))
-            tmp = cmdResult.data()
+                binaryData.append(parts)
+            #print("Res type: " + str(type(binaryData)) + ", Res size: "  + str(binaryData.size()))
+            tmp = binaryData.data()
             with open(filePath, "wb") as f:
                 f.write(tmp)
-            return True
+            return cmdResult
         else:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
+                binaryData.append(parts)
                 #print( "Binary part sizes: " + str(parts.size()))
+            cmdResult.update({"data": binaryData}) 
             return cmdResult
 
 
@@ -1427,22 +1501,25 @@ def readChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = Non
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        cmdResult = {}
+        result = json.loads(simpleCmdParser.getJSEngineResult())
+        #print ("readChannelDataToClientsBlob result: " + result)
+        cmdResult.update({"result": result})
         if filePath:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-            #print("Res type: " + str(type(cmdResult)) + ", Res size: "  + str(cmdResult.size()))
-            tmp = cmdResult.data()
-            toLog = str(type(tmp)) + " , " + str(len(tmp))
+                binaryData.append(parts)
+            print("Res type: " + str(type(binaryData)) + ", Res size: "  + str(binaryData.size()))
+            tmp = binaryData.data()
             with open(filePath, "wb") as f:
                 f.write(tmp)
-            return True
+            return cmdResult
         else:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-                #print( "Binary part with size: " + str(parts.size()))
+                binaryData.append(parts)
+                #print( "Binary part sizes: " + str(parts.size()))
+            cmdResult.update({"data": binaryData}) 
             return cmdResult
 
 
@@ -1493,9 +1570,10 @@ def readRawChannelData(ws, varName, handle, fromDims, countDims):
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        print("done", cmdResult)
-        return cmdResult
+        # on successful run the return value is None from the server and as such the getJSEngineResult result is useless for us here
+        #cmdResult = simpleCmdParser.getJSEngineResult()
+        #return cmdResult
+        return True
 
 
 def readChannelData(ws, varName, handle, fromDims, countDims):
@@ -1593,9 +1671,8 @@ def writeChannelDataFromAttachment(ws, buffer, handle, fromDims, countDims):
         return cmdResult
 
 
-
 def getTmpTiff(ws, uId, filePath):
-    print('gettif')
+    #print('gettif')
     command = "FemtoAPIFile.getTmpTiff('" + uId + "')"
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
@@ -1613,14 +1690,16 @@ def getTmpTiff(ws, uId, filePath):
             f.write(cmdResult.data())
         return True
 
-
             
-def tiffExport(ws, filePath, handle, applyLut, channelList = [], compressed = 1, breakView = 0, exportRawData = 0, startTimeSlice = 0, endTimeSlice = 1):
+def tiffExport(ws, filePath, handle, applyLut, channelList = '', compressed = 1, breakView = 0, exportRawData = 0, startTimeSlice = 0, endTimeSlice = ''):
+    ### csak a friss femtoapi wrapper el működik, ez a verzió nincs kint pypi-n smartpointeres build issue miatt
     filePath = Path(filePath)
-    print(filePath)
+    if not filePath.parent.exists():
+        print("tiffExport error: Filepath directory does not exists.")
+        return None
     rndm = random.randrange(0, 1000000)
     uId = 'tmptif_' + str(rndm)
-    command="FemtoAPIFile.createTmpTiff('" + uId + "', '" + str(handle) + "', " + str(applyLut) + "," + str(channelList) + "," + str(compressed) + "," + str(breakView) + "," + str(exportRawData) + "," + str(startTimeSlice) + "," + str(endTimeSlice) + ")"
+    command="FemtoAPIFile.createTmpTiff('" + uId + "', '" + str(handle) + "', " + str(applyLut) + ",'" + str(channelList) + "'," + str(compressed) + "," + str(breakView) + "," + str(exportRawData) + "," + str(startTimeSlice) + "," + str(endTimeSlice) + ")"
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
