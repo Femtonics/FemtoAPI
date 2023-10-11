@@ -29,8 +29,7 @@ import json
 class TileScanPy:
 
     def __init__(self):
-        #self.wsConnection = APIFunctions.initConnection('ws://localhost:8888')
-        self.wsConnection = APIFunctions.initConnection('ws://192.168.43.4:8888')
+        self.wsConnection = APIFunctions.initConnection('ws://localhost:8888')
         self.axisX = "SlowX"
         self.axisY = "SlowY"
         self.abortRun = False
