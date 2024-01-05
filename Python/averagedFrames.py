@@ -16,9 +16,12 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+Creates a measurement unit with averaged frames, based on opened measurement "SOURCE", and average defined by "FRAMES".
+"""
+
 import sys, time, logging, os, numpy, argparse, re
 import APIFunctions
-import miscFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from pathlib import Path
@@ -26,6 +29,10 @@ from femtoapi import PyFemtoAPI
 
 
 class AverageFrames:
+    """
+    Creates a measurement unit with averaged frames, based on opened measurement "SOURCE", and average defined by "FRAMES".
+    """
+    
     def __init__(self):
         self.bufferSize = 0
         self.avgFrameNum = 0

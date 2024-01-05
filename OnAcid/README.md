@@ -39,4 +39,4 @@ To download the corresponding package and data, please visit [OnAcid download](h
 
 ## Installation
 
-[CaImAn/RTMC installation and setup](https://kb.femtonics.eu/pages/viewpage.action?pageId=51914704)
+[CaImAn/RTMC installation and setup](https://femtonics.atlassian.net/wiki/spaces/SUP/pages/2422669313/CaImAn+RTMC+installation+and+setup)

@@ -16,9 +16,12 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-import sys, time, re, os, argparse, numpy, h5py, pathlib, json
+"""
+FemtoAPI application to create separate measurement units from the different layers in multilayer and volumescan measurements.
+"""
+
+import sys, time, re, os, argparse, numpy, pathlib, json
 import APIFunctions
-import miscFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 import xml.etree.ElementTree as ET

@@ -16,6 +16,10 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+"""
+FemtoAPI application to copy data between two specified frames into a new measurement unit.
+"""
+
 import sys, re, time, argparse
 import APIFunctions
 from PySide2.QtCore import *
@@ -25,7 +29,7 @@ from femtoapi import PyFemtoAPI
 
 
 class copyFrames:
-
+    
     def __init__(self):
         self.sourceMeas = ''
         self.startingFrame = 0
@@ -35,8 +39,7 @@ class copyFrames:
         
 
     def getArguments(self):
-        parser = argparse.ArgumentParser(description="FemtoAPI application to copy data between two specified frames into a new measurement unit."
-                                                     "Usable with MESc 4.0 and femtoAPI 1.0 versions.")
+        parser = argparse.ArgumentParser(description="FemtoAPI application to copy data between two specified frames into a new measurement unit.")
         parser.add_argument('source', metavar='SOURCE',
                             help='Handle of the source measurement unit. e.g.: "10,0,0"')
         parser.add_argument('frameStart', metavar='FRAMESTART',
@@ -109,12 +112,10 @@ class copyFrames:
                                 for channel in munit['channels']:
                                     channelNames.append(channel['name'])
                                 taskType = munit['technologyType']
-                                munit['xDim']
-                                
                                 dimx = munit['xDim']
-                                xscale = munit['pixelSizeX']
+                                #xscale = munit['pixelSizeX']
                                 dimy = munit['yDim']
-                                yscale = munit['pixelSizeY']
+                                #yscale = munit['pixelSizeY']
                                 dimt = munit['zDim']
                                 tscale = munit['tStepInMs']
                                 referenceViewportJSON = munit['referenceViewportJSON']
