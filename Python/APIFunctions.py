@@ -21,15 +21,15 @@
 """
 This source contains a collection of the FemtoAPI 2.0 calls available for the Atlas systems
 Python API wrapper functions for femtoAPI 2.0 version
-!!! Not final version, nor is it fully tested yet!!!
 """
 
 
-import sys, time, array
+import sys, time, array, random, shutil
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
 import json
+from pathlib import Path
 
 def initConnection(host = 'ws://localhost:8888'):
     """
@@ -107,7 +107,7 @@ def enableSignals(ws):
 
 def isSignalEnabled(ws):
     """
-    Check is signaling enabled on websocket
+    Check if signaling enabled on websocket
     """
     command='FemtoAPITools.isSignalEnabled()'
     simpleCmdParser=ws.sendJSCommand(command)
@@ -253,8 +253,7 @@ def setUnitMetadata(ws, handle, JsonItemName, jsonString):
 
 def getChildTree(ws, handle=''):
     """
-    returns information about the opened files
-    handle defines the range of data returned, can be empty, file level('10'), session level('10,0') and munit level('10,0,0')
+    Returns with the file tree. With no handle argument, returns the whole file tree. Otherwise returns the file, session or unit property tree, according to the given "handle" argument.
     """
     command="FemtoAPIFile.getChildTree('"+handle+"')"
     simpleCmdParser=ws.sendJSCommand(command)
@@ -483,8 +482,9 @@ def createTimeSeriesMUnit(ws, xDim, yDim, taskXMLParameters, viewportJson, z0InM
 
 def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zStepInMicrons = 1.0):
     """
-    zDim: number of Z planes
+    Creates new measurement unit for galvo/resonant/AO fullframe scan time series measurement
 
+    zDim: number of Z planes
     rest of the parameters are the same as in createTimeSeriesMUnit
     """
     command="FemtoAPIFile.createZStackMUnit(" + str(xDim) + ", " + str(yDim) + ", " + str(zDim) + ", '" + taskXMLParameters + "', '" + viewportJson + "', zStepInMicrons = " + str(zStepInMicrons) +  ")"
@@ -498,6 +498,36 @@ def createZStackMUnit(ws, xDim, yDim, zDim, taskXMLParameters, viewportJson, zSt
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
+
+def createVolumeScanMUnit(ws, xDim, yDim, zDim, tDim, technologyType, referenceViewportJson):
+    """
+    
+    """
+    command="FemtoAPIFile.createVolumeScanMUnit(" + str(xDim) + ", " + str(yDim)+ ", " + str(zDim)+ ", " + str(tDim) + ", '" + technologyType + "', '" + referenceViewportJson + "')"
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+
+
+def createMultiLayerMUnit(ws, xDim, yDim, tDim, technologyType, referenceViewportJson):
+    command="FemtoAPIFile.createMultiLayerMUnit(" + str(xDim) + ", " + str(yDim)+ ", " + str(tDim) + ", '" + technologyType + "', '" + referenceViewportJson + "')"
+    #print(command)
+    simpleCmdParser=ws.sendJSCommand(command)
+    resultCode=simpleCmdParser.getResultCode()
+    if resultCode > 0:
+        print ("Return code: " + str(resultCode))
+        print (simpleCmdParser.getErrorText())
+        return None
+    else:
+        cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+        return cmdResult
+    
 
 def createBackgroundFrame(ws, xDim, yDim, technologyType, viewportJson, fileNodeDescriptor = '', z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1):
     """
@@ -838,29 +868,58 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
         return None
     else:
         cmdResult = {}
-        cmdResult.update({"Result": json.loads(simpleCmdParser.getJSEngineResult())})
+        result = json.loads(simpleCmdParser.getJSEngineResult())
+        cmdResult.update({"Result": result})
+        dataSize = result['size']
+        xType = result['xType']
+        yType = result['yType']
+        xDataType = result['xDataType']
+        yDataType = result['yDataType']
+
         xData = []
         yData = []
         curveData = {"xData": xData, "yData": yData}
-
+        cntr = 0
+        raw_data = QByteArray()
         for parts in simpleCmdParser.getPartList():
-            size = int(parts.size() / 2)
-            binaryDataX = QByteArray()
-            binaryDataY = QByteArray()
-            binaryDataX.append(parts[:size])
-            binaryDataY.append(parts[size:])
+            raw_data.append(parts)
             
-            stream = QDataStream(binaryDataX)
+            xSize = 0
+            if xType == 'vector':
+                xSize = dataSize
+            else:
+                xSize = 2
+            
+            stream = QDataStream(parts)
             stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
             while not stream.atEnd():
-                floatData = stream.readDouble()
-                curveData["xData"].append(floatData) 
-            stream = QDataStream(binaryDataY)
-            stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
-            while not stream.atEnd():
-                floatData = stream.readDouble()
-                curveData["yData"].append(floatData)
-            print( "Binary part with size: " + str(parts.size()))
+                if cntr < xSize:
+                    if xDataType == 'double':
+                        tmpData = stream.readDouble()
+                        curveData["xData"].append(tmpData)
+                    else:
+                        tmpData = stream.readUInt16()
+                        curveData["xData"].append(tmpData)
+                else:
+                    if yType== 'rle':
+                        if yDataType == 'double':
+                            tmpData = stream.readUInt32()
+                            curveData["yData"].append(tmpData)
+                            tmpData = stream.readDouble()
+                            curveData["yData"].append(tmpData)
+                        else:
+                            tmpData = stream.readUInt32()
+                            curveData["yData"].append(tmpData)
+                            tmpData = stream.readUInt16()
+                            curveData["yData"].append(tmpData)
+                    else:
+                        if yDataType == 'double':
+                            tmpData = stream.readDouble()
+                            curveData["yData"].append(tmpData)
+                        else:
+                            tmpData = stream.readUInt16()
+                            curveData["yData"].append(tmpData)
+                cntr += 1
         cmdResult.update({"CurveData": curveData})                 
         return cmdResult
 
@@ -881,7 +940,7 @@ def deleteCurve(ws, mUnitHandle, curveIdx):
         cmdResult = simpleCmdParser.getJSEngineResult()
         return cmdResult
 
-#will change
+#might change in the future
 def writeCurve(ws, buffer, mUnitHandle, size, name, xType, xDataType, yType, yDataType, optimize = ''):
     """parameter info on Confluence -> API2.0 """
     ws.uploadAttachment(buffer)
@@ -896,7 +955,7 @@ def writeCurve(ws, buffer, mUnitHandle, size, name, xType, xDataType, yType, yDa
         cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
         return cmdResult
 
-#not working !! fix needed
+#function might not be fully functional
 def appendToCurve(ws, buffer, mUnitHandle, curveIdx, size, xType, xDataType, yType, yDataType):
     """parameter info on Confluence -> API2.0 """
     ws.uploadAttachment(buffer)
@@ -1185,7 +1244,6 @@ def getTmpTiff(ws, uId, filePath):
             
 def tiffExport(ws, filePath, handle, applyLut, channelList = '', compressed = 1, breakView = 0, exportRawData = 0, startTimeSlice = 0, endTimeSlice = ''):
     filePath = Path(filePath)
-    print(filePath)
     if not filePath.parent.exists():
         print("tiffExport error: Filepath directory does not exists.")
         return None
