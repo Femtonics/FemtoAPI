@@ -1,5 +1,5 @@
-%apiobj: object containing an estabilised femtoapi connection
-%handle: format as [10 0 0 0], the last number replresents the channel number
+%apiobj: object containing an estabilished femtoapi connection
+%handle: format as [10 0 0 0], the last number represents the channel number
 %roinum: roi numbering starts at 1
 function roidata = read3DMultiRoi(apiobj ,handle, roinum)
     unitMetadata = apiobj.getUnitMetadata(handle(1:3), 'BaseUnitMetadata');

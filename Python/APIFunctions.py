@@ -30,6 +30,7 @@ from PySide2.QtWebSockets import *
 from femtoapi import PyFemtoAPI
 import json
 from pathlib import Path
+import numpy as np
 
 def initConnection(host = 'ws://localhost:8888'):
     """
@@ -755,7 +756,12 @@ def sendFileToClientsBlob(ws, sPathAndFileName):
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
+        cmdResult = {}
+        binaryData = QByteArray()
+        for parts in simpleCmdParser.getPartList():
+            binaryData.append(parts)
+            print( "Binary part sizes: " + str(parts.size()))
+        cmdResult.update({"data": binaryData}) 
         return cmdResult
 
 
@@ -848,7 +854,7 @@ def curveInfo(ws, mUnitHandle, curveIdx):
         return cmdResult
 
 
-def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
+def readCurve(ws, mUnitHandle, curveIdx, vectorFormat: bool = True, forceDouble: bool = True):
     """
     returns a dictionary with 2 elements
     Result: contains data about the specified curve
@@ -857,7 +863,15 @@ def readCurve(ws, mUnitHandle, curveIdx, vectorFormat = '', forceDouble = ''):
         - 'yData' is a list with the y data of the curve
     the elements of these 2 list make up data pairs (xData[0] - yData[0], xData[1] - yData[1], etc.)
     """
-    command="FemtoAPIFile.readCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', '" + str(vectorFormat) + "', '" + str(forceDouble) + "')"
+    if vectorFormat:
+        vFormat = 'true'
+    else:
+        vFormat = 'false'
+    if forceDouble:
+        fDouble = 'true'
+    else:
+        fDouble = 'false'
+    command="FemtoAPIFile.readCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', " + str(vFormat) + ", " + str(fDouble) + ")"
     #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     #print(simpleCmdParser.hasBinaryParts())
@@ -960,7 +974,7 @@ def appendToCurve(ws, buffer, mUnitHandle, curveIdx, size, xType, xDataType, yTy
     """parameter info on Confluence -> API2.0 """
     ws.uploadAttachment(buffer)
     command="FemtoAPIFile.appendToCurve('" + str(mUnitHandle) + "', '" + str(curveIdx) + "', '" + str(size) + "', '" + xType + "', '" + xDataType + "', '" + yType + "', '" + yDataType + "')"
-    print(command)
+    #print(command)
     simpleCmdParser=ws.sendJSCommand(command)
     resultCode=simpleCmdParser.getResultCode()
     if resultCode > 0:
@@ -1021,21 +1035,22 @@ def readRawChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = 
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readRawChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        cmdResult = {}
+        result = simpleCmdParser.getJSEngineResult()
+        cmdResult.update({"result": result})
         if filePath:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-            print("Res type: " + str(type(cmdResult)) + ", Res size: "  + str(cmdResult.size()))
-            tmp = cmdResult.data()
+                binaryData.append(parts)
+            tmp = binaryData.data()
             with open(filePath, "wb") as f:
                 f.write(tmp)
-            return True
+            return cmdResult
         else:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-                #print( "Binary part sizes: " + str(parts.size()))
+                binaryData.append(parts)
+            cmdResult.update({"data": binaryData}) 
             return cmdResult
 
 
@@ -1056,22 +1071,23 @@ def readChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = Non
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        cmdResult = {}
+        result = json.loads(simpleCmdParser.getJSEngineResult())
+        cmdResult.update({"result": result})
         if filePath:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-            #print("Res type: " + str(type(cmdResult)) + ", Res size: "  + str(cmdResult.size()))
-            tmp = cmdResult.data()
-            toLog = str(type(tmp)) + " , " + str(len(tmp))
+                binaryData.append(parts)
+            print("Res type: " + str(type(binaryData)) + ", Res size: "  + str(binaryData.size()))
+            tmp = binaryData.data()
             with open(filePath, "wb") as f:
                 f.write(tmp)
-            return True
+            return cmdResult
         else:
-            cmdResult = QByteArray()
+            binaryData = QByteArray()
             for parts in simpleCmdParser.getPartList():
-                cmdResult.append(parts)
-                #print( "Binary part with size: " + str(parts.size()))
+                binaryData.append(parts)
+            cmdResult.update({"data": binaryData}) 
             return cmdResult
 
 
@@ -1122,9 +1138,10 @@ def readRawChannelData(ws, varName, handle, fromDims, countDims):
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        cmdResult = simpleCmdParser.getJSEngineResult()
-        print("done", cmdResult)
-        return cmdResult
+        # on successful run the return value is None from the server and as such the getJSEngineResult result is useless for us here
+        #cmdResult = simpleCmdParser.getJSEngineResult()
+        #return cmdResult
+        return True
 
 
 def readChannelData(ws, varName, handle, fromDims, countDims):
