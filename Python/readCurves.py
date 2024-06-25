@@ -30,13 +30,14 @@ Optionally the result can be saved into CSV files
 Include APIFunctions.py in the same directory
 
 Change 'handle' variable according to measurement unit handle.
-Set 'DO_CSV' value to True to also write data into a csv file 
+Set 'DO_CSV' value to True to also write data into a csv file.
+Set 'name' to only read a specific curve
 """
 
-handle = '60,0,0'
-DO_CSV = False
+handle = '59,0,0'
+DO_CSV = True
 path = '' #folder path for the CSV file saving
-
+name = '' #name of the specific curve, if emply string all curves will be processed
 
 app = QCoreApplication(sys.argv)
 ws = APIFunctions.initConnection()
@@ -52,11 +53,13 @@ if not res:
     sys.exit(0)
 curveId = ''
 curveInfo = ''
+
 for curve in res['curves']:
     curveName =  curve['name']
     curveId = curve['curveIdx']
-
-    result = APIFunctions.readCurve(ws, handle, curveId)
+    if name and curveName != name:
+        continue
+    result = APIFunctions.readCurve(ws, handle, curveId, False, False)
     xDataType = result['Result']['xDataType']
     xType = result['Result']['xType']
     yDataType = result['Result']['yDataType']
