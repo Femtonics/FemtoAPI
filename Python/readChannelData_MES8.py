@@ -24,7 +24,7 @@ Reads all frames
 Only works with MES8 measurement files using API 2.0 (MESc 4.5)
 """
 
-import sys, os, time, numpy
+import sys, os, time, numpy, json
 import APIFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
@@ -32,7 +32,7 @@ from pathlib import Path
 from femtoapi import PyFemtoAPI
 
 
-munitHandle = '61,0,4'  # measurement unit handle to export data from
+munitHandle = '59,0,58'  # measurement unit handle to export data from
 channel = 0  # channel number to export data from (numbering starts at 0)
 isRaw = True  # if true the extracted data will be in raw form, if false the data will already include the offset value
 
@@ -79,14 +79,15 @@ if isRaw:
 else:
     rawdata = APIFunctions.readChannelDataToClientsBlob(ws, munitHandle + ',' + str(channel), fromDims, toDims)
 
+resultJson = json.loads(rawdata["result"])
+dataType = resultJson["channelDataType"]
 
-stream = QDataStream(rawdata)
+stream = QDataStream(rawdata["data"])
 stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
 tmplist = []
 while not stream.atEnd():
-    if isRaw:
+    if dataType == "uInt16":
         pixelvalue = stream.readUInt16()
-        pixelvalue += offset
     else:
         pixelvalue = stream.readDouble()
     tmplist.append(numpy.uint16(pixelvalue))
@@ -102,4 +103,3 @@ if mType in ('volumeScan', 'multilayer', 'multiROIMultiCube', 'multiROISnake'):
     #rotatedData = numpy.rot90(shapedData, 1, axes=(0,1))  # the 0,0 coordinate in MEScGUI is the bottom-left corner, rotation might be needed for properly display the data when starter coordinate is top-left
     
 APIFunctions.closeConnection(ws)
-
