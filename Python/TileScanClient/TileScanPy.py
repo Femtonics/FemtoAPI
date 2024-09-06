@@ -28,7 +28,7 @@ import logging
 class TileScanPy:
 
     def __init__(self):
-        self.wsConnection = APIFunctions.initConnection('ws://localhost:8888')  # 192.168.43.4
+        self.wsConnection = APIFunctions.initConnection('ws://localhost:8888')
         self.axisX = "SlowX"
         self.axisY = "SlowY"
         self.abortRun = False
@@ -94,7 +94,7 @@ class TileScanPy:
 
     def setParameters(self, scannerType, viewPortX, viewPortY,
                       resolutionX, resolutionY, dimensionX, dimensionY,
-                      overlap, firstX, firstY, outputDir, directionX, directionY):
+                      overlapPercent, firstX, firstY, outputDir, directionX, directionY):
         string = '[{"space": "space1", "measurementType": "' + scannerType + '", "size": [' + str(viewPortX) + ', ' + str(viewPortY) + '], \
                 "resolution": [' + str(resolutionX) + ', ' + str(resolutionY) + '], "transformation": {"translation": [-' + str(viewPortX/2) + ', -' + str(viewPortY/2) + ', 0]}}]'
         command = "FemtoAPIMicroscope.setImagingWindowParameters('" + string + "')"
@@ -112,6 +112,7 @@ class TileScanPy:
         currFileHandle = res['currentFileHandle']
         currHandle = res['currentMeasurementSessionHandle']
         cols = 0
+        overlap = (viewPortX / 100) * overlapPercent
         xMove = (viewPortX - overlap) * directionX
         yMove = (viewPortY - overlap) * directionY
         APIFunctions.setAxisPosition(self.wsConnection, self.axisX, firstX, 'false', 'true')
@@ -181,3 +182,4 @@ class TileScanPy:
         timestamp = time.strftime("%Y%m%d%H%M%S", ts)
         logging.info("saveFileAsync" + outputDir + " " + timestamp)
         APIFunctions.saveFileAsAsync(self.wsConnection, outputDir + "/" + timestamp + ".mesc")
+        return currHandle

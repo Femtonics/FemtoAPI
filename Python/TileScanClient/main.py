@@ -31,6 +31,12 @@ from PySide2.QtUiTools import QUiLoader
 from PySide2.QtGui import QPalette, QColor
 from PySide2.QtGui import QPixmap
 import TileScanPy
+try:
+    import ImagejStiching as ijs
+    stitchingEnabled = True
+except RuntimeError as e:
+    print(e)
+    stitchingEnabled = False
 import resources
 import logFormatter
 
@@ -46,6 +52,7 @@ class TileScanClient(QWidget):
         self.threadpool = QtCore.QThreadPool()
 #        self.readSettings()
         self.tileScanPy = TileScanPy.TileScanPy()
+        self.currentSession = ''
         #self.ui.closeEvent.connect(self.quit_app)
         #try:
         #    print('window size')
@@ -131,6 +138,7 @@ class TileScanClient(QWidget):
         self.ui = loader.load(ui_file, self)
         ui_file.close()
         micrometer = " \u00B5m"
+        percentage = " \u0025"
         self.ui.btnStart.clicked.connect(self.start_tile_scan)
         self.ui.btnAbort.clicked.connect(self.abort_tile_scan)
         self.ui.btnBrowse.clicked.connect(self.browse_output)
@@ -140,13 +148,15 @@ class TileScanClient(QWidget):
 #        self.ui.spnDimY.editingFinished.connect(self.dim_y_changed)
         self.ui.spnViewportX.setSuffix(micrometer)
         self.ui.spnViewportY.setSuffix(micrometer)
-        self.ui.spnOverlap.setSuffix(micrometer)
+        self.ui.spnOverlap.setSuffix(percentage)
         self.ui.dsbFirstX.setSuffix(micrometer)
         self.ui.dsbFirstY.setSuffix(micrometer)
         self.ui.cmbMode.currentIndexChanged.connect(self.on_cmbMode_changed)
         pixmap = QPixmap(':/images/2')
         self.ui.lblgraphic.setPixmap(pixmap)
-
+        if not stitchingEnabled:
+            self.ui.stitchTiff.setEnabled(False)
+            
     #def dim_x_changed(self):
         #self.regenerateLayout()
 
@@ -185,18 +195,28 @@ class TileScanClient(QWidget):
         if 0 == self.ui.cmbMode.currentIndex() :
             xDirection = 1
             yDirection = -1
+            order = "Right & Down"
         elif 1 == self.ui.cmbMode.currentIndex() :
             xDirection = -1
             yDirection = -1
+            order = "Left & Down"
         elif 2 == self.ui.cmbMode.currentIndex() :
             xDirection = 1
             yDirection = 1
+            order = "Right & Up"
         elif 3 == self.ui.cmbMode.currentIndex() :
             xDirection = -1
             yDirection = 1
+            order = "Left & Up"
         print("Starting.. with " + scanner + " vX:" + str(viewpX) +" vY:" + str(viewpY))
-        self.tileScanPy.setParameters(scanner, viewpX, viewpY,
+        self.currentSession = self.tileScanPy.setParameters(scanner, viewpX, viewpY,
         resX, resY, dimX, dimY, ovrlap, fstX, fstY, outDir, xDirection, yDirection)
+
+        if self.ui.stitchTiff.isChecked():
+            sticher = ijs.TiffSticher(outDir)
+            sticher.tiffExport(self.currentSession)
+            sticher.getStiching(order, dimX, dimY, ovrlap)
+            del sticher
 
     def abort_tile_scan(self):
         scanner = self.ui.cmbScanner.currentText()
