@@ -100,7 +100,7 @@ class TiffSticher:
                     confirm_files output_textfile_name=TileConfiguration.txt  \
                     fusion_method=[Linear Blending] regression_threshold=0.30 \
                     max/avg_displacement_threshold=2.50 absolute_displacement_threshold=3.50 \
-                    subpixel_accuracy computation_parameters=[Save memory (but be slower)] \
+                    subpixel_accuracy compute_overlap computation_parameters=[Save memory (but be slower)] \
                     file_names=[{i}.tif] \
                     image_output=[Write to disk] \
                     output_directory=[' + str(self.dirPath) + '\]')
@@ -111,6 +111,8 @@ class TiffSticher:
 #testing
 if __name__ == "__main__":
     app = QCoreApplication(sys.argv)
-    sticher = TiffSticher("C:/GITrepos/FemtoAPI_archive/Python/TileScanClient/test")
-    sticher.tiffExport([58,0])
-    sticher.getStiching("Left & Down", 3, 3, 50)
+    #path = "N:/DATA/pirka.benjamin/ManualTest/dobosDual/tileScanTest/2"
+    path = "C:/GITrepos/FemtoAPI_archive/Python/TileScanClient/test"
+    sticher = TiffSticher(path)
+    sticher.tiffExport([57,0])
+    sticher.getStiching("Right & Up", 3, 3, 50)

@@ -268,17 +268,31 @@
        </item>
       </layout>
      </item>
-     <item row="14" column="0">
+     <item row="17" column="1">
+      <widget class="QPushButton" name="btnAbort">
+       <property name="text">
+        <string>Abort</string>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0">
       <widget class="QPushButton" name="btnStart">
        <property name="text">
         <string>Start</string>
        </property>
       </widget>
      </item>
-     <item row="14" column="1">
-      <widget class="QPushButton" name="btnAbort">
+     <item row="15" column="1">
+      <widget class="QCheckBox" name="stitchTiff">
        <property name="text">
-        <string>Abort</string>
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Craete Fused Tiff</string>
        </property>
       </widget>
      </item>

@@ -1037,7 +1037,7 @@ def readChannelDataToClientsBlob(ws, handle, fromDims, countDims, filePath = Non
         print (simpleCmdParser.getErrorText())
         return None
     else:
-        print ("readRawChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
+        print ("readChannelDataToClientsBlob result: " + simpleCmdParser.getJSEngineResult())
         if filePath:
             cmdResult = QByteArray()
             for parts in simpleCmdParser.getPartList():
