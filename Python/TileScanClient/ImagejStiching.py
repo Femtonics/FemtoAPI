@@ -25,6 +25,7 @@ import time
 import logging
 import json
 import os
+import javaconfig
 try:
     import imagej
 except ImportError:
@@ -35,8 +36,7 @@ from pathlib import Path
 
 class TiffSticher:
     def __init__(self, outputDir):
-        #self.wsConnection = APIFunctions.initConnection('ws://localhost:8888')
-        self.wsConnection = APIFunctions.initConnection('ws://192.168.43.4:8888')
+        self.wsConnection = APIFunctions.initConnection('ws://localhost:8888')
         outputDir = Path(outputDir)
         if not Path.is_dir(outputDir):
             Path.mkdir(outputDir)
@@ -62,14 +62,10 @@ class TiffSticher:
             APIFunctions.tiffExport(self.wsConnection, filePath, measHandle, 0)
 
     def getStiching(self, order, gridX, gridY, overlap):
+        javaconfig.setJavaEnv()
         ij = imagej.init('C:/Program Files/Fiji.app')
         #ij = imagej.init('2.14.0')
-        print(ij.getVersion())
-
-        #order = 'Right & Up'
-        #gridX = 4
-        #gridY = 4
-        #overlap = 50 # %
+        #print(ij.getVersion())
         TiffExportPath = Path(self.dirPath, 'tmptiff')
 
         ij.IJ.run('Grid/Collection stitching','type=[Grid: snake by rows] \
@@ -83,8 +79,8 @@ class TiffSticher:
                     subpixel_accuracy computation_parameters=[Save memory (but be slower)] \
                     image_output=[Write to disk] \
                     file_names=[{i}.tif] \
-                    image_output=[Fused.tif] \
                     output_directory=[' + str(self.dirPath) + '\]')
         shutil.rmtree(TiffExportPath)
         ij.dispose()
+        print("Stiching is done.")
 
