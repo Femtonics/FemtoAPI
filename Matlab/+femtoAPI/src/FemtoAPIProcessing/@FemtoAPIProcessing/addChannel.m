@@ -17,16 +17,21 @@
 % PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-function [ result ] = addChannel( obj, nodeDescriptor, channelName )
 %ADDCHANNEL Adds channel with spcified name to an existing measurement unit
 % The nodeDescriptor must be an index of a valid, opened measurement unit
 % on the server side, otherwise this function gives an error.
 %
-% INPUTS:
+% INPUTS [required]:
 %   nodeDescriptor              measurement unit index, where channel will
 %                               be added to, e.g. [54,0,1]
 %
 %   channelName                 name of the channel to be added, e.g. 'UG'
+%
+% INPUTS [optional]:
+%   compressionPreset           integer, type of compression preset
+% 
+%   channelDataType             string, type of channel data, its value 
+%                               can be "uint16" or "double"     
 %
 % OUTPUT:
 %   result                struct that contains the following data:
@@ -43,17 +48,35 @@ function [ result ] = addChannel( obj, nodeDescriptor, channelName )
 % See also DELETECHANNEL CREATEMEASUREMENTUNIT
 %
 
+narginchk(3,5);
+
 validateattributes(nodeDescriptor,{'numeric'},{'vector','nonnegative','integer'});
 validateattributes(channelName,{'char'},{'vector','row'});
 
-nodeDescriptor = reshape(nodeDescriptor,1,[]);
-nodeString = strcat(num2str(nodeDescriptor(1:end-1),'%d,'),num2str(nodeDescriptor(end)));
+if nargin == 3 
 
+    result = obj.femtoAPIMexWrapper('FemtoAPIFile.addChannel',nodeDescriptor, channelName);     
 
-q = char(39); % quote character
-result = femtoAPI('command',strcat('FemtoAPIFile.addChannel(',q,nodeString,q,...
-    ',',q,channelName,q,')'));
-result = jsondecode(result{1});
+elseif nargin == 4
+    
+    compressionPreset = varargin{1};
+    validateattributes(compressionPreset,{'numeric'},{'scalar','nonnegative','integer'});
+    result = obj.femtoAPIMexWrapper('FemtoAPIFile.addChannel',nodeDescriptor, channelName, compressionPreset);  
+    
+else 
+    
+    compressionPreset = varargin{1};
+    channelDataType   = varargin{2};
+    channelDataType   = convertCharsToStrings(channelDataType);
+
+    validateattributes(compressionPreset,{'numeric'},{'scalar','nonnegative','integer'});
+    validateattributes(channelDataType,{'string'},{'scalar'});
+    result = obj.femtoAPIMexWrapper('FemtoAPIFile.addChannel',nodeDescriptor, ... 
+        channelName, compressionPreset, channelDataType);     
+    
+end
+
+result = jsondecode(result);
 result.addedChannelIdx = str2num(result.addedChannelIdx);
 
 end

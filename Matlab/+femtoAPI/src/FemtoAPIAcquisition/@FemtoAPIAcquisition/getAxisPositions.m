@@ -34,8 +34,9 @@ function axisPositions = getAxisPositions( obj )
 %
 % See also GETAXISPOSITION SETAXISPOSITION
 %
-objectivePositions = femtoAPI('command','FemtoAPIMicroscope.getAxisPositions()');
-axisPositions = jsondecode(objectivePositions{1});
+
+axisPositions = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.getAxisPositions');
+axisPositions = jsondecode(axisPositions);
 
 end
 

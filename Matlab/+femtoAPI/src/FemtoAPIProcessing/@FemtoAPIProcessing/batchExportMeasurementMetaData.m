@@ -74,8 +74,6 @@ for i = 1: length(measurementHandleArray)
     
     %measurementParamsXMLStruct = xmlString2struct(measurementParamsXMLString);
     measurementParamsXMLString = regexprep(measurementParamsXMLString,'".m"','"um"');
-    measurementParamsXMLString = regexprep(measurementParamsXMLString,'axis attribute="Unit" id="TiltY" value="."','axis attribute="Unit" id="TiltY" value="u"');
-    measurementParamsXMLString = regexprep(measurementParamsXMLString,'axis attribute="Unit" id="TiltX" value="."','axis attribute="Unit" id="TiltX" value="u"');                   
     measurementParamsXMLString = strrep(measurementParamsXMLString,'\"','"');
     measurementParamsXMLStruct = xml2struct(measurementParamsXMLString);
     allMeasurementParams.('measurementParamsXML') = measurementParamsXMLStruct;

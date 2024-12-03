@@ -39,12 +39,8 @@ function [ succeeded ] = setCurrentFile(obj, nodeDescriptor)
 %
 % See also CREATENEWFILE
 %
-
 validateattributes(nodeDescriptor,{'numeric'},{'vector','nonnegative','integer'});
-nodeDescriptor = reshape(nodeDescriptor,1,[]);
-nodeString = strcat(num2str(nodeDescriptor(1:end-1),'%d,'),num2str(nodeDescriptor(end)));
-succeeded = femtoAPI('command',strcat('FemtoAPIFile.setCurrentFile(',nodeString,')'));
-succeeded = jsondecode(succeeded{1});
-
+succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.setCurrentFile',nodeDescriptor);
+succeeded = jsondecode(succeeded);
 end
 

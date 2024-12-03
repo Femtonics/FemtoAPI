@@ -24,41 +24,40 @@ function [ isMoving ] = isAxisMoving(obj, axisName, varargin)
 % error message is returned from server. Valid axis names can be acquired
 % be running obj.getAxisPositions() command.
 %
-% INPUTS [required]: 
+% INPUTS [required]:
 %  axisName                 char array or string, the name of the axis
 %
-% INPUT [optional]: 
-%  spaceName                char array or string, space name. 
-%                           Default: default space ('space1') 
+% INPUT [optional]:
+%  spaceName                char array or string, space name.
+%                           Default: default space ('space1')
 %
-% OUTPUT: 
+% OUTPUT:
 %  isMoving                bool, true if objective is moving along the
-%                          given axis, false otherwise. 
+%                          given axis, false otherwise.
 %
 % Usage example:
 %  obj.isAxisMoving('StageX')
 %
 % See also GETAXISPOSITIONS
 %
-    numVarargs = length(varargin);
-    spaceName = obj.m_AcquisitionState.defaultSpaceName;
 
-    if(~ischar(axisName) && ~isstring(axisName))
-        error('Argument 1, ''axisName'' must be of type character array or string.');
-    end
-    if numVarargs > 1
-        error('Too many input arguments.');
-    elseif numVarargs == 1
-        if(~ischar(varargin{1}) && ~isstring(varargin{1}))
-            error('Argument 2, ''spaceName'' must be of type character array or string.');
-        end
-        spaceName = varargin{1};
-    end
-    q = char(39); % quote character
-    axisName = [q,char(axisName),q];
-    spaceName = [q,char(spaceName),q];
+numVarargs = length(varargin);
+spaceName = obj.m_AcquisitionState.defaultSpaceName;
 
-    isMoving = femtoAPI('command',strcat('FemtoAPIMicroscope.isAxisMoving(',axisName,',',spaceName,')'));
-    isMoving = jsondecode(isMoving{1});
+if(~ischar(axisName) && ~isstring(axisName))
+    error('Argument 1, ''axisName'' must be of type character array or string.');
+end
+if numVarargs > 1
+    error('Too many input arguments.');
+elseif numVarargs == 1
+    if(~ischar(varargin{1}) && ~isstring(varargin{1}))
+        error('Argument 2, ''spaceName'' must be of type character array or string.');
+    end
+    spaceName = varargin{1};
+end
+
+isMoving = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.isAxisMoving',axisName,spaceName);
+isMoving = jsondecode(isMoving);
+
 end
 

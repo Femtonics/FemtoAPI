@@ -21,70 +21,68 @@ function  axisPosition = getAxisPosition(obj,axisName,varargin)
 %GETAXISPOSITION Gets position of the given axis
 % Gets the absolute, relative axis position, or the whole axis position
 % struct get from server, if no optional arguments are given.
-% 
-% INPUT [required]: 
-%  axisName                 char array, name of a configured axis 
-% 
-% INPUTS [optional]: 
-%  positionType             char array, must be 'absolute' or 'relative'. 
-%                           Default: empty char 
-%  
+%
+% INPUT [required]:
+%  axisName                 char array, name of a configured axis
+%
+% INPUTS [optional]:
+%  positionType             char array, must be 'absolute' or 'relative'.
+%                           Default: empty char, means that absolute and 
+%                           relative positions are included in the result
+%
 %  spaceName                char array, name of space for which the axis is
 %                           configured. Default: default space('space1')
 %
-% OUTPUT: 
-%  axisPosition             various output depending on positionType: 
-%                            - double, absolute position, if positionType 
-%                              is 'absolute'  
-%                            - double, relative position, if positionType 
+% OUTPUT:
+%  axisPosition             various output depending on positionType:
+%                            - double, absolute position, if positionType
+%                              is 'absolute'
+%                            - double, relative position, if positionType
 %                              is 'relative'
-%                            - struct, containing absolute/relative positions, 
-%                              threshold, axis limits, labeling origin offset. 
-%                              if positionType is not given.  
+%                            - struct, containing absolute/relative positions,
+%                              threshold, axis limits, labeling origin offset.
+%                              if positionType is not given.
 %
-% Examples: 
-%  axisPositionStruct = obj.getAxisPosition('SlowZ'); 
+% Examples:
+%  axisPositionStruct = obj.getAxisPosition('SlowZ');
 %  absolutePos = obj.getAxisPosition('SlowZ','absolute');
 %  relativePos = obj.getAxisPosition('SlowZ','relative');
 %
 % See also GETAXISPOSITIONS
 %
-    numVarargs = length(varargin);
-    optArgs = {'',obj.m_AcquisitionState.defaultSpaceName};
-    if( numVarargs > 2)
-        error('Too many input arguments.');
-    end
-    if( numVarargs >= 1 )
-        if(~strcmp(varargin{1},'') && ~strcmpi(varargin{1},'Relative') && ...
-                ~strcmpi(varargin{1},'Absolute'))
-            error(strcat(['Argument 2, ''positionType'' must be an empty char', ...
-                ' (means relative and absolute), or ''relative'' or ''absolute'' (case insensitive)']));
-        end
-        optArgs{1} = varargin{1};
-    end
-    
-    if( numVarargs == 2 )
-        if(~ischar(varargin{2}) && ~isstring(varargin{2}))
-            error('Argument 3, ''spacename'' must be a character array or string');
-        end
-        optArgs{2} = char(varargin{2});
-    end
 
-    spaceName = char(optArgs{2});
-    axisName = char(axisName);
-    q = char(39); % quote character
-    axisPosition = femtoAPI('command', ...
-        strcat('FemtoAPIMicroscope.getAxisPosition(',q,axisName,q,',',q,spaceName,q,')'));
-    axisPosition = jsondecode(axisPosition{1});
+numVarargs = length(varargin);
+positionType = ''; % empty means relative and absolu
+spaceName = obj.m_AcquisitionState.defaultSpaceName;
 
-    if(strcmpi(optArgs{1},'absolute'))
-        axisPosition = axisPosition.Absolute;
-    elseif(strcmpi(optArgs{1},'relative'))
-        axisPosition = axisPosition.Relative;
-    else
-        % no optional parameter was given -> get the whole axisposition struct
-        return;
+if( numVarargs > 2)
+    error('Too many input arguments.');
+end
+if( numVarargs >= 1 )
+    validPosTypes = ["Relative","Absolute"];
+    validatestring(varargin{1},validPosTypes,mfilename, 'positionType',2);
+    positionType = varargin{1};
+end
+
+if( numVarargs == 2 )
+    if(~ischar(varargin{2}) && ~isstring(varargin{2}))
+        error('Argument 3, ''spacename'' must be a character array or string');
     end
+    spaceName = varargin{2};
+end
+
+axisPosition = obj.femtoAPIMexWrapper('FemtoMicroscope.getAxisPosition',axisName, ...
+    spaceName);
+axisPosition = jsondecode(axisPosition);
+
+if(strcmpi(positionType,'absolute'))
+    axisPosition = axisPosition.Absolute;
+elseif(strcmpi(positionType,'relative'))
+    axisPosition = axisPosition.Relative;
+else
+    % no optional parameter was given -> get the whole axisposition struct
+    return;
+end
 
 end
 

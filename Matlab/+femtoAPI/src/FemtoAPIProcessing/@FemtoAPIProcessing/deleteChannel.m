@@ -39,11 +39,8 @@ function result = deleteChannel(obj,channelHandle)
 %
 
 validateattributes(channelHandle,{'numeric'},{'vector','nonnegative','integer'});
-channelHandle = reshape(channelHandle,1,[]);
-channelString = strcat(num2str(channelHandle(1:end-1),'%d,'),num2str(channelHandle(end))); 
-q = char(39); % quote character
-result = femtoAPI('command',strcat('FemtoAPIFile.deleteChannel(',q,channelString,q,')'));
-result = jsondecode(result{1});
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.deleteChannel',channelHandle);
+result = jsondecode(result);
 
 end
 

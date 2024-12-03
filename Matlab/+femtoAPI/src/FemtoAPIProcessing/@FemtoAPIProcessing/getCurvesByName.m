@@ -23,6 +23,8 @@ function [ curveNamesFiltered, curveData ] = getCurvesByName( obj, measurementHa
 
 % get metadata of curves as array
 curvesMetaData = obj.getMeasurementMetaDataField(measurementHandle,'curves');
+%validateattributes(channelNames,{'string'});
+
 
 curveData = [];
 curveNamesFiltered = [];

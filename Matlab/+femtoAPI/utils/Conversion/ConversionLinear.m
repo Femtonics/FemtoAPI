@@ -82,6 +82,7 @@ classdef ConversionLinear < ConversionNoParamsIF
             end
         end
         
+        % TODO setter methods for converted min/max values
         function set.m_convertedMinValueUint16(obj,val)
             validateattributes(val,{'uint16'},{'scalar'});
             obj.m_convertedMinValueUint16 = val ;
@@ -196,7 +197,7 @@ classdef ConversionLinear < ConversionNoParamsIF
     
     
     methods ( Access = protected, Hidden )
-
+        % TODO instead off affineTransform, clampAffineTransform is ok? 
         function limitsChanged(obj)
             if(obj.isLimitedDouble())
                 obj.m_convertedMinValueDouble = ConversionLinear.affineTransform(obj.m_lowerLimitDouble,...
@@ -330,7 +331,9 @@ classdef ConversionLinear < ConversionNoParamsIF
         function updateInvScale(obj,scale)
             obj.m_invScale =  ConversionLinear.scaleToInvScale(scale);
         end
-         
+        
+        
+        
     end
     
     
@@ -345,21 +348,25 @@ classdef ConversionLinear < ConversionNoParamsIF
         end
         
         function transformedVal = affineTransform(value, slope, intercept)
+            % TODO inputcheck
             transformedVal = double(value)* double(slope) + double(intercept);
         end
         
         
         function transformedVal = clampAffineTransform(lowerLimit,value,upperLimit,slope,intercept)
+            % TODO inputcheck
             transformedVal = double(clamp(lowerLimit,value,upperLimit)) * double(slope) + double(intercept);
         end
         
         
         function invTransformedVal = invAffineTransform(value, invSlope, intercept)
+            % TODO inputcheck
             invTransformedVal = (double(value) - double(intercept)) * double(invSlope);
         end
         
         
         function invTransformedVal = clampInvAffineTransform(lowerLimit,value,upperLimit,invSlope,intercept)
+            % TODO inputcheck
             invTransformedVal = (double(clamp(lowerLimit,value,upperLimit)) - double(intercept)) * double(invSlope);
         end
         

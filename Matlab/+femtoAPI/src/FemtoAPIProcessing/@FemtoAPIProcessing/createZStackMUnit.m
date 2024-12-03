@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function [ result ] = createZStackMUnit( obj, xDim, yDim, zDim,...
-    taskXMLParameters, viewportJson, varargin )
+    technologyType, referenceViewportJson, varargin )
 %CREATEZSTACKMUNIT Creates new z-stack measurement unit. 
 % Creates z-stack measurement unit for resonant, galvo, or AO measurements. 
 % The type of measurement is given in the xml taskXMLParameters. 
@@ -30,7 +30,8 @@ function [ result ] = createZStackMUnit( obj, xDim, yDim, zDim,...
 %  xDim                  measurement unit x resolution
 %  yDim                  measurement unit y resolution
 %  zDim                  number of z planes
-%  taskXMLParameters     task parameter in xml string format 
+%  technologyType        type of scanning technology, can be 
+%                          'AO', 'resonant', 'galvo', 'dual'
 %  viewportJson          viewport json (for exact format, see the example
 %                        below)
 % 
@@ -51,25 +52,19 @@ function [ result ] = createZStackMUnit( obj, xDim, yDim, zDim,...
 %                             zStepInMicrons)
 %
 % Example: 
-%  Sample Task parameter (JS):
-%  for galvo unit: 
-%  tp='<Task Type="TaskFastXYGalvo" Version="1.0"><Devices/><Params/></Task>' 
-%  for resonant unit: 
-%  tp='<Task Type="TaskResonantCommon" Version="1.0"><Devices/><Params/></Task>' 
-%  for AO unit: 
-%  tp='<Task Type="TaskAOFullFrame" Version="1.0"><Devices/><Params/></Task>' 
 %
-%  viewportJson =strcat('{"transformation": {"translation": [0,0,0],',... 
-%                '"rotationQuaternion":[0,0,0,1]}, "size": [256, 256]}');
-%  obj.createZStackMUnit(256,256,10,tp,viewportJson)
+%  viewportJson =strcat(' {"GeomTransTransl": [0,0,0], ...
+%     "GeomTransRot":[0,0,0,1]}, "Width": 100, "Height": 200}');
+%
+%  obj.createZStackMUnit(256,256,10,'galvo',viewportJson)
 % 
 % See also CREATETIMESERIESMUNIT ADDCHANNEL 
 % 
 
 validateattributes(xDim,{'numeric'},{'scalar','positive','integer'});
 validateattributes(yDim,{'numeric'},{'scalar','positive','integer'});
-validateattributes(taskXMLParameters,{'char'},{'vector','row'});
-validateattributes(viewportJson,{'char'},{'vector','row'});
+validateattributes(technologyType,{'char'},{'vector','row'});
+validateattributes(referenceViewportJson,{'char'},{'vector','row'});
 
 
 numVarargs = length(varargin);
@@ -83,16 +78,16 @@ zStepInMicrons = 1.0;
 
 
 if numVarargs == 1
-    validateattributes(varargin{1},{'numeric'},{'scalar','nonnegative','double'});
+    validateattributes(varargin{1},{'numeric'},{'scalar','nonnegative','real'});
     zStepInMicrons = varargin{1};
     zStepInMicrons = num2str(zStepInMicrons);
 end
-q = char(39); % quote character
-result = femtoAPI('command',strcat('FemtoAPIFile.createZStackMUnit(',...
-    num2str(xDim),',',num2str(yDim),',',num2str(zDim),',',... 
-    q,taskXMLParameters,q,',',q,viewportJson,q,',',...
-    num2str(zStepInMicrons),')'));
-result = jsondecode(result{1});
+
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.createZStackMUnit', xDim, yDim, zDim, ...
+    technologyType, referenceViewportJson, ...
+    zStepInMicrons);
+
+result = jsondecode(result);
 result.addedMUnitIdx = str2num(result.addedMUnitIdx);
 
 end

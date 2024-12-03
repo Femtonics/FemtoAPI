@@ -41,12 +41,10 @@ function result = openFilesAsync(obj,fileNames)
 %  obj.openFilesAsync(["C:/file1.mesc"; "C:/file2.mesc"]);
 %
 %
-% See also GETSTATUS  
-fileNames = strrep(string(fileNames),'\','/');
-fileNames = strjoin(fileNames,';');
-q = char(39); % quote character 
-result = femtoAPI('command',strcat('FemtoAPIFile.openFilesAsync(',q,char(fileNames),q,')'));
-result = jsondecode(result{1});
+% See also GETSTATUS
 
+fileNames = strjoin(string(fileNames),';');
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.openFilesAsync',fileNames);
+result = jsondecode(result);
 end
 

@@ -18,10 +18,11 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 classdef TreeWrapper < handle
-    %TreeWrapper Creates tree object from nested structure. 
-    %   
+    %TreeWrapper Creates tree object from nested structures. 
+    %   Detailed explanation goes here
     
     properties (SetAccess = private)
+        %m_searchMap = containers.Map('KeyType','double','ValueType','double');
         m_handles ;
         m_tree ;
     end
@@ -124,6 +125,15 @@ classdef TreeWrapper < handle
         end
          
         % set methods
+        function setStructByNodeID(obj, nodeID, newValue)
+            validateattributes(nodeID,{'numeric'},{'integer','positive','scalar','<=',...
+                length(obj.m_handles)},'setStructFieldByNodeID','nodeID',1);
+            
+            dataStructHandle = obj.getHStructByNodeID(nodeID);
+            dataStructHandle.data = newValue;
+        end        
+        
+        
         function setStructFieldByNodeID(obj, nodeID, fieldname, newValue)
             validateattributes(nodeID,{'numeric'},{'integer','positive','scalar','<=',...
                 length(obj.m_handles)},'setStructFieldByNodeID','nodeID',1);
@@ -137,6 +147,16 @@ classdef TreeWrapper < handle
                 error('Fieldname cannot found, no data has been set.');
             end                
         end
+        
+        function val = setStructByHandle(obj, handle, newValue)
+            validateattributes(handle,{'numeric'},{'vector'},...
+                'setStructFieldByHandle','handle',1);
+            
+            val = [];
+            % get the reference(handle) of the data
+            dataStructHandle = obj.getHStructByHandle(handle);
+            dataStructHandle.data = newValue;
+        end 
         
         % Sets struct field by it handle. If fieldName is not found, optionally
         % an error or warning message, or no message can be shown, and it

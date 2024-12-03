@@ -65,7 +65,7 @@ colorComponentVec2 = double(obj.m_vecColors(idx2).m_colorAsArray);
 %colorObj = vecColors(idx1) + factor * (vecColors(idx2) - vecColors(idx1));
 %colorObj = uint8(colorComponentVec1) + uint8(factor * (colorComponentVec2 - colorComponentVec1) );
 
-colorObj = uint8( colorComponentVec1 + round(factor * (colorComponentVec2 - colorComponentVec1)) ) ;
+colorObj = uint8(colorComponentVec1 + floor(factor * (colorComponentVec2 - colorComponentVec1)) ) ;
 colorObj = Color(colorObj, obj.m_colorOrder);
 end
 

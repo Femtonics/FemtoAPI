@@ -20,11 +20,11 @@
 function configuredAxisNames = getConfiguredAxes(obj)
 %GETCONFIGUREDAXES Gets the configured axis names
 % Returns the configured axis names, based on locally stored acquisition
-% struct. Run getAcquisitionState() command before this. 
-% 
-% OUTPUT: 
+% struct. Run getAcquisitionState() command before this.
+%
+% OUTPUT:
 %  configuredAxisNames           string array, contains configured (valid)
-%                                axis names 
+%                                axis names
 %
 % See also GETACQUISITIONSTATE
 %
@@ -35,15 +35,12 @@ standardAxes = obj.m_AcquisitionState.taskParametersPerSpace. ...
     common.focus.axisPositions.standardAxes;
 
 configuredAxisNames = strings(1,length(nonStandardAxes) + length(standardAxes));
-
-for i = 1 : length(nonStandardAxes)
+for i=1:length(nonStandardAxes)
     configuredAxisNames(i) = nonStandardAxes{i}.axis;
 end
 
-numOfNonStandardAxes = length(nonStandardAxes);
-
-for i = 1 : length(standardAxes)
-    configuredAxisNames(numOfNonStandardAxes + i) = standardAxes{i}.axis;
+for i=1:length(standardAxes)
+    configuredAxisNames(length(nonStandardAxes) + i) = standardAxes{i}.axis;
 end
 
 end

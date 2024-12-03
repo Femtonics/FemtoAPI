@@ -18,11 +18,11 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function buildTree(obj, parentStruct, nodeID )
-%BUILDTREE Helper function for building up local processing state tree
-% Helper function that recursively traverses processing state nested 
-% struct and adds each struct which was wrapped by HStruct object to the 
-% tree. 
-%
+%UNTITLED4 Summary of this function goes here
+%   Detailed explanation goes here
+
+% TODO commented validateattributes for performance reasons
+%validateattributes(parentStruct,{'HStruct'},{'nonempty'});
 
 fnames = fieldnames(parentStruct.data);
 
@@ -40,7 +40,7 @@ for i=1:length(fnames)
      if(isa(parentStruct.data.(fnames{i}),'HStruct'))
         for j=1:length(parentStruct.data.(fnames{i}))            
             childStruct = parentStruct.data.(fnames{i})(j);
-            % copy back the wrapped HStruct into proc. state stuct to achieve
+            % copy back the wrapped HStruct into mescState stuct to achieve
             % that the tree and the original nested struct (mescState)
             % reference to the same data
             obj.buildTree(childStruct, childNodeID );

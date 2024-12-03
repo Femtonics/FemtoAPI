@@ -80,14 +80,12 @@ validateattributes(newAbsolutePath,{'char'},{'nonempty','row'});
 
 % default arguments
 overWriteExistingFile = false;
-nodeString = '';
+fileNodeDescriptor = '';
 compressFileIfPossible = false;
 
 if numVarargs >= 1    
     validateattributes(varargin{1},{'numeric'},{'vector','nonnegative','integer'});
-    nodeDescriptor = varargin{1};
-    nodeDescriptor = reshape(nodeDescriptor,1,[]);
-    nodeString = strcat(num2str(nodeDescriptor(1:end-1),'%d,'),num2str(nodeDescriptor(end)));    
+    fileNodeDescriptor = varargin{1};   
 end
 
 if numVarargs >= 2
@@ -100,11 +98,8 @@ if numVarargs == 3
     compressFileIfPossible = varargin{3};
 end
 
-
-q = char(39); % quote character
-result = femtoAPI('command',strcat('FemtoAPIFile.closeFileAndSaveAsAsync(',q,newAbsolutePath,q,',',...
-    ',',q,nodeString,q,',',num2str(overWriteExistingFile),num2str(compressFileIfPossible),')'));
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.closeFileAndSaveAsAsync', newAbsolutePath, ...
+    fileNodeDescriptor, overWriteExistingFile, compressFileIfPossible);
 result = jsondecode(result{1});
-
 
 end

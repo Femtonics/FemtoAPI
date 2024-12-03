@@ -72,7 +72,7 @@ classdef FemtoAPIAcquisition < FemtoAPIIF
         isStarted = startGalvoScanSnapAsync(obj);
                
         % set measurement duration 
-        succeeded = setMeasurementDuration(obj, duration, varargin);
+        succeeded = setMeasurementDuration(obj, duration, taskType);
         
         %% Axis manipulation commands
         % get objective axis positions and info (axis limits, thresholds) from server
@@ -83,21 +83,21 @@ classdef FemtoAPIAcquisition < FemtoAPIIF
         
         % set axis position (focusing mode, objective positions (only
         % one axis at once)
-        succeeded = setAxisPosition(obj, axisName, position,varargin);
+        setAxisPosition(obj, axisName, position,varargin);
         
         success = doZero(obj, axisName,varargin);
         
         isMoving = isAxisMoving(obj, axisName, varargin);
         %% Z stack depth correction profile set/get commands
         % set Z stack laser intensity
-        succeeded = setZStackLaserIntensityProfile(obj,zStacklaserIntensities);
+        setZStackLaserIntensityProfile(obj,zStacklaserIntensities);
         
         % Get Z Stack depth correction intensities for configured devices
         % in case of resonant/galvo measurements
         zStackLaserIntensityProfile = getZStackLaserIntensityProfile(obj,varargin);
 
         %% Imaging window parameters (resolution, viewport rectangle) set/get commands
-        setImagingWindowParameters(obj,imagingParams);
+        setImagingWindowsParameters(obj,imagingParams);
         
         % gets imaging parameters (viewport). One optional paramter:
         % 'resonant' or 'galvo' can be given for getting vieport of specific measurement. 

@@ -18,23 +18,23 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function [ focusingModes ] = getFocusingModes(obj, varargin)
-%GETFOCUSINGMODES Gets available focusing modes from server. 
-% 
+%GETFOCUSINGMODES Gets available focusing modes from server.
+%
 % See also SETFOCUSINGMODE
 %
-    if nargin > 2 
-        error('Too many input arguments');
-    elseif nargin == 2
-        validateattributes(varargin{1},{'char'},{'vector','row'} ...
-            ,mfilename,'spaceName');
-        spaceName = varargin{1};
-    else 
-        spaceName = '';
-    end
-    
-    q = char(39); % quote character
-    focusingModes = femtoAPI('command', ...
-        strcat('FemtoAPIMicroscope.getFocusingModes(',q,spaceName,q,')'));
-    focusingModes = jsondecode(focusingModes{1});
+
+if nargin > 2
+    error('Too many input arguments');
+elseif nargin == 2
+    validateattributes(varargin{1},{'char'},{'vector','row'} ...
+        ,mfilename,'spaceName');
+    spaceName = varargin{1};
+else
+    spaceName = '';
+end
+
+focusingModes = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.getFocusingModes', spaceName);
+focusingModes = jsondecode(focusingModes);
+
 end
 

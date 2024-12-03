@@ -18,16 +18,17 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function getAcquisitionState( obj )
-%GETACQUISITIONSTATE Updates acquistion state struct from server. 
-% Gets acquistion state json, parses it into struct and stores it locally. 
+%GETACQUISITIONSTATE Updates acquistion state struct from server.
+% Gets acquistion state json, parses it into struct and stores it locally.
 % Acquistion state contains measurement informations that can be seen on
-% resonant/galvo tabs in the MESc GUI in Acquistion mode. 
-% For example device values, modalities, axis positions, 
-% 
+% resonant/galvo tabs in the MESc GUI in Acquistion mode.
+% For example device values, modalities, axis positions,
+%
 % See also GETPROCESSINGSTATE
 %
-    acquisitionState = femtoAPI('command','FemtoAPIMicroscope.getAcquisitionState()');
-    obj.m_AcquisitionState = jsondecode(acquisitionState{1});
+
+acquisitionState = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.getAcquisitionState');
+obj.m_AcquisitionState = jsondecode(acquisitionState);
 
 end
 

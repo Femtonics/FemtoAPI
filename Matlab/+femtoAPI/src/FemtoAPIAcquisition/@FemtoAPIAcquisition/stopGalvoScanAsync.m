@@ -20,19 +20,21 @@
 function isStopped = stopGalvoScanAsync(obj)
 %STOPGALVOSCANASYNC Stops Galvo XY scan measurement asynchronously.
 %  It returns 'false' if the command has failed to execute and the
-%  measurement has not stopped correctly. Due to the asynchron call, 
-%  if it returns 'true', it only means that the stop command has been 
+%  measurement has not stopped correctly. Due to the asynchron call,
+%  if it returns 'true', it only means that the stop command has been
 %  sent correctly, but it does not check whether the measurement has really
 %  stopped. To make certain about this, the microscope state should be
-%  polled with the getMicroscopeState() command. 
+%  polled with the getMicroscopeState() command.
 %
-% OUTPUT: 
+% OUTPUT:
 %  isStopped  - false: failed to stop measurement
-%               true:  measurment stop command has been sent correctly, 
-%                but does not mean that it has really stopped. 
+%               true:  measurment stop command has been sent correctly,
+%                but does not mean that it has really stopped.
 %
 % See also GETMICROSCOPESTATE
 %
-    isStopped = femtoAPI('command','FemtoAPIMicroscope.stopGalvoScanAsync()');
-    isStopped = jsondecode(isStopped{1});
+
+isStopped = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.stopGalvoScanAsync');
+isStopped = jsondecode(isStopped);
+
 end

@@ -21,29 +21,30 @@ function result = getMicroscopeState( obj )
 %GETMICROSCOPESTATE Gets the microscope state and last measurement error.
 % Returns a struct containing the microscope state and the last
 % measurement error, if there was any. If no error has happened at the time
-% when this command was issued, lastMeasurementError is an empty char. 
+% when this command was issued, lastMeasurementError is an empty char.
 %
-% Possible values of 'microscopeState': 
-%    "Off" - FemtoAPIMicroscope.hardware is turned off 
-%    "Initializing" - FemtoAPIMicroscope.hardware initialization is in progress 
-%    "Ready" - FemtoAPIMicroscope.hardware is ready for starting measurement 
-%    "Working" -  Measurement is in progress  
-%    "In an invalid state" - Error condition (e.g. microscope hardware error)  
+% Possible values of 'microscopeState':
+%    "Off" - FemtoAPIMicroscope.hardware is turned off
+%    "Initializing" - FemtoAPIMicroscope.hardware initialization is in progress
+%    "Ready" - FemtoAPIMicroscope.hardware is ready for starting measurement
+%    "Working" -  Measurement is in progress
+%    "In an invalid state" - Error condition (e.g. microscope hardware error)
 %
-% OUTPUT: 
-%  result              struct, containing the following fields: 
-%                       - microscopeState: the state of microscope hardware  
+% OUTPUT:
+%  result              struct, containing the following fields:
+%                       - microscopeState: the state of microscope hardware
 %                         as an enumeration
-%                       - lastMeasurementError: char array 
+%                       - lastMeasurementError: char array
 %
 % See also GETACQUISITIONSTATE
 %
-    result = femtoAPI('command','FemtoAPIMicroscope.getMicroscopeState()');
-    result = jsondecode(result{1});
-    microscopeState = MicroscopeState.fromString(result.microscopeState);
-    lastMeasurementError = result.lastMeasurementError;
-    result = struct('microscopeState', microscopeState, 'lastMeasurementError', ...
-        lastMeasurementError);
+
+result = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.getMicroscopeState');
+result = jsondecode(result);
+microscopeState = FemtoAPIMicroscope.fromString(result.microscopeState);
+lastMeasurementError = result.lastMeasurementError;
+result = struct('microscopeState', microscopeState, 'lastMeasurementError', ...
+    lastMeasurementError);
 
 end
 

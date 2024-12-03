@@ -47,14 +47,16 @@ function [ deviceValues ] = getPMTAndLaserIntensityDeviceValues( obj )
 %  
 % See also DEVICEVALUES GETPMTANDLASERINTENSITYDEVICEVALUES
 %
-    deviceValues = femtoAPI('command',strcat('FemtoAPIMicroscope.getPMTAndLaserIntensityDeviceValues()'));
-    deviceValues = jsondecode(deviceValues{1});
-    if(isempty(deviceValues))
-        warning('No devices get from server');
-        return;
-    end
 
-    deviceValues = DeviceValues(deviceValues);
+deviceValues = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.getPMTAndLaserIntensityDeviceValues');
+deviceValues = jsondecode(deviceValues);
+if(isempty(deviceValues))
+    warning('No devices get from server');
+    return;
+end
+
+deviceValues = DeviceValues(deviceValues);
+
 end
 
 

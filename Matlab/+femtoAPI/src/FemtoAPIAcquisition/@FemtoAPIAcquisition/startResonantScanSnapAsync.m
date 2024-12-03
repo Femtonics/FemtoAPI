@@ -18,24 +18,26 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function isStarted = startResonantScanSnapAsync(obj)
-%STARTRESONANTSCANSNAPASYNC Starts a resonant scan snap. 
+%STARTRESONANTSCANSNAPASYNC Starts a resonant scan snap.
 % This function only sends the start measurement command to the server
 % but does not check whether the measurement has really started on the
 % server. This function returns a boolean value, if it is 'false', then the
-% measurement start has failed, but 'true' just means that the command 
-% was successfully sent to the server, but does not mean that the 
+% measurement start has failed, but 'true' just means that the command
+% was successfully sent to the server, but does not mean that the
 % measurement start was successful. If the user wants to know this, then
 % the microscope state should be polled, with the method
-% getMicroscopeState() . 
-%    
+% getMicroscopeState() .
 %
-% OUTPUT: 
+%
+% OUTPUT:
 %  isStarted  -  false: error during measurement start
 %                true: start measurement command was sent, but it does not
 %                mean that the measurement has really started
 %
-% See GETMICROSCOPESTATE 
-% 
-    isStarted = femtoAPI('command','FemtoAPIMicroscope.startResonantScanSnapAsync()');
-    isStarted = jsondecode(isStarted{1});
+% See GETMICROSCOPESTATE
+%
+
+isStarted = obj.femtoAPIMexWrapper('FemtoAPIMicroscope.startResonantScanSnapAsync');
+isStarted = jsondecode(isStarted);
+
 end

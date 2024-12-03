@@ -47,14 +47,9 @@ function [ result ] = extendMUnit(obj, mUnitHandle, frameCount)
 %  
 validateattributes(mUnitHandle,{'numeric'},{'vector','nonnegative','integer'});
 validateattributes(frameCount,{'numeric'},{'scalar','positive','integer'});
-
-mUnitHandle = reshape(mUnitHandle,1,[]);
-strMUnitHandle = strcat(num2str(mUnitHandle(1:end-1),'%d,'),num2str(mUnitHandle(end)));
-    
-q = char(39); % quote character
-result = femtoAPI('command',strcat('FemtoAPIFile.extendMUnit(',...
-    q,strMUnitHandle,q,',',num2str(frameCount),')'));
-result = jsondecode(result{1});
+  
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.extendMUnit',mUnitHandle,frameCount);
+result = jsondecode(result);
 
 end
 

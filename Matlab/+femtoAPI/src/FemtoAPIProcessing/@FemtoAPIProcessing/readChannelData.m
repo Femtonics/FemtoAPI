@@ -21,17 +21,19 @@ function channelData = readChannelData( obj, channelHandle, readDataType, vararg
 %READCHANNELDATA Reads converted channel data
 %   channelData = READCHANNELDATA( obj, channelHandle, readDataType, varargin )
 %   reads converted channel data from the channel specified by the 1xN(or Nx1) array
-%   channelHandle, where the first N-1 element contains the node, and
+%   channelHandle, where the first N-1 element is the unit handle, and
 %   the Nth element is the channel index.
 %   If no optional inputs are given, it reads and returns all data from the
 %   specified channel.
-%   One optional input can be given, in D dimensional cell array of vectors 
-%   containing the chosen elements from each dimension: 
-%   {[fromDim1:n1:toDim1],[fromDim2:n2:toDim2], ÿÿÿ, [fromDimD:nd:toDimD]}
-%   where 1 <= fromDimD < toDimD <= number of dimensions of the specified
-%   channel.
-%   In this case, only the part of the channel data will be read.
-%   Currently this function works only with 3D data (D=3).
+%   To read part of channel data, two optional array inputs can be given:
+%   'fromDims' contains the begin indices to read from in each dimension, 
+%   and 'countDims' contains the number of pixels to read in each dimnesion. 
+%
+%   Each element of 'fromDims' must be smaller than the corresponding dimension
+%   of the image, otherwise an error is thrown.
+%   If 'fromDims' + 'countDims' >= [dim1,dim2,..dimN] (N is the dimension 
+%   of the image), then 'countDims' will be croppped on server side to met 
+%   the condition: 'fromDims' + 'countDims' = [dim1,dim2,..dimN].
 %
 % INPUTS [required]:
 %  channelHandle        - N element array which contains channel information
@@ -42,55 +44,57 @@ function channelData = readChannelData( obj, channelHandle, readDataType, vararg
 %                         'double')
 %
 % INPUTS [optional]:
-%  subSlabSpec          - contains the min and max indices of each dimension
-%                         to read in cell array
-%                          { [fromDim0:n0:toDim0],[fromDim1:n1:toDim1], ÿÿÿ, [fromDimD-1:nk:toDimD-1] }
+%  fromDims             - array that contains indices in each dimension to 
+%                         start read data from. If not given, it reads data 
+%                         from the beginning in each dimensions.  
+%
+%  countDims            - array that contains the number of pixels to read
+%                         in each image dimension
 %
 % OUTPUT:
 %  channelData          - the converted data read from the specified channel
 %
-% See also writeChannelData
+% See also readRawChannelData writeChannelData
 %
-usage = strcat(['Usage: obj.readChannelData(channelHandle, readDataType) ',...
-    'or obj.readChannelData(channelHandle, readDataType, subSlabSpec)']);
-numVarargs = length(varargin);
-if nargin > 4
-    error(strcat('Too many input arguments. ',usage));
-elseif nargin < 3
-    error(strcat('Too few input arguments. ',usage));
-end
+
+narginchk(3,5);
 
 validateattributes(channelHandle,{'numeric'},{'vector','nonnegative','integer'});
 channelHandle = reshape(channelHandle,1,[]);
 
-if(strcmp(readDataType,'double'))
+validatestring(readDataType,["uint16","double"],mfilename,"readDataType");
+readDataType = string(readDataType);
+if readDataType == "double"
     isDouble = 1;
-elseif(strcmp(readDataType,'uint16'))
-    isDouble = 0;
 else
-    error(char(strcat("Argument 2, read channel data type must be one of ",...
-        "'uint16'"," or ","'double'")));
+    isDouble = 0;
 end
 
+fromDims = [];
+countDims = [];
+
+numVarargs = length(varargin);
+if numVarargs >= 1
+    fromDims = varargin{1};
+end
+if numVarargs == 2 
+    countDims = varargin{2};
+end
+
+rawChannelData = obj.readRawChannelData(channelHandle,fromDims, countDims);
+
 % read conversion data, than convert the read raw channel data
-measMetaData = obj.getMeasurementMetaDataRef(channelHandle);
-conversion = measMetaData.data.conversion;
+channelInfo = obj.getUnitMetadata(channelHandle(1:end-1),'ChannelInfo');
+channelIdx = channelHandle(end)+1; % +1 because of matlab indexing 
+conversion = channelInfo.channels(channelIdx).conversion;
 limits = conversion.limits;
 title = conversion.title;
 unitName = conversion.unitName;
 
-if(numVarargs == 1)
-    subSlabSpec = varargin{1};
-    rawChannelData = obj.readRawChannelData(channelHandle,subSlabSpec);
-else
-    rawChannelData = obj.readRawChannelData(channelHandle);
-end
-
-
 switch(conversion.type)
-    case 'identity'
+    case 'Identity'
         conversionObj = ConversionIdentity;
-    case 'linear'
+    case 'LinearMapping'
         offset = conversion.offset;
         scale = conversion.scale;
         conversionObj = ConversionLinear(scale,offset,title,unitName);
@@ -105,8 +109,6 @@ if(isDouble)
 else
     channelData = conversionObj.convertToUint16(rawChannelData);
 end
-
-
 
 end
 

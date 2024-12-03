@@ -57,9 +57,8 @@ if(nargin == 5)
     bSave = varargin{1};
 end
 
-q = char(39); % quote character
-succeeded = femtoAPI('command',strcat('FemtoAPIFile.modifyConversion(', ...
-    q,conversionName,q,',',num2str(scale),',',num2str(offset),',',num2str(bSave),')'));
-succeeded = jsondecode(succeeded{1});
+succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.modifyConversion',conversionName, ...
+    scale, offset, bSave);
+succeeded = jsondecode(succeeded);
 
 end
