@@ -18,10 +18,10 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function buildProcessingStateHandle( obj, parentStruct )
-%BUILDPROCESSINGSTATEHANDLE Builds server's state structure from handle obj
+%BUILDFEMTOSTATEHANDLE Builds server's state structure from handle objects
 % Helper function, it gets server's processing state struct(nested structure), 
-% that is obtained from json decoding, and wraps the structures in HStruct 
-% handle objects, and rebuilds the server's processing state structure 
+% that is obtained from json decoding, and wraps the structures in it in 
+% HStruct handle objects, and rebuilds the server's processing state structure 
 % using HStruct objects instead of plain struct.
 %
 % INPUT: 

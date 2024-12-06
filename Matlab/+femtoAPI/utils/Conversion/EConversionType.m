@@ -24,6 +24,7 @@ classdef EConversionType < uint8
     enumeration
         eIdentity    (0)
         eLinearConv  (1)
+        %eInterp      (2)
     end
     
     methods

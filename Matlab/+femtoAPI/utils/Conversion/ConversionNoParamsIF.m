@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 classdef ConversionNoParamsIF < ConversionIF
-    %CONVERSIONNOPARAMSIF Summary of this class goes here
+    %ConversionNoParamsIF Summary of this class goes here
     %   Detailed explanation goes here
     
     
@@ -58,6 +58,10 @@ classdef ConversionNoParamsIF < ConversionIF
             obj.m_sTitle = title;
             obj.m_sUnitName = unitName;
             
+%             obj.m_lowerLimitDouble = ConversionIF.m_defaultLowerLimitDouble;
+%             obj.m_upperLimitDouble = ConversionIF.m_defaultUpperLimitDouble;
+%             obj.m_lowerLimitUint16 = ConversionIF.m_defaultLowerLimitUint16;
+%             obj.m_upperLimitUint16 = ConversionIF.m_defaultUpperLimitUint16;
         end
         
         
@@ -107,6 +111,13 @@ classdef ConversionNoParamsIF < ConversionIF
             unitName = obj.m_sUnitName;
         end
         
+        %         function val = get.m_sDefaultTitle(obj)
+        %             val = obj.m_sDefaultTitle;
+        %         end
+        %
+        %         function val = get.m_sDefaultUnitName(obj)
+        %             val = obj.m_sDefaultUnitName;
+        %         end
         
         function set.m_sTitle(obj,newTitle)
             validateattributes(newTitle,{'char'},{'vector'},'set.m_sTitle');
@@ -114,14 +125,14 @@ classdef ConversionNoParamsIF < ConversionIF
                 obj.m_sTitle = newTitle;
             end
         end
-
+        
         function set.m_sUnitName(obj, newUnitName)
             validateattributes(newUnitName,{'char'},{'vector'},'set.m_sUnitName');
             if(~isequal(obj.m_sUnitName,newUnitName))
                 obj.m_sUnitName = newUnitName;
             end
         end
-
+        
         
         function resetLimitsFromUint16Values(obj,varargin)
             numVarargs = length(varargin);
@@ -166,7 +177,6 @@ classdef ConversionNoParamsIF < ConversionIF
                 obj.limitsChanged();
             end
         end
-        
         
         function resetLimitsFromDoubleValues(obj, varargin)
             numVarargs = length(varargin);

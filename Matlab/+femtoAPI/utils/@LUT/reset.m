@@ -18,22 +18,13 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function reset( obj, varargin )
-%RESET Resets the Look up table (LUT) bound and/or color vectors.
-% If called with one optional parameters, it resets the LUT with one entry: 
-% constant Color with lower range value. 
-% If called with two parameters, then resets the LUT entries to have data 
-% points and colors in the two parameters.
-% Note, that this function will not change LUT ranges, but if value is out 
-% of range, it will be clamped to within the range. 
-% 
-% Examples:
-%   obj.reset("#00ff0000")
-%   obj.reset([10 70000],["#ff000000","#00ff0000"])
-%
+%RESET Reset the Look up table (LUT) bound and/or color vectors.
+%   Detailed explanation goes here
+%validateattributes(constantColor, {'uint32','char','string','struct'},{'nonempty'},'reset','constantColor');
 
-if nargin == 1 
-    error('Too few input arguments');
-elseif nargin == 2 % reset to constant color
+
+
+if nargin == 2 % reset to constant color
     validateattributes(varargin{1}, {'Color','string'},{'nonempty','scalar'},'reset','constantColor');
     
     obj.m_vecBounds = obj.m_rangeLowerBound;

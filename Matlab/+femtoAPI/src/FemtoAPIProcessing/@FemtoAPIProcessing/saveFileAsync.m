@@ -43,7 +43,11 @@ function [ succeeded ] = saveFileAsync( obj, varargin )
 %  femtoapiObj.saveFileAsync()  -> saves current file
 %  femtoapiObj.saveFileAsync(73)  -> saves file with handle 73
 %  
-% See also SAVEFILEASASYNC
+%  TODO remove these? 
+%  femtoapiObj.saveFileAsync([73 1]) -> saves file with handle 73
+%  femtoapiObj.saveFileAsync([73,1,10]) -> saves file with handle 73, if 
+%  10 is the last measurement handle of session [73,1], otherwise throws an
+%  error
 
 numArgs = length(varargin);
 if numArgs > 1
@@ -53,18 +57,13 @@ end
 if numArgs == 1
     nodeDescriptor = varargin{1};
     validateattributes(nodeDescriptor,{'numeric'},{'vector','nonnegative','integer'});
-    nodeDescriptor = reshape(nodeDescriptor,1,[]);
-    
-    nodeString = strcat(num2str(nodeDescriptor(1:end-1),'%d,'),num2str(nodeDescriptor(end)));
-    q = char(39); % quote character
-    succeeded = femtoAPI('command',strcat('FemtoAPIFile.saveFileAsync(',q,nodeString,q,')'));
-    succeeded = jsondecode(succeeded{1});
+    succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.saveFileAsync',nodeDescriptor);
 else
     % call with no parameters
-    succeeded = femtoAPI('command',strcat('FemtoAPIFile.saveFileAsync()'));
-    succeeded = jsondecode(succeeded{1});
+    succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.saveFileAsync');
 end
 
+succeeded = jsondecode(succeeded);
 
 end
 

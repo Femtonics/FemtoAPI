@@ -45,24 +45,22 @@ function [status] = getStatus(obj,varargin)
 % Examples:
 %  result = obj.closeFileNoSaveAsync() -> result contains the command id 
 %  status = obj.getStatus(result.id) -> get status of all open file, and file
-%                                       opening errors
+% opening errors
 % 
-%  status = obj.getStatus() -> get status of all open files 
 %
 
 q = char(39); % quote character
 varargs = length(varargin);
 if(varargs == 0)
-    status = femtoAPI('command',strcat('FemtoAPIFile.getStatus()'));
+    status =  obj.femtoAPIMexWrapper('FemtoAPIFile.getStatus');
 elseif(varargs == 1)
     commandID = varargin{1};
     validateattributes(commandID,{'char'},{'row'});
-    status = femtoAPI('command',strcat('FemtoAPIFile.getStatus(',q,commandID,q,')'));
+    status =  obj.femtoAPIMexWrapper('FemtoAPIFile.getStatus', commandID);
 else
     error('Too many input arguments.');
 end
         
-status = jsondecode(status{1});
-
+status = jsondecode(status);
 end
 

@@ -37,8 +37,9 @@ function [result] = moveMUnit(obj, sourceMImageHandle, destMItemHandle)
 %                            - succeeded: bool flag, means whether the
 %                              synchronous part of the command ended
 %                              successfully or not
-%                            - movedMUnitIdx: handle of the new MUnit,
-%                              where the source image is moved to
+%                            - movedParameters: struct, contains 
+%                              the image role - handle pairs of the moved 
+%                              measurement and linked images.
 %
 % Examples:
 %  - move MUnit within the same session:
@@ -50,24 +51,16 @@ function [result] = moveMUnit(obj, sourceMImageHandle, destMItemHandle)
 % See also COPYMUNIT CREATEMUNIT DELETEMUNIT
 %
 
-validateattributes(sourceMImageHandle,{'numeric'},{'vector','nonnegative', ...
-    'integer'},mfilename,'sourceMUnitHandle');
-validateattributes(destMItemHandle,{'numeric'},{'vector','nonnegative', ...
-    'integer'},mfilename, 'destMItemHandle');
+validateattributes(sourceMImageHandle,{'numeric'},{'vector','nonnegative','integer'},mfilename,'sourceMUnitHandle');
+validateattributes(destMItemHandle,{'numeric'},{'vector','nonnegative','integer'},mfilename, 'destMItemHandle');
 
-sourceMImageHandle = reshape(sourceMImageHandle,1,[]);
-destMItemHandle = reshape(destMItemHandle,1,[]);
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.moveMUnit',sourceMImageHandle, destMItemHandle);
+result = jsondecode(result);
 
-q = char(39); % quote character
-sSourceMImageHandle = strcat(q,num2str(sourceMImageHandle(1:end-1),'%d,') ...
-    ,num2str(sourceMImageHandle(end),'%d'''));
-sDestMItemHandle = strcat(q,num2str(destMItemHandle(1:end-1),'%d,'), ...
-    num2str(destMItemHandle(end),'%d'''));
-
-result = femtoAPI('command',strcat('FemtoAPIFile.moveMUnit(', ...
-    sSourceMImageHandle,',', sDestMItemHandle,')'));
-result = jsondecode(result{1});
-result.movedMUnitIdx = str2num(result.movedMUnitIdx);
+fnames = fieldnames(result.movedParameters);
+for i = 1:length(fnames)
+    result.movedParameters.(fnames{i}) = str2num(result.movedParameters.(fnames{i}));
+end
 
 end
 

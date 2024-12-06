@@ -19,9 +19,9 @@
 
 function changeDateTimeToLocal(obj)
 %CHANGEDATETIMETOLOCAL Change datetimes to local time
-% Change all datetimes in client's processing state tree to local time
+% Change all datetimes in server's processing state tree to local time
 %
-% It loops through the opened files, and sets created, modified, saved times:
+% It loops through the opened files, and set created, modified, saved times:
 % 
 % processing_state_root -> currentDate
 % processing_state_root->openedFiles -> created, modified, saved

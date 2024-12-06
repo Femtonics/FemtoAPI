@@ -45,35 +45,34 @@ function [ succeeded ] = saveFileAsAsync( obj, newAbsolutePath, varargin )
 % Usage: 
 %  saveFileAsAsync( obj, newAbsolutePath, nodeDescriptor, overWriteExistingFile )
 %
-% See also SAVEFILEASYNC
 % 
-
 numVarargs = length(varargin);
 if numVarargs > 2
     error(strcat('Too many input arguments! Usage: saveAsFileAsync(newAbsoluteFilePath',... 
     ',nodeString,overWriteExistingFile'));
 end
-
-validateattributes(newAbsolutePath,{'char'},{'row'});
+if(isstring(newAbsolutePath))
+    newAbsolutePath = char(newAbsolutePath);
+else
+    validateattributes(newAbsolutePath,{'char'},{'row'});
+end
 
 % default arguments
 overWriteExistingFile = 0;
-nodeString = '';
+nodeDescriptor = [];
 
 if numVarargs >= 1
-    validateattributes(varargin{2},{'numeric'},{'vector','nonnegative','integer'});
-    nodeDescriptor = varargin{2};
-    nodeDescriptor = reshape(nodeDescriptor,1,[]);
-    nodeString = strcat(num2str(nodeDescriptor(1:end-1),'%d,'),num2str(nodeDescriptor(end)));
+    validateattributes(varargin{1},{'numeric'},{'vector','nonnegative','integer'});
+    nodeDescriptor = varargin{1};
 end
 if numVarargs == 2    
-    validateattributes(varargin{1},{'logical'},{'scalar'});
-    overWriteExistingFile = varargin{1};
+    validateattributes(varargin{2},{'logical'},{'scalar'});
+    overWriteExistingFile = varargin{2};
 end
 
-q = char(39); % quote character
-succeeded = femtoAPI('command',strcat('FemtoAPIFile.saveFileAsAsync(',q,newAbsolutePath,q,',',...
-    ',',q,nodeString,q,num2str(overWriteExistingFile),')'));
-succeeded = jsondecode(succeeded{1});
+succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.saveFileAsAsync',newAbsolutePath, ...
+    nodeDescriptor, overWriteExistingFile);
+succeeded = jsondecode(succeeded);
+
 
 end

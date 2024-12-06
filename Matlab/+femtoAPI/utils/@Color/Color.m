@@ -58,7 +58,7 @@ classdef Color
     end
     
     properties (Access = public, Constant) 
-        m_defaultAlphaValue = uint8(0);
+        m_defaultAlphaValue = uint8(255);
         m_defaultColorOrder = 'RGBA';
     end
     

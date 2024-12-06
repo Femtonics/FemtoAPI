@@ -32,7 +32,7 @@ function validateLUTStructure(obj,LUTStruct)
 validateattributes(LUTStruct,{'struct'},{'scalar'},'validateLUTStructure','LUTStruct');
 
 % LUT struct must contain 'entries' and 'range' fields
-if(~all(ismember(fieldnames(LUTStruct)',LUT.LUTStructFieldNames)))
+if(~isequal(fieldnames(LUTStruct)',LUT.LUTStructFieldNames))
     error('Input parameter LUTStruct must contain ''entries'' and ''range'' fields');
 elseif(~isstruct(LUTStruct.entries))
     error('LUTStruct.entries must be a struct');

@@ -41,8 +41,9 @@ function [result] = copyMUnit(obj, sourceMImageHandle, destMItemHandle, varargin
 %                            - succeeded: bool flag, means whether the
 %                              synchronous part of the command ended
 %                              successfully or not
-%                            - copiedMUnitIdx: handle of the new MUnit,
-%                              where the soure image is copied to
+%                            - copiedParameters: struct, contains 
+%                              the image role - handle pairs of the copied 
+%                              measurement and linked images. 
 % Examples:
 %  - copy MUnit with channel contents to the same session:
 %    result = obj.copyMUnit([34,0,1], [34,0], true)
@@ -52,13 +53,14 @@ function [result] = copyMUnit(obj, sourceMImageHandle, destMItemHandle, varargin
 %
 % See also MOVEMUNIT CREATEMUNIT DELETEMUNIT
 %
+
 if nargin > 4
     error('Too many input arguments.');
 elseif nargin == 4
     validateattributes(varargin{1},{'logical'},{'scalar'}, mfilename, 'bCopyChannelContents');
     bCopyChannelContents = varargin{1};
 elseif nargin == 3
-    bCopyChannelContents = false;
+    bCopyChannelContents = true;
 else
     error('Too few input arguments');
 end
@@ -66,18 +68,15 @@ end
 validateattributes(sourceMImageHandle,{'numeric'},{'vector','nonnegative','integer'},mfilename,'sourceMImageHandle');
 validateattributes(destMItemHandle,{'numeric'},{'vector','nonnegative','integer'},mfilename, 'destMItemHandle');
 
-sourceMImageHandle = reshape(sourceMImageHandle,1,[]);
-destMItemHandle = reshape(destMItemHandle,1,[]);
+result = obj.femtoAPIMexWrapper('FemtoAPIFile.copyMUnit', sourceMImageHandle, ...
+    destMItemHandle, bCopyChannelContents);
 
-q = char(39); % quote character
-sSourceMImageHandle = strcat(q,num2str(sourceMImageHandle(1:end-1),'%d,'),num2str(sourceMImageHandle(end),'%d'''));
-sDestMItemHandle = strcat(q,num2str(destMItemHandle(1:end-1),'%d,'),num2str(destMItemHandle(end),'%d'''));
-
-result = femtoAPI('command',strcat('FemtoAPIFile.copyMUnit(', ...
-    sSourceMImageHandle,',', sDestMItemHandle,',', ...
-    num2str(bCopyChannelContents),')'));
 result = jsondecode(result{1});
-result.copiedMUnitIdx = str2num(result.copiedMUnitIdx);
+
+fnames = fieldnames(result.copiedParameters);
+for i = 1:length(fnames)
+    result.copiedParameters.(fnames{i}) = str2num(result.copiedParameters.(fnames{i}));
+end
 
 end
 
