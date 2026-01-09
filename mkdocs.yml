@@ -5,61 +5,62 @@ plugins:
   - search
 
 nav:
-  - "FemtoAPI v2.0 Home":
-    - "Overview": kb/api2/femtoapi-v2-0-home/index.md
-    - "FemtoAPI 2.0":
-      - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/index.md
-      - "Introduction and architecture":
-        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/introduction-and-architecture/index.md
-        - "Main features overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/introduction-and-architecture/main-features-overview.md
-      - "Prerequisites for using the FemtoAPI library": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/prerequisites-for-using-the-femtoapi-library.md
-      - "The FemtoAPI command reference":
-        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/index.md
-        - "Add and remove channels": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/add-and-remove-channels.md
-        - "API file events and query functions": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/api-file-events-and-query-functions.md
-        - "Curve operations": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/curve-operations.md
-        - "Get acquisition state": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-acquisition-state.md
-        - "Get microscope state": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-microscope-state.md
-        - "Get processing state": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-processing-state.md
-        - "Get-set imaging window (viewport) parameters": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-imaging-window-viewport-parameters.md
-        - "Get-set PMT/Laserintensity device values": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-pmt-laserintensity-device-values.md
-        - "Get-set properties for measurement items": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-properties-for-measurement-items.md
-        - "Get-set ZStack PMT/laser intensity device depth profile": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-zstack-pmt-laser-intensity-device-depth-profile.md
-        - "Handling measurement files": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/handling-measurement-files.md
-        - "Image Export": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/image-export.md
-        - "Manipulating axis positions": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/manipulating-axis-positions.md
-        - "MultiROI commands": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/multiroi-commands.md
-        - "MUnit manipulations": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/munit-manipulations.md
-        - "Read-write binary channel data": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/read-write-binary-channel-data.md
-        - "Setting measurement duration": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/setting-measurement-duration.md
-        - "Space commands": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/space-commands.md
-        - "Starting and stopping measurements": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/starting-and-stopping-measurements.md
-        - "Tools": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/tools.md
-      - "The FemtoAPI library reference":
-        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-library-reference/index.md
-        - "APIWebSocketClient reference": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-library-reference/apiwebsocketclient-reference.md
-        - "ReplyMessageParser reference": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-library-reference/replymessageparser-reference.md
-      - "The FemtoAPI Matlab client":
-        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/index.md
-        - "FemtoAPI Matlab demos":
-          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/index.md
-          - "Device control demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo.md
-          - "FemtoAPI browser demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo.md
-          - "Image processing demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo.md
-          - "Instructions to implement ROI calculations": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations.md
-          - "Measurement control demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo.md
-        - "FemtoAPI Matlab function reference": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-function-reference.md
-        - "Helper classes and functions": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/helper-classes-and-functions.md
-        - "Prerequisites and setting up the environment": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment.md
-        - "Tutorial: using the FemtoAPI Matlab client": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md
-      - "The FemtoAPI Python client":
-        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/index.md
-        - "Prerequisites and setting up the python environment": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment.md
-        - "Tutorial: creating a FemtoAPI Python client with the FemtoAPI library": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library.md
-        - "Tutorial: using FemtoAPI with a simple WebSocket in Python": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python.md
-      - "Tutorial: use cases": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/tutorial-use-cases.md
-      - "Using FemtoAPI with Simple WebSocket Client": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/using-femtoapi-with-simple-websocket-client.md
-      - "Using the FemtoAPI client in C++ code":
-        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/using-the-femtoapi-client-in-c-code/index.md
-        - "C++ tutorial: creating a FemtoAPI client with the FemtoAPI library": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library.md
-
+  - "Home": index.md
+  - "Knowledge Base":
+    - "FemtoAPI v2.0 Home":
+      - "Overview": kb/api2/femtoapi-v2-0-home/index.md
+      - "FemtoAPI 2.0":
+        - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/index.md
+        - "Introduction and architecture":
+          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/introduction-and-architecture/index.md
+          - "Main features overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/introduction-and-architecture/main-features-overview.md
+        - "Prerequisites for using the FemtoAPI library": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/prerequisites-for-using-the-femtoapi-library.md
+        - "The FemtoAPI command reference":
+          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/index.md
+          - "Add and remove channels": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/add-and-remove-channels.md
+          - "API file events and query functions": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/api-file-events-and-query-functions.md
+          - "Curve operations": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/curve-operations.md
+          - "Get acquisition state": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-acquisition-state.md
+          - "Get microscope state": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-microscope-state.md
+          - "Get processing state": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-processing-state.md
+          - "Get-set imaging window (viewport) parameters": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-imaging-window-viewport-parameters.md
+          - "Get-set PMT/Laserintensity device values": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-pmt-laserintensity-device-values.md
+          - "Get-set properties for measurement items": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-properties-for-measurement-items.md
+          - "Get-set ZStack PMT/laser intensity device depth profile": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/get-set-zstack-pmt-laser-intensity-device-depth-profile.md
+          - "Handling measurement files": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/handling-measurement-files.md
+          - "Image Export": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/image-export.md
+          - "Manipulating axis positions": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/manipulating-axis-positions.md
+          - "MultiROI commands": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/multiroi-commands.md
+          - "MUnit manipulations": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/munit-manipulations.md
+          - "Read-write binary channel data": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/read-write-binary-channel-data.md
+          - "Setting measurement duration": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/setting-measurement-duration.md
+          - "Space commands": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/space-commands.md
+          - "Starting and stopping measurements": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/starting-and-stopping-measurements.md
+          - "Tools": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-command-reference/tools.md
+        - "The FemtoAPI library reference":
+          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-library-reference/index.md
+          - "APIWebSocketClient reference": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-library-reference/apiwebsocketclient-reference.md
+          - "ReplyMessageParser reference": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-library-reference/replymessageparser-reference.md
+        - "The FemtoAPI Matlab client":
+          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/index.md
+          - "FemtoAPI Matlab demos":
+            - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/index.md
+            - "Device control demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo.md
+            - "FemtoAPI browser demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo.md
+            - "Image processing demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo.md
+            - "Instructions to implement ROI calculations": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations.md
+            - "Measurement control demo": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo.md
+          - "FemtoAPI Matlab function reference": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/femtoapi-matlab-function-reference.md
+          - "Helper classes and functions": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/helper-classes-and-functions.md
+          - "Prerequisites and setting up the environment": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment.md
+          - "Tutorial: using the FemtoAPI Matlab client": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md
+        - "The FemtoAPI Python client":
+          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/index.md
+          - "Prerequisites and setting up the python environment": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment.md
+          - "Tutorial: creating a FemtoAPI Python client with the FemtoAPI library": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library.md
+          - "Tutorial: using FemtoAPI with a simple WebSocket in Python": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python.md
+        - "Tutorial: use cases": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/tutorial-use-cases.md
+        - "Using FemtoAPI with Simple WebSocket Client": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/using-femtoapi-with-simple-websocket-client.md
+        - "Using the FemtoAPI client in C++ code":
+          - "Overview": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/using-the-femtoapi-client-in-c-code/index.md
+          - "C++ tutorial: creating a FemtoAPI client with the FemtoAPI library": kb/api2/femtoapi-v2-0-home/femtoapi-2-0/using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library.md
