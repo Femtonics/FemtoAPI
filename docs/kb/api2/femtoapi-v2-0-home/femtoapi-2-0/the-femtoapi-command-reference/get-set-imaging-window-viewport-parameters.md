@@ -29,7 +29,7 @@ These parameters appear only when the get command is issued, and cannot be set.
 
 ### Usage in Matlab
 
-First, instantiate the FemtoAPIAcquisition class as described in the  tutorial(API2-A-1448161761). 
+First, instantiate the FemtoAPIAcquisition class as described in the  tutorial ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). 
 
 The syntax of the call is almost the same, only the resulted json is parsed into a Matlab (nested) struct. Otherwise the usage is the same as with the C++/Python client commands:
 
@@ -269,7 +269,7 @@ for resonant:
 
 ### Usage in Matlab
 
-First, instantiate the FemtoAPIAcquisition class as described in the  tutorial(API2-A-1448161761). 
+First, instantiate the FemtoAPIAcquisition class as described in the  tutorial ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). 
 
 The syntax of the call is almost the same, only the input json must be parsed into a Matlab (nested) struct. Otherwise the usage is the same as with the C++/Python client commands:
 

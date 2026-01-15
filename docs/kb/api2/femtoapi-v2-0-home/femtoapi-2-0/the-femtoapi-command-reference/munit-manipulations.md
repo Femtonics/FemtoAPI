@@ -11,7 +11,7 @@ The following measurement unit manipulations are implemented:
 
 In the Matlab FemtoAPI client, regarding the command descriptions and usage, the same applies as in case of C++/Python client, there are some minor differences regarding the input/output arguments. The usage from Matlab is the following:
 
-* You need to create a FemtoAPIProcessing object, as described  here(API2-A-1448161761)
+* You need to create a FemtoAPIProcessing object, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md))
 * call the command with the same name as in case of C++/Python, and the input/output parameters have the following format:
   * **measurement unit handle**, in input/output parameters: represented as Matlab array, instead of string, e.g. [43 0 0]
   * **countDims**: represented as Matlab array
@@ -39,7 +39,7 @@ Input parameters:
 Returns a json object with the following fields:
 
 * **succeeded**: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **addedMUnitIdx**: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"
 
   
@@ -99,7 +99,7 @@ Input parameters:
 Returns a json object with the following fields:
 
 * **succeeded**: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **addedMUnitIdx**: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"
 
   
@@ -169,7 +169,7 @@ Input parameters:
 Returns a json object with the following fields:
 
 * **succeeded**: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **addedMUnitIdx**: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"
 
   
@@ -264,7 +264,7 @@ Input parameters:
 Returns a json object with the following fields:
 
 * **succeeded**: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **addedMUnitIdx**: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"
 
   
@@ -354,7 +354,7 @@ Input parameters:
 Returns a json object with the following fields:
 
 * **succeeded**: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **addedMUnitIdx**: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"
 
   
@@ -433,7 +433,7 @@ Input parameters:
 Returns a json object containing the following fields:
 
 * **succeeded**: bool, true if the extend measurement unit command has been successfully initiated, false otherwise.
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 
 It fails when:
 
@@ -466,7 +466,7 @@ auto cmdParser=client->sendJSCommand(command); 
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
-result = femtoapiObj.extendMUnit([43,0,2],10) % extends measurement unit with 10 frames, result is the returned json object  from server converted to struct
+result = femtoapiObj.extendMUnit ([43,0,2],10) % extends measurement unit with 10 frames, result is the returned json object  from server converted to struct
 ```
 
 
@@ -503,7 +503,7 @@ Input parameters:
 Returns a json object containing the following fields:
 
 * **succeeded**: bool, true if the synchronous part of the command has been successfully run, false otherwise.
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **deletedMUnitIdx:** the measurement unit index that has been deleted
 
 It fails when:
@@ -536,7 +536,7 @@ auto cmdParser=client->sendJSCommand(command); 
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
-result = femtoapiObj.deleteMUnit([43,0,2]) % delete measurement unit, result is the returned json object from server converted to struct
+result = femtoapiObj.deleteMUnit ([43,0,2]) % delete measurement unit, result is the returned json object from server converted to struct
 ```
 
 
@@ -575,7 +575,7 @@ Input parameters:
 Returns a json with the following fields:
 
 * **succeeded**: Returns true if the copy of the unit was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **copiedParameters**: Contains a **measurement** element and and other linked element if the copied MUnit has one. Unique index(es) of the newly created (copied) measurement unit(s) as string, e.g. '45,0,0'
 
   *"copiedParameters": {"background": "11,1,0", "measurement": "11,0,2"}*
@@ -609,7 +609,7 @@ auto cmdParser=client->sendJSCommand(command); 
 femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)  
 
 % copy source measurement unit [61,0,1], to the requested measurement session  [62,0,1], including channel contents
-result = femtoapiObj.copyMUnit([61,0,1], [62,0,1], true); % result is json converted to struct
+result = femtoapiObj.copyMUnit ([61,0,1], [62,0,1], true); % result is json converted to struct
 newresult.copiedMUnitIdx % the copied measurement unit index as Matlab array, in this case [62,0,1]
 ```
 
@@ -649,7 +649,7 @@ Input parameters:
 Returns a json with the following fields:
 
 * **succeeded**: Returns true if the move of the unit was successfully initiated, otherwise it returns false
-* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID)(API2-A-1448161797) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
+* **id**: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) ([Tools](tools.md)) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.
 * **movedParameters**<span style="letter-spacing:0.0px;">:</span> <span style="letter-spacing:0.0px;">Contains a **measurement** element and other linked element of the moved MUnit (if any). Unique index(es) of the newly created (copied) measurement unit(s) as string, e.g. '45,0,0'</span>
 
   *"movedParameters": {"background": "11,1,1", "measurement": "11,0,3"}*
@@ -766,7 +766,7 @@ auto cmdParser=client->sendJSCommand(command); 
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)  
-result = femtoapiObj.setLinkedMUnit([61,0,1], [61,1,0]); 
+result = femtoapiObj.setLinkedMUnit ([61,0,1], [61,1,0]); 
 ```
 
 

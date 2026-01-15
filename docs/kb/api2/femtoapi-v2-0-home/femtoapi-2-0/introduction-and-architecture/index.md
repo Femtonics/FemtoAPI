@@ -1,10 +1,10 @@
 # Introduction and architecture
-Femto API (Application Programming Interface) is an optional module of the MESc measurement control and analysis application by Femtonics Ltd. It serves as a programmable client-server user interface to MESc, complementing its graphical user interface, the MESc GUI. 
-
-  
+Femto API (Application Programming Interface) is an optional module of the MESc measurement control and analysis application by Femtonics Ltd. It serves as a programmable client-server user interface to MESc, complementing its graphical user interface, the MESc GUI.
 
 
-  
+
+![](MEScAPI.svg)
+
 
 
 The figure above depicts the main components of FemtoAPI.

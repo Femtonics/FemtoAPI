@@ -16,14 +16,14 @@ Input parameters:
   
 
 
-*Note*: the real measurement duration will be a bit greater than this value due to hardware delay. By calling the  getAcquisitionState()(API2-A-1448161788) command, you can inspect the 'durationEntered' and 'durationEstimated' json fields. The former is what you have given by setMeasurementDuration() command, and the latter will be the estimated duration, which is always greater than the entered duration. 
+*Note*: the real measurement duration will be a bit greater than this value due to hardware delay. By calling the  getAcquisitionState() ([Get acquisition state](get-acquisition-state.md)) command, you can inspect the 'durationEntered' and 'durationEstimated' json fields. The former is what you have given by setMeasurementDuration() command, and the latter will be the estimated duration, which is always greater than the entered duration. 
 
   
 
 
 ### Matlab usage
 
-First, you need to create a FemtoAPIAcquisition object as described  here(API2-A-1448161761). After it, usage is the same.
+First, you need to create a FemtoAPIAcquisition object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, usage is the same.
 
 ### Examples
 

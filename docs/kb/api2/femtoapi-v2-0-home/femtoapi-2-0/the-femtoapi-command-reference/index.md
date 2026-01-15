@@ -23,102 +23,102 @@ FemtoAPIMicroscope namespace contains the functions used for measurement control
 
 Get/set processing state: 
 
-* *getProcessingState()(API2-A-1448161786)*
+* *getProcessingState() ([Get processing state](get-processing-state.md))*
 
 Read/write channel data: 
 
-* *readRawChannelDataToClientsBlob(handle, fromDims, countDims)(API2-A-1448161789)*
-* *readChannelDataToClientsBlob(handle, fromDims, countDims)(API2-A-1448161789)*
-* *readRawChannelDataJSON(handle, fromDims, countDims)(API2-A-1448161789)*
-* *readChannelDataJSON(handle, fromDims, countDims)(API2-A-1448161789)*
-* *readRawChannelData(handle, fromDims, countDims)(API2-A-1448161789)*
-* *readChannelData(handle, fromDims, countDims)(API2-A-1448161789)*
-* *writeRawChannelData(data, handle, fromDims, countDims)(API2-A-1448161789)*
-* *writeChannelData(data, handle, fromDims, countDims)(API2-A-1448161789)*
-* *writeRawChannelDataFromAttachment(handle, fromDims, countDims)(API2-A-1448161789)*
-* *writeChannelDataFromAttachment(handle, fromDims, countDims)(API2-A-1448161789)*
-* *addLastFrameToMSession(sDestMSession, SpaceName)(API2-A-1448161789)*
+* *readRawChannelDataToClientsBlob(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *readChannelDataToClientsBlob(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *readRawChannelDataJSON(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *readChannelDataJSON(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *readRawChannelData(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *readChannelData(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *writeRawChannelData(data, handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *writeChannelData(data, handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *writeRawChannelDataFromAttachment(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *writeChannelDataFromAttachment(handle, fromDims, countDims) ([Read-write binary channel data](read-write-binary-channel-data.md))*
+* *addLastFrameToMSession(sDestMSession, SpaceName) ([Read-write binary channel data](read-write-binary-channel-data.md))*
 
 File operations:
 
-* *createNewFile()(API2-A-1448161791)*
-* *setCurrentFile(handle)(API2-A-1448161791)*
-* *saveFileAsync( fileHandle = '')(API2-A-1448161791)*
-* *saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = '', overWriteExistingFile = false)(API2-A-1448161791)*
-* *closeFileNoSaveAsync(fileHandle = '')(API2-A-1448161791)*
-* *closeFileAndSaveAsync(fileHandle = '', compressFileIfPossible = false)(API2-A-1448161791)*
-* *closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = '', overWriteExistingFile = false, compressFileIfPossible = false)(API2-A-1448161791)*
-* *openFilesAsync(filePaths)(API2-A-1448161791)*
+* *createNewFile() ([Handling measurement files](handling-measurement-files.md))*
+* *setCurrentFile(handle) ([Handling measurement files](handling-measurement-files.md))*
+* *saveFileAsync( fileHandle = '') ([Handling measurement files](handling-measurement-files.md))*
+* *saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = '', overWriteExistingFile = false) ([Handling measurement files](handling-measurement-files.md))*
+* *closeFileNoSaveAsync(fileHandle = '') ([Handling measurement files](handling-measurement-files.md))*
+* *closeFileAndSaveAsync(fileHandle = '', compressFileIfPossible = false) ([Handling measurement files](handling-measurement-files.md))*
+* *closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = '', overWriteExistingFile = false, compressFileIfPossible = false) ([Handling measurement files](handling-measurement-files.md))*
+* *openFilesAsync(filePaths) ([Handling measurement files](handling-measurement-files.md))*
 
 Get/set properties for measurement items:
 
-* getUnitMetadata(nodeDescriptor, jsonItemStr, subscribe = "")(API2-A-2400223233)
-* setUnitMetadata(nodeDescriptor, jsonItemStr)(API2-A-2400223233)
-* setUnitMetadata(nodeDescriptor, jsonItemStr, json)(API2-A-2400223233)
-* getDisplayedProperties(nodeDescriptor, bDetailed)(API2-A-2400223233)
+* getUnitMetadata(nodeDescriptor, jsonItemStr, subscribe = "") ([Get-set properties for measurement items](get-set-properties-for-measurement-items.md))
+* setUnitMetadata(nodeDescriptor, jsonItemStr) ([Get-set properties for measurement items](get-set-properties-for-measurement-items.md))
+* setUnitMetadata(nodeDescriptor, jsonItemStr, json) ([Get-set properties for measurement items](get-set-properties-for-measurement-items.md))
+* getDisplayedProperties(nodeDescriptor, bDetailed) ([Get-set properties for measurement items](get-set-properties-for-measurement-items.md))
 
 Measurement unit operations:
 
-* *createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)(API2-A-1448161796)*
-* *createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0)(API2-A-1448161796)*
-* *extendMUnit(nodeDescriptor, countDims)(API2-A-1448161796)*
-* *deleteMUnit(nodeDescriptor)(API2-A-1448161796)*
-* *copyMUnit(sSourceMImage, sDestMSession, bCopyChannelContents = true)(API2-A-1448161796)*
-* *moveMUnit(sSourceMImage, sDestMSession)(API2-A-1448161796)*
+* *createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1) ([MUnit manipulations](munit-manipulations.md))*
+* *createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0) ([MUnit manipulations](munit-manipulations.md))*
+* *extendMUnit(nodeDescriptor, countDims) ([MUnit manipulations](munit-manipulations.md))*
+* *deleteMUnit(nodeDescriptor) ([MUnit manipulations](munit-manipulations.md))*
+* *copyMUnit(sSourceMImage, sDestMSession, bCopyChannelContents = true) ([MUnit manipulations](munit-manipulations.md))*
+* *moveMUnit(sSourceMImage, sDestMSession) ([MUnit manipulations](munit-manipulations.md))*
 
 MultiROI operations:
 
-* *createBackgroundFrame(xDim, yDim, technologyType, backgroundImageRole, viewportJson, fileNodeDescriptor = '', t0InMs = 0.0, deltaTInMs = 1.0, tDimInitial = 1)(API2-A-1448161829)*
-* *createBackgroundZStack(xDim, yDim, zDim, technologyType, backgroundImageRole, viewportJson, fileNodeDescriptor = '', zStepInMicrons = 1.0)(API2-A-1448161829)*
-* *createMultiROI2DMUnit(xDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0)(API2-A-1448161829)*
-* *createMultiROI3DMUnit(xDim, yDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0)(API2-A-1448161829)*
-* *createMultiROI4DMUnit(xDim, yDim, zDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0)(API2-A-1448161829)*
+* *createBackgroundFrame(xDim, yDim, technologyType, backgroundImageRole, viewportJson, fileNodeDescriptor = '', t0InMs = 0.0, deltaTInMs = 1.0, tDimInitial = 1) ([MultiROI commands](multiroi-commands.md))*
+* *createBackgroundZStack(xDim, yDim, zDim, technologyType, backgroundImageRole, viewportJson, fileNodeDescriptor = '', zStepInMicrons = 1.0) ([MultiROI commands](multiroi-commands.md))*
+* *createMultiROI2DMUnit(xDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0) ([MultiROI commands](multiroi-commands.md))*
+* *createMultiROI3DMUnit(xDim, yDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0) ([MultiROI commands](multiroi-commands.md))*
+* *createMultiROI4DMUnit(xDim, yDim, zDim, tDim, methodType, backgroundImagePath, deltaTInMs = 1.0, t0InMs= 0.0) ([MultiROI commands](multiroi-commands.md))*
 
 Channel operations: 
 
-* *addChannel(nodeDescriptor, channelName(API2-A-1448161798) , c(API2-A-1448161798) ompressionPreset = 0)(API2-A-1448161798)*
-* *deleteChannel(nodeDescriptor)(API2-A-1448161798)*
+* *addChannel(nodeDescriptor, channelName ([Add and remove channels](add-and-remove-channels.md)) , c ([Add and remove channels](add-and-remove-channels.md)) ompressionPreset = 0) ([Add and remove channels](add-and-remove-channels.md))*
+* *deleteChannel(nodeDescriptor) ([Add and remove channels](add-and-remove-channels.md))*
 
 Curve operations: 
 
-* *deleteCurve(nodeDescriptor, idxCurve)(API2-A-1448161813)*
-* *addCurve(nodeDescriptor, name, xType, xDataType, yType, yDataType)(API2-A-1448161813)*
-* *curveInfo(nodeDescriptor, idxCurve)(API2-A-1448161813)*
-* *appendToCurveRaw(nodeDescriptor, idxCurve, size, xType, xDataType, yType, yDataType)(API2-A-1448161813)*
-* *appendToCurve(nodeDescriptor, idxCurve, size, xType, xDataType, yType, yDataType)(API2-A-1448161813)*
-* *readCurveRaw(nodeDescriptor, idxCurve, vectorFormat, forceDouble)(API2-A-1448161813)*
-* *readCurve(nodeDescriptor, idxCurve, vectorFormat, forceDouble)(API2-A-1448161813)*
+* *deleteCurve(nodeDescriptor, idxCurve) ([Curve operations](curve-operations.md))*
+* *addCurve(nodeDescriptor, name, xType, xDataType, yType, yDataType) ([Curve operations](curve-operations.md))*
+* *curveInfo(nodeDescriptor, idxCurve) ([Curve operations](curve-operations.md))*
+* *appendToCurveRaw(nodeDescriptor, idxCurve, size, xType, xDataType, yType, yDataType) ([Curve operations](curve-operations.md))*
+* *appendToCurve(nodeDescriptor, idxCurve, size, xType, xDataType, yType, yDataType) ([Curve operations](curve-operations.md))*
+* *readCurveRaw(nodeDescriptor, idxCurve, vectorFormat, forceDouble) ([Curve operations](curve-operations.md))*
+* *readCurve(nodeDescriptor, idxCurve, vectorFormat, forceDouble) ([Curve operations](curve-operations.md))*
 
 Tools:
 
-* *modifyConversion(conversionName, scale, offset, bSave = false)(API2-A-1448161797)*
-* *getStatus(commandID)(API2-A-1448161797)*
-* *getStatus()(API2-A-1448161797)*
-* *getCommandSetVersion()(API2-A-1448161797)*
-* *getLastCommandError()(API2-A-1448161797)*
+* *modifyConversion(conversionName, scale, offset, bSave = false) ([Tools](tools.md))*
+* *getStatus(commandID) ([Tools](tools.md))*
+* *getStatus() ([Tools](tools.md))*
+* *getCommandSetVersion() ([Tools](tools.md))*
+* *getLastCommandError() ([Tools](tools.md))*
 
 Export:
 
-* *createTmpTiff('identifier', nodeDescriptor, applyLUT\[, channels, compress, breakView, exportRawData, startTimeSlice, endTimeSlice]);(API2-A-2392000945)*
-* *getTmpTiff('identifier')(API2-A-2392000945)*
-* *cancelTiff('identifier')(API2-A-2392000945)*
+* *createTmpTiff('identifier', nodeDescriptor, applyLUT\[, channels, compress, breakView, exportRawData, startTimeSlice, endTimeSlice]); ([Image Export](image-export.md))*
+* *getTmpTiff('identifier') ([Image Export](image-export.md))*
+* *cancelTiff('identifier') ([Image Export](image-export.md))*
 
 Metadata and event related functions:
 
-* *getChildTree('handler')(API2-A-1448161811)*
-* *getFileList(\[,'subscribe' | 'unsubscribe'])(API2-A-1448161811)*
-* *getFileMetadata('fileHandler'\[,'subscribe' | 'unsubscribe'])(API2-A-1448161811)*
-* *getSessionMetadata('sessionHandler'\[,'subscribe' | 'unsubscribe'])(API2-A-1448161811)*
-* *setSessionMetadata('sessionHandler',JSON)(API2-A-1448161811)*
-* *getUnitMetadataJson('unitHandler', 'JsonItemName',\[ ,'subscribe' | 'unsubscribe'])(API2-A-1448161811)*
-* *setUnitMetadataJson('unitHandler','JsonItemName', JSON)(API2-A-1448161811)*
+* *getChildTree('handler') ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *getFileList(\[,'subscribe' | 'unsubscribe']) ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *getFileMetadata('fileHandler'\[,'subscribe' | 'unsubscribe']) ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *getSessionMetadata('sessionHandler'\[,'subscribe' | 'unsubscribe']) ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *setSessionMetadata('sessionHandler',JSON) ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *getUnitMetadataJson('unitHandler', 'JsonItemName',\[ ,'subscribe' | 'unsubscribe']) ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *setUnitMetadataJson('unitHandler','JsonItemName', JSON) ([API file events and query functions](api-file-events-and-query-functions.md))*
 
 Events:
 
-* *fileListChanged()(API2-A-1448161811)*
-* *fileMetadataChanged()(API2-A-1448161811)*
-* *sessionMetadataChanged()(API2-A-1448161811)*
-* *unitMetadataChanged()(API2-A-1448161811)*
+* *fileListChanged() ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *fileMetadataChanged() ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *sessionMetadataChanged() ([API file events and query functions](api-file-events-and-query-functions.md))*
+* *unitMetadataChanged() ([API file events and query functions](api-file-events-and-query-functions.md))*
 
 Space commands:
 
@@ -128,50 +128,50 @@ Space commands:
 
 Getting states: 
 
-* *getMicroscopeState()(API2-A-1448161787)*
-* *getAcquisitionState()(API2-A-1448161788)*
+* *getMicroscopeState() ([Get microscope state](get-microscope-state.md))*
+* *getAcquisitionState() ([Get acquisition state](get-acquisition-state.md))*
 
 Start/stop measurements, setting duration: 
 
-* *startGalvoScanSnapAsync()(API2-A-1448161790)*
-* *startGalvoScanAsync()(API2-A-1448161790)*
-* *stopGalvoScanAsync()(API2-A-1448161790)*
-* *startResonantScanSnapAsync()(API2-A-1448161790)*
-* *startResonantScanAsync()(API2-A-1448161790)*
-* *stopResonantScanAsync()(API2-A-1448161790)*
-* *setMeasurementDuration(duration, taskName = '', spaceName = '')(API2-A-1448161799)*
+* *startGalvoScanSnapAsync() ([Starting and stopping measurements](starting-and-stopping-measurements.md))*
+* *startGalvoScanAsync() ([Starting and stopping measurements](starting-and-stopping-measurements.md))*
+* *stopGalvoScanAsync() ([Starting and stopping measurements](starting-and-stopping-measurements.md))*
+* *startResonantScanSnapAsync() ([Starting and stopping measurements](starting-and-stopping-measurements.md))*
+* *startResonantScanAsync() ([Starting and stopping measurements](starting-and-stopping-measurements.md))*
+* *stopResonantScanAsync() ([Starting and stopping measurements](starting-and-stopping-measurements.md))*
+* *setMeasurementDuration(duration, taskName = '', spaceName = '') ([Setting measurement duration](setting-measurement-duration.md))*
 
 Manipulating axis positions:
 
-* *getAxisPositions()(API2-A-1448161794)*
-* *getAxisPosition(axisName, spaceName = '')(API2-A-1448161794)*
-* *setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = '')(API2-A-1448161794)*
-* doZero(axisName, spaceName = '')(API2-A-1448161794)
-* isAxisMoving(axisName, spaceName = '')(API2-A-1448161794)
+* *getAxisPositions() ([Manipulating axis positions](manipulating-axis-positions.md))*
+* *getAxisPosition(axisName, spaceName = '') ([Manipulating axis positions](manipulating-axis-positions.md))*
+* *setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = '') ([Manipulating axis positions](manipulating-axis-positions.md))*
+* doZero(axisName, spaceName = '') ([Manipulating axis positions](manipulating-axis-positions.md))
+* isAxisMoving(axisName, spaceName = '') ([Manipulating axis positions](manipulating-axis-positions.md))
 
 Get/set Z-stack device intensity depth profile: 
 
-* *getZStackLaserIntensityProfile(measurementType = '', spaceName = '')(API2-A-1448161793)*
-* *setZStackLaserIntensityProfile(json)(API2-A-1448161793)*
+* *getZStackLaserIntensityProfile(measurementType = '', spaceName = '') ([Get-set ZStack PMT/laser intensity device depth profile](get-set-zstack-pmt-laser-intensity-device-depth-profile.md))*
+* *setZStackLaserIntensityProfile(json) ([Get-set ZStack PMT/laser intensity device depth profile](get-set-zstack-pmt-laser-intensity-device-depth-profile.md))*
 
 Get/set imaging window parameters: 
 
-* *getImagingWindowParameters(measurementType = '', spaceName = '')(API2-A-1448161792)*
-* *setImagingWindowParameters(json)(API2-A-1448161792)*
+* *getImagingWindowParameters(measurementType = '', spaceName = '') ([Get-set imaging window (viewport) parameters](get-set-imaging-window-viewport-parameters.md))*
+* *setImagingWindowParameters(json) ([Get-set imaging window (viewport) parameters](get-set-imaging-window-viewport-parameters.md))*
 
 Get/set device values: 
 
-* *getPMTAndLaserIntensityDeviceValues()(API2-A-1448161795)*
-* *setPMTAndLaserIntensityDeviceValues(json)(API2-A-1448161795)*
+* *getPMTAndLaserIntensityDeviceValues() ([Get-set PMT/Laserintensity device values](get-set-pmt-laserintensity-device-values.md))*
+* *setPMTAndLaserIntensityDeviceValues(json) ([Get-set PMT/Laserintensity device values](get-set-pmt-laserintensity-device-values.md))*
 
 Tools: 
 
-* *setFocusingMode(focusingMode, spaceName = '')(API2-A-1448161797)*
-* *getFocusingModes(spaceName = '')(API2-A-1448161797)*
-* *getActiveProtocol()(API2-A-1448161797)*
-* *setActiveTaskAndSubTask(taskName, subTaskName = '')(API2-A-1448161797)*
-* *getCommandSetVersion()(API2-A-1448161797)*
-* *getLastCommandError()(API2-A-1448161797)*
+* *setFocusingMode(focusingMode, spaceName = '') ([Tools](tools.md))*
+* *getFocusingModes(spaceName = '') ([Tools](tools.md))*
+* *getActiveProtocol() ([Tools](tools.md))*
+* *setActiveTaskAndSubTask(taskName, subTaskName = '') ([Tools](tools.md))*
+* *getCommandSetVersion() ([Tools](tools.md))*
+* *getLastCommandError() ([Tools](tools.md))*
 
   
 

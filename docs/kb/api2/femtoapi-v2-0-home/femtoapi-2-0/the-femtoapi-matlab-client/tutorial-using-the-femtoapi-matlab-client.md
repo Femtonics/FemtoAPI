@@ -6,14 +6,14 @@ The Matlab client wraps the FemtoAPI library's functionality, and makes it easy 
 
 **FemtoAPIProcessing class:** used for measurement processing purposes, such as file operations (read, write, create new file, or measurement unit, set current file, etc.), getting the processing state (metadata found on the processing panel of the MESc GUI) or the setting part of the processing state (e.g. comment of measurement session/group/unit, channel conversion and LUT), etc.
 
-You can find the list of callable functions in the  FemtoAPI command reference(API2-A-1448161785), under 'FemtoAPIFile namespace'. 
+You can find the list of callable functions in the  FemtoAPI command reference ([The FemtoAPI command reference](../the-femtoapi-command-reference/index.md)), under 'FemtoAPIFile namespace'. 
 
   
 
 
 **FemtoAPIAcquisition class**: used for measurement acquisition purposes, such as starting/stopping galvo/resonant measurements, getting/setting values of PMT and Laser intensity devices, objective positions, the viewport, getting the acquisition state (metadata found on the acquisition panel of the MESc GUI), etc. 
 
-You can find the list of callable functions in the  FemtoAPI command reference(API2-A-1448161785), under 'FemtoAPIMicroscope namespace'. 
+You can find the list of callable functions in the  FemtoAPI command reference ([The FemtoAPI command reference](../the-femtoapi-command-reference/index.md)), under 'FemtoAPIMicroscope namespace'. 
 
   
 
@@ -65,14 +65,14 @@ processingState = femtoapiObj.m_processingState;
 % get copy of channel conversion struct, where channel handle (unique id, can be optained from the MESc GUI) of the channel is [52,0,0,0]. 
 % This means, that the channel is within the measurement unit with handle [52,0,0], and its index is 0. It must be an id of an already opened measurement unit in the MESc GUI, 
 % which must have channel with index 0, otherwise this function will give an error, that no such measurement unit exists. 
-channelConv = femtoapiObj.getMeasurementMetaDataField([52,0,0,0],'conversion');
+channelConv = femtoapiObj.getMeasurementMetaDataField ([52,0,0,0],'conversion');
 
 % change conversion
 channelConv.offset = 10.0;
 channelConv.scale = 2.0;
 
 % set new channel conversion struct locally 
-femtoapiObj.setMeasurementMetaDataField([52,0,0,0],'conversion',channelConv);
+femtoapiObj.setMeasurementMetaDataField ([52,0,0,0],'conversion',channelConv);
 
 % send processing state changes to the server by calling setProcessingState() command
 succeeded = femtoapiObj.setProcessingState();

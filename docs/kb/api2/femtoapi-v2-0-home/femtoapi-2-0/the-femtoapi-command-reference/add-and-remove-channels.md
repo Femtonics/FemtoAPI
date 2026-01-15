@@ -32,7 +32,7 @@ Returns a JSON object that contains the following fields:
 
 ### Use in Matlab
 
-First, create a FemtoApiProcessing object as described  here(API2-A-1448161761). The use is the same as described above,
+First, create a FemtoApiProcessing object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). The use is the same as described above,
 
 result = femtoapiObj.addChannel(mUnitHandle, channelName) 
 
@@ -54,7 +54,7 @@ auto cmdParser=client->sendJSCommand(command);
 
 ```matlab
 femtoapiObj = FemtoApiProcessing;
-result = femtoapiObj.addChannel([43,0,1],'PMT_UR');
+result = femtoapiObj.addChannel ([43,0,1],'PMT_UR');
 addedChannelHandle = result.addedChannelIdx; % vector of added channel handle
 ```
 
@@ -95,7 +95,7 @@ Returns a JSON object that contains the following fields:
 
 ### Use in Matlab
 
-First, create a FemtoApiProcessing object as described  here(API2-A-1448161761). The use is the same as described above,
+First, create a FemtoApiProcessing object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). The use is the same as described above,
 
 result = femtoapiObj.deleteChannel(channelHandle) 
 
@@ -120,7 +120,7 @@ auto cmdParser=client->sendJSCommand(command);
 
 ```matlab
 femtoapiObj = FemtoApiProcessing;
-result = femtoapiObj.deleteChannel([43,0,1,1]);
+result = femtoapiObj.deleteChannel ([43,0,1,1]);
 ```
 
   

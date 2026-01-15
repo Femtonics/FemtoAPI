@@ -42,7 +42,7 @@ Gets the value of a given field of processing state metadata, based on the given
 
 **setMeasurementMetaDataField(obj, handle, fieldName, value)**
 
-Sets the value of a given metadata field based the given handle. It sets value in the locally stored processing state structure. You have to call the  setProcessingState()(API2-A-1448161786) command to send changes to the server.
+Sets the value of a given metadata field based the given handle. It sets value in the locally stored processing state structure. You have to call the  setProcessingState() ([Get processing state](../the-femtoapi-command-reference/get-processing-state.md)) command to send changes to the server.
 
 **val = getMeasurementMetaDataFieldRecursive(obj,rootHandle,fieldName,doWarning)**
 
@@ -60,7 +60,7 @@ It returns an Nx2 cell array containing the pairs of child handle and the corres
 **setMeasurementMetaDataFieldSelective(obj,rootHandle, fieldName, value)**  
 
 
-Sets the given value to field in all metadata structure which handles are child handles of rootHandle. It sets value in the locally stored processing state structure. You have to call the  setProcessingState()(API2-A-1448161786) command to send changes to the server.
+Sets the given value to field in all metadata structure which handles are child handles of rootHandle. It sets value in the locally stored processing state structure. You have to call the  setProcessingState() ([Get processing state](../the-femtoapi-command-reference/get-processing-state.md)) command to send changes to the server.
 
 **val = getChildHandles(obj, handle)**
 
@@ -103,29 +103,29 @@ Data access is based on the unique identifier of measurement items (named as mea
 
 **configuredAxes = getConfiguredAxes(obj);**
 
-Gets the name of currently configured axes as string array. It uses local data, so must be called after  getAcquisitionState()(API2-A-1448161788) or  getAxisPositions()(API2-A-1448161794) command.
+Gets the name of currently configured axes as string array. It uses local data, so must be called after  getAcquisitionState() ([Get acquisition state](../the-femtoapi-command-reference/get-acquisition-state.md)) or  getAxisPositions() ([Manipulating axis positions](../the-femtoapi-command-reference/manipulating-axis-positions.md)) command.
 
 **isConfigured = isAxisConfigured(obj,axisName)**
 
-Returns whether the given axis name is valid or not. It uses local data, so must be called after  getAcquisitionState()(API2-A-1448161788) or  getAxisPositions()(API2-A-1448161794) command.
+Returns whether the given axis name is valid or not. It uses local data, so must be called after  getAcquisitionState() ([Get acquisition state](../the-femtoapi-command-reference/get-acquisition-state.md)) or  getAxisPositions() ([Manipulating axis positions](../the-femtoapi-command-reference/manipulating-axis-positions.md)) command.
 
  **taskParameters = getTaskParameters(obj,taskType,spaceName)**
 
-Gets the parameters for the specified task and space. Task type can be 'resonant' or 'galvo', and if space name is not given, default space is considered. It uses local data, so to get up-to-date information,  getAcquisitionState()(API2-A-1448161788) command must be called before this. 
+Gets the parameters for the specified task and space. Task type can be 'resonant' or 'galvo', and if space name is not given, default space is considered. It uses local data, so to get up-to-date information,  getAcquisitionState() ([Get acquisition state](../the-femtoapi-command-reference/get-acquisition-state.md)) command must be called before this. 
 
 **activeSubTask = getActiveSubTaskForTask(obj,taskType,varargin)**
 
-Gets the active sub task (measurement mode, e.g. timeseries, Z-Stack, volume scan) for the given task (which can be resonant or galvo). It uses local data, so to get up-to-date information,  getAcquisitionState()(API2-A-1448161788) command must be called before this. 
+Gets the active sub task (measurement mode, e.g. timeseries, Z-Stack, volume scan) for the given task (which can be resonant or galvo). It uses local data, so to get up-to-date information,  getAcquisitionState() ([Get acquisition state](../the-femtoapi-command-reference/get-acquisition-state.md)) command must be called before this. 
 
 
 
 **parameters = getActiveSubTaskParameters(obj, taskType)**
 
-Gets the parameters of the active sub task (measurement mode, e.g. timeseries, Z-Stack, volume scan) for the given task (which can be resonant or galvo). It uses local data, so to get up-to-date information,  getAcquisitionState()(API2-A-1448161788) command must be called before this. 
+Gets the parameters of the active sub task (measurement mode, e.g. timeseries, Z-Stack, volume scan) for the given task (which can be resonant or galvo). It uses local data, so to get up-to-date information,  getAcquisitionState() ([Get acquisition state](../the-femtoapi-command-reference/get-acquisition-state.md)) command must be called before this. 
 
 **\[activeTask, activeSubTask] = getActiveTaskAndSubTask(obj,varargin)**
 
-Gets the active task (can be resonant or galvo) and sub task (measurement mode, e.g. timeseries, Z-Stack, volume scan). It uses local data, so to get up-to-date information,  getAcquisitionState()(API2-A-1448161788) command must be called before this. 
+Gets the active task (can be resonant or galvo) and sub task (measurement mode, e.g. timeseries, Z-Stack, volume scan). It uses local data, so to get up-to-date information,  getAcquisitionState() ([Get acquisition state](../the-femtoapi-command-reference/get-acquisition-state.md)) command must be called before this. 
 
 # Common helpers of FemtoAPIProcessing and FemtoAPIAcquisition classes
 

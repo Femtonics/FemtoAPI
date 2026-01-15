@@ -13,10 +13,8 @@ This demo demonstrates a basic file browser of .mesc files opened in the MESc ap
 
   
 
+The MATLAB user interface of the FemtoAPI browser demo
 
- The MATLAB user interface of the FemtoAPI browser demo 
-
-  
 
 
 ***Prerequisites***
@@ -27,8 +25,7 @@ This demo demonstrates a basic file browser of .mesc files opened in the MESc ap
 4. Open a measurement unit in the measurement unit viewer by double clicking on it in the tree view to the left
 5. Start MATLAB and run the demo program femtoapi_browser_App
 
-***How it works***  
-
+***How it works***
 
 1. After opening the femtoapi_browser_App program, the list of measurement units open in the running MESc application is acquired. All measurement units from each opened MESc file will be listed in a tree structure, similar to the Processing tab of MESc.
 
@@ -40,41 +37,26 @@ This demo demonstrates a basic file browser of .mesc files opened in the MESc ap
 
 5. Open some new files in the running MESc application, then click the “Refresh data” button in the demo window to acquire the updated list of open measurement units.
 
-6.   
+6. Steps of batch exporting input/output curve data to file:
 
-   <details>
-   <summary>Steps of batch exporting input/output curve data to file:</summary>
+    * select one or more measurement units from the treeview and click the "Batch export input curves..." or "Batch export output curves..." button
+    * then you can see the name of common input/output channels of the selected measurement units. You can select one or more channels and press "Ok".
+    * after that, a window appears, where you can specify the file name type you want to save to (.mat or .txt). Then press OK.
+    * the created file contains the curve data from the common input/output channels of the selected measurement units
 
-   * select one or more measurement units from the treeview and click the "Batch export input curves..." or "Batch export output curves..." button
-   * then you can see the name of common input/output channels of the selected measurement units. You can select one or more channels and press "Ok". 
-   * after that, a window appears, where you can specify the file name type you want to save to (.mat or .txt). Then press OK. 
-   * the created file contains the curve data from the common input/output channels of the selected measurement units
+7. Steps of exporting measurement parameters:
 
-   </details>
-
-
-7.   
-
-   <details>
-   <summary>Steps of exporting measurement parameters</summary>
-
-   * select one or more measurement units from the treeview and click the "Batch export measurement parameters..." button
-   * after that, a window appears, where you can specify the file name. Then press OK. 
-   * the saved file the content of "measurementInfo", "measurementParamsXML" and "measurementParams". See the  processing state json(DEV-A-1668703787) structure for details.
-
-   </details>
-
-
-  
-
+    * select one or more measurement units from the treeview and click the "Batch export measurement parameters..." button
+    * after that, a window appears, where you can specify the file name. Then press OK.
+    * the saved file the content of "measurementInfo", "measurementParamsXML" and "measurementParams". See the  processing state json(DEV-A-1668703787) structure for details.
 
 ***Notes:***
 
-The demo program writes some information to the MATLAB command prompt, e.g.: 
+The demo program writes some information to the MATLAB command prompt, e.g.:
 
 * the connection to the server was successful or not,
 * data was read from the running MESc application.
 
 If a new file is opened in the MESc application, the "Refresh data" button needs to be clicked to update the file list in mescapi_browser.
 
-When you close and reopen MESc, the demo program needs to be restarted to connect to the new MESc instance 
+When you close and reopen MESc, the demo program needs to be restarted to connect to the new MESc instance

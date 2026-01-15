@@ -2,7 +2,7 @@
 
 The 'femtoapi' package is used to communicate with the API server. It can be installed from PyPI: "pip install femtoapi"
 
-For a detailed description of these functions please visit the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) site.
+For a detailed description of these functions please visit the [FemtoAPI](https://femtonics.github.io/FemtoAPI) site.
 
 Here is a list of the presented functions.  
 	- [APIFunctions.py](https://github.com/Femtonics/FemtoAPI/blob/main/Python/APIFunctions.py):  

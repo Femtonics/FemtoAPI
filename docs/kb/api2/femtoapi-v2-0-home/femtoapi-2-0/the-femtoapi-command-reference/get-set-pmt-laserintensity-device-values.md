@@ -65,11 +65,11 @@ Example output:
 
 ### Usage in Matlab
 
-First, you need to create a FemtoAPIAcquisition object, as described  here(API2-A-1448161761). Otherwise, the usage is the same as described above, the only change that the returned value has different format: 
+First, you need to create a FemtoAPIAcquisition object, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). Otherwise, the usage is the same as described above, the only change that the returned value has different format: 
 
 result = femtoapiObj.getPMTAndLaserIntensityDeviceValues();
 
-where the returned value is a  DeviceValues(API2-A-1448161777) object, that contains the json result returned from server parsed into an array of Matlab structs.
+where the returned value is a  DeviceValues ([Helper classes and functions](../the-femtoapi-matlab-client/helper-classes-and-functions.md)) object, that contains the json result returned from server parsed into an array of Matlab structs.
 
 ### Examples
 
@@ -178,7 +178,7 @@ The input JSON is validated against the following JSON schema:
 
 ### Usage in Matlab
 
-First, you need to create a FemtoAPIAcquisition object as described  here(API2-A-1448161761). After it, you need to give the input as a DeviceValues object:
+First, you need to create a FemtoAPIAcquisition object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, you need to give the input as a DeviceValues object:
 
 succeeded = femtoapiObj.setPMTAndLaserIntensityDevices(deviceValues) 
 

@@ -31,7 +31,7 @@ It is important to note that most of these measurement file operations run async
 
 You can check the status of the started file operation the following way:
 
-* in the returned json, the value of 'id' can be used as input parameter to FemtoAPIFile.getStatus(commandID) command, which returns whether the started background operation is still running or has ended, and if it has ended, whether there was an error or not. If you want to know if there is a pending operation on the currently opened files, you can run FemtoAPIFile.getStatus() without parameters. Details of these commands are described  here(API2-A-1448161797). 
+* in the returned json, the value of 'id' can be used as input parameter to FemtoAPIFile.getStatus(commandID) command, which returns whether the started background operation is still running or has ended, and if it has ended, whether there was an error or not. If you want to know if there is a pending operation on the currently opened files, you can run FemtoAPIFile.getStatus() without parameters. Details of these commands are described  here ([Tools](tools.md)). 
 
   
 
@@ -44,7 +44,7 @@ You can check the status of the started file operation the following way:
 ### Differences in Matlab
 
 * in Matlab client, the function syntaxes are almost the same, the only difference is, that the input parameter handle is a number (in case of file), or an array (in case of session) instead of a string, and the return value is the json got from server parsed as Matlab struct
-* you have to instantiate FemtoAPIProcessing class (as described  here(API2-A-1448161761)) to call these functions. It will be denoted as 'femtoapiObj' in the following sections
+* you have to instantiate FemtoAPIProcessing class (as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md))) to call these functions. It will be denoted as 'femtoapiObj' in the following sections
 * in case of any error, you instanty get it as Matlab error type exception.
 
   
@@ -190,7 +190,7 @@ auto cmdParser=client->sendJSCommand(command);
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing(); % local connection
-femtoapiObj.setCurrentSession([52,0]); 
+femtoapiObj.setCurrentSession ([52,0]); 
 ```
 
   
@@ -239,7 +239,7 @@ Possible reasons for failure:
 * The given file is new and does not yet have a name or it is open as read-only. Please use saveFileAsAsync in these cases instead.
 * A previous save operation is in progress in the given file.
 
-If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus(API2-A-1448161797) command for details.
+If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus ([Tools](tools.md)) command for details.
 
   
 
@@ -291,7 +291,7 @@ femtoapiObj = FemtoAPIProcessing();
 femtoapiObj.saveFileAsync();
 
 // save the file with index 43:
-femtoapiObj.saveFileAsync([43])”;
+femtoapiObj.saveFileAsync ([43])”;
 
 ```
 
@@ -355,7 +355,7 @@ Possible reasons for failure:
   
 
 
-If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus(API2-A-1448161797) command for details.
+If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus ([Tools](tools.md)) command for details.
 
 *Note*: if the asynchronous portion of this call fails (e.g., the target drive gets full), you get error information in the MESc GUI too, as status message which vanishes within few seconds. 
 
@@ -496,7 +496,7 @@ Possible reasons for failure:
   
 
 
-If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus(API2-A-1448161797) command for details.
+If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus ([Tools](tools.md)) command for details.
 
   
 
@@ -547,7 +547,7 @@ auto cmdParser=client->sendJSCommand(command);
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing();
-femtoapiObj.closeFileNoSaveAsync([65]);
+femtoapiObj.closeFileNoSaveAsync ([65]);
 ```
 
   
@@ -607,7 +607,7 @@ Possible reasons for failure:
   
 
 
-If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus(API2-A-1448161797) command for details.
+If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus ([Tools](tools.md)) command for details.
 
   
 
@@ -672,7 +672,7 @@ auto cmdParser=client->sendJSCommand(command);
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing();
-femtoapiObj.closeFileAndSaveAsync([65], true); % close the file with index 65 and save it, possibly with compression
+femtoapiObj.closeFileAndSaveAsync ([65], true); % close the file with index 65 and save it, possibly with compression
 ```
 
   
@@ -736,7 +736,7 @@ Possible reasons for failure:
 * The given path differs from the current path of the file, there is a file on the given path, and the overwrite flag was set to true, but MESc could not delete the preexisting file.
 * Could not create a read-write accessible file on the given path (the folder does not exist, or it is not writable).
 
-If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus(API2-A-1448161797) command for details.
+If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus ([Tools](tools.md)) command for details.
 
   
 
@@ -867,7 +867,7 @@ Possible reasons for failure:
   
 
 
-If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus(API2-A-1448161797) command for details.
+If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus ([Tools](tools.md)) command for details.
 
   
 

@@ -77,7 +77,7 @@ Otherwise, no binary data are received and the JS engine returns 0 as the data s
 
 ### Usage in Matlab:
 
-Firstly, you need to create a FemtoAPIProcessing object, as described  here(API2-A-1448161761). After it, you can call this command as following: 
+Firstly, you need to create a FemtoAPIProcessing object, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, you can call this command as following: 
 
 **rawData = readRawChannelData(channelHandle, readSubSlabSpec)**
 
@@ -121,11 +121,11 @@ auto cmdParser=client->sendJSCommand(command);
 femtoapiObj = MEScAPIProcessing(); % connect to local server (MESc) 
 
 % read raw channel data of measurement unit [61,0,1], from channel 0
-imRawData = femtoapiObj.readRawChannelData([61,0,1,0]);
+imRawData = femtoapiObj.readRawChannelData ([61,0,1,0]);
 
 % read part of image data: 1:512 pixels in X, 1:512 in Y, and 1:10 in Z dimension
 readSubSlabSpec = {[1:512],[1:512],[1:10]}; 
-imDataPartRaw = femtoapiObj.readRawChannelData([61,0,1,0],readSubSlabSpec);
+imDataPartRaw = femtoapiObj.readRawChannelData ([61,0,1,0],readSubSlabSpec);
 ```
 
   
@@ -169,7 +169,7 @@ Return value: The same as in the 'raw' case, but the converted binary data are r
 
 ### Usage in Matlab
 
-Firstly, you need to create a FemtoAPIProcessing object, as described  here(API2-A-1448161761). After it, you can call this command as following: 
+Firstly, you need to create a FemtoAPIProcessing object, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, you can call this command as following: 
 
 **convertedData = femtoapiObj.readChannelData(channelHandle, readDataType, readSubSlabSpec)**
 
@@ -206,12 +206,12 @@ auto cmdParser=client->sendJSCommand(command);
 femtoapiObj = MEScAPIProcessing(); % connect to local server (MESc) 
 
 % read raw channel data of measurement unit [61,0,1], from channel 0
-imRawData = femtoapiObj.readChannelData([61,0,1,0],'uint16');
+imRawData = femtoapiObj.readChannelData ([61,0,1,0],'uint16');
 
 % read part of image data: 1:512 pixels in X, 1:512 in Y, and 1:10 in Z dimension
 readSubSlabSpec = {[1:512],[1:512],[1:10]}; 
 readDataType = 'double'; % it can be 'double' or 'uint16'
-imDataPartRaw = femtoapiObj.readChannelData([61,0,1,0],readDataType, readSubSlabSpec);
+imDataPartRaw = femtoapiObj.readChannelData ([61,0,1,0],readDataType, readSubSlabSpec);
 
 ```
 
@@ -571,7 +571,7 @@ Return value: the same as for the write(Raw)ChannelData command.
 
 ### Usage in Matlab
 
-Firstly, you need to create a FemtoAPIProcessing object, as described  here(API2-A-1448161761). After it, you can call this command as following: 
+Firstly, you need to create a FemtoAPIProcessing object, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, you can call this command as following: 
 
 **femtoapiObj.writeRawChannelData(channelHandle, rawData, fromDims)**
 
@@ -615,7 +615,7 @@ femtoapiObj = MEScAPIProcessing() % connect to local server
 
 
 writeFromDims = [1,1,1];
-femtoapiObj.writeRawChannelData([61,0,1,1], imDataRaw, writeFromDims);
+femtoapiObj.writeRawChannelData ([61,0,1,1], imDataRaw, writeFromDims);
 ```
 
   
@@ -659,7 +659,7 @@ Return value: the same as for the write(Raw)ChannelData command.
 
 ### Usage in Matlab
 
-Firstly, you need to create a FemtoAPIProcessing object, as described  here(API2-A-1448161761). After it, you can call this command as following: 
+Firstly, you need to create a FemtoAPIProcessing object, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, you can call this command as following: 
 
 **femtoapiObj.writeChannelData(channelHandle, data, fromDims)**
 

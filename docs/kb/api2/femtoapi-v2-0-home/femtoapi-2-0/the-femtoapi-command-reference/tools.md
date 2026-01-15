@@ -26,7 +26,7 @@ Returns: true if the named conversion's scale and offset has been successfully m
 
 ### Usage in Matlab
 
-First, a FemtoAPIProcessingobject must be created, as described  here(API2-A-1448161761). Usage is the same as described above: 
+First, a FemtoAPIProcessingobject must be created, as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). Usage is the same as described above: 
 
 isModified = femtoapiObj.modifyConversion(conversionName, scale, offset, bSave)
 
@@ -113,7 +113,7 @@ It returns a json with the following fields:
 
 ### Usage in Matlab
 
-First create a FemtoAPIProcessingobject as described  here(API2-A-1448161761). You can use it the same way as described above:
+First create a FemtoAPIProcessingobject as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). You can use it the same way as described above:
 
 result = femtoapiObj.getStatus(commandID) 
 
@@ -234,7 +234,7 @@ It returns the following json::
 
 ### Usage in Matlab
 
-First create a FemtoAPIProcessingobject as described  here(API2-A-1448161761). You can use it the same way as described above:
+First create a FemtoAPIProcessingobject as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). You can use it the same way as described above:
 
 result = femtoapiObj.getStatus() 
 
@@ -347,14 +347,14 @@ Errors occur in the following cases:
 * the file lock was not successful (because other concurrent file operation was running at that time)
 * the file is being closed
 
-*Note*: valid curve indices can be obtained by issuing  FemtoAPIFile.getProcessingState()(API2-A-1448161786) command. Its output contains the curve metadata of the opened measurement units. 
+*Note*: valid curve indices can be obtained by issuing  FemtoAPIFile.getProcessingState() ([Get processing state](get-processing-state.md)) command. Its output contains the curve metadata of the opened measurement units. 
 
   
 
 
 ### **Matlab usage**
 
-First, you need to create a FemtoAPIProcessing object as described  here(API2-A-1448161761). After it, call the command: 
+First, you need to create a FemtoAPIProcessing object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, call the command: 
 
 curveDataXY = femtoapiObj.curveInfo(mUnitHandle, curveIdx)
 
@@ -380,7 +380,7 @@ auto cmdParser=client->sendJSCommand(command);
 
 ```matlab
 femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
-curveXY = femtoapiObj.curveInfo([34,0,1],0); 
+curveXY = femtoapiObj.curveInfo ([34,0,1],0); 
 curveXY(1,1) % first X data 
 curveXY(1,2) % first Y data 
 ```
@@ -466,7 +466,7 @@ Errors occur in the following cases:
 
 ### **Matlab usage**
 
-First, you need to create a FemtoAPIAcquisition object as described  here(API2-A-1448161761). After it, usage is the same as described above.
+First, you need to create a FemtoAPIAcquisition object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, usage is the same as described above.
 
   
 
@@ -527,7 +527,7 @@ In case of any error, an empty json array and an error message is returned.
 
 ### **Matlab usage**
 
-First, you need to create a FemtoAPIAcquisition object as described  here(API2-A-1448161761). After it, call the command: 
+First, you need to create a FemtoAPIAcquisition object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, call the command: 
 
 focusingModes = femtoapiObj.getFocusingModes()
 
@@ -591,7 +591,7 @@ Gets the active protocol in json. This json contains information about:
 
 ### **Matlab usage**
 
-First, you need to create a FemtoAPIAcquisition object as described  here(API2-A-1448161761). After it, call the command: 
+First, you need to create a FemtoAPIAcquisition object as described  here ([Tutorial: using the FemtoAPI Matlab client](../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client.md)). After it, call the command: 
 
 protocol= femtoapiObj.getActiveProtocol()
 

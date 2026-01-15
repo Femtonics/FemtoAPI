@@ -3,7 +3,7 @@ The processing state indicates the file structure and the associated metadata in
 
 ## **var json = FemtoAPIFile.getProcessingState()**
 
-**DEPRECATED**, please use  getChildTree(API2-A-1448161811) as replacement
+**DEPRECATED**, please use  getChildTree ([API file events and query functions](api-file-events-and-query-functions.md)) as replacement
 
 Gets the list of open files and the trees of all measurement sessions and measurements within them, together with most of the available metadata. The exact JSON format is described at the following link:  DEV-A-1668703787 
 
@@ -55,7 +55,7 @@ Because of this, you don't have to parse the json returned from server, you can 
 * setMesurementMetaDataField(handle, fieldName, newValue) : sets the given field in the measurement session/unit/channel denoted by handle to newValue
 * etc. 
 
-The full list of helper functions that can be used regarding processing state can be found  here(API2-A-1448161777). 
+The full list of helper functions that can be used regarding processing state can be found  here ([Helper classes and functions](../the-femtoapi-matlab-client/helper-classes-and-functions.md)). 
 
   
 

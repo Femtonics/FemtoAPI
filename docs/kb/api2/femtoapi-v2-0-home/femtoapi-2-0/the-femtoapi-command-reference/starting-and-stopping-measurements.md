@@ -28,7 +28,7 @@ Stop measurement commands fails when:
 *Notes*:
 
 * <span style="letter-spacing: 0.0px;">It is advisable to check the microscope state right after a start measurement command has been successfully initiated, and returned true. If it shows "Working" state, the measurement is running properly.</span>
-* You can check the state of the microscope hardware with the  getMicroscopeState()(API2-A-1448161787) command, whether it is running properly or not, and in the latter case, the cause of the error. 
+* You can check the state of the microscope hardware with the  getMicroscopeState() ([Get microscope state](get-microscope-state.md)) command, whether it is running properly or not, and in the latter case, the cause of the error. 
 
   
 
