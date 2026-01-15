@@ -1,0 +1,3276 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../get-set-zstack-pmt-laser-intensity-device-depth-profile/">
+      
+      
+        <link rel="next" href="../image-export/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Handling measurement files - FemtoAPI 2.0 Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#handling-measurement-files" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-header__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FemtoAPI 2.0 Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Handling measurement files
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-nav__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FemtoAPI 2.0 Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Knowledge Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction and architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction and architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/main-features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main features overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prerequisites-for-using-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites for using the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI command reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI command reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-and-remove-channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add and remove channels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-file-events-and-query-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API file events and query functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curve-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curve operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-acquisition-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get acquisition state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-microscope-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get microscope state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-processing-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get processing state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-imaging-window-viewport-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set imaging window (viewport) parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-pmt-laserintensity-device-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set PMT/Laserintensity device values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-properties-for-measurement-items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set properties for measurement items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-zstack-pmt-laser-intensity-device-depth-profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#differences-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatenewfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.createNewFile()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.createNewFile()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-setascurrent-femtoapifilesetcurrentsessionhandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var setAsCurrent = FemtoAPIFile.setCurrentSession(handle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var setAsCurrent = FemtoAPIFile.setCurrentSession(handle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilesavefileasync-filehandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.saveFileAsync( fileHandle = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.saveFileAsync( fileHandle = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilesavefileasasyncnewabsoluteunicodepath-filehandle-overwriteexistingfile-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = '', overWriteExistingFile = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = &#39;&#39;, overWriteExistingFile = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileclosefilenosaveasyncfilehandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.closeFileNoSaveAsync(fileHandle = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.closeFileNoSaveAsync(fileHandle = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileclosefileandsaveasyncfilehandle-compressfileifpossible-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.closeFileAndSaveAsync(fileHandle = '', compressFileIfPossible = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.closeFileAndSaveAsync(fileHandle = &#39;&#39;, compressFileIfPossible = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileclosefileandsaveasasyncnewabsolutefilepath-filehandle-overwriteexistingfile-false-compressfileifpossible-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = '', overWriteExistingFile = false, compressFileIfPossible = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = &#39;&#39;, overWriteExistingFile = false, compressFileIfPossible = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileopenfilesasyncfilepaths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.openFilesAsync(filePaths)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.openFilesAsync(filePaths)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manipulating-axis-positions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiroi-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MultiROI commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../munit-manipulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-write-binary-channel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-measurement-duration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting measurement duration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starting-and-stopping-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting and stopping measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI library reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI library reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIWebSocketClient reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/replymessageparser-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplyMessageParser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Matlab client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6_1" id="__nav_2_1_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab demos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI Matlab demos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI browser demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image processing demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions to implement ROI calculations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-function-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab function reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/helper-classes-and-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper classes and functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using the FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Python client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Python client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the python environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: creating a FemtoAPI Python client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using FemtoAPI with a simple WebSocket in Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-femtoapi-with-simple-websocket-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using FemtoAPI with Simple WebSocket Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_10" id="__nav_2_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the FemtoAPI client in C++ code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using the FemtoAPI client in C++ code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++ tutorial: creating a FemtoAPI client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#differences-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatenewfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.createNewFile()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.createNewFile()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-setascurrent-femtoapifilesetcurrentsessionhandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var setAsCurrent = FemtoAPIFile.setCurrentSession(handle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var setAsCurrent = FemtoAPIFile.setCurrentSession(handle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilesavefileasync-filehandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.saveFileAsync( fileHandle = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.saveFileAsync( fileHandle = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilesavefileasasyncnewabsoluteunicodepath-filehandle-overwriteexistingfile-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = '', overWriteExistingFile = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = &#39;&#39;, overWriteExistingFile = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileclosefilenosaveasyncfilehandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.closeFileNoSaveAsync(fileHandle = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.closeFileNoSaveAsync(fileHandle = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileclosefileandsaveasyncfilehandle-compressfileifpossible-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result= FemtoAPIFile.closeFileAndSaveAsync(fileHandle = '', compressFileIfPossible = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result= FemtoAPIFile.closeFileAndSaveAsync(fileHandle = &#39;&#39;, compressFileIfPossible = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileclosefileandsaveasasyncnewabsolutefilepath-filehandle-overwriteexistingfile-false-compressfileifpossible-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = '', overWriteExistingFile = false, compressFileIfPossible = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = &#39;&#39;, overWriteExistingFile = false, compressFileIfPossible = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileopenfilesasyncfilepaths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.openFilesAsync(filePaths)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.openFilesAsync(filePaths)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="handling-measurement-files">Handling measurement files</h1>
+<p>In its current release, the FemtoAPI supports the following operations on measurement files:</p>
+<ul>
+<li>createNewFile: Open a new, unnamed measurement file and set it as the destination for subsequent measurements</li>
+<li>setCurrentSession: Change to which open file the subsequent measurements will be saved into</li>
+<li>saveFileAsync: Save an open measurement file under its current name (if it already has one)</li>
+<li>saveFileAsAsync: Save an open measurement file under a new name</li>
+<li>closeFileNoSaveAsync: Close an open measurement file without saving</li>
+<li>closeFileAndSaveAsync: Save an open measurement file under its current name (if it already has one), then close it</li>
+<li>closeFileAndSaveAsAsync: Save an open measurement file under a new name, then close it</li>
+<li>openFilesAsync: Opens one or more existing measurement files</li>
+</ul>
+<p>These operations should suffice for saving your freshly acquired measurement data to measurement files. </p>
+<p>All these commands here (except setCurrentSession() ) return a json object, with the following fields in common: </p>
+<ul>
+<li><strong>succeeded</strong>: bool value, itrue means that the file operation was initiated successfully and started in the background </li>
+<li><strong>id</strong>: unique id of the command in string, or "0", if the background file operation hasn't started, because there was an error during the initiation of it (succeeded = false in this case), or because there is no need to start the background process (succeeded = true in this case). For example, saving a file which hasn't been modified since last save results in this case.</li>
+</ul>
+<p>In later sections, these common fields in the returned json will not be described again, but referenced as 'succeeded' and 'id'. Only the additional fields will be described. </p>
+<p>It is important to note that most of these measurement file operations run asynchronously, which means the following:</p>
+<ul>
+<li>When you call any of these operations, the FemtoAPI server checks whether all conditions of successfully starting the operation are met. If not, the FemtoAPI server returns a descriptive error message and does not start the file operation. Otherwise, the FemtoAPI server reports success and starts the file operation in the background.</li>
+</ul>
+<p>You can check the status of the started file operation the following way:</p>
+<ul>
+<li>in the returned json, the value of 'id' can be used as input parameter to FemtoAPIFile.getStatus(commandID) command, which returns whether the started background operation is still running or has ended, and if it has ended, whether there was an error or not. If you want to know if there is a pending operation on the currently opened files, you can run FemtoAPIFile.getStatus() without parameters. Details of these commands are described  here (<a href="../tools/">Tools</a>). </li>
+</ul>
+<p><em>Note on error messages</em>: if you run any of these commands, and it fails, the error message will not show up on the MESc GUI in message box that requires user interaction. Instead of it, a status message will appear on the MESc GUI with the error message that vanishes within few seconds.</p>
+<h3 id="differences-in-matlab">Differences in Matlab</h3>
+<ul>
+<li>in Matlab client, the function syntaxes are almost the same, the only difference is, that the input parameter handle is a number (in case of file), or an array (in case of session) instead of a string, and the return value is the json got from server parsed as Matlab struct</li>
+<li>you have to instantiate FemtoAPIProcessing class (as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>)) to call these functions. It will be denoted as 'femtoapiObj' in the following sections</li>
+<li>in case of any error, you instanty get it as Matlab error type exception.</li>
+</ul>
+<h2 id="var-result-femtoapifilecreatenewfile"><strong>var result= FemtoAPIFile.createNewFile()</strong></h2>
+<p>Creates a new, unnamed file, and sets it as the current file (i.e., the file where new measurements are placed). As this file has no name yet, you cannot permanently save it with saveFileAsync or closeFileAndSaveAsync. To do so, you need to give it a name and a destination folder with saveFileAsAsync or closeFileAndSaveAsAsync.</p>
+<p>Return value: json object, with 'succeeded' = true and a valid 'id' if the new file was successfully created, otherwise 'succeeded' = false and id = 0.</p>
+<p>The new file cannot be created if</p>
+<ul>
+<li>the Windows TEMP drive is full,</li>
+<li>the Windows TEMP folder is not writable, or</li>
+<li>the number of files opened in MESc has reached its upper limit (currently: 400).</li>
+</ul>
+<h3 id="usage-in-matlab">Usage in Matlab</h3>
+<p>result = mescapObj.createNewFile(); </p>
+<p>The returned value 'result' is the json get from server parsed in Matlab struct. </p>
+<h3 id="examples">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “var isCreated = FemtoAPIFile.createNewFile()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % local connection
+femtoapiObj.createNewFile(); 
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.createNewFile();&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;createNewFile(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<p><em>Note</em>: if the asynchronous portion of this call fails (e.g., the Windows TEMP drive is full or not writable), this call returns true and you can get error information by calling the getStatus(id) command with the appropriate command ID, and will not show up an error message in the MESc GUI. </p>
+<h2 id="var-setascurrent-femtoapifilesetcurrentsessionhandle"><strong>var setAsCurrent = FemtoAPIFile.setCurrentSession(handle)</strong></h2>
+<p>Sets the given file as the current file, which selects the last measurement session of the given file as the place to which subsequent measurements will be saved. You can also directly specify the last measurement session within an open file if you wish to do so.</p>
+<p>Note that MESc guarantees that exactly one file is always selected as current. If, e.g., the last open file is closed, MESc creates a new measurement file and sets it as current. MESc also guarantees that all open measurement files contain at least one measurement session. Therefore, exactly one current measurement session is selected as current one during the whole runtime of MESc.</p>
+<p>Input parameter:</p>
+<p><strong>handle</strong>: the unique descriptor string of an opened .mesc file or the last measurement session in an opened .mesc file. For example, '52,1' means the .mesc file with ID 52 and its last measurement session with ID 1, and it is valid if no session ID greater than 1 exists within this file . You can visually check these handles to the left of each item (file, measurement session, measurement) in the Processing mode of the MESc GUI.</p>
+<p>Return value: true if the file has been successfully set as current, otherwise false. Possible reasons for failure:</p>
+<ul>
+<li>The input parameter is syntactically incorrect. It must represent a measurement file handle or a measurement session handle in the form 'fileIndex' or 'fileIndex,measurementSessionIndex'. Examples: '43', '65,0'.</li>
+<li>The given file or measurement session handle is syntactically adequate, but it does not represent an open file, or the last measurement session of an open file.</li>
+<li>The given file or the file of the given measurement session is being closed and, therefore, it is not accessible anymore.</li>
+</ul>
+<h3 id="usage-in-matlab_1">Usage in Matlab</h3>
+<p>succeeded = femtoapiObj.setCurrentSession(handle)</p>
+<p>Input argument:</p>
+<p><strong>handle:</strong> the above described file or measurement session unique descriptor string as numeric value (file handle, e.g. 47) or Matlab array (session handle, e.g. [45 0])</p>
+<p>Return value: bool, the same as described above </p>
+<h3 id="examples_1">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">// set the file with index 52 as current, provided its last measurement session
+// index 0
+
+QString command = “var setAsCurrent = FemtoAPIFile.setCurrentSession('52,0')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// set the file with index 40 as current
+
+QString command = “var setAsCurrent = FemtoAPIFile.setCurrentSession('40')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % local connection
+femtoapiObj.setCurrentSession ([52,0]); 
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.setCurrentSession('52');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;setCurrentSession(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-result-femtoapifilesavefileasync-filehandle"><strong>var result= FemtoAPIFile.saveFileAsync( fileHandle = '')</strong></h2>
+<p>Saves the given measurement file, or the current measurement file if called without parameter or with an empty handle.</p>
+<p>Input<span style="letter-spacing: 0.0px;"> parameter: </span></p>
+<p><span style="letter-spacing: 0.0px;"><strong>fileHandle</strong>: the unique index of an open .mesc file converted to a string. For instance, handle '52' means the file with index 52. (File indices are displayed in the Processing mode of the MESc GUI, too.) If called with no file handle or an empty string, the current file will be saved.</span></p>
+<p><span style="letter-spacing: 0.0px;">It returns the json object described . </span></p>
+<p>In the returned json: </p>
+<ul>
+<li>'succeeded' = true and valid 'id' : if the saving of the file was successfully initiated (in this case, the asynchronous portion of the call has been started successfully)</li>
+<li>'succeeded' = true and 'id' = 0 : if the file hasn't been modified since last save, so saving the file hasn't started</li>
+<li>'succeeded' = false and 'id' = 0 : failed to save file </li>
+</ul>
+<p>Possible reasons for failure:</p>
+<ul>
+<li>The given handle is syntactically incorrect, or there is no opened file in MESc with the given handle.</li>
+<li>The given file is being closed and, therefore, it is not accessible for saving anymore.</li>
+<li>The given file is new and does not yet have a name or it is open as read-only. Please use saveFileAsAsync in these cases instead.</li>
+<li>A previous save operation is in progress in the given file.</li>
+</ul>
+<p>If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus (<a href="../tools/">Tools</a>) command for details.</p>
+<p><em>Note</em>: if the asynchronous portion of this call fails (e.g., the target drive gets full), you get error information in the MESc GUI too, as status message which vanishes within few seconds. </p>
+<h3 id="usage-in-matlab_2">Usage in Matlab</h3>
+<p>In Matlab, if the current file wanted to be saved, then no parameter is given:</p>
+<p>result = femtoapiObj.saveFileAsync(); </p>
+<p>Otherwise, give the handle of the file, as a number (positive integer) :</p>
+<p>result = femtoapiObj.saveFileAsync(fileHandle) </p>
+<p>The returned value 'result' is the json described above parsed into a Matlab struct.</p>
+<h3 id="examples_2">Examples</h3>
+<p><strong><em>C++ code examples:</em></strong></p>
+<pre><code class="language-cpp">// save the current file if no input parameter is given, or an empty string
+QString command = “var success = FemtoAPIFile.saveFileAsync()”; // or FemtoAPIFile.saveFileAsync('');
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// save the file with index 43:
+QString command = “var success = FemtoAPIFile.saveFileAsync('43')”;
+auto cmdParser=client→sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing();
+
+// save the current file if no input parameter is given, or an empty string
+femtoapiObj.saveFileAsync();
+
+// save the file with index 43:
+femtoapiObj.saveFileAsync ([43])”;
+
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.saveFileAsync();&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;saveFileAsync(): %s&quot; % simpleCmdParser.getJSEngineResult())
+
+</code></pre>
+<h2 id="var-result-femtoapifilesavefileasasyncnewabsoluteunicodepath-filehandle-overwriteexistingfile-false"><strong>var result= FemtoAPIFile.saveFileAsAsync(newAbsoluteUnicodePath, fileHandle = '', overWriteExistingFile = false)</strong></h2>
+<p>Saves the given measurement file, or the current measurement file, if called with an empty handle, to the given absolute path. You can also specify whether an existing file may be overwritten.</p>
+<p>If the given absolute path equals the current path of the given file, the command works exactly as saveFileAsync and the overwrite flag argument is ignored.</p>
+<p>Input parameters:</p>
+<ul>
+<li>newAbsoluteUnicodePath: The new absolute path as a Unicode string.</li>
+<li>fileHandle: The unique index of an open .mesc file converted to a string, e.g., '55'. If no file handle is given, MESc takes the current file.</li>
+<li>overWriteExistingFile: A Boolean flag denoting whether a preexisting file on newAbsoluteUnicodePath may be overwritten. If newAbsoluteFilePath equals the current path of the given file, this parameter is ignored.</li>
+</ul>
+<p>It returns the json object described . </p>
+<p>In the returned json: </p>
+<ul>
+<li>'succeeded' = true and valid 'id' : if the saving of the file was successfully initiated (in this case, the asynchronous portion of the call has been started successfully)</li>
+<li>'succeeded' = true and 'id' = 0 : newAbsoluteUnicodePath is the same as the path of the file given with its handle, and it hasn't been modified since last save, so saving the file hasn't started</li>
+<li>'succeeded' = false and 'id' = 0 : failed to save file </li>
+</ul>
+<p>Possible reasons for failure:</p>
+<ul>
+<li>The given handle is syntactically incorrect, or there is no open file in MESc with the given handle.</li>
+<li>The given file is being closed and, therefore, not accessible for saving.</li>
+<li>A previous save operation is in progress in the given file.</li>
+<li>The given path equals to the current path of the file, and the file is open as read-only, or it is new without a valid path. In this case, you should save the file under a different path.</li>
+<li>The given path differs from the current path of the file, but there is already a file there, and the overwrite flag was set to false.</li>
+<li>The given path differs from the current path of the file, there is a file on the given path, and the overwrite flag was set to true, but MESc could not delete the preexisting file.</li>
+<li>Could not create a read-write accessible file on the given path (the folder component of the given path does not exist, or it is not writable).</li>
+</ul>
+<p>If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus (<a href="../tools/">Tools</a>) command for details.</p>
+<p><em>Note</em>: if the asynchronous portion of this call fails (e.g., the target drive gets full), you get error information in the MESc GUI too, as status message which vanishes within few seconds. </p>
+<h3 id="usage-in-matlab_3">Usage in Matlab</h3>
+<p>In Matlab, the usage is the same, there are only some minor differences regarding types of input parameters and returned value:</p>
+<p>result = femtoapiObj.saveFileAsAsync(newAbsoluteUnicodePath, fileHandle, overWriteExistingFile)</p>
+<p>Input parameter (required): </p>
+<ul>
+<li>newAbsoluteUnicodePath: character array</li>
+</ul>
+<p>Input parameters (optional):</p>
+<ul>
+<li>fileHandle: (positive integer) number </li>
+<li>overWriteExistingFile: bool</li>
+</ul>
+<p>Returns the json described above parsed into a Matlab struct. </p>
+<h3 id="examples_3">Examples</h3>
+<p><strong><em>C++ code usage and examples:</em></strong></p>
+<pre><code class="language-cpp">// save the current file on the given absolute path, do not overwrite existing file
+
+QString command = “var result= FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc')”;
+auto cmdParser=client-&gt;sendJSCommand(command)
+
+
+
+// save the file with index 53 on the given absolute path, do not overwrite an existing file
+
+QString command = “var result= FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc','53')”;
+auto cmdParser=client-&gt;sendJSCommand(command)
+
+
+// save the file with index 53 on the given absolute path, overwrite existing file
+
+QString command = “var result= FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc','52', true)”;
+auto cmdParser=client-&gt;sendJSCommand(command)
+
+
+
+// save the current file on the given absolute path, overwrite existing file
+
+QString command = “var result= FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc','', true)”;
+auto cmdParser=client-&gt;sendJSCommand(command)
+
+
+
+// save the current file on the given absolute path, do not overwrite existing file
+
+QString command = “var result= FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc','', false)”;
+auto cmdParser=client-&gt;sendJSCommand(command)
+
+
+
+// or, equivalently, you can simply write this as
+
+QString command = “var result= FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc')”;
+auto cmdParser=client-&gt;sendJSCommand(command)
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing();
+
+% save current file to the specified absolute path. If file exists there, then it will not be overwritten, no save occurs and an error is returned
+femtoapiObj.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc');
+
+% Save file with handle 52 to the specified path. If file exists there, then it will not be overwritten, no save occurs and an error is returned. 
+femtoapiObj.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc',52, true);
+
+% save file with handle 52 to the specified path, if file exists, then overwrites it
+femtoapiObj.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc',52, true);
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.saveFileAsAsync('C:/Users/user/Documents/Measurements/example.mesc','52', true);&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;saveFileAsAsync(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-result-femtoapifileclosefilenosaveasyncfilehandle"><strong>var result = FemtoAPIFile.closeFileNoSaveAsync(fileHandle = '')</strong></h2>
+<p>Closes the given file without saving. With no or an empty input parameter, the current file is closed.</p>
+<p>Input parameter:</p>
+<ul>
+<li>fileHandle: The unique index of an open .mesc file converted to a string. For instance, handle '52' means the file with index 52. (File indices are displayed in the Processing mode of the MESc GUI, too.) If called with no file handle or an empty string, the current file will be closed.</li>
+</ul>
+<p>It returns the json object described . </p>
+<p>In the returned json: </p>
+<ul>
+<li>'succeeded' = true and valid 'id' : if the closing of the file was successfully initiated (in this case, the asynchronous portion of the call has been started successfully)</li>
+<li>'succeeded' = false and 'id' = 0 : otherwise</li>
+</ul>
+<p>Possible reasons for failure:</p>
+<ul>
+<li>The given handle is syntactically incorrect, or there is no open file in MESc with the given handle.</li>
+<li>A file operation is pending in the file: it is being closed or saved asynchronously.</li>
+</ul>
+<p>If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus (<a href="../tools/">Tools</a>) command for details.</p>
+<p><em>Note1</em>: if the asynchronous portion of this call fails, you get error information in the MESc GUI too, as status message which vanishes within few seconds. </p>
+<p><em>Note2:</em> MESc guarantees that exactly one file and its last measurement session is always selected as current. This means that if the current file is closed, MESc automatically selects another open file as current. If the last open file is closed, MESc creates a new measurement file and sets it as current.</p>
+<h3 id="usage-in-matlab_4">Usage in Matlab</h3>
+<p>In Matlab, if the current file wanted to be closed without save, then no parameter is given:</p>
+<p>result = femtoapiObj.closeFileNoSaveAsync(); </p>
+<p>Otherwise, give the handle of the file as input, as a number (positive integer) :</p>
+<p>result = femtoapiObj.closeFileNoSaveAsync(fileHandle) </p>
+<p>The returned value 'result' is the json described above parsed into a Matlab struct.</p>
+<h3 id="examples_4">Examples</h3>
+<p><strong><em>C++ code usage and examples:</em></strong></p>
+<pre><code class="language-cpp">// close the current file without saving
+
+QString command = “var result= FemtoAPIFile.closeFileNoSaveAsync()”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// close the file with index 65 without saving it
+
+QString command = “var result= FemtoAPIFile.closeFileNoSaveAsync('65')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing();
+femtoapiObj.closeFileNoSaveAsync ([65]);
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.closeFileNoSaveAsync('65');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;closeFileNoSaveAsync(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-result-femtoapifileclosefileandsaveasyncfilehandle-compressfileifpossible-false"><strong>var result= FemtoAPIFile.closeFileAndSaveAsync(fileHandle = '', compressFileIfPossible = false)</strong></h2>
+<p>Saves the given file, then closes it. Optionally, compresses the file during saving.</p>
+<p>Input parameters:</p>
+<ul>
+<li>fileHandle: The unique index of an open .mesc file converted to a string, e.g., '55'. If no file handle or empty string is given, MESc takes the current file.</li>
+<li>compressFileIfPossible: A Boolean flag denoting whether the file should be compressed if possible.</li>
+</ul>
+<p>It returns the json object described . </p>
+<p>In the returned json: </p>
+<ul>
+<li>'succeeded' = true and valid 'id' : if the combined operation of saving and closing the file was successfully initiated (in this case, the asynchronous portion of the call has been started successfully)</li>
+<li>'succeeded' = false and 'id' = 0 : otherwise</li>
+</ul>
+<p>Possible reasons for failure:</p>
+<ul>
+<li>The given handle is syntactically incorrect, or there is no opened file in MESc with the given handle.</li>
+<li>A file operation is pending in the file: it is being closed or saved asynchronously.</li>
+<li>The given file is new and does not yet have a name or it is open as read-only. Please use closeFileAndSaveAsAsync in these cases instead.</li>
+</ul>
+<p>If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus (<a href="../tools/">Tools</a>) command for details.</p>
+<p><em>Note1</em>: if the asynchronous portion of this call fails, you get error information in the MESc GUI too, as status message which vanishes within few seconds. </p>
+<p><em>Note2</em>: file compression means that the contents of the temporary file are copied to the given path, and the empty holes left behind by deleted objects are not. Since saving with compression is often slower than saving without compression (the latter being simple file copying), compression is never performed if nothing has been deleted from the measurement file, even if you set the compressFileIfPossible flag to true.</p>
+<p><em>Note3:</em> MESc guarantees that exactly one file and its last measurement session is always selected as current. This means that if the current file is closed, MESc automatically selects another open file as current. If the last open file is closed, MESc creates a new measurement file and sets it as current.</p>
+<h3 id="usage-in-matlab_5">Usage in Matlab</h3>
+<p>The usage in Matlab is the same as described above, except the types of input parameters and returned value are a bit different: </p>
+<p>result = femtoapiObj.closeFileAndSaveAsync(fileHandle, compressFileIfPossible);</p>
+<p>Input parameters (optional): </p>
+<ul>
+<li>fileHandle must be a (positive integer) number </li>
+<li>compressFileIfPossible is boolean value </li>
+</ul>
+<p>The returned value 'result' is the json described above parsed into a Matlab struct.</p>
+<h3 id="examples_5">Examples</h3>
+<p><strong><em>C++ code usage and examples:</em></strong></p>
+<pre><code class="language-cpp">// close the current file and save it without trying to compress it
+QString command = “var result= FemtoAPIFile.closeFileAndSaveAsync()”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// close the file with index 65 and save it without trying to compress it
+QString command = “var result= FemtoAPIFile.closeFileAndSaveAsync('65')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// or, equivalently
+QString command = “var result= FemtoAPIFile.closeFileAndSaveAsync('65',false)”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// close the file with index 65 and save it, possibly with compression
+QString command = “var result= FemtoAPIFile.closeFileAndSaveAsync('65', true)”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing();
+femtoapiObj.closeFileAndSaveAsync ([65], true); % close the file with index 65 and save it, possibly with compression
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.closeFileAndSaveAsync('65', true);&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;closeFileAndSaveAsync(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-result-femtoapifileclosefileandsaveasasyncnewabsolutefilepath-filehandle-overwriteexistingfile-false-compressfileifpossible-false"><strong>var result = FemtoAPIFile.closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle = '', overWriteExistingFile = false, compressFileIfPossible = false)</strong></h2>
+<p>Saves the given file under a new name, then closes it. Optionally, compresses the file during saving. You can also specify whether an existing file may be overwritten.</p>
+<p>If the given absolute path equals the current path of the given file, the command works exactly as closeFileAndSaveAsync and the given overwrite flag is ignored.</p>
+<p>Input parameters:</p>
+<ul>
+<li>newAbsoluteUnicodePath: The new absolute path as a Unicode string.</li>
+<li>fileHandle: The unique index of an open .mesc file converted to a string, e.g., '55'. If no file handle is given, MESc takes the current file.</li>
+<li>overWriteExistingFile: A Boolean flag denoting whether a preexisting file on newAbsoluteUnicodePath may be overwritten. If newAbsoluteFilePath equals the current path of the given file, this parameter is ignored.</li>
+<li>compressFileIfPossible: A Boolean flag denoting whether the file should be compressed if possible.</li>
+</ul>
+<p>It returns the json object described . </p>
+<p>In the returned json: </p>
+<ul>
+<li>'succeeded' = true and valid 'id' : if the combined operation of saving and closing the file was successfully initiated (in this case, the asynchronous portion of the call has been started successfully)</li>
+<li>'succeeded' = false and 'id' = 0 : otherwise</li>
+</ul>
+<p>Possible reasons for failure:</p>
+<ul>
+<li>The given handle is syntactically incorrect, or there is no open file in MESc with the given handle.</li>
+<li>A file operation is pending in the file: it is being closed or saved asynchronously.</li>
+<li>The given path equals to the current path of the file, and the file is open as read-only, or it is new without a valid path. In this case, you should save the file under a different path.</li>
+<li>The given path differs from the current path of the file, but there is a file there already, and the overwrite flag was set to false.</li>
+<li>The given path differs from the current path of the file, there is a file on the given path, and the overwrite flag was set to true, but MESc could not delete the preexisting file.</li>
+<li>Could not create a read-write accessible file on the given path (the folder does not exist, or it is not writable).</li>
+</ul>
+<p>If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus (<a href="../tools/">Tools</a>) command for details.</p>
+<p><em>Note1:</em> if the asynchronous portion of this call fails(e.g., the target drive gets full), you get error information in the MESc GUI too, as status message which vanishes within few seconds. </p>
+<p><em>Note2</em>: file compression means that the contents of the temporary file are copied to the given path, and the empty holes left behind by deleted objects are not. Since saving with compression is often slower than saving without compression (the latter being simple file copying), compression is never performed if nothing has been deleted from the measurement file, even if you set the compressFileIfPossible flag to true.</p>
+<p><em>Note3:</em> MESc guarantees that exactly one file and its last measurement session is always selected as current. This means that if the current file is closed, MESc automatically selects another open file as current. If the last open file is closed, MESc creates a new measurement file and sets it as current.</p>
+<h3 id="usage-in-matlab_6">Usage in Matlab</h3>
+<p>The usage in Matlab is the same as described above, except the types of input parameters and returned value are a bit different: </p>
+<p>result = femtoapiObj.closeFileAndSaveAsAsync(newAbsoluteFilePath, fileHandle, overWriteExistingFiles, compressFileIfPossible);</p>
+<p>Input parameters (required):</p>
+<ul>
+<li>newAbsoluteFilePath: char array</li>
+</ul>
+<p>Input parameters (optional): </p>
+<ul>
+<li>fileHandle must be a (positive integer) number </li>
+<li>overWriteExistingFiles is a boolen value </li>
+<li>compressFileIfPossible is a boolean value </li>
+</ul>
+<p>The returned value 'result' is the json described above parsed into a Matlab struct.</p>
+<h3 id="examples_6">Examples</h3>
+<p><strong><em>C++ code usage and examples:</em></strong></p>
+<pre><code class="language-cpp">// close the current file and save it under a new name without compression
+QString command = “var success = FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// close the file with index 65 and save it to the given path without compression, and fail if there is already a file on the given path
+QString command = “var success = FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc','65', false)”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// the above can also be written without specifying the third parameter as
+QString command = “var success = FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc','65')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// close the current file and save it to the given path with compression, and overwrite the file on the given path if it exists
+QString command = “var success = FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc','', true, true)”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+
+// close the file with index 65 and save it with compression, and overwrite the file on the given path if it exists
+QString command = “var success = FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc','65', true, true)”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing();
+
+% close the file with index 65 and save it with compression, and overwrite the file on the given path if it exists
+femtoapiObj.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc',[65], true, true); 
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc','65', true, true);&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;closeFileAndSaveAsync(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="_1"></h2>
+<h2 id="var-result-femtoapifileopenfilesasyncfilepaths"><strong>var result = FemtoAPIFile.openFilesAsync(filePaths)</strong></h2>
+<p>Opens one or more file(s) asynchronously. </p>
+<p>Input parameter: </p>
+<ul>
+<li><strong>filePaths</strong>: one or more full file path(s) in one unicode string(s), separated with semicolon within the string</li>
+</ul>
+<p>It returns the json object described . </p>
+<p>In the returned json: </p>
+<ul>
+<li>'succeeded' = true and valid 'id' : if opening the file(s) was successfully initiated (in this case, the asynchronous portion of the call has been started successfully)</li>
+<li>'succeeded' = false and 'id' = 0 : otherwise</li>
+</ul>
+<p>Possible reasons for failure: </p>
+<ul>
+<li>at least one given file path is invalid: it does not exists or is a dangling symbolic link/shourtcut</li>
+<li>the number of files opened in MESc has reached its upper limit (currently: 400)</li>
+</ul>
+<p>If the operation has been initiated successfully, then you can use the returned 'id' to obtain whether this operation is in progress or not, and if it has ended then get an error information. See  getStatus (<a href="../tools/">Tools</a>) command for details.</p>
+<p><em>Note1:</em> If file opening is initiated from the MESc GUI and from the FemtoAPI at the same time, it does not generates an error, even if there are common files to open. The union of the two file list will be opened. </p>
+<h3 id="usage-in-matlab_7">Usage in Matlab</h3>
+<p>Usage is the same, but 'filePaths' is a character array</p>
+<p>result = femtoapiObj.openFilesAsync(filePaths)</p>
+<p>Input parameter (required): </p>
+<p>filePaths: character array, file paths are separated with semicolon</p>
+<p>The returned value 'result' is the json described above parsed into a Matlab struct.</p>
+<h3 id="examples_7">Examples</h3>
+<p><strong><em>C++ code usage and examples:</em></strong></p>
+<pre><code class="language-cpp">// open one file
+QString command = “var result= FemtoAPIFile.openFilesAsync('C:/Users/user/Documents/Measurements/example.mesc')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+// open two files
+QString command = “var result= FemtoAPIFile.openFilesAsync('C:/Users/user/Documents/Measurements/example.mesc;C:/Users/user/Documents/Measurements/example.mesc')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing();
+
+% open one file 
+femtoapiObj.openFilesAsync('C:/Users/user/Documents/Measurements/example.mesc'); 
+
+% open two files
+femtoapiObj.openFilesAsync('C:/Users/user/Documents/Measurements/example.mesc;C:/Users/user/Documents/Measurements/example2.mesc');
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.closeFileAndSaveAsAsync('C:/Users/user/Documents/Measurements/example.mesc');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;closeFileAndSaveAsync(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

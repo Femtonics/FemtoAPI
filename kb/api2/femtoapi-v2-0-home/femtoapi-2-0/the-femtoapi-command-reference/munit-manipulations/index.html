@@ -1,0 +1,3497 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../multiroi-commands/">
+      
+      
+        <link rel="next" href="../read-write-binary-channel-data/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>MUnit manipulations - FemtoAPI 2.0 Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#munit-manipulations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-header__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FemtoAPI 2.0 Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MUnit manipulations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-nav__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FemtoAPI 2.0 Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Knowledge Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction and architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction and architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/main-features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main features overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prerequisites-for-using-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites for using the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI command reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI command reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-and-remove-channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add and remove channels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-file-events-and-query-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API file events and query functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curve-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curve operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-acquisition-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get acquisition state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-microscope-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get microscope state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-processing-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get processing state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-imaging-window-viewport-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set imaging window (viewport) parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-pmt-laserintensity-device-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set PMT/Laserintensity device values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-properties-for-measurement-items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set properties for measurement items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-zstack-pmt-laser-intensity-device-depth-profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-measurement-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manipulating-axis-positions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiroi-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MultiROI commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notes-on-matlab-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes on Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatetimeseriesmunitxdim-ydim-taskxmlparametersviewportjson-z0inms-00-zstepinms-10-zdiminitial-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatebesseltimeseriesmunitxdim-ydim-viewportjson-z0inms-00-zstepinms-10-zdiminitial-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createBesselTimeSeriesMUnit(xDim, yDim, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createBesselTimeSeriesMUnit(xDim, yDim, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatezstackmunitxdim-ydim-zdim-taskxmlparametersviewportjson-zstepinmicrons-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatevolumescanmunitxdim-ydim-zdim-tdim-technologytype-viewportjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createVolumeScanMUnit(xDim, yDim, zDim, tDim, technologyType, viewportJson)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createVolumeScanMUnit(xDim, yDim, zDim, tDim, technologyType, viewportJson)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatemultilayermunitxdim-ydim-zdim-technologytype-viewportjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createMultiLayerMUnit(xDim, yDim, zDim, technologyType, viewportJson)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createMultiLayerMUnit(xDim, yDim, zDim, technologyType, viewportJson)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileextendmunitmunithandle-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.extendMUnit(mUnitHandle, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.extendMUnit(mUnitHandle, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifiledeletemunitmunithandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.deleteMUnit(mUnitHandle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.deleteMUnit(mUnitHandle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecopymunitsourcemunithandle-destmhandle-bcopychannelcontents-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.copyMUnit(sourceMUnitHandle, destMHandle, bCopyChannelContents = true)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.copyMUnit(sourceMUnitHandle, destMHandle, bCopyChannelContents = true)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilemovemunitsourcemunithandle-destmsessionhandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.moveMUnit(sourceMUnitHandle, destMSessionHandle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.moveMUnit(sourceMUnitHandle, destMSessionHandle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilesetlinkedmunitsourcemunithandle-linkedmunithandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.setLinkedMUnit(sourceMUnitHandle, linkedMUnitHandle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.setLinkedMUnit(sourceMUnitHandle, linkedMUnitHandle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-write-binary-channel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-measurement-duration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting measurement duration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starting-and-stopping-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting and stopping measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI library reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI library reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIWebSocketClient reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/replymessageparser-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplyMessageParser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Matlab client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6_1" id="__nav_2_1_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab demos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI Matlab demos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI browser demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image processing demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions to implement ROI calculations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-function-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab function reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/helper-classes-and-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper classes and functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using the FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Python client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Python client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the python environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: creating a FemtoAPI Python client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using FemtoAPI with a simple WebSocket in Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-femtoapi-with-simple-websocket-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using FemtoAPI with Simple WebSocket Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_10" id="__nav_2_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the FemtoAPI client in C++ code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using the FemtoAPI client in C++ code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++ tutorial: creating a FemtoAPI client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notes-on-matlab-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes on Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatetimeseriesmunitxdim-ydim-taskxmlparametersviewportjson-z0inms-00-zstepinms-10-zdiminitial-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatebesseltimeseriesmunitxdim-ydim-viewportjson-z0inms-00-zstepinms-10-zdiminitial-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createBesselTimeSeriesMUnit(xDim, yDim, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createBesselTimeSeriesMUnit(xDim, yDim, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatezstackmunitxdim-ydim-zdim-taskxmlparametersviewportjson-zstepinmicrons-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatevolumescanmunitxdim-ydim-zdim-tdim-technologytype-viewportjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createVolumeScanMUnit(xDim, yDim, zDim, tDim, technologyType, viewportJson)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createVolumeScanMUnit(xDim, yDim, zDim, tDim, technologyType, viewportJson)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecreatemultilayermunitxdim-ydim-zdim-technologytype-viewportjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.createMultiLayerMUnit(xDim, yDim, zDim, technologyType, viewportJson)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.createMultiLayerMUnit(xDim, yDim, zDim, technologyType, viewportJson)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileextendmunitmunithandle-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.extendMUnit(mUnitHandle, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.extendMUnit(mUnitHandle, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifiledeletemunitmunithandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.deleteMUnit(mUnitHandle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.deleteMUnit(mUnitHandle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilecopymunitsourcemunithandle-destmhandle-bcopychannelcontents-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.copyMUnit(sourceMUnitHandle, destMHandle, bCopyChannelContents = true)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.copyMUnit(sourceMUnitHandle, destMHandle, bCopyChannelContents = true)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilemovemunitsourcemunithandle-destmsessionhandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.moveMUnit(sourceMUnitHandle, destMSessionHandle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.moveMUnit(sourceMUnitHandle, destMSessionHandle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilesetlinkedmunitsourcemunithandle-linkedmunithandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.setLinkedMUnit(sourceMUnitHandle, linkedMUnitHandle)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.setLinkedMUnit(sourceMUnitHandle, linkedMUnitHandle)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="munit-manipulations">MUnit manipulations</h1>
+<p>The following measurement unit manipulations are implemented:</p>
+<ul>
+<li>create (time series or z-stack resonant/galvo/Ao fullframe scan)</li>
+<li>extend</li>
+<li>copy/move</li>
+<li>delete</li>
+<li>setting linked MUnit</li>
+</ul>
+<h3 id="notes-on-matlab-usage">Notes on Matlab usage</h3>
+<p>In the Matlab FemtoAPI client, regarding the command descriptions and usage, the same applies as in case of C++/Python client, there are some minor differences regarding the input/output arguments. The usage from Matlab is the following:</p>
+<ul>
+<li>You need to create a FemtoAPIProcessing object, as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>)</li>
+<li>call the command with the same name as in case of C++/Python, and the input/output parameters have the following format:</li>
+<li><strong>measurement unit handle</strong>, in input/output parameters: represented as Matlab array, instead of string, e.g. [43 0 0]</li>
+<li><strong>countDims</strong>: represented as Matlab array</li>
+<li><strong>result</strong>: the returned value is the json get from server parsed into a Matlab struct (if it contains measurement unit handle (e.g. copiedMUnitIdx, addedMUnitIdx), it is a Matlab array)</li>
+<li>If a command fails, then it throws an error type Matlab exception containing the error message</li>
+</ul>
+<h2 id="_1"></h2>
+<h2 id="var-result-femtoapifilecreatetimeseriesmunitxdim-ydim-taskxmlparametersviewportjson-z0inms-00-zstepinms-10-zdiminitial-1"><strong>var result = FemtoAPIFile.createTimeSeriesMUnit(xDim, yDim, taskXMLParameters,viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)</strong></h2>
+<p>Creates new measurement unit for galvo/resonant/AO fullframe scan time series measurement.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>xDim</strong>: measurement image x resolution</li>
+<li><strong>yDim</strong>: measurement image y resolution</li>
+<li><strong>taskXMLParameters</strong>: measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.</li>
+<li><strong>viewportJson</strong>: viewport for measurement</li>
+<li><strong>z0InMs</strong>: Measurement start time offset in ms. Double, default value is 0.0</li>
+<li><strong>zStepInMs</strong>: Frame duration time in ms (1/frame rate). Positive double, default value is 1.0.</li>
+<li><strong>zDimInitial</strong><span style="letter-spacing:0.0px;">:</span> <span style="letter-spacing:0.0px;">Number</span><span style="letter-spacing:0.0px;"> of </span><span style="letter-spacing:0.0px;">frames</span> <span style="letter-spacing:0.0px;">to</span> <span style="letter-spacing:0.0px;">create</span><span style="letter-spacing:0.0px;"> in z </span><span style="letter-spacing:0.0px;">dimension</span><span style="letter-spacing:0.0px;">. </span><span style="letter-spacing:0.0px;">Positive</span><span style="letter-spacing:0.0px;"> integer, </span><span style="letter-spacing:0.0px;">default</span> <span style="letter-spacing:0.0px;">value</span><span style="letter-spacing:0.0px;"> is 1.</span></li>
+</ul>
+<p>Returns a json object with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>addedMUnitIdx</strong>: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"</li>
+</ul>
+<h3 id="usage-in-matlab">Usage in Matlab</h3>
+<p>result = femtoapiObj.createTimeSeriesMUnit(xDim, yDim, taskXMLParameters, viewportJson, z0InMs, zStepInMs, zDimInitial)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples">Examples</h3>
+<p>The following variables need to be defined:</p>
+<p>var viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransRot": [0,0,0,1], "geomTransTransl": [0,0,0], "height":256, "width": 256}]}'</p>
+<p>in API version 2.0 (MESc ver 4.5) : taskXMLParameters is replaced by a single string containing the scaning mode: galvo/resonant/AO</p>
+<p>galvo:</p>
+<p>var tp='galvo'</p>
+<p>resonant:</p>
+<p>var tp='resonant'</p>
+<p>AO fullframe scan:</p>
+<p>var tp='AO'</p>
+<p><strong>C++ code example</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.createTimeSeriesMUnit(256,256,tp,viewport)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<h2 id="var-result-femtoapifilecreatebesseltimeseriesmunitxdim-ydim-viewportjson-z0inms-00-zstepinms-10-zdiminitial-1"><strong>var result = FemtoAPIFile.createBesselTimeSeriesMUnit(xDim, yDim, viewportJson, z0InMs = 0.0, zStepInMs = 1.0, zDimInitial = 1)</strong></h2>
+<p>Creates new measurement unit of Bessel measurement type for AO fullframe scan time series measurement.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>xDim</strong>: measurement image x resolution</li>
+<li><strong>yDim</strong>: measurement image y resolution</li>
+<li><strong>viewportJson</strong>: viewport for measurement</li>
+<li><strong>z0InMs</strong>: Measurement start time offset in ms. Double, default value is 0.0</li>
+<li><strong>zStepInMs</strong>: Frame duration time in ms (1/frame rate). Positive double, default value is 1.0.</li>
+<li><strong>zDimInitial</strong>: Number of frames to create in z dimension. Positive integer, default value is 1.</li>
+</ul>
+<p>Returns a json object with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>addedMUnitIdx</strong>: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"</li>
+</ul>
+<h3 id="usage-in-matlab_1">Usage in Matlab</h3>
+<p>result = femtoapiObj.createBesselTimeSeriesMUnit(xDim, yDim, viewportJson, z0InMs, zStepInMs, zDimInitial)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_1">Examples</h3>
+<p>The following variables need to be defined:</p>
+<p>var viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransRot": [0,0,0,1], "geomTransTransl": [0,0,0], "height":256, "width": 256}]}'</p>
+<p><strong>C++ code example</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.createBesselTimeSeriesMUnit(256,256,viewport)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">viewport = '{&quot;referenceViewportFormatVersion&quot;: 1, &quot;viewports&quot;:[{&quot;geomTransRot&quot;: [0,0,0,1], &quot;geomTransTransl&quot;: [0,0,0], &quot;height&quot;:256, &quot;width&quot;: 256}]}'; 
+femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.createBesselTimeSeriesMUnit(256,256,viewport) % create measurement unit 
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.createBesselTimeSeriesMUnit(256,256,viewport);” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;createBesselTimeSeriesMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="var-result-femtoapifilecreatezstackmunitxdim-ydim-zdim-taskxmlparametersviewportjson-zstepinmicrons-10"><strong>var result = FemtoAPIFile.createZStackMUnit(xDim, yDim, zDim, taskXMLParameters,viewportJson, zStepInMicrons = 1.0)</strong></h2>
+<p>Creates new measurement unit for galvo/resonant/AO z-stack measurement.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>xDim</strong>: measurement image x resolution</li>
+<li><strong>yDim</strong>: measurement image y resolution</li>
+<li><strong>zDim</strong>: number of z planes</li>
+<li><strong>taskXMLParameters</strong>: measurementParamsXML for resonant/galvo/AO fullframe scan z-stack measurement.</li>
+<li><strong>viewportJson</strong>: viewport for measurement</li>
+<li><strong>zStepInMicrons</strong>: Step between z planes in um. Double, default value is 0.0</li>
+</ul>
+<p>Returns a json object with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>addedMUnitIdx</strong>: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"</li>
+</ul>
+<h3 id="usage-in-matlab_2">Usage in Matlab</h3>
+<p>result = femtoapiObj.createZStackMUnit(xDim, yDim, zDim, taskXMLParameters, viewportJson, zStepInMicrons)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_2">Examples</h3>
+<p>The following variables need to be defined:</p>
+<p>var viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransRot": [0,0,0,1], "geomTransTransl": [0,0,0], "height":256, "width": 256}]}'</p>
+<p>in API version 2.0 (MESc ver 4.5) : taskXMLParameters is replaced by a single string containing the scaning mode: galvo/resonant/AO</p>
+<p>galvo:</p>
+<p>var tp='galvo'</p>
+<p>resonant:</p>
+<p>var tp='resonant'</p>
+<p>AO fullframe scan:</p>
+<p>var tp='AO'</p>
+<p><strong>C++ code example</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.createZStackMUnit(256,256,10,tp,viewport)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">viewport = '{&quot;referenceViewportFormatVersion&quot;: 1, &quot;viewports&quot;:[{&quot;geomTransRot&quot;: [0,0,0,1], &quot;geomTransTransl&quot;: [0,0,0], &quot;height&quot;:256, &quot;width&quot;: 256}]}';
+tp = 'galvo' ;
+
+femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.createZStackMUnit(256,256,10,tp,viewport) % create measurement unit 
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.createZStackMUnit(256,256,10,tp,viewport);” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;createZStackMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_2"></h2>
+<h2 id="var-result-femtoapifilecreatevolumescanmunitxdim-ydim-zdim-tdim-technologytype-viewportjson"><strong>var result = FemtoAPIFile.createVolumeScanMUnit(xDim, yDim, zDim, tDim, technologyType, viewportJson)</strong></h2>
+<p>Creates new measurement unit for galvo/resonant/AO fullframe volume scan measurement.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>xDim</strong>: measurement image x resolution</li>
+<li><strong>yDim</strong>: measurement image y resolution</li>
+<li><strong>zDim</strong>: number of Z planes</li>
+<li><strong>tDim</strong>: number of time frames on each Z plane</li>
+<li><strong>technologyType</strong>: measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.</li>
+<li><strong>viewportJson</strong>: viewport for measurement</li>
+</ul>
+<p>Returns a json object with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>addedMUnitIdx</strong>: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"</li>
+</ul>
+<h3 id="usage-in-matlab_3">Usage in Matlab</h3>
+<p>result = femtoapiObj.createVolumeScanMUnit(xDim, yDim, zDim, tDim, technologyType, viewportJson)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_3">Examples</h3>
+<p>The following variables need to be defined:</p>
+<p>var viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransRot": [0,0,0,1], "geomTransTransl": [0,0,0], "height":256, "width": 256}]}'</p>
+<p>in API version 2.0 (MESc ver 4.5) : taskXMLParameters is replaced by a single string containing the scaning mode: galvo/resonant/AO</p>
+<p>galvo:</p>
+<p>var tp='galvo'</p>
+<p>resonant:</p>
+<p>var tp='resonant'</p>
+<p>AO fullframe scan:</p>
+<p>var tp='AO'</p>
+<p><strong>C++ code example</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.createVolumeScanMUnit(256,256,10,1,tp,viewport)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">viewport = '{&quot;referenceViewportFormatVersion&quot;: 1, &quot;viewports&quot;:[{&quot;geomTransRot&quot;: [0,0,0,1], &quot;geomTransTransl&quot;: [0,0,0], &quot;height&quot;:256, &quot;width&quot;: 256}]}';
+tp = 'galvo' ;
+
+femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.createVolumeScanMUnit(256,256,10,1,tp,viewport) % create measurement unit 
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.createVolumeScanMUnit(256,256,10,1,tp,viewport);” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;createTimeSeriesMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_3"></h2>
+<h2 id="var-result-femtoapifilecreatemultilayermunitxdim-ydim-zdim-technologytype-viewportjson"><strong>var result = FemtoAPIFile.createMultiLayerMUnit(xDim, yDim, zDim, technologyType, viewportJson)</strong></h2>
+<p>Creates new measurement unit for galvo/resonant/AO fullframe multi layer scan measurement.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>xDim</strong>: measurement image x resolution</li>
+<li><strong>yDim</strong>: measurement image y resolution</li>
+<li><strong>zDim</strong>: number of layers</li>
+<li><strong>technologyType</strong>: measurementParamsXML for resonant/galvo/AO fullframe scan time series measurement.</li>
+<li><strong>viewportJson</strong>: viewport for measurement</li>
+</ul>
+<p>Returns a json object with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the measurement unit creation was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>addedMUnitIdx</strong>: In case of the new measurement unit has been successfully created, the unique index of the created measurement unit converted to string, e.g. "34,0,1"</li>
+</ul>
+<h3 id="usage-in-matlab_4">Usage in Matlab</h3>
+<p>result = femtoapiObj.createMultiLayerMUnit(xDim, yDim, zDim, technologyType, viewportJson)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_4">Examples</h3>
+<p>The following variables need to be defined:</p>
+<p>each layer has it's own viewport</p>
+<p>var viewport='{"referenceViewportFormatVersion": 1, "viewports":[{"geomTransRot": [0,0,0,1], "geomTransTransl": [0,0,0], "height":256, "width": 256}, {"geomTransRot": [0,0,0,1], "geomTransTransl": [0,0,0], "height":256, "width": 256}]}'</p>
+<p>technologyType: AO</p>
+<p>var tp='AO'</p>
+<p><strong>C++ code example</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.createMultiLayerMUnit(256,256,2,tp,viewport)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">viewport = '{&quot;referenceViewportFormatVersion&quot;: 1, &quot;viewports&quot;:[{&quot;geomTransRot&quot;: [0,0,0,1], &quot;geomTransTransl&quot;: [0,0,0], &quot;height&quot;:256, &quot;width&quot;: 256}, {&quot;geomTransRot&quot;: [0,0,0,1], &quot;geomTransTransl&quot;: [0,0,0], &quot;height&quot;:256, &quot;width&quot;: 256}]}';
+tp = 'galvo' ;
+
+femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.createMultiLayerMUnit(256,256,2,tp,viewport) % create measurement unit 
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.createMultiLayerMUnit(256,256,2,tp,viewport);” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;createMultiLayerMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_4"></h2>
+<h2 id="var-result-femtoapifileextendmunitmunithandle-countdims"><strong>var result = FemtoAPIFile.extendMUnit(mUnitHandle, countDims)</strong></h2>
+<p>Extends a measurement unit given by 'mUnitHandle' with the number of frames 'countDims'.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>mUnitHandle:</strong> unique index of a measurement unit converted to string, e.g. '23,0,1'.</li>
+<li><strong>countDims:</strong> number of frames to extend the measurement unit with</li>
+</ul>
+<p>Returns a json object containing the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: bool, true if the extend measurement unit command has been successfully initiated, false otherwise.</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+</ul>
+<p>It fails when:</p>
+<ul>
+<li>the parameter mUnitHandle is syntactically invalid, or there is no opened measurement unit with this index is present, or</li>
+<li>the given measurement unit is not accessible because another asynchronous operation is running or the file is being closed, or</li>
+<li>this image type cannot be extended</li>
+</ul>
+<h3 id="usage-in-matlab_5">Usage in Matlab</h3>
+<p>result = femtoapiObj.extendMUnit(mUnitHandle, countDims)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_5">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.extendMUnit('43,0,2',10)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.extendMUnit ([43,0,2],10) % extends measurement unit with 10 frames, result is the returned json object  from server converted to struct
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.extendMUnit('43,0,2',10);” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.extendMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_5"></h2>
+<h2 id="var-result-femtoapifiledeletemunitmunithandle"><strong>var result = FemtoAPIFile.deleteMUnit(mUnitHandle)</strong></h2>
+<p>Deletes a measurement unit from a .mesc file given by 'mUnitHandle' .</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>mUnitHandle:</strong> unique index of a measurement unit converted to string, e.g. '23,0,1'.</li>
+</ul>
+<p>Returns a json object containing the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: bool, true if the synchronous part of the command has been successfully run, false otherwise.</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>deletedMUnitIdx:</strong> the measurement unit index that has been deleted</li>
+</ul>
+<p>It fails when:</p>
+<ul>
+<li>the parameter 'mUnitHandle' is syntactically invalid, or there is no opened measurement unit with this index is present, or</li>
+<li>the given measurement unit is not accessible because another asynchronous operation is running or the file is being closed</li>
+</ul>
+<h3 id="usage-in-matlab_6">Usage in Matlab</h3>
+<p>result = femtoapiObj.deleteMUnit(mUnitHandle)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_6">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.deleteMUnit('43,0,2')”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.deleteMUnit ([43,0,2]) % delete measurement unit, result is the returned json object from server converted to struct
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.deleteMUnit('43,0,2');” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.deleteMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_6"></h2>
+<h2 id="var-result-femtoapifilecopymunitsourcemunithandle-destmhandle-bcopychannelcontents-true"><strong>var result = FemtoAPIFile.copyMUnit(sourceMUnitHandle, destMHandle, bCopyChannelContents = true)</strong></h2>
+<p>Copies the source measurement unit to the requested measurement session (or group). Channels with contents and metadata are copied by default. If 'bCopyChannelContents' is set to false, channels are copied almost the same way, except that channel data values will not be copied, and it will be created with zero values.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>sourceMUnitHandle</strong>: the unique index of the measurement unit to copy in string format, e.g. '34,0,0'</li>
+<li><strong>destMHandle</strong>: the unique index of the destination measurement session (or group) to copy the source MUnit to, in string format, e.g. '43,0'.</li>
+<li><strong>bCopyChannelContents</strong>: if true, channel contents of measurement unit will be copied too. Otherwise, channel data values are 0.</li>
+</ul>
+<p>Returns a json with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the copy of the unit was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>copiedParameters</strong>: Contains a <strong>measurement</strong> element and and other linked element if the copied MUnit has one. Unique index(es) of the newly created (copied) measurement unit(s) as string, e.g. '45,0,0'</li>
+</ul>
+<p><em>"copiedParameters": {"background": "11,1,0", "measurement": "11,0,2"}</em></p>
+<p><em>Note 1</em>: If measurement MUnit is copied, then its linked MUnit(s) is/are copied as well.</p>
+<p><em>Note 2</em>: the source and the MSession where the source measurement unit is located and the destination MSession can be different within the same file, or they can be in different measurement files.</p>
+<h3 id="usage-in-matlab_7">Usage in Matlab</h3>
+<p>result = femtoapiObj.copyMUnit(sourceMUnitHandle, destMHandle, bCopyChannelContents)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_7">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.copyMUnit ('61,0,1', '62,0', true)”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)  
+
+% copy source measurement unit [61,0,1], to the requested measurement session  [62,0,1], including channel contents
+result = femtoapiObj.copyMUnit ([61,0,1], [62,0,1], true); % result is json converted to struct
+newresult.copiedMUnitIdx % the copied measurement unit index as Matlab array, in this case [62,0,1]
+</code></pre>
+<p><strong><span style="letter-spacing:0.0px;">Python </span><span style="letter-spacing:0.0px;">client</span> <span style="letter-spacing:0.0px;">code</span> <span style="letter-spacing:0.0px;">example</span><span style="letter-spacing:0.0px;">: </span></strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.copyMUnit ('61,0,1', '62,0', true);” 
+simpleCmdParser=client.sendJSCommand(command)  
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;copyMUnit (): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_7"></h2>
+<h2 id="var-result-femtoapifilemovemunitsourcemunithandle-destmsessionhandle"><strong>var result = FemtoAPIFile.moveMUnit(sourceMUnitHandle, destMSessionHandle)</strong></h2>
+<p>Moves the source measurement unit to the requested measurement session (or group).  The content of the channels are always moved.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>sourceMUnitHandle</strong>: the index of the measurement unit to move</li>
+<li><strong>destMSessionHandle</strong>: the index of the destination measurement session to move the source MUnit</li>
+</ul>
+<p>Returns a json with the following fields:</p>
+<ul>
+<li><strong>succeeded</strong>: Returns true if the move of the unit was successfully initiated, otherwise it returns false</li>
+<li><strong>id</strong>: command id, which is used as input to  FemtoAPIFile.getStatus(commandID) (<a href="../tools/">Tools</a>) command, to obtain the current status of the command (the asynchronous part), if succeeded == true.</li>
+<li><strong>movedParameters</strong><span style="letter-spacing:0.0px;">:</span> <span style="letter-spacing:0.0px;">Contains a <strong>measurement</strong> element and other linked element of the moved MUnit (if any). Unique index(es) of the newly created (copied) measurement unit(s) as string, e.g. '45,0,0'</span></li>
+</ul>
+<p><em>"movedParameters": {"background": "11,1,1", "measurement": "11,0,3"}</em></p>
+<p><em>Note 1</em>: the MSession where the source measurement unit is located and the destination MSession can be different within the same file, or they can be in different measurement files.</p>
+<p><em>Note 2</em>: if the source measurement unit has linked MUnits, they are also moved, if moving is possible. (If the linked MUnit(s) is/are linked to another MUnit(s), then moving is not possible).</p>
+<p><em>Note 3</em>: when moving is not possible, the main and the linked MUnit(s) will be copied intead of move.</p>
+<h3 id="usage-in-matlab_8">Usage in Matlab</h3>
+<p>result = femtoapiObj.moveMUnit(sourceMUnitHandle, destMSessionHandle, bCopyChannelContents)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_8">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.moveMUnit('61,0,1', '62,0')”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)  
+
+% move source measurement unit [61,0,1], to the requested measurement session  [62,0,1] 
+result = femtoapiObj.moveMUnit ([61,0,1], [62,0,1]); 
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.moveMUnit ('61,0,1', '62,0');” 
+simpleCmdParser=client.sendJSCommand(command)  
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;moveMUnit (): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="var-result-femtoapifilesetlinkedmunitsourcemunithandle-linkedmunithandle"><strong>var result = FemtoAPIFile.setLinkedMUnit(sourceMUnitHandle, linkedMUnitHandle)</strong></h2>
+<p>Links MUnit specified by 'linkedMUnitHandle' to the main MUnit with 'sourceUnitHandle'. The main MUnit must be in a measurement MSession and the linked MUnit must be within a background MSession within the same file as the main MUnit.</p>
+<p>Linking means that the linked MUnit is always copied/moved/deleted along with the main MUnit. Linking has the following properties:</p>
+<ul>
+<li>One background MUnit can be linked to several measurement MUnits</li>
+<li>Only one background image can be linked to a main MUnit with a specified image role</li>
+<li>The main and its linked MUnit(s) must be within the same file.</li>
+<li>When copying the main MUnit, the linked MUnit(s) is/are also copied.</li>
+<li>When moving the main MUnit, the linked MUnit(s) is/are only moved if it is not linked to another measurement MUnit(s). Otherwise the linked MUnit(s) is/are copied
+  with the main MUnit.</li>
+<li>Linked MUnit can't be copied/moved/deleted, only with the main MUnit.</li>
+<li>The linked MUnit is deleted automatically when the main MUnit is deleted, if and only if it is not linked to other MUnit(s).</li>
+<li>After an MUnit is linked to its main MUnit, it can't be deleted manually.</li>
+<li>An MUnit in the background MSession can be linked to more than one main MUnit. In this case, it is deleted when the last main MUnit
+  pointing to it is deleted.</li>
+</ul>
+<p><strong>Input parameters:</strong></p>
+<ul>
+<li><strong>sourceMUnitHandle</strong>: the index of the main measurement unit. It must be an MUnit with measurement role.</li>
+<li><strong>linkedMUnitHandle</strong>: the index of the destination measurement unit to link to the the mainMUnit . It must point to an MUnit in the background session.</li>
+</ul>
+<p>Returns true if linking was successful, false otherwise.</p>
+<h3 id="usage-in-matlab_9">Usage in Matlab</h3>
+<p>result = femtoapiObj.setLinkedMUnit(sourceMUnitHandle, linkedMUnitHandle)</p>
+<p>For more information about usage, see the  and the examples below.</p>
+<h3 id="examples_9">Examples:</h3>
+<p>Link MUnit with handle '61,1,0' from the background session to the main MUnit with handle '61,0,1':</p>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.setLinkedMUnit('61,0,1', '61,1,0')”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong>Matlab client code example:</strong></p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)  
+result = femtoapiObj.setLinkedMUnit ([61,0,1], [61,1,0]); 
+</code></pre>
+<p><strong>Python client code example:</strong></p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.setLinkedMUnit('61,0,1', '61,1,0');” 
+simpleCmdParser=client.sendJSCommand(command)  
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;setLinkedMUnit(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

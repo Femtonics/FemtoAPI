@@ -1,0 +1,3715 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../munit-manipulations/">
+      
+      
+        <link rel="next" href="../setting-measurement-duration/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Read-write binary channel data - FemtoAPI 2.0 Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#read-write-binary-channel-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-header__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FemtoAPI 2.0 Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Read-write binary channel data
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-nav__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FemtoAPI 2.0 Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Knowledge Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction and architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction and architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/main-features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main features overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prerequisites-for-using-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites for using the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI command reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI command reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-and-remove-channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add and remove channels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-file-events-and-query-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API file events and query functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curve-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curve operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-acquisition-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get acquisition state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-microscope-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get microscope state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-processing-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get processing state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-imaging-window-viewport-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set imaging window (viewport) parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-pmt-laserintensity-device-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set PMT/Laserintensity device values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-properties-for-measurement-items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set properties for measurement items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-zstack-pmt-laser-intensity-device-depth-profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-measurement-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manipulating-axis-positions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiroi-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MultiROI commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../munit-manipulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-parameters-of-binary-read-and-write-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common parameters of binary read and write commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-for-using-binary-read-and-write-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes for using binary read and write commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differences-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadrawchanneldatatoclientsblobhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readRawChannelDataToClientsBlob(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readRawChannelDataToClientsBlob(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadchanneldatatoclientsblobhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readChannelDataToClientsBlob(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readChannelDataToClientsBlob(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadrawchanneldatajsonhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readRawChannelDataJSON(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readRawChannelDataJSON(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadchanneldatajsonhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readChannelDataJSON(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readChannelDataJSON(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-imgdata-femtoapifilereadrawchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imgdata-femtoapifilereadrawchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-imgdata-femtoapifilereadchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imgdata-femtoapifilereadchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewriterawchanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Var isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewriterawchanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewritechanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewritechanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage examples:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage examples:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-and-write-raw-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read and write raw data:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-and-write-converted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read and write converted data:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewriterawchanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Var isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewriterawchanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewritechanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewritechanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileaddlastframetomsessionsdestmsession-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result-femtoapifileaddlastframetomsessionsdestmsession-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-measurement-duration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting measurement duration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starting-and-stopping-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting and stopping measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI library reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI library reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIWebSocketClient reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/replymessageparser-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplyMessageParser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Matlab client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6_1" id="__nav_2_1_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab demos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI Matlab demos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI browser demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image processing demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions to implement ROI calculations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-function-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab function reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/helper-classes-and-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper classes and functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using the FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Python client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Python client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the python environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: creating a FemtoAPI Python client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using FemtoAPI with a simple WebSocket in Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-femtoapi-with-simple-websocket-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using FemtoAPI with Simple WebSocket Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_10" id="__nav_2_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the FemtoAPI client in C++ code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using the FemtoAPI client in C++ code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++ tutorial: creating a FemtoAPI client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-parameters-of-binary-read-and-write-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common parameters of binary read and write commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-for-using-binary-read-and-write-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes for using binary read and write commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differences-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadrawchanneldatatoclientsblobhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readRawChannelDataToClientsBlob(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readRawChannelDataToClientsBlob(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadchanneldatatoclientsblobhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readChannelDataToClientsBlob(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readChannelDataToClientsBlob(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadrawchanneldatajsonhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readRawChannelDataJSON(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readRawChannelDataJSON(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapifilereadchanneldatajsonhandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIFile.readChannelDataJSON(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIFile.readChannelDataJSON(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-imgdata-femtoapifilereadrawchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imgdata-femtoapifilereadrawchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-imgdata-femtoapifilereadchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imgdata-femtoapifilereadchanneldatahandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewriterawchanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Var isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewriterawchanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewritechanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewritechanneldatadata-handle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage examples:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage examples:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-and-write-raw-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read and write raw data:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-and-write-converted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read and write converted data:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewriterawchanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Var isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewriterawchanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-iswritten-femtoapifilewritechanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswritten-femtoapifilewritechanneldatafromattachmenthandle-fromdims-countdims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifileaddlastframetomsessionsdestmsession-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result-femtoapifileaddlastframetomsessionsdestmsession-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="read-write-binary-channel-data">Read-write binary channel data</h1>
+<h4 id="common-parameters-of-binary-read-and-write-commands">Common parameters of binary read and write commands</h4>
+<ul>
+<li><strong>handle</strong> The unique descriptor string of an open .mesc file, measurement session, measurement, or channel. For example, '52,0,1,1' means the .mesc file with ID 52, its measurement session with ID 0, its measurement unit with ID 1, and its channel number 1. Handles are displayed on the MESc GUI, too.</li>
+<li><strong>fromDims</strong> A string enumerating the starting indices of a sub-hyperrectangle of a multidimensional data array. For example, in a 3-dimensional data array, '256,0,10' means index 256 in the first dimension, index 0 in the second dimension, and index 10 in the third dimension. Note that all indices are zero-based.</li>
+<li><strong>countDims</strong> A string enumerating the dimensions of a sub-hyperrectangle of a multidimensional data array. For example, in a three-dimensional data array, '512,512,10' means 512 pixels in the first and second dimensions, and 10 frames in the third dimension.</li>
+</ul>
+<h4 id="notes-for-using-binary-read-and-write-commands">Notes for using binary read and write commands</h4>
+<ul>
+<li>
+<p>All indices in the parameter fromDims are zero-based. </p>
+</li>
+<li>
+<p>The parameters fromDims and countDims must have the same number of dimensions.</p>
+</li>
+<li>
+<p>If the parameters fromDims and countDims are not strings containing nonnegative integers separated by single commas, a corresponding error message is generated in the MESc log file with the tag &lt;MEScAPIServer&gt;, and the last error message can be retrieved with the FemtoAPI command 'FemtoAPIFile.getLastCommandError();'.</p>
+</li>
+<li>
+<p>In all binary read and write commands, raw data are always transferred using the data type of the channel specified by the handle, and the converted data are always transferred as double precision floating point numbers.</p>
+</li>
+<li>
+<p>If you write var before the return value of any FemtoAPI command, the result is not sent to the client as JSON or binary data. E.g.,</p>
+</li>
+<li>
+<p>var result = FemtoAPIFile.getProcessingState() stores the result on the server side, but</p>
+</li>
+<li>
+<p>result = FemtoAPIFile.getProcessingState() and FemtoAPIFile.getProcessingState() send the result to the client.</p>
+</li>
+<li>
+<p>The read(Raw)ChannelData commands described in the following section always return null to the client and store their results only on the server side.</p>
+</li>
+<li>
+<p>the sub-hyperrectangle described by the parameters fromDims and countDims must always have an intersection with the dimensions of the specified channel, e.g., they must fulfill the following conditions for all dimensions n (Otherwise, no data is transferred, and null is returned to the client):  </p>
+</li>
+<li>
+<p>(0&lt;=) fromDims(n) &lt; dimension(n) ,</p>
+</li>
+<li>1 &lt;= countDims(n) , </li>
+<li>countDims(n) can be the string 'Inf' , it means the whole image part after fromDims(n), so it is internally truncated as following: countDims(n) = dimension(n) - fromDims(n),</li>
+<li>
+<p>if fromDims(n) + countDims(n) &gt; dimension(n), then countDims(n) is truncated internally so that fromDims(n) + countDims(n) = dimension(n).</p>
+</li>
+<li>
+<p>The 'Inf' as countDims(n) parameter is useful when you want to read part of an image, but you don't know the exact dimensions of it. You only have to deal with the fromDims(n) parameter. </p>
+</li>
+<li>
+<p>In case of write functions, the data to write must have the same dimensions as the sub-hyperrectangle specfied by fromDims and (truncated) countDims parameters. Otherwise an error is returned and no data is written.</p>
+</li>
+<li>
+<p>readRawChannelDataToClientsBlob transfers raw binary data to the FemtoAPI client as a binary blob. This method is useful for quickly transferring large amounts of binary data from the server to the client. The read data type of raw data is the data type of the channel specified by the parameter handle.</p>
+</li>
+</ul>
+<h4 id="differences-in-matlab">Differences in Matlab</h4>
+<p>In the Matlab variant of these commands, the following differences are present: </p>
+<ul>
+<li>
+<p>Regarding the read channel data commands, only the read(Raw)ChannelDataToClientsBlob commands are wrapped, because of practical reasons. It returns image data as 3D (or 4D in case of volume scan) matlab array. Similarly, regarding the write channel data command, the write(Raw)ChannelDataFromAttachment command is wrapped. </p>
+</li>
+<li>
+<p>In case of reading converted data, Matlab function readChannelData() actually reads the raw data from server, and uses the channel conversion values from processing state and converts it locally according to the given data type. </p>
+</li>
+<li>
+<p>input parameters are a bit different: </p>
+</li>
+<li>
+<p><strong>readSubSlabSpec</strong>: instead of fromDims and countDims as strings, the sub-hyperrectangle of a multidimensional image array in read functions is specified as a cell containing numeric arrays: { [fromX : stepX : toX], [fromY : stepY : toY], [fromZ : stepZ : toZ] } in case of 3D channel data, and { [fromX : stepX : toX], [fromY : stepY : toY], [fromZ : stepZ : toZ], [fromT : stepT : toT] } in case of 4D channel data. For example: { [1:3:10], [2:5:300], [1:10] } means the image portion in X dimension from pixel 1 to 10, with step 3, in Y dimension from 2 to 300 with step 5, and in Z dimension, from 1 to 10. If it is not specified, the whole channel data is read.</p>
+</li>
+<li><strong>channelHandle</strong>: as described above, a unique id of the requested channel, but given as a numeric array (e.g. [43 0 1 0] )</li>
+<li>in case of write functions, the image data is always given as input parameter, so the sub-hyperrectangle can be specified by fromDims and the input image data. (The dimensions of the given image array corresponds to the countDims parameter). </li>
+<li>input parameters fromDims and readSubSlabSpec use Matlab indexing (begin with 1)</li>
+</ul>
+<h2 id="femtoapifilereadrawchanneldatatoclientsblobhandle-fromdims-countdims"><strong>FemtoAPIFile.readRawChannelDataToClientsBlob(handle, fromDims, countDims)</strong></h2>
+<p>Transfers raw binary data to the FemtoAPI client as a binary blob. This method is useful for quickly transferring large amounts of binary data from the server to the client. The read data type of raw data is the data type of the channel specified by the parameter handle.</p>
+<p>Return value: In case of a successful read, the server returns the binary data of the requested sub-hyperrectangle, and the JavaScript engine returns a JSON object with the size of the read data.</p>
+<p>Otherwise, no binary data are received and the JS engine returns 0 as the data size.</p>
+<h3 id="usage-in-matlab">Usage in Matlab:</h3>
+<p>Firstly, you need to create a FemtoAPIProcessing object, as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, you can call this command as following: </p>
+<p><strong>rawData = readRawChannelData(channelHandle, readSubSlabSpec)</strong></p>
+<p>Input parameters:</p>
+<p>Required: </p>
+<ul>
+<li>channelHandle: numeric array, unique id of the requested channel (e.g. [43 0 1 0] )</li>
+</ul>
+<p>Optional:</p>
+<ul>
+<li>readSubSlabSpec: cell, that contains numeric arrays, which specifies a sub-hyperrectangle of a multidimensional image array. Instead of 'fromDims' and 'countDims', it uses the following format: { [fromX : stepX : toX], [fromY : stepY : toY], [fromZ : stepZ : toZ] } in case of 3D channel data, and { [fromX : stepX : toX], [fromY : stepY : toY], [fromZ : stepZ : toZ], [fromT : stepT : toT] } in case of 4D channel data. For example: { [1:3:10], [2:5:300], [1:10] } means the image portion in X dimension from pixel 1 to 10, with step 3, in Y dimension from 2 to 300 with step 5, and in Z dimension, from 1 to 10. If not specified, the whole channel data is read.</li>
+</ul>
+<p>Notes on readSubSlabSpec parameter: </p>
+<ul>
+<li>the fromD, stepD, toD parameters have to be positive integers, otherwise an error is returned.</li>
+<li>in case of 3D channel data, the image slab has to be specified in X, Y, Z dimensions, unless the channel contains only 1 frame, in this case, readSubSlabSpec can be { fromX : stepX : toX, fromY : stepY : toY } or { fromX : stepX : toX, fromY : stepY : toY, 1 }, otherwise an error is returned and no data is read.</li>
+<li>in case of 4D channel data (e.g. volume scan), the slab has to be specified in all 4 dimensions, otherwise an error is returned and no data is read.</li>
+<li>other than the cases listed, if the subslab dimension size is less than 3D or greater than 4D, an error is returned </li>
+</ul>
+<p>Returns the read raw data as 2D (channel contains only 1 frame), 3D, or 4D (in case of volume scan data) array. The read raw data type is the channel data type (uint16 or double).</p>
+<h3 id="examples"><strong><em>Examples</em></strong>:</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.readRawChannelDataToClientsBlob('61,0,1,0', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code>femtoapiObj = MEScAPIProcessing(); % connect to local server (MESc) 
+
+% read raw channel data of measurement unit [61,0,1], from channel 0
+imRawData = femtoapiObj.readRawChannelData ([61,0,1,0]);
+
+% read part of image data: 1:512 pixels in X, 1:512 in Y, and 1:10 in Z dimension
+readSubSlabSpec = {[1:512],[1:512],[1:10]}; 
+imDataPartRaw = femtoapiObj.readRawChannelData ([61,0,1,0],readSubSlabSpec);
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.readRawChannelDataToClientsBlob('61,0,1,0', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;Image size %d&quot; % simpleCmdParser.getJSEngineResult())
+    if simpleCmdParser.hasBinaryParts() == True:
+        for parts in simpleCmdParser.getPartList():
+            #print(parts.data())
+            print( &quot;Binary part sizes: %d&quot; % parts.size())
+</code></pre>
+<h2 id="femtoapifilereadchanneldatatoclientsblobhandle-fromdims-countdims"><strong>FemtoAPIFile.readChannelDataToClientsBlob(handle, fromDims, countDims)</strong></h2>
+<p>The converted binary data is transferred from the server to the FemtoAPI client as a binary blob. The data type is double.</p>
+<p>Return value: The same as in the 'raw' case, but the converted binary data are returned from the server.</p>
+<h3 id="usage-in-matlab_1">Usage in Matlab</h3>
+<p>Firstly, you need to create a FemtoAPIProcessing object, as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, you can call this command as following: </p>
+<p><strong>convertedData = femtoapiObj.readChannelData(channelHandle, readDataType, readSubSlabSpec)</strong></p>
+<p>Input arguments:</p>
+<p>Required: </p>
+<ul>
+<li>channelHandle: same as described at readRawChannelData command</li>
+<li>readDataType: data type of channel specified by 'channelHandle'. It can be 'uint16' or 'double'. </li>
+</ul>
+<p>Optional: </p>
+<ul>
+<li>readSubSlabSpec: same as described at readRawChannelData command</li>
+</ul>
+<p>Returns the converted image data.</p>
+<p><em>Note</em>: This function internally reads the raw channel data from server in the channel data type, then converts it locally according to the given read data type ( 'readDataType' ).</p>
+<h3 id="examples_1">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.readChannelDataToClientsBlob('61,0,1,0', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code>femtoapiObj = MEScAPIProcessing(); % connect to local server (MESc) 
+
+% read raw channel data of measurement unit [61,0,1], from channel 0
+imRawData = femtoapiObj.readChannelData ([61,0,1,0],'uint16');
+
+% read part of image data: 1:512 pixels in X, 1:512 in Y, and 1:10 in Z dimension
+readSubSlabSpec = {[1:512],[1:512],[1:10]}; 
+readDataType = 'double'; % it can be 'double' or 'uint16'
+imDataPartRaw = femtoapiObj.readChannelData ([61,0,1,0],readDataType, readSubSlabSpec);
+
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.readChannelDataToClientsBlob('61,0,1,0', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;Image size %d&quot; % simpleCmdParser.getJSEngineResult())
+    if simpleCmdParser.hasBinaryParts() == True:
+        for parts in simpleCmdParser.getPartList():
+            #print(parts.data())
+            print( &quot;Binary part sizes: %d&quot; % parts.size())
+</code></pre>
+<h2 id="femtoapifilereadrawchanneldatajsonhandle-fromdims-countdims"><strong>FemtoAPIFile.readRawChannelDataJSON(handle, fromDims, countDims)</strong></h2>
+<p>The server sends the requested raw image data as a JSON string to the FemtoAPI client. No binary data are transferred.</p>
+<p>Return value: In case of a successful read, the specified raw values are returned to the client as a JSON array. Otherwise, an empty JSON array is returned. No binary data are sent from the server.</p>
+<h3 id="examples_2">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.readRawChannelDataJSON('61,0,0,0', '0,0,10', '512,512,1')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<p>This function is not present in the Matlab client. </p>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.readRawChannelDataJSON('61,0,0,0', '0,0,10', '512,512,1');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;readRawChannelDataJSON(): %s&quot; % simpleCmdParser.getJSEngineResult().encode('utf-8'))
+</code></pre>
+<h2 id="femtoapifilereadchanneldatajsonhandle-fromdims-countdims"><strong>FemtoAPIFile.readChannelDataJSON(handle, fromDims, countDims)</strong></h2>
+<p>The server sends the requested converted image data as a JSON string to the FemtoAPI client. No binary data are transferred.</p>
+<p>Return value: In case of a successful read, the specified converted values are returned to the client as a JSON array. Otherwise, an empty JSON array is returned. No binary data are sent from the server.</p>
+<h3 id="examples_3">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.readChannelDataJSON('61,0,1,1', '0,0,3', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<p>This function is not present in the Matlab client. </p>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.readChannelDataJSON('61,0,1,1', '0,0,3', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;readChannelDataJSON(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-imgdata-femtoapifilereadrawchanneldatahandle-fromdims-countdims"><strong>var imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)</strong></h2>
+<h2 id="or"><strong>or</strong></h2>
+<h2 id="imgdata-femtoapifilereadrawchanneldatahandle-fromdims-countdims"><strong>imgData = FemtoAPIFile.readRawChannelData(handle, fromDims, countDims)</strong></h2>
+<p>Reads raw channel data on the server side to a JavaScript variable. The read data type of raw data is the data type of the channel specified by the parameter handle.</p>
+<p>Return value: Both commands return the JSON result 'null' to the client side, and no binary data. The returned value is stored on the server side.</p>
+<h3 id="examples_4">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “var data = FemtoAPIFile.readRawChannelData('61,0,1,0', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<p>This function is not present in the Matlab client. </p>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;var data = FemtoAPIFile.readRawChannelData('61,0,1,0', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;readRawChannelData(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-imgdata-femtoapifilereadchanneldatahandle-fromdims-countdims"><strong>var imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)</strong></h2>
+<h2 id="or_1"><strong>or</strong></h2>
+<h2 id="imgdata-femtoapifilereadchanneldatahandle-fromdims-countdims"><strong>imgData = FemtoAPIFile.readChannelData(handle, fromDims, countDims)</strong></h2>
+<p>Reads converted channel data on the server side into a JavaScript variable. The read data type of converted data is double.</p>
+<p>Both commands return the JSON result 'null' to the client side, and no binary data.</p>
+<h3 id="examples_5">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “var data = FemtoAPIFile.readChannelData('61,0,1,0', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<p>This function is not present in the Matlab client. </p>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;var data = FemtoAPIFile.readChannelData('61,0,1,0', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;readChannelData(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-iswritten-femtoapifilewriterawchanneldatadata-handle-fromdims-countdims"><strong>Var isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)</strong></h2>
+<h2 id="or_2"><strong>or</strong></h2>
+<h2 id="iswritten-femtoapifilewriterawchanneldatadata-handle-fromdims-countdims"><strong>isWritten = FemtoAPIFile.writeRawChannelData(data, handle, fromDims, countDims)</strong></h2>
+<p>Writes raw channel data from the variable to the specified sub-hyperrectangle. The variable should be of the same type as the channel to write specified by handle, and the sub-hyperrectangle specified by fromDims and countDims must fulfill the conditions described in the introduction.</p>
+<p>The returned JSON object variable isWritten contains true and a 'Success' message, if the data was written successfully, otherwise it contains false and the error message itself. At the commands, in the former case, when var is before the isWritten variable, it is stored on the server side, and null is sent to the client, while in the latter case, the resulting variable is sent to the client as a JSON object.</p>
+<h3 id="examples_6">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “var image = FemtoAPIFile.readRawChannelData('61,0,1,0', '0,0,0', '512,512,10'); FemtoAPIFile.writeRawChannelData(image,'61,0,1,1', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<p>This function is not present in the Matlab client. </p>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;var image = FemtoAPIFile.readRawChannelData('61,0,1,0', '0,0,0', '512,512,10'); FemtoAPIFile.writeRawChannelData(image,'61,0,1,1', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;read/write commands result: %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="var-iswritten-femtoapifilewritechanneldatadata-handle-fromdims-countdims"><strong>var isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)</strong></h2>
+<h2 id="or_3"><strong>or</strong></h2>
+<h2 id="iswritten-femtoapifilewritechanneldatadata-handle-fromdims-countdims"><strong>isWritten = FemtoAPIFile.writeChannelData(data, handle, fromDims, countDims)</strong></h2>
+<p>Writes the converted data from a variable. Otherwise the same is true as for the writeRawChannelData command. </p>
+<h3 id="examples_7">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “var image = FemtoAPIFile.readChannelData('61,0,1,0', '0,0,0', '512,512,10'); FemtoAPIFile.writeChannelData(image,'61,0,1,1', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<h3 id="usage-examples"><strong>Usage examples:</strong></h3>
+<h4 id="read-and-write-raw-data">Read and write raw data:</h4>
+<p><em>imgData = FemtoAPIFile.readRawChannelData('61,0,1,0', '0,0,0', '64,64,1');</em></p>
+<p>// reads data to a variable on the server side</p>
+<p><em>isWritten = FemtoAPIFile.writeRawChannelData(imgData, '62,0,0,0', '0,0,0', '64,64,1');</em></p>
+<p>// writes the imgData variable and the value of the isWritten variable (write success/failed) is returned to the client</p>
+<h4 id="read-and-write-converted-data">Read and write converted data:</h4>
+<p><em>imgData = FemtoAPIFile.readChannelData('61,0,1,0', '0,0,0', '64,64,1');</em></p>
+<p>// reads data to a variable on the server side</p>
+<p><em>isWritten = FemtoAPIFile.writeChannelData(imgData, '62,0,0,0', '0,0,0', '64,64,1');</em></p>
+<p>// writes the imgData variable and the value of the isWritten variable (write success/failed) is returned to the client</p>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<p>This function is not present in the Matlab client. </p>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;var image = FemtoAPIFile.readChannelData('61,0,1,0', '0,0,0', '512,512,10'); FemtoAPIFile.writeChannelData(image,'61,0,1,1', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;read/write commands result: %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="_1"></h2>
+<h2 id="var-iswritten-femtoapifilewriterawchanneldatafromattachmenthandle-fromdims-countdims"><strong>Var isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)</strong></h2>
+<h2 id="or_4"><strong>or</strong></h2>
+<h2 id="iswritten-femtoapifilewriterawchanneldatafromattachmenthandle-fromdims-countdims"><strong>isWritten = FemtoAPIFile.writeRawChannelDataFromAttachment(handle, fromDims, countDims)</strong></h2>
+<p>Writes the specified raw data from an attached binary data file. The attached binary data type must be the same as the channel data type of the specified data, and the fromDims and countDims parameters must fulfill the conditions described in the introduction.</p>
+<p>Return value: the same as for the write(Raw)ChannelData command.</p>
+<h3 id="usage-in-matlab_2">Usage in Matlab</h3>
+<p>Firstly, you need to create a FemtoAPIProcessing object, as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, you can call this command as following: </p>
+<p><strong>femtoapiObj.writeRawChannelData(channelHandle, rawData, fromDims)</strong></p>
+<p>Input arguments:</p>
+<p>Required: </p>
+<ul>
+<li>channelHandle: specifies the channel where to write 'rawData'. It must be a vector, e.g. [43,0,1,0] is the channel with index 0 in the measurement unit [43,0,1] </li>
+<li>rawData: specifies the image data to write as matlab array. </li>
+</ul>
+<p>Optional: </p>
+<ul>
+<li>fromDims: vector, specifies from which pixel the input rawData is written into the given channel, e.g. [0,0,0]. Details are in the introduction.</li>
+</ul>
+<p><em>Note</em>: the written sub-hyperrectangle is specified by fromDims and rawData (the dimensions of rawData corresponds to the countDims parameter). </p>
+<h3 id="examples_8">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">client-&gt;uploadAttachment(buffer);
+
+QString command = “result= FemtoAPIFile.writeRawChannelDataFromAttachment('61,0,1,1', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code>femtoapiObj = MEScAPIProcessing() % connect to local server
+
+
+writeFromDims = [1,1,1];
+femtoapiObj.writeRawChannelData ([61,0,1,1], imDataRaw, writeFromDims);
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">client.uploadAttachment(buffer);
+command=&quot;result= FemtoAPIFile.writeRawChannelDataFromAttachment('61,0,1,1', '0,0,0', '512,512,10');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;writeRawChannelDataFromAttachment(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="_2"></h2>
+<h2 id="var-iswritten-femtoapifilewritechanneldatafromattachmenthandle-fromdims-countdims"><strong>var isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)</strong></h2>
+<h2 id="or_5"><strong>or</strong></h2>
+<h2 id="iswritten-femtoapifilewritechanneldatafromattachmenthandle-fromdims-countdims"><strong>isWritten = FemtoAPIFile.writeChannelDataFromAttachment(handle, fromDims, countDims)</strong></h2>
+<p>Writes the specified converted data from an attached binary data file. The attached binary data type must be the same as the channel data type of the specified data, and the fromDims and countDims parameters must fulfill the conditions described above.</p>
+<p>Return value: the same as for the write(Raw)ChannelData command.</p>
+<h3 id="usage-in-matlab_3">Usage in Matlab</h3>
+<p>Firstly, you need to create a FemtoAPIProcessing object, as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, you can call this command as following: </p>
+<p><strong>femtoapiObj.writeChannelData(channelHandle, data, fromDims)</strong></p>
+<p>The data parameter is the converted data to write. Otherwise, the same applies as in case of writeRawChannelData.</p>
+<p><em>Note</em>: Internally, converted data is converted back to raw data first according to channel data type, then this raw data is sent to the server.</p>
+<h3 id="examples_9">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">client-&gt;uploadAttachment(buffer);
+
+QString command = “result= FemtoAPIFile.writeChannelDataFromAttachment('61,0,1,1', '0,0,0', '512,512,10')”;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>It is possible to read converted data and then write it back as raw data and vice versa.</li>
+<li>The data type of the written raw data must be the same as the channel data type (double or uint16), otherwise the writing operation fails.</li>
+<li>Converted data are always read and written in the data type double, while raw data are always read and written in the data type of the specified channel.</li>
+</ul>
+<h2 id="var-result-femtoapifileaddlastframetomsessionsdestmsession-spacename"><strong>var result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)</strong></h2>
+<h2 id="or_6"><strong>or</strong></h2>
+<h2 id="result-femtoapifileaddlastframetomsessionsdestmsession-spacename"><strong>result = FemtoAPIFile.addLastFrameToMSession(sDestMSession, SpaceName)</strong></h2>
+<p>Creates a new MUnit in the given MSession, and adds the frame on the immediate window (last frame of a measurement/live or snap) to it. If sDestMSession parameter is empty string, the current MSession is considered. Last frame is considered as the frame of immediate window of the space given by SpaceName, or from the default space if SpaceName is empty.<br />
+Note: This is a synchronous operation, it waits until the new measurement unit is created and the immediate image is added to it, then returns the MUnit the node descriptor.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>sDestMSession:</strong> The index of the destination measurement session</li>
+<li><strong>SpaceName:</strong> Space name</li>
+</ul>
+<p>Result:</p>
+<p>The node descriptor of the created measurement unit containing the immediate image.</p>
+<h3 id="usage-in-matlab_4">Usage in Matlab</h3>
+<p>result = femtoapiObj.addLastFrameToMSession(destMSessionHandle, spaceName)</p>
+<p>For more information about usage, see the introduction and the examples below.</p>
+<h3 id="examples_10">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code>QString command = “FemtoAPIFile.addLastFrameToMSession('62,0', 'space1')”; 
+auto cmdParser=client-&gt;sendJSCommand(command); 
+</code></pre>
+<p><strong><em>*</em>Matlab client code example:</strong>*** </p>
+<pre><code>femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)  
+result = femtoapiObj.addLastFrameToMSession ([62,0], 'space1'); 
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code>command=&quot;FemtoAPIFile.addLastFrameToMSession ('62,0', 'space1');” 
+simpleCmdParser=client.sendJSCommand(command)  
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;moveMUnit (): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

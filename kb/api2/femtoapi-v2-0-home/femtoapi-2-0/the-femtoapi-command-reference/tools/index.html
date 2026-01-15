@@ -1,0 +1,3908 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../starting-and-stopping-measurements/">
+      
+      
+        <link rel="next" href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Tools - FemtoAPI 2.0 Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tools" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-header__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FemtoAPI 2.0 Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tools
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-nav__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FemtoAPI 2.0 Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Knowledge Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction and architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction and architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/main-features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main features overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prerequisites-for-using-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites for using the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI command reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI command reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-and-remove-channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add and remove channels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-file-events-and-query-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API file events and query functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curve-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curve operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-acquisition-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get acquisition state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-microscope-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get microscope state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-processing-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get processing state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-imaging-window-viewport-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set imaging window (viewport) parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-pmt-laserintensity-device-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set PMT/Laserintensity device values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-properties-for-measurement-items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set properties for measurement items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-zstack-pmt-laser-intensity-device-depth-profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-measurement-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manipulating-axis-positions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiroi-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MultiROI commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../munit-manipulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-write-binary-channel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-measurement-duration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting measurement duration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starting-and-stopping-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting and stopping measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-ismodified-femtoapifilemodifyconversionsconversionname-dscale-doffset-bsave-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var isModified = FemtoAPIFile.modifyConversion(sConversionName, dScale, dOffset, bSave = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var isModified = FemtoAPIFile.modifyConversion(sConversionName, dScale, dOffset, bSave = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilegetstatusscommandid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.getStatus(sCommandID)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.getStatus(sCommandID)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilegetstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.getStatus()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.getStatus()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-curvexysize-femtoapifilecurveinfomunithandle-curveidx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var curveXYSize = FemtoAPIFile.curveInfo(mUnitHandle, curveIdx)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var curveXYSize = FemtoAPIFile.curveInfo(mUnitHandle, curveIdx)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-success-femtoapimicroscopesetfocusingmodefocusingmode-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var success = FemtoAPIMicroscope.setFocusingMode(focusingMode, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var success = FemtoAPIMicroscope.setFocusingMode(focusingMode, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapimicroscopegetfocusingmodesspacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIMicroscope.getFocusingModes(spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIMicroscope.getFocusingModes(spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-protocol-femtoapimicroscopegetactiveprotocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var protocol = FemtoAPIMicroscope.getActiveProtocol()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var protocol = FemtoAPIMicroscope.getActiveProtocol()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeeded-femtoapimicroscopesetactivetaskandsubtasktaskname-subtaskname-timeseries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeeded = FemtoAPIMicroscope.setActiveTaskAndSubTask(taskName, subTaskName = 'timeSeries')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var succeeded = FemtoAPIMicroscope.setActiveTaskAndSubTask(taskName, subTaskName = &#39;timeSeries&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-version-femtoapimicroscopegetcommandsetversion-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var version = FemtoAPIMicroscope.getCommandSetVersion() or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-version-femtoapifilegetcommandsetversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var version = FemtoAPIFile.getCommandSetVersion()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var version = FemtoAPIFile.getCommandSetVersion()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-lasterror-femtoapimicroscopegetlastcommanderror-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var lastError= FemtoAPIMicroscope.getLastCommandError() or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-lasterror-femtoapifilegetlastcommanderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var lastError = FemtoAPIFile.getLastCommandError()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var lastError = FemtoAPIFile.getLastCommandError()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI library reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI library reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIWebSocketClient reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/replymessageparser-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplyMessageParser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Matlab client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6_1" id="__nav_2_1_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab demos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI Matlab demos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI browser demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image processing demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions to implement ROI calculations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-function-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab function reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/helper-classes-and-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper classes and functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using the FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Python client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Python client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the python environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: creating a FemtoAPI Python client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using FemtoAPI with a simple WebSocket in Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-femtoapi-with-simple-websocket-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using FemtoAPI with Simple WebSocket Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_10" id="__nav_2_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the FemtoAPI client in C++ code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using the FemtoAPI client in C++ code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++ tutorial: creating a FemtoAPI client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-ismodified-femtoapifilemodifyconversionsconversionname-dscale-doffset-bsave-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var isModified = FemtoAPIFile.modifyConversion(sConversionName, dScale, dOffset, bSave = false)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var isModified = FemtoAPIFile.modifyConversion(sConversionName, dScale, dOffset, bSave = false)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilegetstatusscommandid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.getStatus(sCommandID)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.getStatus(sCommandID)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapifilegetstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIFile.getStatus()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIFile.getStatus()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-curvexysize-femtoapifilecurveinfomunithandle-curveidx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var curveXYSize = FemtoAPIFile.curveInfo(mUnitHandle, curveIdx)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var curveXYSize = FemtoAPIFile.curveInfo(mUnitHandle, curveIdx)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-success-femtoapimicroscopesetfocusingmodefocusingmode-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var success = FemtoAPIMicroscope.setFocusingMode(focusingMode, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var success = FemtoAPIMicroscope.setFocusingMode(focusingMode, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-result-femtoapimicroscopegetfocusingmodesspacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var result = FemtoAPIMicroscope.getFocusingModes(spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var result = FemtoAPIMicroscope.getFocusingModes(spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-protocol-femtoapimicroscopegetactiveprotocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var protocol = FemtoAPIMicroscope.getActiveProtocol()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var protocol = FemtoAPIMicroscope.getActiveProtocol()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeeded-femtoapimicroscopesetactivetaskandsubtasktaskname-subtaskname-timeseries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeeded = FemtoAPIMicroscope.setActiveTaskAndSubTask(taskName, subTaskName = 'timeSeries')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var succeeded = FemtoAPIMicroscope.setActiveTaskAndSubTask(taskName, subTaskName = &#39;timeSeries&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab-usage_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matlab usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-version-femtoapimicroscopegetcommandsetversion-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var version = FemtoAPIMicroscope.getCommandSetVersion() or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-version-femtoapifilegetcommandsetversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var version = FemtoAPIFile.getCommandSetVersion()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var version = FemtoAPIFile.getCommandSetVersion()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-lasterror-femtoapimicroscopegetlastcommanderror-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var lastError= FemtoAPIMicroscope.getLastCommandError() or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-lasterror-femtoapifilegetlastcommanderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var lastError = FemtoAPIFile.getLastCommandError()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var lastError = FemtoAPIFile.getLastCommandError()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tools">Tools</h1>
+<h2 id="_1"></h2>
+<h2 id="var-ismodified-femtoapifilemodifyconversionsconversionname-dscale-doffset-bsave-false"><strong>var isModified = FemtoAPIFile.modifyConversion(sConversionName, dScale, dOffset, bSave = false)</strong></h2>
+<p>Modifies conversion in MESc conversion manager to the given value, which can be saved to file if requested.</p>
+<p>Conversion is given by its name, and its type can only be identical or linear, otherwise this function returns false. </p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>sConversionName</strong>: string, name of the conversion, as it can be seen in MESc conversion manager. </li>
+<li><strong>dScale</strong>: double, the new scale to set </li>
+<li><strong>dOffset</strong>: double, the new offset to set</li>
+<li><strong>bSave</strong>: boolean, if true, the conversion is saved to disk if it has been modified. Otherwise, the specified conversion modified only in memory. Default value is false.</li>
+</ul>
+<p>Returns: true if the named conversion's scale and offset has been successfully modified, </p>
+<p>false otherwise (e.g. if conversion name is invalid, or failed to save to the disk)</p>
+<h3 id="usage-in-matlab">Usage in Matlab</h3>
+<p>First, a FemtoAPIProcessingobject must be created, as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). Usage is the same as described above: </p>
+<p>isModified = femtoapiObj.modifyConversion(conversionName, scale, offset, bSave)</p>
+<p>Input parameters (required): </p>
+<ul>
+<li>conversionName: char array</li>
+<li>scale: double</li>
+<li>offset: double</li>
+</ul>
+<p>Input parameters (optional): </p>
+<ul>
+<li>bSave: logical value</li>
+</ul>
+<p>In case of any error, it throws an error type exception containing the error message, otherwise it returns true. </p>
+<h3 id="examples">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">% set conversion PMT_UG parameters, without saving it 
+QString command = “FemtoAPIFile.modifyConversion('PMT_UG',2.0,1.1,false)”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing;
+
+% set conversion PMT_UG parameters, without saving it 
+femtoapiObj.modifyConversion('PMT_UG',2.0,1.1,false); 
+</code></pre>
+<p><strong>Python client example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.modifyConversion('PMT_UG', '2.0', '1.1', false)” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.modifyConversion(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_2"></h2>
+<h2 id="var-result-femtoapifilegetstatusscommandid"><strong>var result = FemtoAPIFile.getStatus(sCommandID)</strong></h2>
+<p>Gets status of an asynchronous file operation based on their command ID. You can get the command ID as the returned value of any asynchronous file operation command, if it was successfully initiated.</p>
+<p>It returns a json with the following fields: </p>
+<ul>
+<li><strong>isPending</strong>: bool value, true if the requested file operation is in progress, false if it has been ended or if no such command ID exists.</li>
+<li><strong>error</strong>: contains error information. It is empty string if no error has happened.</li>
+</ul>
+<h3 id="usage-in-matlab_1">Usage in Matlab</h3>
+<p>First create a FemtoAPIProcessingobject as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). You can use it the same way as described above:</p>
+<p>result = femtoapiObj.getStatus(commandID) </p>
+<p>where commandID is a Matlab char array, and 'result' is the returned json from server parsed into a Matlab struct.</p>
+<h3 id="examples_1">Examples</h3>
+<p><strong>C++ code example</strong> </p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.saveFileAsync()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+if (!cmdParser) {
+    qDebug()&lt;&lt;&quot;Can't create result parser!&quot;;
+    return -1;
+}
+if (cmdParser-&gt;getResultCode()!=0) {
+    qDebug()&lt;&lt;cmdParser-&gt;getErrorText();
+    return -1;
+}
+
+QString result=cmdParser-&gt;getJSEngineResult().toString();
+
+// parse command result
+QJsonParseError error;
+QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8(), &amp;error);
+if (doc.isNull())
+{
+    qDebug()&lt;&lt;&quot;Can't parse result!&quot;;
+    return -1;
+}
+QJsonObject resObj = doc.object();
+QString commandID = resObj.value(&quot;id&quot;) // get command ID 
+QString command = &quot;FemtoAPIFile.getStatus(&quot; + commandID + &quot;)&quot;; 
+
+// get status 
+cmdParser=client-&gt;sendJSCommand(command); 
+result=cmdParser-&gt;getJSEngineResult().toString();
+</code></pre>
+<p><strong>Matlab client code example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+
+result = femtoapiObj.saveFileAsync(); % saves current file
+commandID = result.id;
+succeed = result.succeeded
+currFileHandle = femtoapiObj.getCurrentFileHandle
+
+% polling status while save operation is pending
+processing = true;
+if(succeed)
+    while(processing)
+        status = femtoapiObj.getStatus(commandID)
+        processing = status.isPending == 1
+        pause(0.1)
+    end
+end
+
+status = femtoapiObj.getStatus(commandID)
+if(~isempty(status.error))
+    disp(strcat(&quot;Error during asynchron save operation: &quot;, status.error)) % in  
+</code></pre>
+<p><strong>Python client code example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.saveFileAsync()&quot;
+simpleCmdParser=ws.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: &quot; + str(resultCode))
+    print (simpleCmdParser.getErrorText())
+else:
+    cmdResult = json.loads(simpleCmdParser.getJSEngineResult())
+    print (&quot;Filesave success: &quot; + str(cmdResult[&quot;succeeded&quot;]))
+
+commandId = cmdResult[&quot;id&quot;]
+
+command=&quot;FemtoAPIFile.getStatus('&quot; + str(commandId) + &quot;')
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+if resultCode &gt; 0:
+    print (&quot;Return code: &quot; + str(resultCode))
+    print (simpleCmdParser.getErrorText())
+else:
+    cmdResult = simpleCmdParser.getJSEngineResult()
+    print (&quot;getStatus success:&quot; + str(cmdResult))
+
+</code></pre>
+<h2 id="var-result-femtoapifilegetstatus"><strong>var result = FemtoAPIFile.getStatus()</strong></h2>
+<p>Gets the status of currently opened files. </p>
+<p>It returns the following json::</p>
+<p><strong>openedFilesStatus</strong>: json array holding status information of currently opened files. It contains json objects with the following fields:</p>
+<ul>
+<li><strong>fileIndex</strong>: file index (or file handle)</li>
+<li><strong>lastCommandID</strong>: id of the last asynchronous command issued on the file</li>
+<li><strong>fileStatus</strong>: status of the file, equal to one of the following values: "OK", "FileDoesNotExist", "CopyCancelled", "UnspecifiedError"</li>
+<li><strong>isPendingFileOperation</strong>: true if there is currently a pending operation on the file, false otherwise</li>
+<li><strong>lastError:</strong> last error on file</li>
+</ul>
+<p><strong>lastFileOpenError</strong>: json object holding error information on the last asynchronous file operation (from GUI and API)</p>
+<ul>
+<li><strong>commandID</strong>: last file operation command id (if file has been opened from GUI, commandID is empty string)</li>
+<li><strong>error</strong>: error text or empty string in case of the last file open operation resulted with no error</li>
+</ul>
+<h3 id="usage-in-matlab_2">Usage in Matlab</h3>
+<p>First create a FemtoAPIProcessingobject as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). You can use it the same way as described above:</p>
+<p>result = femtoapiObj.getStatus() </p>
+<p>where 'result' is the returned json from server parsed into a Matlab struct.</p>
+<h3 id="examples_2">Examples</h3>
+<p><strong>C++ code example</strong> </p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.getStatus()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+if (!cmdParser) {
+    qDebug()&lt;&lt;&quot;Can't create result parser!&quot;;
+    return -1;
+}
+if (cmdParser-&gt;getResultCode()!=0) {
+    qDebug()&lt;&lt;cmdParser-&gt;getErrorText();
+    return -1;
+}
+
+QString result=cmdParser-&gt;getJSEngineResult().toString();
+</code></pre>
+<p><strong>Matlab client code example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+result = femtoapiObj.getStatus(); % get status of all opened .mesc files (json is parsed into struct)
+</code></pre>
+<p><strong>Python client code example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.getStatus(fullPath)” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.getStatus(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<p>Example output json (after two MESc files are opened from GUI successfully): </p>
+<pre><code class="language-js">{
+    &quot;lastFileOpenError&quot;: {
+        &quot;commandID&quot;: &quot;&quot;,
+        &quot;error&quot;: [
+        ]
+    },
+    &quot;openedFilesStatus&quot;: [
+        {
+            &quot;fileIndex&quot;: 99,
+            &quot;fileStatus&quot;: &quot;OK&quot;,
+            &quot;isPendingFileOperation&quot;: false,
+            &quot;lastCommandId&quot;: &quot;&quot;,
+            &quot;lastError&quot;: &quot;&quot;
+        },
+        {
+            &quot;fileIndex&quot;: 100,
+            &quot;fileStatus&quot;: &quot;OK&quot;,
+            &quot;isPendingFileOperation&quot;: false,
+            &quot;lastCommandId&quot;: &quot;&quot;,
+            &quot;lastError&quot;: &quot;&quot;
+        }
+    ]
+}
+
+</code></pre>
+<h2 id="_3"></h2>
+<h2 id="var-curvexysize-femtoapifilecurveinfomunithandle-curveidx"><strong>var curveXYSize = FemtoAPIFile.curveInfo(mUnitHandle, curveIdx)</strong></h2>
+<p>Gets measurement unit's curve XY data, and sends it the to client as binary blob. </p>
+<p>Input parameters: </p>
+<ul>
+<li><strong>mUnitHandle</strong>: unique index of a measurement unit, converted to a string, e.g. '43,0,0' </li>
+<li><strong>curveIdx</strong>: index of the curve within measurement unit. </li>
+</ul>
+<p>Returns the number of curve data ( (X,Y) pairs) in case when curve data has been sent successfully to the client, and an empty string in case of any error. </p>
+<p>Errors occur in the following cases: </p>
+<ul>
+<li>mUnitHandle is ill formatted</li>
+<li>there is no opened measurement unit with the specified handle</li>
+<li>there is no curve with the given index in the given measurement unit</li>
+<li>the file lock was not successful (because other concurrent file operation was running at that time)</li>
+<li>the file is being closed</li>
+</ul>
+<p><em>Note</em>: valid curve indices can be obtained by issuing  FemtoAPIFile.getProcessingState() (<a href="../get-processing-state/">Get processing state</a>) command. Its output contains the curve metadata of the opened measurement units. </p>
+<h3 id="matlab-usage"><strong>Matlab usage</strong></h3>
+<p>First, you need to create a FemtoAPIProcessing object as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, call the command: </p>
+<p>curveDataXY = femtoapiObj.curveInfo(mUnitHandle, curveIdx)</p>
+<p>where mUnitHandle is a matlab array instead of string, e.g. [45,0,0]. </p>
+<p>It returns the curve data in an Nx2 array, where the first column is the 'X' data, and second column is the 'Y' data of the curve. </p>
+<h3 id="examples_3">Examples</h3>
+<p><strong>C++ code example</strong> </p>
+<pre><code class="language-cpp">QString command = “FemtoAPIFile.curveInfo('34,0,0',0)”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client code example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIProcessing(); % connect to local server (MESc)   
+curveXY = femtoapiObj.curveInfo ([34,0,1],0); 
+curveXY(1,1) % first X data 
+curveXY(1,2) % first Y data 
+</code></pre>
+<p><strong>Python client code example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.curveInfo('34,2,1','1')” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:
+    cmdResult = {}
+    cmdResult.update({&quot;Result&quot;: simpleCmdParser.getJSEngineResult()})
+    xData = []
+    yData = []
+    curveData = {&quot;xData&quot;: xData, &quot;yData&quot;: yData}
+
+    for parts in simpleCmdParser.getPartList():
+        size = int(parts.size() / 2)
+        binaryDataX = QByteArray()
+        binaryDataY = QByteArray()
+        binaryDataX.append(parts[:size])
+        binaryDataY.append(parts[size:])
+
+        stream = QDataStream(binaryDataX)
+        stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
+        while not stream.atEnd():
+            floatData = stream.readDouble()
+            curveData[&quot;xData&quot;].append(floatData) 
+        stream = QDataStream(binaryDataY)
+        stream.setByteOrder(QDataStream.ByteOrder.LittleEndian)
+        while not stream.atEnd():
+            floatData = stream.readDouble()
+            curveData[&quot;yData&quot;].append(floatData)
+
+        print( &quot;Binary part with size: &quot; + str(parts.size()))
+    cmdResult.update({&quot;CurveData&quot;: curveData})
+    # cmdResult[&quot;Result&quot;] holds the number of curve data ( (X,Y) pairs) while cmdResult[&quot;CurveData&quot;] holds the actual data
+    print (&quot;FemtoAPIFile.curveInfo(): %s&quot; % cmdResult[&quot;Result&quot;]) 
+</code></pre>
+<h2 id="_4"></h2>
+<h2 id="var-success-femtoapimicroscopesetfocusingmodefocusingmode-spacename"><strong>var success = FemtoAPIMicroscope.setFocusingMode(focusingMode, spaceName = '')</strong></h2>
+<p>UNSAFE command</p>
+<p>Switches to the given focusing mode 'focusingMode', if it is valid. </p>
+<p>Input parameters: </p>
+<ul>
+<li><strong>focusingMode</strong>: string, valid values are obtained by the output of getFocusingModes() command</li>
+<li><strong>spaceName</strong>: string, name of the space, if empty string, default space ("space1") is considered</li>
+</ul>
+<p>Returns true if successfully switched to the requested focusing mode, </p>
+<p>false in case of any errors. </p>
+<p>Errors occur in the following cases: </p>
+<ul>
+<li>input parameters are ill formatted or the given spaceName or focusing mode does not exist</li>
+<li>handwheel is locked </li>
+</ul>
+<h3 id="matlab-usage_1"><strong>Matlab usage</strong></h3>
+<p>First, you need to create a FemtoAPIAcquisition object as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, usage is the same as described above.</p>
+<h3 id="examples_4">Examples</h3>
+<p>First, call getFocusingModes() before this command, to obtain configured and valid focusing modes.</p>
+<p><strong>C++ code example</strong> </p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.setFocusingMode('Standard')”; // in case if 'Standard' is a valid mode
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client code example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition(); % connect to local server (MESc)   
+succeeded = femtoapiObj.setFocusingMode('Virtual'); % in case if 'Virtual' is a valid mode 
+</code></pre>
+<p><strong>Python client code example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.setfocusingMode('Virtual')” // in case if 'Virtual' is a valid mode
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIMicroscope.setfocusingMode(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_5"></h2>
+<h2 id="var-result-femtoapimicroscopegetfocusingmodesspacename"><strong>var result = FemtoAPIMicroscope.getFocusingModes(spaceName = '')</strong></h2>
+<p>UNSAFE command. </p>
+<p>Gets the available (configured) focusing modes for the specified space in json array, as it can be seen in the MESc GUI. If space name is not given, default space ('space1') is considered.</p>
+<p>In case of any error, an empty json array and an error message is returned.</p>
+<h3 id="matlab-usage_2"><strong>Matlab usage</strong></h3>
+<p>First, you need to create a FemtoAPIAcquisition object as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, call the command: </p>
+<p>focusingModes = femtoapiObj.getFocusingModes()</p>
+<p>where the returned value is a string array. </p>
+<h3 id="examples_5">Examples</h3>
+<p><strong>C++ code example</strong> </p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.getFocusingModes()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client code example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition(); % connect to local server (MESc)   
+focusingModes = femtoapiObj.getFocusingModes(); 
+</code></pre>
+<p><strong>Python client code example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.getFocusingModes()” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIMicroscope.getFocusingModes(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_6"></h2>
+<h2 id="var-protocol-femtoapimicroscopegetactiveprotocol"><strong>var protocol = FemtoAPIMicroscope.getActiveProtocol()</strong></h2>
+<p>Gets the active protocol in json. This json contains information about:</p>
+<ul>
+<li>currently active user waveforms, channels, and patterns</li>
+<li>which waveform is currently set to be displayed on which channels</li>
+<li>display order and timing of the waveforms</li>
+<li>pattern metadata: path description, path order, cycle time, etc. </li>
+</ul>
+<h3 id="matlab-usage_3"><strong>Matlab usage</strong></h3>
+<p>First, you need to create a FemtoAPIAcquisition object as described  here (<a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/">Tutorial: using the FemtoAPI Matlab client</a>). After it, call the command: </p>
+<p>protocol= femtoapiObj.getActiveProtocol()</p>
+<p>where 'protocol' is the returned json from server parsed into a nested struct. </p>
+<h3 id="examples_6">Examples</h3>
+<p><strong>C++ code example</strong> </p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.getActiveProtocol()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client code example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition(); % connect to local server (MESc)   
+protocol = femtoapiObj.getActiveProtocol(); 
+</code></pre>
+<p><strong>Python client code example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.getActiveProtocol()” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIMicroscope.getActiveProtocol(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<p>Example output: </p>
+<pre><code class="language-js">{
+    &quot;beginCut&quot;: 0,
+    &quot;lastModified&quot;: &quot;2020-04-15T14:01:42&quot;,
+    &quot;measurementLength&quot;: 0.2,
+    &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+    &quot;name&quot;: &quot;Default protocol&quot;,
+    &quot;protocolId&quot;: &quot;{bfa51e87-5084-4815-a8fa-88c84635ce12}&quot;,
+    &quot;runtimeUniqueIndex&quot;: &quot;&quot;,
+    &quot;timelines&quot;: [
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{94a61449-e21f-4aaa-bc6b-5878a9a1dafd}&quot;,
+                &quot;channelType&quot;: 2,
+                &quot;color&quot;: &quot;#008b8b&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;PatternSwitch&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;Pattern switch&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 1,
+                &quot;hint&quot;: 0,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;PATTERN_SWITCH_VIRTUAL_CHANNEL&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:46&quot;,
+                &quot;maximumValue&quot;: 1,
+                &quot;minimumValue&quot;: 0,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 0,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;On/off&quot;
+            },
+            &quot;curveColor&quot;: &quot;#008b8b&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{42eac861-cad0-4d4f-bbe1-5c3e5b59dbde}&quot;,
+            &quot;timelineObjects&quot;: [
+                {
+                    &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+                    &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                    &quot;objectType&quot;: 1,
+                    &quot;parameters&quot;: &quot;&quot;,
+                    &quot;pattern&quot;: {
+                        &quot;cyclePeriod&quot;: 100,
+                        &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+                        &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                        &quot;name&quot;: &quot;Default immediate pattern space1&quot;,
+                        &quot;paths&quot;: [
+                            {
+                                &quot;label&quot;: &quot;3&quot;,
+                                &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+                                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                                &quot;pathID&quot;: &quot;{2848cb00-faca-49c8-b9c2-7149eeb095b1}&quot;,
+                                &quot;pathOrder&quot;: 1,
+                                &quot;pathType&quot;: 3,
+                                &quot;spiralAngleInRad&quot;: 0,
+                                &quot;spiralEnd&quot;: &quot;[0,0,0]&quot;,
+                                &quot;spiralNormalVector&quot;: &quot;[0,0,0]&quot;,
+                                &quot;spiralRadius&quot;: 1,
+                                &quot;spiralScale&quot;: 1,
+                                &quot;spiralStart&quot;: &quot;[0,0,0]&quot;,
+                                &quot;spiralStepInRad&quot;: 1,
+                                &quot;spiralZeroAngleVector&quot;: &quot;[0,0,0]&quot;,
+                                &quot;splineStepSize&quot;: 1,
+                                &quot;transformMatrix&quot;: &quot;[[1,0,0,43.2584],[0,1,0,-43.2489],[0,0,1,0],[0,0,0,1]]&quot;,
+                                &quot;veritces3D&quot;: &quot;[[-259.55,-27.288,0],[-216.292,298.108,0],[177.154,302.227,0]]&quot;
+                            }
+                        ],
+                        &quot;patternID&quot;: &quot;{3d932c00-a391-4de7-99fa-0787a0ceeafd}&quot;,
+                        &quot;space&quot;: {
+                            &quot;lastModified&quot;: &quot;2020-02-06T16:48:47&quot;,
+                            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                            &quot;name&quot;: &quot;space1&quot;,
+                            &quot;spaceID&quot;: &quot;space1&quot;
+                        },
+                        &quot;sumOfPathLength&quot;: 0
+                    },
+                    &quot;startAtMs&quot;: 0,
+                    &quot;timelineObjectID&quot;: &quot;{e267f1f0-932c-4300-8adb-ec66d6b70fca}&quot;
+                }
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{1fb91880-983f-4523-b77a-30d4ea3fbdfe}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#8b008b&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;GearOutputCmdX&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;Galvo cmd X&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 6,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;ch_galvo_cmdx&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:47&quot;,
+                &quot;maximumValue&quot;: 400,
+                &quot;minimumValue&quot;: -400,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 1,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#ffd700&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{34a2dd2b-c8f6-4cb5-ad01-cd1d9067f659}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{beff7f4d-1fbf-4414-b66a-c35a04cef70e}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#ffd700&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;GearOutputCmdY&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;Galvo cmd Y&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 6,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;ch_galvo_cmdy&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:47&quot;,
+                &quot;maximumValue&quot;: 400,
+                &quot;minimumValue&quot;: -400,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 1,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#8b0000&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{a5aedc71-dc9c-4129-9b38-556ac3686c60}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{90f2c483-580b-4f79-b7e1-618690281165}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#8b0000&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;Laser473&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;Laser 473&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 6,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;ch_laser_473&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:46&quot;,
+                &quot;maximumValue&quot;: 100,
+                &quot;minimumValue&quot;: 0,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#8fbc8f&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{46523ef5-0334-47c4-a483-6ff9a2eaf1d7}&quot;,
+            &quot;timelineObjects&quot;: [
+                {
+                    &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+                    &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                    &quot;objectType&quot;: 0,
+                    &quot;parameters&quot;: &quot;{\&quot;duration\&quot;:1500,\&quot;waveformLoop\&quot;:true}&quot;,
+                    &quot;startAtMs&quot;: 0,
+                    &quot;timelineObjectID&quot;: &quot;{514f0faa-030a-436f-8da9-c095eae601be}&quot;,
+                    &quot;wave&quot;: {
+                        &quot;amplitude&quot;: 1,
+                        &quot;duration&quot;: 1500,
+                        &quot;dutyCycle&quot;: 50,
+                        &quot;frequency&quot;: 100,
+                        &quot;lastModified&quot;: &quot;2020-02-11T15:57:26&quot;,
+                        &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                        &quot;name&quot;: &quot;1111&quot;,
+                        &quot;phase&quot;: 0,
+                        &quot;samplesPerSecond&quot;: 1000,
+                        &quot;waveCurves&quot;: [
+                            {
+                                &quot;curve&quot;: &quot;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&quot;,
+                                &quot;lastModified&quot;: &quot;2020-02-11T15:57:25&quot;,
+                                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                                &quot;partIndex&quot;: 0,
+                                &quot;waveCurveID&quot;: 180
+                            }
+                        ],
+                        &quot;waveID&quot;: &quot;{bb39da8a-bb9d-480b-9f30-395eea24c168}&quot;,
+                        &quot;waveMaxValue&quot;: 1,
+                        &quot;waveMinValue&quot;: 0,
+                        &quot;waveType&quot;: 4,
+                        &quot;yOffset&quot;: 0
+                    }
+                }
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{08aec2ac-c292-4882-b8f8-0abffea6b2bb}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#008b8b&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;PMTGatingUG&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;PMT Gating UG&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 6,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;ch_PMT_Gating_UG&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:47&quot;,
+                &quot;maximumValue&quot;: 5,
+                &quot;minimumValue&quot;: 0,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#008b8b&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:28&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{91eb7a0f-b7c4-4575-9348-bf41a6d88fda}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{afc1edab-6581-4af0-affb-772b9c580102}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#00008b&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;DummyOutput&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;Shutter&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 4,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;ch_shutter&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:46&quot;,
+                &quot;maximumValue&quot;: 1.7976931348623157e+308,
+                &quot;minimumValue&quot;: -1.7976931348623157e+308,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#00008b&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:28&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{7c56b739-e5e2-4e64-a3b0-dece1d306d34}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{8991c9c0-ba31-4663-8584-6de7974f71ca}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#ff8c00&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;Sh3&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;Shutter473&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 4,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;ch_shutter473&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:46&quot;,
+                &quot;maximumValue&quot;: 1.79769e+308,
+                &quot;minimumValue&quot;: -1.79769e+308,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#ff8c00&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:28&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{f23b1a3e-21d8-4f47-a577-7304e1c3202d}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{31fc61f4-9b3e-4b5f-bd70-41338d125204}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#8fbc8f&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;DummyOutput2&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;CH CMDY&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 4,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;dummyOutput2&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:46&quot;,
+                &quot;maximumValue&quot;: 1.7976931348623157e+308,
+                &quot;minimumValue&quot;: -1.7976931348623157e+308,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#8fbc8f&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:28&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{0ec4007b-341c-41ee-b2a9-9e4e0cae7a0a}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        },
+        {
+            &quot;channel&quot;: {
+                &quot;channelID&quot;: &quot;{641288d0-49d8-4150-b9cf-43ae973c44fd}&quot;,
+                &quot;channelType&quot;: 1,
+                &quot;color&quot;: &quot;#8a2be2&quot;,
+                &quot;dataType&quot;: 0,
+                &quot;deviceName&quot;: &quot;DummyOutput3&quot;,
+                &quot;direction&quot;: 2,
+                &quot;displayName&quot;: &quot;CH CmdY&quot;,
+                &quot;enabled&quot;: 1,
+                &quot;hideInputCurve&quot;: 0,
+                &quot;hint&quot;: 4,
+                &quot;hostName&quot;: &quot;FEMTO-0212&quot;,
+                &quot;identifier&quot;: &quot;dummyOutput3&quot;,
+                &quot;lastModified&quot;: &quot;2020-02-06T16:48:46&quot;,
+                &quot;maximumValue&quot;: 1.7976931348623157e+308,
+                &quot;minimumValue&quot;: -1.7976931348623157e+308,
+                &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+                &quot;sampleRate&quot;: 1000,
+                &quot;sourceType&quot;: 0,
+                &quot;unitName&quot;: &quot;&quot;
+            },
+            &quot;curveColor&quot;: &quot;#8a2be2&quot;,
+            &quot;curveHide&quot;: 0,
+            &quot;enabled&quot;: true,
+            &quot;lastModified&quot;: &quot;2020-02-11T15:57:28&quot;,
+            &quot;modifiedBy&quot;: &quot;szalnor&quot;,
+            &quot;timelineID&quot;: &quot;{34955e58-5b4a-480d-8863-f2df320965de}&quot;,
+            &quot;timelineObjects&quot;: [
+            ]
+        }
+    ],
+    &quot;version&quot;: &quot;1.0&quot;
+}
+
+</code></pre>
+<h2 id="_7"></h2>
+<h2 id="var-succeeded-femtoapimicroscopesetactivetaskandsubtasktaskname-subtaskname-timeseries"><strong>var succeeded = FemtoAPIMicroscope.setActiveTaskAndSubTask(taskName, subTaskName = 'timeSeries')</strong></h2>
+<p>UNSAFE command</p>
+<p>Sets the given measurement task and subtask. Task means the type of measurement, it can be resonant or galvo, and subtask is the measurement mode, it can be timeseries, Z-stack or volume scan. </p>
+<p>It does the same if you would select these tabs and sub tabs on the MESc GUI. </p>
+<p>Input parameters: </p>
+<p><strong>taskName</strong>: string, name of the task to set. It can be 'resonant' or 'galvo', the MESc GUI changes to these tabs accordingly. </p>
+<p><strong>subTaskName</strong>: string, optional parameter, name of the sub task to set. Its value can be on of the strings 'timeSeries', 'zStack' or 'volumeScan'. If not given, timeseries measurement will be selected on the MESc GUI by default. </p>
+<p>In case of success, it returns true, otherwise false. </p>
+<h3 id="matlab-usage_4">Matlab usage</h3>
+<p>You must create a FemtoAPIAcquisition object, after it, usage is the same as described above.</p>
+<h3 id="examples_7">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.setActiveTaskAndSubTask('resonant','zStack')”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition;
+succeeded = femtoapiObj.setActiveTaskAndSubTask('galvo','zStack'); 
+</code></pre>
+<p><strong>Python client example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.setActiveTaskAndSubTask('galvo','zStack')” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.setActiveTaskAndSubTask(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_8"></h2>
+<h2 id="var-version-femtoapimicroscopegetcommandsetversion-or"><strong>var version = FemtoAPIMicroscope.getCommandSetVersion() or</strong></h2>
+<h2 id="var-version-femtoapifilegetcommandsetversion"><strong>var version = FemtoAPIFile.getCommandSetVersion()</strong></h2>
+<p>Gets the version of the FemtoAPI command set in string. Example output: "v.1.0". </p>
+<h3 id="examples_8">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.getCommandSetVersion()”; 
+// or QString command = “FemtoAPIFile.getCommandSetVersion()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition; % or femtoapiObj = FemtoAPIProcessing
+succeeded = femtoapiObj.getCommandSetVersion(); 
+</code></pre>
+<p><strong>Python client example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.getCommandSetVersion()” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.getCommandSetVersion(): %s&quot; % simpleCmdParser.getJSEngineResult()) 
+</code></pre>
+<h2 id="_9"></h2>
+<h2 id="var-lasterror-femtoapimicroscopegetlastcommanderror-or"><strong>var lastError= FemtoAPIMicroscope.getLastCommandError() or</strong></h2>
+<h2 id="var-lasterror-femtoapifilegetlastcommanderror"><strong>var lastError = FemtoAPIFile.getLastCommandError()</strong></h2>
+<p>Gets the error information of the last issued command. It returns a json object with the following fields: </p>
+<ul>
+<li><strong>ErrorCode</strong>: integer, code of the error. In case of no error, it is 0. </li>
+<li><strong>ErrorText</strong>: string, the cause of the error</li>
+<li><strong>ErrorType</strong>: string, type of the error, for example ParameterError, FileError, SystemError, NoError. </li>
+</ul>
+<p>Example output (in case of no error): </p>
+<pre><code class="language-js">{
+    &quot;ErrorCode&quot;: 0,
+    &quot;ErrorText&quot;: &quot;&quot;,
+    &quot;ErrorType&quot;: &quot;eNoError&quot;
+}
+</code></pre>
+<h3 id="examples_9">Examples</h3>
+<p><strong>C++ code example:</strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.getLastCommandError()”; 
+// or QString command = “FemtoAPIFile.getLastCommandError()”; 
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong>Matlab client example:</strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition; % or femtoapiObj = FemtoAPIProcessing
+succeeded = femtoapiObj.getLastCommandError(); 
+</code></pre>
+<p><strong>Python client example:</strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIFile.getLastCommandError()” 
+simpleCmdParser=client.sendJSCommand(command)  
+
+resultCode=simpleCmdParser.getResultCode() 
+
+if resultCode &gt; 0: 
+    print (&quot;Return code: %d&quot; % resultCode) 
+    print (simpleCmdParser.getErrorText()) 
+else:   
+    print (&quot;FemtoAPIFile.getLastCommandError(): %s&quot; % simpleCmdParser.getJSEngineResult())) 
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

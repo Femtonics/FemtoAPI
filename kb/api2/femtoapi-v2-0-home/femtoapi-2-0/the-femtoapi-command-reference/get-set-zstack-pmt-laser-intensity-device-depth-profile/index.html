@@ -1,0 +1,2658 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../get-set-properties-for-measurement-items/">
+      
+      
+        <link rel="next" href="../handling-measurement-files/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Get-set ZStack PMT/laser intensity device depth profile - FemtoAPI 2.0 Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#get-set-zstack-pmtlaser-intensity-device-depth-profile" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-header__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FemtoAPI 2.0 Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Get-set ZStack PMT/laser intensity device depth profile
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-nav__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FemtoAPI 2.0 Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Knowledge Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction and architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction and architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/main-features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main features overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prerequisites-for-using-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites for using the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI command reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI command reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-and-remove-channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add and remove channels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-file-events-and-query-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API file events and query functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curve-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curve operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-acquisition-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get acquisition state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-microscope-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get microscope state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-processing-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get processing state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-imaging-window-viewport-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set imaging window (viewport) parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-pmt-laserintensity-device-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set PMT/Laserintensity device values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-properties-for-measurement-items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set properties for measurement items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-outjson-femtoapimicroscopegetzstacklaserintensityprofilemeasurementtype-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var outJson = FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '', spaceName = '')
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapimicroscopegetzstacklaserintensityprofilemeasurementtype-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '', spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = &#39;&#39;, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c-code-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ code examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeed-femtoapimicroscopesetzstacklaserintensityprofilejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeed = FemtoAPIMicroscope.setZStackLaserIntensityProfile(json)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapimicroscopesetzstacklaserintensityprofile-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIMicroscope.setZStackLaserIntensityProfile( json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIMicroscope.setZStackLaserIntensityProfile( json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-and-restrictions-on-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes and restrictions on parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c-code-examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ code examples:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-measurement-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manipulating-axis-positions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiroi-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MultiROI commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../munit-manipulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-write-binary-channel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-measurement-duration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting measurement duration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starting-and-stopping-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting and stopping measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI library reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI library reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIWebSocketClient reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/replymessageparser-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplyMessageParser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Matlab client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6_1" id="__nav_2_1_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab demos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI Matlab demos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI browser demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image processing demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions to implement ROI calculations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-function-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab function reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/helper-classes-and-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper classes and functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using the FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Python client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Python client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the python environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: creating a FemtoAPI Python client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using FemtoAPI with a simple WebSocket in Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-femtoapi-with-simple-websocket-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using FemtoAPI with Simple WebSocket Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_10" id="__nav_2_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the FemtoAPI client in C++ code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using the FemtoAPI client in C++ code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++ tutorial: creating a FemtoAPI client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-outjson-femtoapimicroscopegetzstacklaserintensityprofilemeasurementtype-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var outJson = FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '', spaceName = '')
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapimicroscopegetzstacklaserintensityprofilemeasurementtype-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '', spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = &#39;&#39;, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c-code-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ code examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeed-femtoapimicroscopesetzstacklaserintensityprofilejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeed = FemtoAPIMicroscope.setZStackLaserIntensityProfile(json)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#or_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        or
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#femtoapimicroscopesetzstacklaserintensityprofile-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FemtoAPIMicroscope.setZStackLaserIntensityProfile( json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FemtoAPIMicroscope.setZStackLaserIntensityProfile( json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-and-restrictions-on-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes and restrictions on parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c-code-examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ code examples:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="get-set-zstack-pmtlaser-intensity-device-depth-profile">Get-set ZStack PMT/laser intensity device depth profile</h1>
+<h2 id="_1"></h2>
+<h2 id="var-outjson-femtoapimicroscopegetzstacklaserintensityprofilemeasurementtype-spacename"><strong>var outJson = FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '', spaceName = '')</strong></h2>
+<h2 id="or"><strong>or</strong></h2>
+<h2 id="femtoapimicroscopegetzstacklaserintensityprofilemeasurementtype-spacename"><strong>FemtoAPIMicroscope.getZStackLaserIntensityProfile(measurementType = '', spaceName = '')</strong></h2>
+<p>UNSAFE operation.</p>
+<p>This command is used to get the Z-stack depth correction profile (the interpolation reference points) of PMT/ laser intensity devices. Its output has the same JSON schema as the setZStackLaserIntensityProfile() command.</p>
+<p>Has two filtering input parameters, these are:</p>
+<ul>
+<li><strong>measurementType</strong>: gets the Z-stack depth correction profile for all spaces, but only for the given measurement type (currently its value can be ‘resonant’ or ‘galvo’)</li>
+<li><strong>spaceName</strong>: gets the Z-stack depth correction profile for all measurement types (resonant, galvo), but only for the given space</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>if called with no parameters, or an empty string ‘’, no filtering will be applied, so the parameters are get for all available spaces and measurement types (resonant, galvo)</li>
+<li>if the given measurement type or space name is wrong, it returns an empty JSON, and an error message</li>
+</ul>
+<h3 id="usage-in-matlab">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscope object must be created. After it, the usage is the same as described above, only the input/output parameter types are a bit different: </p>
+<p>result = femtoapiObj.getZStackLaserIntensityProfile(measurementType, spaceName) </p>
+<p>where measurementType and spaceName must be char arrays, and the retuned value is the retuned json parsed into an array of (nested) Matlab structs. </p>
+<p>In case of any error, it gives the error message as a Matlab error type exception, otherwise it returns true.</p>
+<h3 id="examples">Examples</h3>
+<h4 id="c-code-examples"><strong><em>C++ code examples</em></strong></h4>
+<pre><code class="language-cpp">// 1. Getting z-stack depth profile for resonant and galvo measurements, and for all spaces available:
+QString command = “FemtoAPIMicroscope.getZStackLaserIntensityProfile() “; // ( or FemtoAPIMicroscope.getZStackLaserIntensityProfile(‘’) or FemtoAPIMicroscope.getZStackLaserIntensityProfile(‘’,’’) )
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+// 2. Getting z-stack parameters for galvo measurement:
+QString command = “FemtoAPIMicroscope.getZStackLaserIntensityProfile(‘galvo’) “ ;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+// 3. Getting z-stack depth profile for all measurements, but ‘space1’:
+QString command = “FemtoAPIMicroscope.getZStackLaserIntensityProfile(‘’,’space1’) “;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+// 4. Getting z-stack depth profile for resonant measurement, and space2:
+QString command = “FemtoAPIMicroscope.getZStackLaserIntensityProfile(‘resonant’,’space2’) “;
+auto cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+femtoapiObj.getZStackLaserIntensityProfile('space1','galvo'); % gets z stack intensity profile for galvo measurement 
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.getZStackLaserIntensityProfile();&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;getZStackLaserIntensityProfile(): %s&quot; % simpleCmdParser.getJSEngineResult())
+
+</code></pre>
+<h2 id="_2"></h2>
+<h2 id="var-succeed-femtoapimicroscopesetzstacklaserintensityprofilejson"><strong>var succeed = FemtoAPIMicroscope.setZStackLaserIntensityProfile(json)</strong></h2>
+<h2 id="or_1"><strong>or</strong></h2>
+<h2 id="femtoapimicroscopesetzstacklaserintensityprofile-json"><strong>FemtoAPIMicroscope.setZStackLaserIntensityProfile( json)</strong></h2>
+<p>UNSAFE operation.</p>
+<p>Used to set the Z-stack intensity depth profile of PMT/ laser intensity devices, based on 2 or 3 z-levels and device values at these levels, as interpolation points.</p>
+<p>The input JSON is an array, that consists of JSON objects, which contain one or more JSON objects for the different measurement types and/or spaces. These JSON objects consist of the following values:</p>
+<ul>
+<li><strong>space</strong>: string, optional, the space which is used, if omitted, the default space is used.</li>
+<li><strong>measurementType</strong>: string, which is the type of Z-stack measurement to apply the depth correction to, currently it can be “resonant” or “galvo”.</li>
+<li><strong>firstZ:</strong> a double value of the first Z relative position in a Z-stack measurement, the first reference Z interpolation point.</li>
+<li><strong>intermediateZ:</strong> optional, an intermediate Z relative position, used as an interpolation reference point. If given, its value must be between ‘firstZ’ and ‘lastZ’.</li>
+<li><strong>lastZ:</strong> double value of the last Z relative position in µm, until the Z-stack measurement is performed. The last reference Z interpolation point.</li>
+<li><strong>zStep:</strong> double value of the Z step in a Z-stack measurement. It assigns the Z-planes to interpolate device values, based on ‘DepthCorrection’</li>
+<li><strong>DepthCorrection:</strong> a JSON object that consists of a JSON array, which contains JSON object items with intensity values of PMT/laser intensity devices at given Z-planes (which is defined by the ‘firstZ’, ‘intermediateZ’ and ‘lastZ’ parameters). These device values assign the reference values for interpolation.</li>
+</ul>
+<p>The input JSON is validated against the following schema:</p>
+<pre><code class="language-js">{
+    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,
+    &quot;title&quot;: &quot;Z-stack depth correction schema&quot;,
+    &quot;description&quot;: &quot;Json array that contains the Z-Stack depth correction laser intensity values for all spaces and measurement types (galvo, resonant)&quot;,
+    &quot;type&quot;: &quot;array&quot;,
+    &quot;minItems&quot;: 1,
+    &quot;items&quot;: {
+        &quot;description&quot;: &quot;Json object that contains the Z-Stack depth correction laser intensity values for a specific space and measurement type (galvo or resonant)&quot;,
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot; :{
+            &quot;space&quot;: {
+                &quot;description&quot;: &quot;Name of the space&quot;,
+                &quot;type&quot;: &quot;string&quot;
+            },
+            &quot;measurementType&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;enum&quot;:[&quot;resonant&quot;,&quot;galvo&quot;],
+                &quot;description&quot;: &quot;Type of measurement, its value can only be 'resonant' or 'galvo'.&quot;
+            },
+            &quot;firstZ&quot;: {
+                &quot;description&quot;: &quot;first Z relative coordinate (to labeling origin)&quot;,
+                &quot;type&quot; : &quot;number&quot;
+            },
+            &quot;intermediateZ&quot;: {
+                &quot;description&quot;: &quot;intermediate Z relative coordinate (to labeling origin)&quot;,
+                &quot;type&quot; : &quot;number&quot;
+            },
+            &quot;lastZ&quot;: {
+                &quot;description&quot;: &quot;last Z relative coordinate (to labeling origin)&quot;,
+                &quot;type&quot; : &quot;number&quot;
+            },
+            &quot;zStep&quot;: {
+                &quot;description&quot; : &quot;z step in um&quot;,
+                &quot;type&quot; : &quot;number&quot;
+            },
+            &quot;DepthCorrection&quot; : {
+                &quot;description&quot;: &quot;z-stack laser intensities for the specified devices at z positions firstZ, (optionally intermediateZ), lastZ&quot;,
+                &quot;type&quot;:&quot;array&quot;,
+                &quot;items&quot; :  {
+                    &quot;type&quot; : &quot;object&quot;,
+                    &quot;properties&quot; : {
+                        &quot;name&quot; : {
+                            &quot;description&quot; : &quot;name of the PMT/Pockels device&quot;,
+                            &quot;type&quot; : &quot;string&quot;
+                        },
+                        &quot;values&quot; : {
+                            &quot;type&quot; : &quot;array&quot;,
+                            &quot;items&quot;: {
+                                &quot;type&quot;: &quot;number&quot;,
+                                &quot;minimum&quot; : 0
+                            },
+                            &quot;minItems&quot; : 2,
+                            &quot;maxItems&quot; : 3
+                        }
+                    },
+                    &quot;required&quot;:[&quot;name&quot;,&quot;values&quot;],
+                    &quot;additionalProperties&quot;: false
+                }
+            }
+        },
+        &quot;required&quot;: [ &quot;measurementType&quot;,&quot;firstZ&quot;,&quot;lastZ&quot;,&quot;zStep&quot;,&quot;DepthCorrection&quot; ],
+        &quot;additionalProperties&quot;: false
+    }
+} 
+</code></pre>
+<h4 id="important-notes-and-restrictions-on-parameters">Important notes and restrictions on parameters</h4>
+<p>There are some restrictions on Z-stack parameters:</p>
+<ul>
+<li>the minimum value of the ‘zStep’ parameter is currently 0.1 µm</li>
+<li>if firstZ = intermediateZ = lastZ results in an error</li>
+<li>otherwise, if intermediateZ = firstZ or intermediateZ =lastZ, the difference between lastZ and firstZ must be greater than or equal to the minimum Z step value</li>
+<li>In case 3 Z reference points are given (firstZ &lt; intermediateZ &lt; lastZ), the difference between reference points must be greater than or equal to the minimum Z step value</li>
+</ul>
+<p>Device values:</p>
+<ul>
+<li>all device intensity values must be positive double numbers</li>
+<li>in a “DepthCorrection” object, each “values” field must contain the same number of elements as the number of Z reference values</li>
+<li>in a ‘DepthCorrection’ JSON object, if the “values” parameter for a given device is below/above its lower/upper limit, it will be clamped to the given device’s lower/upper limit accordingly</li>
+<li>the lower/upper limits of devices can be get by the command FemtoAPIMicroscope.getPMTAndLaserIntensityDeviceValues()</li>
+</ul>
+<p>Interpolation of reference points:</p>
+<ul>
+<li>in case of 2 reference points, the device values are interpolated linearly</li>
+<li>in case of 3 reference points, the pchip interpolation method is used</li>
+<li>if abs(lastZ – firstZ) / zStep is not an integer, the last Z plane position can be beyond the lastZ value, for example, If firstZ = 0.0, lastZ = 2.0, zStep = 0.6, the device values are interpolated at 5 Z-planes: 0.0, 0.6, 1.2, 1.8, 2.4</li>
+</ul>
+<p>If any of the above conditions are not met, or a device with an invalid name is present, or a JSON is given that does not meet the conditions of the given JSON schema, an error message is returned, and nothing is set on the server.</p>
+<p>The ‘measurementType’ and ‘space’ pairs are unique, so if the outer JSON array contains more than one object with the same measurement type and space, an error message is returned, and no parameter is set.</p>
+<h3 id="usage-in-matlab_1">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscope object must be created. After it, the usage is the same as described above, only the input/output parameter types are a bit different: </p>
+<p>succeeded = femtoapiObj.setZStackLaserIntensityProfile(jsonAsStruct) </p>
+<p>where the input parameter json is parsed into an array of (nested) Matlab structs.</p>
+<p>In case of any error, it gives the error message as a Matlab error type exception, otherwise it returns true.</p>
+<h3 id="examples_1">Examples</h3>
+<h4 id="c-code-examples_1"><strong><em>C++ code examples:</em></strong></h4>
+<pre><code class="language-cpp">// 1. Setting parameters for galvo measurement, with 3 reference points, on default space:
+QString command = “FemtoAPIMicroscope.setZStackLaserIntensityProfile('[{&quot;measurementType&quot;:&quot;galvo&quot;,&quot;firstZ&quot;:10.0,&quot;intermediateZ&quot;: 13.0,&quot;lastZ&quot;: 13.0,&quot;zStep&quot;:0.5, &quot;DepthCorrection&quot;:[{&quot;name&quot;:&quot;PMT_UG&quot;,&quot;values&quot;:[0,2,5]},{&quot;name&quot;:&quot;ResonantPockelsCell&quot;,&quot;values&quot;:[0,50,60]}]}]') “;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+// This command creates 11 z planes, from firstZ = 10.0 to lastZ = 13.0, with zStep = 0.5. 
+
+// 2. Setting parameters for resonant and galvo measurement in one command, for space1, with 3 reference values:
+QString command = “FemtoAPIMicroscope.setZStackLaserIntensityProfile('[{&quot;measurementType&quot;:&quot;galvo&quot;,&quot;firstZ&quot;:10.0,&quot;intermediateZ&quot;: 12.0,&quot;lastZ&quot;: 13.0,&quot;zStep&quot;:0.9, &quot;DepthCorrection&quot;:[{&quot;name&quot;:&quot;PMT_UG&quot;,&quot;values&quot;:[0,2,5]},{&quot;name&quot;:&quot;PMT_UR&quot;,&quot;values&quot;:[2,3,5]}]}, {&quot;measurementType&quot;:&quot;resonant&quot;,&quot;firstZ&quot;:2.0,&quot;intermediateZ&quot;: 5.0,&quot;lastZ&quot;: 7.0,&quot;zStep&quot;:0.5, &quot;DepthCorrection&quot;:[{&quot;name&quot;:&quot;PMT_UG&quot;,&quot;values&quot;:[0,2,5]},{&quot;name&quot;:&quot;PMT_UR&quot;,&quot;values&quot;:[0,50,60]}]}]') “;
+auto cmdParser=client-&gt;sendJSCommand(command);
+
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+
+zStackParameters.space = 'space1';
+zStackParameters.measurementType = 'galvo';
+zStackParameters.firstZ = 0.0;
+zStackParameters.zStep = 10.0;
+zStackParameters.zPlanes = 2;
+
+deviceNames = {'PMT_UG','PMT_UR','PMT_GALVO','ResonantPockelsCell','Apt1'};
+deviceValues = {[0.4;2.5],[3.5;1.6],[4.1;3.5],[2.3;10],[3.1;14.1]}; % sets 2 reference values for devices
+depthCorrStruct = repmat(struct('name',[],'values',[]),length(deviceNames),1);
+
+for i=1:length(deviceNames)
+    depthCorrStruct(i).name = deviceNames{i};
+    depthCorrStruct(i).values = deviceValues{i};
+end
+
+zStackParameters.DepthCorrection = depthCorrStruct;
+femtoapiObj.setZStackLaserIntensityProfile(zStackParameters)
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.setZStackLaserIntensityProfile('[{&quot;measurementType&quot;:&quot;galvo&quot;,&quot;firstZ&quot;:10.0,&quot;intermediateZ&quot;: 13.0,&quot;lastZ&quot;: 13.0,&quot;zStep&quot;:0.5, &quot;DepthCorrection&quot;:[{&quot;name&quot;:&quot;PMT_UG&quot;,&quot;values&quot;:[0,2,5]},{&quot;name&quot;:&quot;ResonantPockelsCell&quot;,&quot;values&quot;:[0,50,60]}]}]');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;setZStackLaserIntensityProfile(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3011 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../image-export/">
+      
+      
+        <link rel="next" href="../multiroi-commands/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Manipulating axis positions - FemtoAPI 2.0 Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#manipulating-axis-positions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-header__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FemtoAPI 2.0 Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Manipulating axis positions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="FemtoAPI 2.0 Knowledge Base" class="md-nav__button md-logo" aria-label="FemtoAPI 2.0 Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FemtoAPI 2.0 Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Knowledge Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction and architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction and architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-and-architecture/main-features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main features overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prerequisites-for-using-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites for using the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI command reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI command reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-and-remove-channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add and remove channels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-file-events-and-query-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API file events and query functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curve-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curve operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-acquisition-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get acquisition state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-microscope-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get microscope state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-processing-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get processing state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-imaging-window-viewport-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set imaging window (viewport) parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-pmt-laserintensity-device-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set PMT/Laserintensity device values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-properties-for-measurement-items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set properties for measurement items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-set-zstack-pmt-laser-intensity-device-depth-profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-set ZStack PMT/laser intensity device depth profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-measurement-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling measurement files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulating axis positions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-json-femtoapimicroscopegetaxispositions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var json = FemtoAPIMicroscope.getAxisPositions()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var json = FemtoAPIMicroscope.getAxisPositions()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-json-femtoapimicroscopegetaxispositionaxisname-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var json = FemtoAPIMicroscope.getAxisPosition(axisName, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var json = FemtoAPIMicroscope.getAxisPosition(axisName, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-on-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes on usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description and usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-on-usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes on usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeed-setaxispositionaxisname-newposition-isrelativepositiontrue-isrelativetocurrentpositiontrue-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeed = setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var succeed = setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeed-isaxismovingaxisname-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeed = isAxisMoving(axisName, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var succeed = isAxisMoving(axisName, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiroi-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MultiROI commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../munit-manipulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MUnit manipulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-write-binary-channel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read-write binary channel data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-measurement-duration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting measurement duration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Space commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starting-and-stopping-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting and stopping measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI library reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI library reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/apiwebsocketclient-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIWebSocketClient reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-library-reference/replymessageparser-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplyMessageParser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Matlab client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6_1" id="__nav_2_1_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab demos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FemtoAPI Matlab demos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/device-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/femtoapi-browser-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI browser demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/image-processing-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image processing demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/instructions-to-implement-roi-calculations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions to implement ROI calculations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-demos/measurement-control-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement control demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/femtoapi-matlab-function-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FemtoAPI Matlab function reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/helper-classes-and-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper classes and functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/prerequisites-and-setting-up-the-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-matlab-client/tutorial-using-the-femtoapi-matlab-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using the FemtoAPI Matlab client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The FemtoAPI Python client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The FemtoAPI Python client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/prerequisites-and-setting-up-the-python-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisites and setting up the python environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-creating-a-femtoapi-python-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: creating a FemtoAPI Python client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../the-femtoapi-python-client/tutorial-using-femtoapi-with-a-simple-websocket-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: using FemtoAPI with a simple WebSocket in Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-femtoapi-with-simple-websocket-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using FemtoAPI with Simple WebSocket Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_10" id="__nav_2_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the FemtoAPI client in C++ code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using the FemtoAPI client in C++ code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../using-the-femtoapi-client-in-c-code/c-tutorial-creating-a-femtoapi-client-with-the-femtoapi-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++ tutorial: creating a FemtoAPI client with the FemtoAPI library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-json-femtoapimicroscopegetaxispositions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var json = FemtoAPIMicroscope.getAxisPositions()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var json = FemtoAPIMicroscope.getAxisPositions()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-json-femtoapimicroscopegetaxispositionaxisname-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var json = FemtoAPIMicroscope.getAxisPosition(axisName, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var json = FemtoAPIMicroscope.getAxisPosition(axisName, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-on-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes on usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description and usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-on-usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes on usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeed-setaxispositionaxisname-newposition-isrelativepositiontrue-isrelativetocurrentpositiontrue-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeed = setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var succeed = setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#var-succeed-isaxismovingaxisname-spacename" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var succeed = isAxisMoving(axisName, spaceName = '')
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="var succeed = isAxisMoving(axisName, spaceName = &#39;&#39;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-matlab_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in Matlab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="manipulating-axis-positions">Manipulating axis positions</h1>
+<p>The following operations are described here: </p>
+<ul>
+<li>getAxisPositions</li>
+<li>getAxisPosition</li>
+<li>doZero</li>
+<li>setAxisPosition</li>
+<li>isAxisMoving</li>
+</ul>
+<h2 id="_1"></h2>
+<h2 id="var-json-femtoapimicroscopegetaxispositions"><strong>var json = FemtoAPIMicroscope.getAxisPositions()</strong></h2>
+<p>UNSAFE operation.</p>
+<p>This command is used to get all configured and adjustable axis position information. The output JSON contains the following information:</p>
+<p>Every JSON object contains the following axis parameters:</p>
+<ul>
+<li><strong>space</strong>: space of the axis is configured to</li>
+<li><strong>Lock</strong>: if true, axis positions cannot be set (solely by the Handwheel, but only in low speed mode)</li>
+<li><strong>Minimum/Maximum Z position</strong>: min/max absolute position of an axis configured to raw Z</li>
+<li><strong>Near position</strong>: near position absolute coordinate in µm</li>
+<li><strong>Mode</strong>: objective mode</li>
+<li><strong>AxisPositions</strong>: a JSON object that contains 2 objects, one named “StandardAxes” and another named “NonStandardAxes”. Standard axes are usually Slow X,Y,Z, VirtX,Y, Z, Tilt X,Y,Z, and FastZ. Other axes, for example pipette manipulation axes, are found under “NonStandardAxes” in the JSON, if present.</li>
+</ul>
+<p>The StandardAxes/NonStandardAxes JSON array contains objects with information about the configured axes. These contain the following axis parameters:</p>
+<ul>
+<li><strong>Axis</strong>: name of the configured axis</li>
+<li><strong>Absolute</strong>: absolute position of the axis in µm</li>
+<li><strong>Relative</strong>: relative position of the axis in µm (relative to the current position)</li>
+<li><strong>AlertThreshold</strong>: axis threshold in µm, the maximum movement of which can be applied with the setAxisPosition() API command</li>
+<li><strong>AxisLowerLimit</strong>: the minimum absolute position of the axis (varies if the absolute coordinate system is translated/rotated)</li>
+<li><strong>AxisUpperLimit</strong>: the maximum absolute position of the axis (varies if the absolute coordinate system is translated/rotated)</li>
+<li><strong>LabelingOriginOffset</strong>: labeling origin offset position</li>
+</ul>
+<p>Example output:</p>
+<pre><code class="language-js">[{
+        &quot;AxisPositions&quot;: {
+            &quot;NonStandardAxes&quot;: [ ],
+            &quot;StandardAxes&quot;: [
+                {
+                    &quot;Absolute&quot;: 199.21805399270463,
+                    &quot;AlertThreshold&quot;: 50,
+                    &quot;Axis&quot;: &quot;FastZ&quot;,
+                    &quot;AxisLowerLimit&quot;: -200,
+                    &quot;AxisUpperLimit&quot;: 200,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: 199.21805399270463
+                }, {
+                    &quot;Absolute&quot;: -28.18,
+                    &quot;AlertThreshold&quot;: 9,
+                    &quot;Axis&quot;: &quot;SlowX&quot;,
+                    &quot;AxisLowerLimit&quot;: -10000,
+                    &quot;AxisUpperLimit&quot;: 0,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: -28.18
+                }, {
+                    &quot;Absolute&quot;: -174.69,
+                    &quot;AlertThreshold&quot;: 34,
+                    &quot;Axis&quot;: &quot;SlowY&quot;,
+                    &quot;AxisLowerLimit&quot;: -10000,
+                    &quot;AxisUpperLimit&quot;: 0,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: -174.69
+                }, {
+                    &quot;Absolute&quot;: -117.64,
+                    &quot;Axis&quot;: &quot;SlowZ&quot;,
+                    &quot;AxisLowerLimit&quot;: -24500,
+                    &quot;AxisUpperLimit&quot;: 0,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: -117.64
+                }, {
+                    &quot;Absolute&quot;: 7.529920000000001,
+                    &quot;AlertThreshold&quot;: 15,
+                    &quot;Axis&quot;: &quot;TiltX&quot;,
+                    &quot;AxisLowerLimit&quot;: -55,
+                    &quot;AxisUpperLimit&quot;: 47,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: 7.529920000000001
+                }, {
+                    &quot;Absolute&quot;: -28.50832,
+                    &quot;AlertThreshold&quot;: 8,
+                    &quot;Axis&quot;: &quot;TiltY&quot;,
+                    &quot;AxisLowerLimit&quot;: -44,
+                    &quot;AxisUpperLimit&quot;: 77,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: -28.50832
+                }, {
+                    &quot;Absolute&quot;: 0,
+                    &quot;AlertThreshold&quot;: 9,
+                    &quot;Axis&quot;: &quot;VirtX&quot;,
+                    &quot;AxisLowerLimit&quot;: -10058.559331683451,
+                    &quot;AxisUpperLimit&quot;: 28.425122191018254,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: 0
+                }, {
+                    &quot;Absolute&quot;: 0,
+                    &quot;AlertThreshold&quot;: 9,
+                    &quot;Axis&quot;: &quot;VirtY&quot;,
+                    &quot;AxisLowerLimit&quot;: -244.7146052663152,
+                    &quot;AxisUpperLimit&quot;: 200.52343632100892,
+                    &quot;LabelingOriginOffset&quot;: 0,
+                    &quot;Relative&quot;: 0
+                }, {
+                    &quot;Absolute&quot;: 0,
+                    &quot;AlertThreshold&quot;: 9,
+                    &quot;Axis&quot;: &quot;VirtZ&quot;,
+                    &quot;AxisLowerLimit&quot;: -450.55220157968716,
+                    &quot;AxisUpperLimit&quot;: 133.87231018703233,
+                    &quot;LabelingOriginOffset&quot;: 199.21805399270463,
+                    &quot;Relative&quot;: 0
+                }
+            ]
+        },
+        &quot;Lock&quot;: false,
+        &quot;Maximum Z position&quot;: 0,
+        &quot;Minimum Z position&quot;: -24500,
+        &quot;Mode&quot;: &quot;Standard&quot;,
+        &quot;Near position&quot;: -200,
+        &quot;space&quot;: &quot;space1&quot; 
+}]
+</code></pre>
+<h3 id="usage-in-matlab">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscopeobject must be created. After it, the usage is the same as described above, only the returned value has a different format: </p>
+<p>result = femtoapiObj.getAxisPositions();</p>
+<p>where the returned value is the returned json from server parsed into an array of (nested) Matlab structs. </p>
+<p>In case of any error, it gives an error message as a Matlab error type exception.</p>
+<h3 id="examples">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.getAxisPositions()” ;
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+result = femtoapiObj.getAxisPositions();
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.getAxisPositions();&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;getAxisPositions(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="_2"></h2>
+<h2 id="var-json-femtoapimicroscopegetaxispositionaxisname-spacename"><strong>var json = FemtoAPIMicroscope.getAxisPosition(axisName, spaceName = '')</strong></h2>
+<p>UNSAFE operation.</p>
+<p>This command returns the part of the json returned by getAxisPositions() for the specified axis and space.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>axisName</strong>: string, name of a valid and configured axis. </li>
+<li><strong>spaceName</strong>: string, optional, must be the name of the space for which the axis given by ‘axisName’ is configured. </li>
+</ul>
+<p>In case of success, it returns a json object, with the following fields: </p>
+<ul>
+<li><strong>Axis</strong>: name of the configured axis</li>
+<li><strong>Absolute</strong>: absolute position of the axis in µm</li>
+<li><strong>Relative</strong>: relative position of the axis in µm (relative to the current position)</li>
+<li><strong>AlertThreshold</strong>: axis threshold in µm, the maximum movement of which can be applied with the setAxisPosition() API command</li>
+<li><strong>AxisLowerLimit</strong>: the minimum absolute position of the axis (varies if the absolute coordinate system is translated/rotated)</li>
+<li><strong>AxisUpperLimit</strong>: the maximum absolute position of the axis (varies if the absolute coordinate system is translated/rotated)</li>
+<li><strong>LabelingOriginOffset</strong>: labeling origin offset position</li>
+</ul>
+<p>In case of any error (e.g. space name is invalid), it returns an empty json and an error message. </p>
+<h5 id="important-notes-on-usage">Important notes on usage</h5>
+<ul>
+<li>in case the axisName/spaceName is invalid, it returns false, and an error message</li>
+<li>if the axis is not configured with the given space, it returns false, and an error message</li>
+<li>if the ‘spaceName’ parameter is not given, it uses a default space name (currently it is called ‘space1’)</li>
+</ul>
+<p><em>Note</em>: List of standard (and non-standard) axes can be obtained by issuing the FemtoAPIMicroscope.getAxisPositions() command.</p>
+<h3 id="usage-in-matlab_1">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscopeobject must be created. After it, usage is the following: </p>
+<ul>
+<li>if called without parameters, it gets the above json parsed into struct, for default space: </li>
+</ul>
+<p><strong>result = femtoapiObj.getAxisPosition(axisName);</strong></p>
+<ul>
+<li>if called with two parameters, second parameter is char array, position type, which can be 'absolute' or 'relative' or empty char: </li>
+</ul>
+<p><strong>relativeOrAbsolutePosition = femtoapiObj.getAxisPosition(axisName, positionType);</strong></p>
+<p>Returns the requested position, but if positionType is empty char, result is the same as in the first case. </p>
+<ul>
+<li>if called with three parameters, third parameter is char array, name of the space which the axis is configured for: </li>
+</ul>
+<p><strong>result = femtoapiObj.getAxisPosition(axisName, positionType, spaceName);</strong></p>
+<p>Empty space name produces the same as in the second case. </p>
+<p>In case of any error, it gives an error message as a Matlab error type exception.</p>
+<h3 id="examples_1">Examples</h3>
+<p><strong><em>C++ code example:</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.getAxisPosition('SlowZ')” ;
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+% get the axis position struct from server (contains limits, alert threshold, labeling origin offset too) and select position fields: 
+result = femtoapiObj.getAxisPosition('SlowX');
+relativePos = result.relative;
+absolutePos = result.absolute;
+
+% or return directly absolute/reltive position: 
+relativePos = femtoapiObj.getAxisPosition('SlowX', 'relative');
+absolutePos = femtoapiObj.getAxisPosition('SlowX', 'absolute');
+
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.getAxisPosition('Tiltx');&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;getAxisPosition(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<p><strong>var success = FemtoAPIMicroscope.doZero(axisName, spaceName ='')</strong></p>
+<p>UNSAFE operation.</p>
+<h5 id="description-and-usage">Description and usage</h5>
+<p>This command is used to set the axis relative position to 0.0, and set the labeling origin to the current absolute position.</p>
+<p>Input parameters:</p>
+<ul>
+<li><strong>axisName</strong>: string, name of a valid and configured axis </li>
+<li><strong>spaceName</strong>: string, optional, must be the name of the space for which the axis given by ‘axisName’ is configured. </li>
+</ul>
+<p>Output: true, when zero was successful, false otherwise</p>
+<h5 id="important-notes-on-usage_1">Important notes on usage</h5>
+<ul>
+<li>in case the axisName/spaceName is invalid, it returns false, and an error message</li>
+<li>if the axis is not configured with the given space, it returns false, and an error message</li>
+<li>if the ‘spaceName’ parameter is not given, it uses a default space name (currently it is called ‘space1’)</li>
+<li>if the Handwheel is locked (Lock is checked in the MESc GUI), axis zero cannot be done</li>
+<li>axis zero currently can only be done on standard axes (Slow(X,Y,Z), Virt(X, Y, Z), Tilt(X, Y, Z), FastZ)</li>
+</ul>
+<p><em>Note</em>: List of standard (and non-standard) axes can be obtained by issuing the FemtoAPIMicroscope.getAxisPositions() command.</p>
+<h3 id="usage-in-matlab_2">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscopeobject must be created. After it, the usage is the same as described above:</p>
+<p>succeeded= femtoapiObj.doZero(axisName, spaceName);</p>
+<p>where axisName and spaceName must be character arrays, and spaceName can be an empty char or omitted (default space is used in this case).</p>
+<p>In case of any error, it gives the error message as a Matlab error type exception. Otherwise, it returns true.</p>
+<h3 id="examples_2">Examples</h3>
+<p><strong><em>C++ code examples</em></strong></p>
+<pre><code class="language-cpp">// zero axis ‘TiltX’, which is configured on default space
+QString command = “FemtoAPIMicroscope.doZero(‘TiltX’)”;
+// (or “FemtoAPIMicroscope.doZero(‘TiltX’,’space1’)”; )
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+
+// zero axis ‘VirtY’, configured on space2
+QString command = “FemtoAPIMicroscope.doZero(‘VirtY’,’space2’)”;
+//(or “FemtoAPIMicroscope.doZero(‘VirtY’,’space2’)”; )
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+axisName = 'SlowZ';
+space = 'space1';
+
+femtoapiObj.doZero(axisName,space);
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-cpp">command=&quot;FemtoAPIMicroscope.doZero(‘TiltX’);&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;doZero(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="_3"></h2>
+<h2 id="var-succeed-setaxispositionaxisname-newposition-isrelativepositiontrue-isrelativetocurrentpositiontrue-spacename"><strong>var succeed = setAxisPosition(axisName, newPosition, isRelativePosition=true, isRelativeToCurrentPosition=true, spaceName = '')</strong></h2>
+<p>UNSAFE operation.</p>
+<p>This command is used to set an absolute or relative position of a configured axis. Only one axis can be set at once. The given position must be within the axis and threshold limits. The limits with the valid axis names can be get with the command getAxispositions(), which will be described later.</p>
+<p>The required input parameters:</p>
+<ul>
+<li><strong>axisName</strong>: string, it must be a configured axis name.</li>
+<li><strong>newPosition</strong>: double, the new position that wanted to be set. It can be a relative or an absolute position, depending on the isRelativePosition flag.</li>
+</ul>
+<p>Optional input parameters:</p>
+<ul>
+<li><strong>isRelativePosition</strong>: if true, the given position is relative, otherwise it is considered as an absolute position. Default: true</li>
+<li><strong>isRelativeToCurrentPosition</strong> : bool, if true, the newPosition parameter means a relative position to the current position, otherwise it is relative to the labeling origin offset. Default: true</li>
+<li><strong>spaceName</strong>: name of the space. default: empty string, which means the default space name</li>
+</ul>
+<h5 id="important-notes">Important notes</h5>
+<ul>
+<li>only one axis position can be set at a time</li>
+<li>the axisName must be valid (if not, an error message is returned, and the position is not changed)</li>
+<li>every axis has its axis threshold limit, which is the maximum position change that is allowed relative to the current position in one command. If the new position that wanted to be set is out of this limit, the position will not be set, and the objective is not moved (an appropriate error message is returned)</li>
+<li>it is possible, that the new axis position is within the threshold limit of the given axis, but it would be out of the absolute limits of the axis. In this case, the objective is not moved, and an error message is returned.</li>
+<li>if any parameter is invalid, the objective is not moved, and an error message is returned</li>
+<li>the configured axis properties, the axis name, the axis threshold limits and the axis limits in the absolute coordinate system can be get by the getAxisPositions() command</li>
+<li>if a tilted axis is moved, then Z-stack parameters (firstZ, intermediateZ, zStep, zPlanes) will be reset to their default values due to coordinate system change.</li>
+</ul>
+<p><em>Note</em>: if an absolute position is set, the value of the parameter isRelativeToCurrentPosition is irrelevant</p>
+<h3 id="usage-in-matlab_3">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscopeobject must be created. After it, the usage is the same as described above: </p>
+<p>succeeded = femtoapiObj.setAxisPosition(axisName, newPosition, isRelativePosition, isRelativeToCurrentPosition, spaceName);</p>
+<p>Input arguments (required): </p>
+<ul>
+<li>axisName: char array</li>
+<li>newPosition: double</li>
+</ul>
+<p>Input arguments (optional): </p>
+<ul>
+<li>isRelativePosition: bool, default value is true</li>
+<li>isRelativeToCurrentPosition: bool, default value is true</li>
+<li>spaceName: character array, default value is the default space (space1) </li>
+</ul>
+<p>In case of any error, it gives the error message as a Matlab error type exception, otherwise it returns true.</p>
+<h3 id="examples_3">Examples</h3>
+<p><strong><em>C++ code examples</em></strong></p>
+<pre><code class="language-cpp">// Moving TiltX axis relative to the current position by 4.5:
+QString command = “FemtoAPIMicroscope.setAxisPosition(‘TiltX’, 4.5, true, true) “
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+
+// Moving axis ‘SlowX’ relative to the labeling origin offset by 8.0 :
+QString command = “FemtoAPIMicroscope.setAxisPosition(‘SlowX’, 8.0, true, false) “;
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+
+// Moving axis ‘VirtZ’ to absolute position 25.0 :
+QString command = “FemtoAPIMicroscope.setAxisPosition(‘SlowZ’, 25.0, false) “
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+
+// Moving axis “TiltY” to absolute position 10.0 on space2:
+QString command = “FemtoAPIMicroscope.setAxisPosition(‘TiltY’, 10.0, false, false, ”space2”)“;
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+
+% set relative position to current position
+space = &quot;space1&quot;;
+axisName = &quot;SlowX&quot;;
+position = 5;
+isRelativePosition = true;
+isRelativeToCurrentPosition = true;
+
+femtoapiObj.setAxisPosition(axisName,position,isRelativePosition,...
+                isRelativeToCurrentPosition,space)
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.setAxisPosition(‘SlowZ’, 25.0, false) ;&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;setAxisPosition(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+<h2 id="_4"></h2>
+<h2 id="var-succeed-isaxismovingaxisname-spacename"><strong>var succeed = isAxisMoving(axisName, spaceName = '')</strong></h2>
+<p>UNSAFE operation.</p>
+<p>Returns whether the objective is moving along the given axis or not. The axisName must be configured to the given space. </p>
+<p>If emtpy char or no space name is given, default space ('space1') is considered. </p>
+<p>The required input parameter:</p>
+<ul>
+<li><strong>axisName</strong>: string, it must be a configured axis name.</li>
+</ul>
+<p>Optional input parameter:</p>
+<ul>
+<li><strong>spaceName</strong>: name of the space. default: empty string, which means the default space name</li>
+</ul>
+<h3 id="usage-in-matlab_4">Usage in Matlab</h3>
+<p>First, a FemtoAPIMicroscope object must be created. After it, the usage is the same as described above: </p>
+<p>succeeded = femtoapiObj.isAxisMoving(axisName, spaceName);</p>
+<p>Input arguments (required): </p>
+<ul>
+<li>axisName: char array</li>
+</ul>
+<p>Input arguments (optional): </p>
+<ul>
+<li>spaceName: character array, if not given, default value is the default space (space1) </li>
+</ul>
+<p>In case of any error, it gives the error message as a Matlab error type exception, otherwise it returns true.</p>
+<h3 id="examples_4">Examples</h3>
+<p><strong><em>C++ code examples</em></strong></p>
+<pre><code class="language-cpp">QString command = “FemtoAPIMicroscope.isAxisMoving('StageX') “
+ReplyMessageParser *cmdParser=client-&gt;sendJSCommand(command);
+</code></pre>
+<p><strong><em>Matlab client code example:</em></strong> </p>
+<pre><code class="language-matlab">femtoapiObj = FemtoAPIAcquisition();
+isMoving = femtoapiObj.isAxisMoving(axisName);
+</code></pre>
+<p><strong><em>Python client code example:</em></strong> </p>
+<pre><code class="language-py">command=&quot;FemtoAPIMicroscope.isAxisMoving(‘SlowZ’) ;&quot;
+simpleCmdParser=client.sendJSCommand(command)
+resultCode=simpleCmdParser.getResultCode()
+
+if resultCode &gt; 0:
+    print (&quot;Return code: %d&quot; % resultCode)
+    print (simpleCmdParser.getErrorText())
+else:   
+    print (&quot;isAxisMoving(): %s&quot; % simpleCmdParser.getJSEngineResult())
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
