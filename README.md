@@ -16,7 +16,7 @@
 The FemtoAPI (Application Programming Interface) enables you to access measurement data created with MES8 on FEMTO3D Atlas microscopes. It serves as a programmable client-server user interface to the Atlas software
 and allows you to integrate a set of clearly defined instructions from various software systems, such as MATLAB or Python.
 With the functions of FemtoAPI, you can create easily data visualization and analysis tools.
-On the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page, you can find the detailed documentation of our tool.
+On the [FemtoAPI](https://femtonics.github.io/FemtoAPI) page, you can find the detailed documentation of our tool.
 [Ask our experts for more details](mailto:info@femtonics.eu).
 
 ## The key features and benefits of the FemtoAPI and its open-source wrapper functions
@@ -60,7 +60,7 @@ For the annotation, downstream analysis, and curation of calcium imaging data re
 To purchase FemtoAPI please contact sales@femtonics.eu.
 
 ## Documentation
-To see full documentation please visit the [FemtoAPI](https://femtonics.atlassian.net/wiki/spaces/API2/pages/1448161743/FemtoAPI+2.0) page.
+To see full documentation please visit the [FemtoAPI](https://femtonics.github.io/FemtoAPI) page.
 
 ## Disclaimer
 IN NO EVENT SHALL FEMTONICS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, 
