@@ -16,7 +16,7 @@
 # HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO PROVIDE 
 # MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-import sys, os, time
+import sys, os, time, json
 import APIFunctions
 from PySide2.QtCore import *
 from PySide2.QtWebSockets import *
@@ -39,13 +39,16 @@ print("API login successfull.")
 IMparams = APIFunctions.getImagingWindowParameters(ws)
 #print(IMparams)
 
-for element in IMparams:
-    print(element)
-
-
-string = '[{"space": "space1", "measurementType": "resonant", "size": [600, 400], "resolution": [450, 300], "transformation": {"translation": [-300.0,-200.0]}}]'
+#for element in IMparams:
+#    print(element)
+elem = 0
+print(IMparams[elem])
+IMparams[elem]["size"] = [512, 1024]
+string = json.dumps([IMparams[elem]])
+#string = json.dumps(IMparams)
+#string = '[{"space": "space1", "measurementType": "resonant", "size": [600, 400], "resolution": [450, 300], "transformation": {"translation": [-300.0,-200.0]}}]'
 res = APIFunctions.setImagingWindowParameters(ws, string)
-print(res)
+
 
 
 APIFunctions.closeConnection(ws)
