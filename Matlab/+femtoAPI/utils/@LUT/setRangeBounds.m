@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function obj = setRangeBounds(obj, lower, upper)
-%setRangeBounds Sets LUT range bounds.
+%UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
 lower = double(lower);

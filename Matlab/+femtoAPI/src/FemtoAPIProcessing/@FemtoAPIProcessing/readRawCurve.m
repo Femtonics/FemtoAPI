@@ -17,9 +17,9 @@
 % PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-function [ curveData, curveInfo ] = readCurve( obj, unitHandle, curveIdx, varargin )
-%READCURVE Reads converted curve data and curveInfo from the given measurement unit 
-% Reads converted curve data as an 1x2 cell array, curveData{1} 
+function [ curveData, curveInfo ] = readRawCurve( obj, unitHandle, curveIdx, varargin )
+%READCURVE Reads raw curve data and curveInfo from the given measurement unit 
+% Reads raw curve data as an 1x2 cell array, curveData{1} 
 % and curveData{2} contain the 'X' and 'Y' curve data, and curveInfo
 % contains the curve metadata.
 %
@@ -44,24 +44,25 @@ function [ curveData, curveInfo ] = readCurve( obj, unitHandle, curveIdx, vararg
 % 
 %  [curveData, curveInfo] = femtoAPIObj.readCurve([72,0,1], 0);
 % 
-% See also ADDCURVE APPENDTOCURVE APPENDRAWTOCURVE READRAWCURVE DELETECURVE
+% See also ADDCURVE APPENDTOCURVE APPENDRAWTOCURVE READCURVE DELETECURVE
 % 
 narginchk(3,5);
 validateattributes(unitHandle,{'numeric'},{'vector','nonnegative', ...
-    'integer'},'readCurve','measurementHandle');
+    'integer'},'readRawCurve','measurementHandle');
 validateattributes(curveIdx,{'numeric'},{'scalar','nonnegative','integer'}, ...
-    'readCurve','curveIdx');
+    'readRawCurve','curveIdx');
 
 vectorFormat = false;
 
-if nargin >= 4
-    validateattributes(varargin{1}, {'logical'}, {'scalar'},'readCurve', ...
+if nargin >= 4 
+    validateattributes(varargin{1}, {'logical'}, {'scalar'},'readRawCurve', ...
         'vectorFormat');
     vectorFormat = varargin{1};
-end
+end 
 
-[curveData, curveInfo] = obj.femtoAPIMexWrapper('FemtoAPIFile.readCurve', unitHandle, ...
+[curveData, curveInfo] = obj.femtoAPIMexWrapper('FemtoAPIFile.readCurveRaw', unitHandle, ...
     curveIdx, vectorFormat);
-curveInfo = jsondecode(curveInfo);
+curveInfo = jsondecode(curveInfo);  
 
 end
+

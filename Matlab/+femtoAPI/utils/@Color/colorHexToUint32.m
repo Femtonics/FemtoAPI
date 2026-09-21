@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function [ colorAsUint32 ] = colorHexToUint32( colorAsHex )
-%COLORHEXTOUINT32 Converts color as hex to uint32 format
+%UNTITLED9 Summary of this function goes here
 %   Detailed explanation goes here
 
 %colorArray = hex2array(colorAsHex);

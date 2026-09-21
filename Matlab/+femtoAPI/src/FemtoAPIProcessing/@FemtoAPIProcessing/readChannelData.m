@@ -93,7 +93,7 @@ unitName = conversion.unitName;
 
 switch(conversion.type)
     case 'Identity'
-        conversionObj = ConversionIdentity;
+        conversionObj = ConversionIdentity(title,unitName);
     case 'LinearMapping'
         offset = conversion.offset;
         scale = conversion.scale;

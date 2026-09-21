@@ -40,7 +40,7 @@ classdef FemtoAPIIF < handle
             ' (default parameter: ws://localhost:8888).' 
             ];
         m_compatible_mex_version = '2.0.0';
-        m_compatible_commandSet_version = '3.0.0';
+        m_compatible_commandSet_version = '3.2.0';
     end
     
     properties (GetAccess = public)
@@ -293,6 +293,19 @@ classdef FemtoAPIIF < handle
             %GETCOMMANDSETVERSION Returns the version of the Femto API commandset
             ver = obj.femtoAPIMexWrapper('getWebSocketState');
         end
+        
+        function modulesJson = getListOfAllowedModules(obj)
+            %GETLISTOFALLOWEDMODULES Returns a json containing all the
+            %allowed modules
+            modulesJson = obj.femtoAPIMexWrapper('FemtoAPITools.getListOfAllowedModules');
+        end
+        
+        function isAllowedJson = isModuleAllowed(obj, moduleName)
+            %ISMODULEALLOWED Returns a json element whether the module
+            %allowed or not
+            isAllowedJson = obj.femtoAPIMexWrapper('FemtoAPITools.isModuleAllowed', moduleName);
+        end
+        
         
     end
     
