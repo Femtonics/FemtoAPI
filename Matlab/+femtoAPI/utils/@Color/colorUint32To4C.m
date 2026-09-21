@@ -18,8 +18,8 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function colorsAsFourComponent = colorUint32To4C(colorsAsUint32, colorOrder)
-%COLORUINT32TO4C Converts color value as (A)RGB or RGB(A) uint32 to color as 4 components
-%   represent uint32 colors as four component
+%UNTITLED9 Summary of this function goes here
+%   represent uint32 colots as four component
 
 validateattributes(colorsAsUint32,{'uint32'},{'nonempty'},'','colorsAsUint32');
 validatestring(colorOrder,{'ARGB','RGBA',},'colorUint32To4C','colorOrder');

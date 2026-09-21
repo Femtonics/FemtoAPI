@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function [ colorAsUint8 ] = colorUint32ToArray( colorAsUint32 )
-%COLORUINT32TOARRAY Converts color value as (A)RGB or RGB(A) uint32 to to array
+%UNTITLED23 Summary of this function goes here
 %   Detailed explanation goes here
 
 validateattributes(colorAsUint32,{'uint32'},{'nonempty','vector'});

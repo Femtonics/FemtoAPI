@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 classdef ConversionLinear < ConversionNoParamsIF
-    %CONVERSIONLINEAR Class for linear conversions  
+    %UNTITLED19 Summary of this class goes here
     %   Detailed explanation goes here
     
     properties (Dependent, Access = protected)

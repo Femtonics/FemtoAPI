@@ -349,15 +349,20 @@ classdef FemtoAPIProcessing < FemtoAPIIF
         writeChannelData( obj, channelHandle, data, varargin );
         
         %% Curve operations
-        [curveData, curveInfo] = readCurve( obj, measurementHandle, idxChannel, varargin );
+        [curveData, curveInfo] = readRawCurve( obj, unitHandle, curveIdx, varargin );
         
-        curveInfo = writeCurve( obj, measurementHandle, size, name, ...
-            xType, xDataType, yType, yDataType, optimize );
+        [curveData, curveInfo] = readCurve( obj, unitHandle, curveIdx, varargin );
         
-        curveInfo = appendToCurve( obj, measurementHandle, curveIdx, ...
+        curveInfo = addCurve( obj, unitHandle, name, ...
+            xType, xDataType, yType, yDataType, varargin );
+        
+        curveInfo = appendToCurve( obj, unitHandle, curveIdx, ...
             curveData, xType, xDataType, yType, yDataType );
         
-        succeded = deleteCurve( obj, measurementHandle, curveIdx);
+        curveInfo = appendRawToCurve( obj, unitHandle, curveIdx, ...
+            curveData, xType, xDataType, yType, yDataType );
+        
+        succeded = deleteCurve( obj, unitHandle, curveIdx);
         
         %% Tools
         json = getStatus(obj,varargin);

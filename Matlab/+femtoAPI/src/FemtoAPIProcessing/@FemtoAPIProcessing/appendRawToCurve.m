@@ -17,16 +17,16 @@
 % PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-function succeeded = appendToCurve( obj, unitHandle, curveIdx, ...
+function succeeded = appendRawToCurve( obj, unitHandle, curveIdx, ...
     curveData, xType, xDataType, yType, yDataType )
-%APPENDTOCURVE Appends an existing curve in a measurement unit (converted data).
+%APPENDRAWTOCURVE Appends an existing curve in a measurement unit (raw data).
 %
 % INPUTS:
 %  unitHandle               - unique measurement handle id, an 1xN (or Nx1)
 %                             vector in which the curve is located
 %  curveIdx                 - nonnegative integer, index of the curve to
 %                             append
-%  curveData                - converted curve data to append with
+%  curveData                - raw curve data to append with
 %  xType                    - string, value can be 'equidistant' or 'vector'
 %  xDataType                - string, value can be 'double' or 'uint16'
 %  yType                    - string, value can be 'rle' or 'vector'
@@ -43,7 +43,7 @@ function succeeded = appendToCurve( obj, unitHandle, curveIdx, ...
 %  curveInfo = femtoAPIObj.appendToCurve([72,0,1],10, curveData,
 %                   'equidistant', 'double', 'vector', 'double');
 %
-% See also ADDCURVE APPENDRAWTOCURVE READCURVE READRAWCURVE DELETECURVE
+% See also ADDCURVE APPENDTOCURVE READCURVE READRAWCURVE DELETECURVE
 %
 narginchk(8,8);
 validateattributes(unitHandle,{'numeric'},{'vector','nonnegative', ...
@@ -129,7 +129,7 @@ end
 
 obj.femtoAPIMexWrapper('uploadAttachment', attachment);
 
-succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.appendToCurve', ...
+succeeded = obj.femtoAPIMexWrapper('FemtoAPIFile.appendToCurveRaw', ...
     unitHandle, ...
     curveIdx, ...
     yDataSize, ...

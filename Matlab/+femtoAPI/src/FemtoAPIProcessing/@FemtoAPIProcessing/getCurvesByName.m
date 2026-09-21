@@ -18,8 +18,8 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function [ curveNamesFiltered, curveData ] = getCurvesByName( obj, measurementHandle, curveNames )
-%GETCURVESBYNAME Gets curve data of the specified curves 
-% Gets curve data of curves specified by 'curveNames'
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
 
 % get metadata of curves as array
 curvesMetaData = obj.getMeasurementMetaDataField(measurementHandle,'curves');

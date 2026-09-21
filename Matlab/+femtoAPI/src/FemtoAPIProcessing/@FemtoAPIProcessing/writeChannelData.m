@@ -24,7 +24,7 @@ function writeChannelData( obj, channelHandle, data, varargin )
 %   channelHandle, where the first N-1 element contains the node, and
 %   the Nth element is the channel index.
 %   One optional input fromDims can be given, in the format 
-%   fromDims = [min1, min2, �, minD], 
+%   fromDims = [min1, min2, ..., minD], 
 %   which are the starting indices for each dimension of the given channel.
 %   In this case, the part of the specified channel is written with the
 %   input parameter data. If data begin at min indices specified by subSlabSpec
@@ -45,7 +45,7 @@ function writeChannelData( obj, channelHandle, data, varargin )
 % INPUTS [optional]:
 %  fromDims             - contains the min indices of each dimension
 %                         from start to write data in format 
-%                         [min1, min2, �, minD]
+%                         [min1, min2, ..., minD]
 %
 %
 % See also WRITERAWCHANNELDATA, READCHANNELDATA, READRAWCHANNELDATA

@@ -17,6 +17,7 @@
 % PROVIDED HEREUNDER IS PROVIDED "AS IS". FEMTONICS HAS NO OBLIGATION TO
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+function [ result ] = addChannel( obj, nodeDescriptor, channelName, varargin )
 %ADDCHANNEL Adds channel with spcified name to an existing measurement unit
 % The nodeDescriptor must be an index of a valid, opened measurement unit
 % on the server side, otherwise this function gives an error.

@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function colorArray = color4CToArray( colorAs4C, colorOrder )
-%COLOR4CTOARRAY Converts color as 4 components to array. 
+%UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 Color.validate4CStruct(colorAs4C);
 validateattributes(colorAs4C,{'struct'},{'vector'});

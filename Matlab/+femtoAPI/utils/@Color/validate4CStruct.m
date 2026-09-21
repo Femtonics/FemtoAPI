@@ -18,7 +18,7 @@
 % PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 function validate4CStruct( colorsAs4C )
-%VALIDATE4CSTRUCT Validates color as 4 components
+%UNTITLED20 Summary of this function goes here
 %   Detailed explanation goes here
 
 p = inputParser;

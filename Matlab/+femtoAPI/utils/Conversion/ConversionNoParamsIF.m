@@ -54,7 +54,7 @@ classdef ConversionNoParamsIF < ConversionIF
             [title, unitName] = optargs{:};
             
             validateattributes(title,{'char'},{'vector'},'','title',2);
-            validateattributes(unitName,{'char'},{'vector'},'','unitName',3);
+            validateattributes(unitName,{'char'},{},'','unitName',3);
             obj.m_sTitle = title;
             obj.m_sUnitName = unitName;
             
