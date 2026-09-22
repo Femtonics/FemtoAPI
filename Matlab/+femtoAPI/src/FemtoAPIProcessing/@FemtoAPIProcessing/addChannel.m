@@ -47,6 +47,7 @@
 %
 % See also DELETECHANNEL CREATEMEASUREMENTUNIT
 %
+function [ result ] = addChannel( obj, nodeDescriptor, channelName, varargin )
 
 narginchk(3,5);
 
