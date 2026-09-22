@@ -3,7 +3,7 @@
 %roinum: roi numbering starts at 1
 function roidata = read3DMultiRoi(apiobj ,handle, roinum)
     unitMetadata = apiobj.getUnitMetadata(handle(1:3), 'BaseUnitMetadata');
-    if ~ismember(unitMetadata.methodType , ['multiROILongitudinalRibbonScan', 'multiROITransverseRibbonScan', 'multiROIChessBoard'])
+    if ~ismember(unitMetadata.methodType , {'multiROILongitudinalRibbonScan', 'multiROITransverseRibbonScan', 'multiROIChessBoard'})
     	error("Bad measurement type, only 3D MultiRoi types are acceptable ...")
     end
     xDim = unitMetadata.xDim;
